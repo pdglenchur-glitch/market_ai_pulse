@@ -165,9 +165,9 @@ market-ai-pulse/
 
 ### Phase 0 — Scaffolding & connectivity proof
 
-- [ ] **0.1** Create the repo folder structure shown in Section 8 (empty placeholder files are fine for now)
-- [ ] **0.2** Initialize git locally, commit, push to the GitHub remote
-- [ ] **0.3** Confirm GitHub Pages is set to serve from `/docs` on the main branch
+- [x] **0.1** Create the repo folder structure shown in Section 8 (empty placeholder files are fine for now)
+- [x] **0.2** Initialize git locally, commit, push to the GitHub remote
+- [x] **0.3** Confirm GitHub Pages is set to serve from `/docs` on the main branch — confirmed live at https://pdglenchur-glitch.github.io/market_ai_pulse/ (200 OK, serving placeholder index.html)
 - [ ] **0.4** Write a throwaway workflow (`.github/workflows/test_secrets.yml`) that only prints `true`/`false` for whether each secret is present — never the value — triggered manually (`workflow_dispatch`)
 - [ ] **0.5** Run that workflow manually, confirm all seven secrets show `true`
 - [ ] **0.6** Write a small local test script that authenticates to Databricks with `DATABRICKS_HOST` + `DATABRICKS_TOKEN` and lists catalogs; confirm `workspace` appears
