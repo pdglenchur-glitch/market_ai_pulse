@@ -1,5 +1,4 @@
 # Single weekly cron: ingest -> trigger transform -> export -> publish
-# (export/publish steps added in Phase 4; this currently covers ingest + transform)
 name: pipeline
 
 on:
@@ -7,6 +6,9 @@ on:
   schedule:
     # Mondays 06:00 UTC
     - cron: "0 6 * * 1"
+
+permissions:
+  contents: write
 
 jobs:
   run:
@@ -34,3 +36,16 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: python trigger_and_poll_job.py
         working-directory: orchestration
+      - name: Export gold tables to docs/data/*.json
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python export_gold_to_json.py
+        working-directory: orchestration
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/*.json
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data"
+          git push
