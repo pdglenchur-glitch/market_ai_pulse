@@ -8,9 +8,19 @@ Sources are added here incrementally as Phase 2 builds each one out.
 """
 import land_to_databricks_volume
 import land_to_r2
+import pull_attention_data
+import pull_dev_momentum
+import pull_macro_data
 import pull_market_data
+import pull_research_pace
 
-SOURCES = [pull_market_data]
+SOURCES = [
+    pull_market_data,
+    pull_macro_data,
+    pull_attention_data,
+    pull_dev_momentum,
+    pull_research_pace,
+]
 
 
 def main() -> None:

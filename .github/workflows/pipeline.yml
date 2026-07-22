@@ -25,5 +25,6 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python run_ingestion.py
         working-directory: ingestion
