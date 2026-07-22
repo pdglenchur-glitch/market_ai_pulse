@@ -73,7 +73,7 @@ This path is what the raw-file-landing step and the Lakeflow bronze read task bo
 
 | Source | Provides | Auth | Notes |
 |---|---|---|---|
-| `yfinance` | Indices, mega-cap stocks, AI basket (NVDA, MSFT, GOOGL, META, PLTR, AMD + a thematic ETF) | None | Unofficial but widely used |
+| `yfinance` | Benchmark (`^GSPC`), 11 SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLRE, XLU, XLC), AI basket (NVDA, MSFT, GOOGL, META, PLTR, AMD, BOTZ) | None | Unofficial but widely used |
 | FRED (St. Louis Fed) | CPI, unemployment, fed funds rate, 10Y yield | Free API key (in secrets) | Macro data doesn't move week to week anyway |
 | Wikipedia Pageviews API | Attention signal — pageviews on "Artificial intelligence," "ChatGPT," "Large language model" | None | Official, stable. **Do not use pytrends** — archived April 2025, unreliable |
 | GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at weekly cadence) | Add `GH_TOKEN` later only if rate-limited |
@@ -154,12 +154,14 @@ market-ai-pulse/
 │   ├── land_to_r2.py
 │   └── land_to_databricks_volume.py
 ├── databricks/
-│   ├── warehouse.py              # resolves the SQL warehouse dynamically (no hardcoded ID)
-│   ├── land_volume_to_bronze.py  # Phase 1 proof; formalized as a Lakeflow task in Phase 3
-│   ├── query_bronze_market_data.py
-│   ├── bronze_to_silver.py
-│   ├── silver_to_gold.py
-│   └── lakeflow_job_config.yml   # no native schedule — triggered via API only
+│   ├── warehouse.py               # resolves the SQL warehouse dynamically (no hardcoded ID)
+│   ├── land_volume_to_bronze.py   # Lakeflow task: raw volume files -> bronze (PySpark, runs via git_source)
+│   ├── bronze_to_silver.py        # Lakeflow task: typed, deduped, historized via MERGE
+│   ├── silver_to_gold.py          # Lakeflow task: all 8 gold tables, fully recomputed each run
+│   ├── query_bronze_market_data.py  # ad hoc debugging queries (via warehouse.py, not part of the job)
+│   ├── query_silver_tables.py
+│   ├── query_gold_tables.py
+│   └── lakeflow_job_config.yml   # job definition (name, git_source, tasks) — no schedule field, ever
 ├── orchestration/
 │   ├── trigger_and_poll_job.py   # calls Databricks run-now, waits for completion
 │   └── export_gold_to_json.py    # queries gold tables via Databricks SQL connector
@@ -212,24 +214,24 @@ market-ai-pulse/
 
 ### Phase 3 — Transform (medallion layers), API-triggered
 
-- [ ] **3.1** Build `bronze_to_silver.py` for the market source only — typing, dedup — validate output
-- [ ] **3.2** Extend it for the macro source
-- [ ] **3.3** Extend it for the attention source
-- [ ] **3.4** Extend it for the dev-momentum source
-- [ ] **3.5** Extend it for the research-pace source
-- [ ] **3.6** Build the `market_daily` gold table
-- [ ] **3.7** Build the `sector_rotation` gold table
-- [ ] **3.8** Build the `volatility` gold table
-- [ ] **3.9** Build the `macro_snapshot` gold table
-- [ ] **3.10** Build the `ai_vs_market` gold table
-- [ ] **3.11** Build the `attention_index` gold table
-- [ ] **3.12** Build the `dev_momentum` gold table
-- [ ] **3.13** Build the `research_pace` gold table
-- [ ] **3.14** Package bronze → silver → gold as a single Lakeflow job with no native schedule attached
-- [ ] **3.15** Write `trigger_and_poll_job.py`: calls `run-now` via the Databricks Jobs API, polls until the run finishes, fails loudly if the job fails
-- [ ] **3.16** Add that script as a step in `pipeline.yml`, after ingestion
-- [ ] **3.17** Manually dispatch the full workflow, confirm it triggers the Lakeflow job and correctly waits for it to finish
-- [ ] **3.18** Spot-check each gold table with a manual query
+- [x] **3.1** Build `bronze_to_silver.py` for the market source only — typing, dedup — validate output — MERGE upsert keyed by `(symbol, date)`, explodes the multi-symbol `records` array
+- [x] **3.2** Extend it for the macro source — melted to `(series, date, value)`, keyed by `(series, date)`
+- [x] **3.3** Extend it for the attention source — melted to `(article, date, views)`, keyed by `(article, date)`
+- [x] **3.4** Extend it for the dev-momentum source — melted to `(repo, snapshot_date, stars)`, keyed by `(repo, snapshot_date)`
+- [x] **3.5** Extend it for the research-pace source — melted to `(category, snapshot_date, count)`, keyed by `(category, snapshot_date)`
+- [x] **3.6** Build the `market_daily` gold table — per-symbol daily change/return via `LAG`
+- [x] **3.7** Build the `sector_rotation` gold table — per-sector-ETF daily + trailing 5-day return
+- [x] **3.8** Build the `volatility` gold table — rolling 20-observation stddev of S&P 500 daily returns
+- [x] **3.9** Build the `macro_snapshot` gold table — latest value per series + up/down/flat trend
+- [x] **3.10** Build the `ai_vs_market` gold table — AI-basket average return minus benchmark return
+- [x] **3.11** Build the `attention_index` gold table — views indexed to each article's first-observed day = 100
+- [x] **3.12** Build the `dev_momentum` gold table — week-over-week star growth per repo
+- [x] **3.13** Build the `research_pace` gold table — week-over-week change in arXiv counts per category
+- [x] **3.14** Package bronze → silver → gold as a single Lakeflow job with no native schedule attached — declared in `databricks/lakeflow_job_config.yml` (name, `git_source` pointing at this repo, 3 tasks); tasks run as `spark_python_task`s pulling code via `git_source` on serverless compute (`environment_version: "3"`), not via notebooks
+- [x] **3.15** Write `trigger_and_poll_job.py`: calls `run-now` via the Databricks Jobs API, polls until the run finishes, fails loudly if the job fails — also creates-or-updates the job by name from the YAML config on every run, so the job definition never drifts from git
+- [x] **3.16** Add that script as a step in `pipeline.yml`, after ingestion
+- [x] **3.17** Manually dispatch the full workflow, confirm it triggers the Lakeflow job and correctly waits for it to finish — run [29940256903](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29940256903) created the job; run [29940472736](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29940472736) confirmed the idempotent update path (same `job_id` reused, not recreated)
+- [x] **3.18** Spot-check each gold table with a manual query — `databricks/query_gold_tables.py`; all 8 tables populated with expected row counts (trend/change columns are `NULL` until a second distinct calendar week of history accumulates — expected, not a bug)
 
 ### Phase 4 — Publish
 
