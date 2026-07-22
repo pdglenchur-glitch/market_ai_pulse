@@ -249,14 +249,14 @@ market-ai-pulse/
 
 ### Phase 5 — Dashboard
 
-- [ ] **5.1** Build `docs/index.html` and `docs/styles.css` as a basic empty-panel layout
-- [ ] **5.2** Build the market snapshot panel, reading `market_daily.json`
-- [ ] **5.3** Build the sector rotation panel
-- [ ] **5.4** Build the volatility panel
-- [ ] **5.5** Build the macro backdrop panel
-- [ ] **5.6** Build the AI pulse panel (combining `ai_vs_market`, `attention_index`, `dev_momentum`, `research_pace`)
-- [ ] **5.7** Mobile-responsive pass
-- [ ] **5.8** Open the public GitHub Pages link in a browser you're not logged into anything on — confirm it loads with zero login
+- [x] **5.1** Build `docs/index.html` and `docs/styles.css` as a basic empty-panel layout — Chart.js (CDN) + dataviz-skill palette, light/dark via `prefers-color-scheme` and a manual toggle
+- [x] **5.2** Build the market snapshot panel, reading `market_daily.json` — stat tiles for the S&P 500 benchmark (close/open/high/low + daily delta)
+- [x] **5.3** Build the sector rotation panel — diverging bar chart of daily return by sector ETF; shows an "accumulating history" placeholder instead of an empty chart when all values are still `null`
+- [x] **5.4** Build the volatility panel — stat tile, same placeholder pattern until 20 trading days exist
+- [x] **5.5** Build the macro backdrop panel — KPI row, one tile per series with a trend arrow
+- [x] **5.6** Build the AI pulse panel (combining `ai_vs_market`, `attention_index`, `dev_momentum`, `research_pace`) — spread stat tile + arXiv count tiles + two bar charts (attention, dev momentum)
+- [x] **5.7** Mobile-responsive pass — verified via headless-browser screenshots (not just code review) at 390px width; found and fixed two real Chart.js bugs: bars rendering at ~1/4 height until a deferred `resize()` forces a remeasure (an initial-sizing race), and the last rotated x-axis label clipping within its own canvas (fixed with a consistent 45° rotation, more right-side padding, and shortening dev-momentum labels to repo name only — full `owner/repo` still shown in the tooltip)
+- [x] **5.8** Open the public GitHub Pages link in a browser you're not logged into anything on — confirm it loads with zero login — verified with a fresh incognito headless profile (no cookies/session) against the live URL; renders correctly
 
 ### Phase 6 — Prove the automation, then polish
 
