@@ -10,14 +10,13 @@ Narrative continuity doc for picking this project back up after a context reset.
 
 ## Where things stand
 
-Phases 0–5 are complete: scaffolding, Phase 1 thin vertical slice, full ingestion automation, the full bronze→silver→gold transform running as a real Databricks Job, publish-to-JSON, and a five-panel dashboard with per-panel visualizations. The pipeline runs unattended daily and has been manually verified end to end multiple times.
+Phases 0–5 are complete, and Phase 6 is nearly done. Only **6.2 remains**: let one real *scheduled* (not manually dispatched) daily run fire on its own at 06:00 UTC and confirm the dashboard updates untouched. This can't be forced — it just needs the cron to actually fire once naturally and then be checked. Everything else is buildable/verifiable on demand and has been:
 
-**Not done yet — Phase 6:**
-- 6.1 confirm one full unattended manual trigger (informally already true from testing, but not yet done as its own explicit checkpoint)
-- 6.2 let one real *scheduled* (not manually dispatched) daily run fire on its own and confirm the dashboard updates untouched
-- 6.3 formal README polish with screenshots (this session did a lighter README pass with the live link, description, and architecture — screenshots still pending)
-- 6.4 the "design decisions" interview-ready writeup
-- 6.5 failure alerting (right now a silent failure = a stale dashboard with no notification)
+- 6.1 — a clean manual full-pipeline run confirmed (run [29950196867](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29950196867), all 4 steps passed, ~4 min)
+- 6.3/6.4 — `README.md` now has real screenshots (`screenshots/dashboard-{light,dark}.png`) and a full design-decisions section (R2 vs S3, Free Edition constraints, why the dashboard is static, why one workflow, why crypto was cut)
+- 6.5 — failure alerting via GitHub Issues: opens an issue labeled `pipeline-failure` on `failure()`, comments instead of duplicating if one's already open, auto-closes on the next `success()`. No new secrets — uses the default `GITHUB_TOKEN` with `issues: write` added to `permissions`. All three paths (create/comment/close) were verified with a temporary test workflow (`_tmp_test_alert.yml`, a fake step that could be forced to fail or succeed) before wiring the real logic into `pipeline.yml` — same "prove it in isolation first" pattern used throughout this project.
+
+Once the project reaches this point, the **only genuinely open item** is the historical-depth question below — everything else in the original plan is done.
 
 **Open question not yet settled:** how much historical depth to retain for trend charts (e.g., cap at a 1-year rolling window, or let it grow unbounded). Not urgent — irrelevant until months of daily history accumulate.
 
@@ -53,6 +52,8 @@ These aren't in the repo but matter for continuing the work from this machine:
 **Custom muted/darker color palette**, replacing the dataviz skill's bright default. User wanted darker, more neutral tones that still read clearly in dark mode. Did *not* eyeball this — installed Node specifically to run `validate_palette.js`, iterated through several candidate hex sets against the actual CVD-safety/contrast/lightness-band checks (chroma-floor failures, CVD-separation failures) until both light and dark variants passed every check. Final categorical hues: slate blue `#2d6bab`/`#4a7bc4`, terracotta `#b35a2a`/`#c96b3a`, pine teal `#1f8a6f`/`#2ba17f`, muted ochre `#b8862f`/`#b0832f`, muted mauve `#9c4f6b`/`#b05f7d` (light/dark).
 
 **Every panel needed its own real visualization** (user feedback — dashboard originally had 3 panels with charts and 2 with only stat tiles). Added: an OHLC-style range bar for Market Snapshot (single floating bar now, will read as a poor-man's candlestick chart once multiple days accumulate); a progress meter for Volatility while accumulating toward its 20-day window, switching to a line chart once ready; a 3-bar rate-comparison chart for Macro Backdrop (deliberately *excluding* CPI, which is an index level not a percentage — mixing units on one axis would have been a real dataviz mistake, not just a style choice); a diverging two-bar chart for AI-vs-market spread and a new cs.AI-vs-cs.LG bar for research pace.
+
+**Failure alerting via GitHub Issues, not Slack/Discord/email.** Considered a webhook-based notification but that requires the user to go create one and add it as a new secret — real setup friction for a "nice to have." GitHub Issues needed nothing new: the workflow already has `GITHUB_TOKEN`, just needed `issues: write` added to `permissions`. Opens an issue labeled `pipeline-failure` on `failure()`, comments instead of duplicating if one's already open (checked via `gh issue list --label pipeline-failure --state open`), and auto-closes it on the next `success()` — a full create/dedupe/recover loop with zero user setup.
 
 ---
 
