@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   run:
@@ -53,3 +54,28 @@ jobs:
           git add docs/data/*.json
           git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data"
           git push
+      - name: Open or update a failure alert issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label pipeline-failure --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Pipeline failed again: $RUN_URL"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Pipeline failure: $(date -u +%Y-%m-%d)" \
+              --label pipeline-failure \
+              --body "The daily pipeline failed and the dashboard may now be stale. See the run: $RUN_URL"
+          fi
+      - name: Close any open failure alert now that the pipeline recovered
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label pipeline-failure --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Pipeline succeeded on the next run — closing."
+            gh issue close "$existing" --repo "$GITHUB_REPOSITORY"
+          fi

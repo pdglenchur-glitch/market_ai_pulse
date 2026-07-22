@@ -271,9 +271,9 @@ market-ai-pulse/
 
 - [x] **6.1** Manually trigger the full `pipeline.yml` once and confirm every step passes with no manual intervention — run [29950196867](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29950196867), all 4 steps (ingest, transform trigger+poll, export, commit+push) passed clean, ~4 min end to end
 - [ ] **6.2** Let one real scheduled weekly run fire on its own; confirm the dashboard updates without you touching anything
-- [ ] **6.3** Write `README.md` with the architecture diagram, screenshots, and the live link
-- [ ] **6.4** Write a short design-decisions section (R2 vs AWS S3, Free Edition constraints, why the dashboard is static, why one workflow orchestrates everything, why crypto was cut) — this is the paragraph you'll actually use in interviews
-- [ ] **6.5** Add failure alerting to the workflow (a step that notifies on failure, since a silent weekly failure means a stale dashboard with no obvious sign)
+- [x] **6.3** Write `README.md` with the architecture diagram, screenshots, and the live link — light/dark screenshots of the live dashboard in `screenshots/`
+- [x] **6.4** Write a short design-decisions section (R2 vs AWS S3, Free Edition constraints, why the dashboard is static, why one workflow orchestrates everything, why crypto was cut) — this is the paragraph you'll actually use in interviews — in `README.md`
+- [x] **6.5** Add failure alerting to the workflow (a step that notifies on failure, since a silent weekly failure means a stale dashboard with no obvious sign) — opens a GitHub issue labeled `pipeline-failure` on `failure()` (comments instead of duplicating if one's already open), auto-closes it on the next `success()`. Uses the default `GITHUB_TOKEN` (`issues: write` permission added) — no new secrets. All three paths (create, comment-not-duplicate, auto-close) verified via a temporary test workflow before wiring into the real pipeline
 
 ---
 
