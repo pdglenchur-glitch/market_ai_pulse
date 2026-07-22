@@ -59,9 +59,11 @@ These are already set up and fixed — Claude Code should use these exact values
 | Value | Setting |
 |---|---|
 | Databricks catalog | `workspace` |
-| Databricks schema | `default` |
+| Databricks schema (volume location only) | `default` |
 | Unity Catalog volume name | `raw_landing` |
 | **Unity Catalog volume path** | `/Volumes/workspace/default/raw_landing/` |
+| Bronze/silver/gold schemas | `workspace.bronze`, `workspace.silver`, `workspace.gold` — created via SQL (`CREATE SCHEMA IF NOT EXISTS`) as part of the build, not manually provisioned |
+| SQL warehouse | "Serverless Starter Warehouse" — already provisioned in the workspace; resolved dynamically via the Databricks SDK (`WorkspaceClient.warehouses.list()`) rather than hardcoding its ID/http_path |
 
 This path is what the raw-file-landing step and the Lakeflow bronze read task both reference. It's not sensitive, so it lives here in plain text rather than in GitHub secrets.
 
