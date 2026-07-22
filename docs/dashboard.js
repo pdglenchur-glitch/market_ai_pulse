@@ -232,6 +232,41 @@ function lineChart(canvas, labels, values, formatValue, colorVar = "--series-1")
   }));
 }
 
+function multiLineChart(canvas, labels, series, formatValue) {
+  const gridline = cssVar("--gridline");
+  const textMuted = cssVar("--text-muted");
+
+  return deferredResize(new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: series.map((s) => ({
+        label: s.label,
+        data: s.data,
+        borderColor: cssVar(s.colorVar),
+        backgroundColor: cssVar(s.colorVar),
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+        tension: 0.15,
+        spanGaps: true,
+      })),
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, position: "bottom", labels: { color: textMuted, boxWidth: 12, font: { size: 11 } } },
+        tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatValue(ctx.raw)}` } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: textMuted } },
+        y: { grid: { color: gridline }, ticks: { color: textMuted, callback: (v) => formatValue(v) } },
+      },
+    },
+  }));
+}
+
 function meter(pct, label) {
   return `
     <div class="meter">
@@ -400,6 +435,18 @@ async function renderAiPulse() {
     const latestSpread = aiVsMarket[aiVsMarket.length - 1];
     const spreadReady = latestSpread && latestSpread.spread !== null;
 
+    // attention_index is baselined to each article's first-observed day, so
+    // with only one day of history every article trivially reads 100 - it
+    // can't show anything until there's a second day to compare against.
+    // It's also inherently a trend metric (indexed like a stock chart), so
+    // once ready it belongs on a line chart over time, not a bar of the
+    // current value - a bar chart can never show "rising or falling".
+    const attentionDates = [...new Set(attention.map((r) => r.date))].sort();
+    const attentionTrendReady = attentionDates.length >= 2;
+    const attentionHeading = attentionTrendReady
+      ? "Public attention trend (Wikipedia pageviews, indexed to first day = 100)"
+      : "Public attention (Wikipedia pageviews)";
+
     el.innerHTML = `
       <div class="two-col">
         <div>
@@ -422,7 +469,7 @@ async function renderAiPulse() {
 
       <div class="two-col subsection">
         <div>
-          <h3>Public attention (Wikipedia pageviews, indexed to 100)</h3>
+          <h3>${attentionHeading}</h3>
           <div class="chart-wrap"><canvas id="attention-chart"></canvas></div>
         </div>
         <div>
@@ -448,18 +495,28 @@ async function renderAiPulse() {
       (v) => fmtNumber(v, 0)
     );
 
-    const latestByArticle = {};
+    const byArticle = {};
     for (const row of attention) {
-      const prev = latestByArticle[row.article];
-      if (!prev || row.date > prev.date) latestByArticle[row.article] = row;
+      (byArticle[row.article] ??= []).push(row);
     }
-    const attentionRows = Object.values(latestByArticle);
-    categoricalBarChart(
-      document.getElementById("attention-chart"),
-      attentionRows.map((r) => r.article.replace(/_/g, " ")),
-      attentionRows.map((r) => r.attention_index),
-      (v) => fmtNumber(v, 0)
-    );
+    const articles = Object.keys(byArticle);
+
+    if (attentionTrendReady) {
+      const series = articles.map((article, i) => ({
+        label: article.replace(/_/g, " "),
+        data: attentionDates.map((d) => byArticle[article].find((r) => r.date === d)?.attention_index ?? null),
+        colorVar: `--series-${(i % 5) + 1}`,
+      }));
+      multiLineChart(document.getElementById("attention-chart"), attentionDates, series, (v) => fmtNumber(v, 0));
+    } else {
+      const latestRows = articles.map((article) => byArticle[article][byArticle[article].length - 1]);
+      categoricalBarChart(
+        document.getElementById("attention-chart"),
+        latestRows.map((r) => r.article.replace(/_/g, " ")),
+        latestRows.map((r) => r.views),
+        (v) => fmtNumber(v, 0)
+      );
+    }
 
     const latestByRepo = {};
     for (const row of devMomentum) {
