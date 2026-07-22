@@ -5,4 +5,5 @@ venv/
 .env
 *.egg-info/
 .DS_Store
-data/
+/data/
+/ingestion/data/
