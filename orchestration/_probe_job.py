@@ -6,7 +6,7 @@ import os
 import time
 
 from databricks.sdk import WorkspaceClient
-from databricks.sdk.service import jobs
+from databricks.sdk.service import compute, jobs
 
 REPO_URL = "https://github.com/pdglenchur-glitch/market_ai_pulse"
 
@@ -28,6 +28,13 @@ def main() -> None:
                     python_file="databricks/_lakeflow_probe.py",
                     source=jobs.Source.GIT,
                 ),
+                environment_key="default",
+            )
+        ],
+        environments=[
+            jobs.JobEnvironment(
+                environment_key="default",
+                spec=compute.Environment(environment_version="3"),
             )
         ],
     )
