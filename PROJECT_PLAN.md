@@ -150,8 +150,12 @@ market-ai-pulse/
 │   ├── pull_attention_data.py
 │   ├── pull_dev_momentum.py
 │   ├── pull_research_pace.py
-│   └── land_to_r2.py
+│   ├── land_to_r2.py
+│   └── land_to_databricks_volume.py
 ├── databricks/
+│   ├── warehouse.py              # resolves the SQL warehouse dynamically (no hardcoded ID)
+│   ├── land_volume_to_bronze.py  # Phase 1 proof; formalized as a Lakeflow task in Phase 3
+│   ├── query_bronze_market_data.py
 │   ├── bronze_to_silver.py
 │   ├── silver_to_gold.py
 │   └── lakeflow_job_config.yml   # no native schedule — triggered via API only
@@ -185,14 +189,14 @@ market-ai-pulse/
 
 ### Phase 1 — Thin vertical slice (one source, fully end to end)
 
-- [ ] **1.1** Write `pull_market_data.py` to fetch one day of S&P 500 data via `yfinance`, save locally as JSON
-- [ ] **1.2** Run it locally, inspect the JSON structure
-- [ ] **1.3** Write `land_to_r2.py` to upload that JSON to the R2 bucket under a `raw/` prefix
-- [ ] **1.4** Run it, confirm the object appears in the R2 bucket (Cloudflare dashboard or a list call)
-- [ ] **1.5** Write the Databricks Files API call that pushes the same JSON into `/Volumes/workspace/default/raw_landing/`
-- [ ] **1.6** Confirm the file appears there (Catalog Explorer or a notebook `%fs ls`)
-- [ ] **1.7** In a Databricks notebook, read that file and create one bronze Delta table (e.g. `bronze.market_data`)
-- [ ] **1.8** Query that table from Databricks SQL to confirm the full chain — API to R2 to volume to Delta table — actually works
+- [x] **1.1** Write `pull_market_data.py` to fetch one day of S&P 500 data via `yfinance`, save locally as JSON — fetches latest daily bar for `^GSPC`
+- [x] **1.2** Run it locally, inspect the JSON structure — ran locally, clean OHLCV + symbol/date/fetched_at structure confirmed
+- [x] **1.3** Write `land_to_r2.py` to upload that JSON to the R2 bucket under a `raw/` prefix
+- [x] **1.4** Run it, confirm the object appears in the R2 bucket (Cloudflare dashboard or a list call) — confirmed via list call, `raw/market_data.json` present
+- [x] **1.5** Write the Databricks Files API call that pushes the same JSON into `/Volumes/workspace/default/raw_landing/` — `ingestion/land_to_databricks_volume.py`
+- [x] **1.6** Confirm the file appears there (Catalog Explorer or a notebook `%fs ls`) — confirmed via `WorkspaceClient.files.list_directory_contents`
+- [x] **1.7** In a Databricks notebook, read that file and create one bronze Delta table (e.g. `bronze.market_data`) — done via SQL warehouse instead of a notebook (`databricks/land_volume_to_bronze.py`, resolves the warehouse dynamically via `databricks/warehouse.py`); created `workspace.bronze.market_data`. Note: JSON file is pretty-printed multi-line, so `read_files(...)` needs `multiLine => true`
+- [x] **1.8** Query that table from Databricks SQL to confirm the full chain — API to R2 to volume to Delta table — actually works — confirmed via `databricks/query_bronze_market_data.py`, all 8 columns correct, `_rescued_data` is `None` (clean parse)
 
 ### Phase 2 — Automate ingestion for all sources
 
