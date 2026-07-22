@@ -1,10 +1,29 @@
-# Placeholder — built out in Phase 2 (Section 9 of PROJECT_PLAN.md)
+# Single weekly cron: ingest -> trigger transform -> export -> publish
+# (transform/export/publish steps added in Phases 3-4; this currently covers ingestion only)
 name: pipeline
+
 on:
   workflow_dispatch: {}
+  schedule:
+    # Mondays 06:00 UTC
+    - cron: "0 6 * * 1"
 
 jobs:
-  placeholder:
+  ingest:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "pipeline.yml not yet implemented — see PROJECT_PLAN.md Phase 2"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt
+      - name: Run ingestion (all sources -> R2 + Databricks volume)
+        env:
+          R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python run_ingestion.py
+        working-directory: ingestion

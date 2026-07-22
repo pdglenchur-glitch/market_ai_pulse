@@ -32,17 +32,20 @@ def fetch_latest_day(symbol: str = SYMBOL) -> dict:
     }
 
 
+def run(output: Path = DEFAULT_OUTPUT) -> Path:
+    record = fetch_latest_day()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(record, indent=2))
+    print(f"Wrote {output}")
+    print(json.dumps(record, indent=2))
+    return output
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
-
-    record = fetch_latest_day()
-
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(record, indent=2))
-    print(f"Wrote {args.output}")
-    print(json.dumps(record, indent=2))
+    run(args.output)
 
 
 if __name__ == "__main__":
