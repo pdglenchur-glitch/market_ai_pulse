@@ -144,6 +144,102 @@ function categoricalBarChart(canvas, labels, values, formatValue, tooltipLabels)
   }));
 }
 
+function rangeBarChart(canvas, label, low, high, open, close) {
+  const good = cssVar("--delta-good");
+  const bad = cssVar("--delta-bad");
+  const gridline = cssVar("--gridline");
+  const textMuted = cssVar("--text-muted");
+  const color = close >= open ? good : bad;
+  const span = high - low;
+  const pad = span > 0 ? span * 0.4 : Math.abs(high) * 0.01 || 1;
+
+  return deferredResize(new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: [label],
+      datasets: [
+        {
+          data: [[low, high]],
+          backgroundColor: color,
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: () => [
+              `Open: ${fmtNumber(open)}`,
+              `Close: ${fmtNumber(close)}`,
+              `High: ${fmtNumber(high)}`,
+              `Low: ${fmtNumber(low)}`,
+            ],
+          },
+        },
+      },
+      scales: {
+        x: {
+          min: low - pad,
+          max: high + pad,
+          grid: { color: gridline },
+          ticks: { color: textMuted, callback: (v) => fmtNumber(v, 0) },
+        },
+        y: { grid: { display: false }, ticks: { color: textMuted } },
+      },
+    },
+  }));
+}
+
+function lineChart(canvas, labels, values, formatValue, colorVar = "--series-1") {
+  const color = cssVar(colorVar);
+  const gridline = cssVar("--gridline");
+  const textMuted = cssVar("--text-muted");
+
+  return deferredResize(new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          data: values,
+          borderColor: color,
+          backgroundColor: color,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          borderWidth: 2,
+          tension: 0.15,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (ctx) => formatValue(ctx.raw) } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: textMuted } },
+        y: { grid: { color: gridline }, ticks: { color: textMuted, callback: (v) => formatValue(v) } },
+      },
+    },
+  }));
+}
+
+function meter(pct, label) {
+  return `
+    <div class="meter">
+      <div class="meter-track"><div class="meter-fill" style="width:${Math.min(100, Math.max(0, pct))}%"></div></div>
+      <div class="meter-label">${label}</div>
+    </div>`;
+}
+
 async function renderMarketSnapshot() {
   const el = document.getElementById("market-content");
   try {
@@ -163,7 +259,19 @@ async function renderMarketSnapshot() {
         ${statTile("Low", fmtNumber(benchmark.low))}
       </div>
       <p class="panel-meta" style="margin-top:12px">As of ${benchmark.date}</p>
+      <div class="subsection">
+        <h3>Day's range (colored by close vs. open)</h3>
+        <div class="chart-wrap" style="height:110px"><canvas id="market-range-chart"></canvas></div>
+      </div>
     `;
+    rangeBarChart(
+      document.getElementById("market-range-chart"),
+      benchmark.symbol,
+      benchmark.low,
+      benchmark.high,
+      benchmark.open,
+      benchmark.close
+    );
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load market data: ${err.message}</p>`;
   }
@@ -203,21 +311,32 @@ async function renderVolatility() {
   const el = document.getElementById("volatility-content");
   try {
     const data = await fetchJson("volatility");
+    const withValues = data.filter((d) => d.rolling_20d_volatility !== null);
     const latest = data[data.length - 1];
-    if (!latest || latest.rolling_20d_volatility === null) {
+
+    if (withValues.length === 0) {
+      const collected = data.length;
       el.innerHTML = `
         <div class="stat-tile">
           <div class="stat-label">Rolling 20-day volatility</div>
           <div class="stat-value">—</div>
-          <div class="stat-delta neutral">Accumulating history — needs 20 trading days</div>
+          ${meter((collected / 20) * 100, `${collected} / 20 trading days collected`)}
         </div>`;
       return;
     }
-    el.innerHTML = statTile(
-      "Rolling 20-day volatility",
-      fmtPct(latest.rolling_20d_volatility),
-      `As of ${latest.date}`,
-      "neutral"
+
+    el.innerHTML = `
+      ${statTile("Rolling 20-day volatility", fmtPct(latest.rolling_20d_volatility), `As of ${latest.date}`, "neutral")}
+      <div class="subsection">
+        <h3>Volatility over time</h3>
+        <div class="chart-wrap"><canvas id="volatility-chart"></canvas></div>
+      </div>
+    `;
+    lineChart(
+      document.getElementById("volatility-chart"),
+      withValues.map((d) => d.date),
+      withValues.map((d) => d.rolling_20d_volatility),
+      fmtPct
     );
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load volatility data: ${err.message}</p>`;
@@ -245,7 +364,24 @@ async function renderMacro() {
       })
       .join("");
 
-    el.innerHTML = `<div class="kpi-row">${tiles}</div>`;
+    // CPI is an index level, not a percentage - it stays in the KPI row only.
+    // The three rate-like series share a unit (%), so they're comparable on one chart.
+    const rateSeries = ["unemployment_rate", "fed_funds_rate", "10y_yield"];
+    const rateRows = data.filter((row) => rateSeries.includes(row.series));
+
+    el.innerHTML = `
+      <div class="kpi-row">${tiles}</div>
+      <div class="subsection">
+        <h3>Rates compared (%)</h3>
+        <div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>
+      </div>
+    `;
+    categoricalBarChart(
+      document.getElementById("macro-rate-chart"),
+      rateRows.map((row) => labels[row.series] || row.series),
+      rateRows.map((row) => row.value),
+      (v) => `${fmtNumber(v)}%`
+    );
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load macro data: ${err.message}</p>`;
   }
@@ -262,15 +398,26 @@ async function renderAiPulse() {
     ]);
 
     const latestSpread = aiVsMarket[aiVsMarket.length - 1];
-    const spreadText = latestSpread && latestSpread.spread !== null
-      ? fmtPct(latestSpread.spread)
-      : "Accumulating history";
+    const spreadReady = latestSpread && latestSpread.spread !== null;
 
     el.innerHTML = `
-      <div class="kpi-row">
-        ${statTile("AI basket vs. S&amp;P 500 (spread)", spreadText, latestSpread ? `As of ${latestSpread.date}` : undefined, deltaClass(latestSpread && latestSpread.spread))}
-        ${statTile("arXiv cs.AI (7d)", researchPace.find((r) => r.category === "cs.AI")?.count ?? "—")}
-        ${statTile("arXiv cs.LG (7d)", researchPace.find((r) => r.category === "cs.LG")?.count ?? "—")}
+      <div class="two-col">
+        <div>
+          <h3>AI basket vs. S&amp;P 500 (daily return)</h3>
+          ${
+            spreadReady
+              ? `<div class="chart-wrap" style="height:160px"><canvas id="ai-spread-chart"></canvas></div>`
+              : `<div class="stat-tile">
+                   <div class="stat-label">Spread</div>
+                   <div class="stat-value">—</div>
+                   <div class="stat-delta neutral">Accumulating history — needs a second day of data</div>
+                 </div>`
+          }
+        </div>
+        <div>
+          <h3>Research pace (arXiv, trailing 7d)</h3>
+          <div class="chart-wrap" style="height:160px"><canvas id="research-chart"></canvas></div>
+        </div>
       </div>
 
       <div class="two-col subsection">
@@ -284,6 +431,22 @@ async function renderAiPulse() {
         </div>
       </div>
     `;
+
+    if (spreadReady) {
+      divergingBarChart(
+        document.getElementById("ai-spread-chart"),
+        ["AI basket", "S&P 500"],
+        [latestSpread.ai_basket_return, latestSpread.benchmark_return],
+        fmtPct
+      );
+    }
+
+    categoricalBarChart(
+      document.getElementById("research-chart"),
+      researchPace.map((r) => r.category),
+      researchPace.map((r) => r.count),
+      (v) => fmtNumber(v, 0)
+    );
 
     const latestByArticle = {};
     for (const row of attention) {

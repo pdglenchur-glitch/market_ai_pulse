@@ -8,14 +8,14 @@
   --gridline: #e1e0d9;
   --baseline: #c3c2b7;
   --border: rgba(11, 11, 11, 0.10);
-  --delta-good: #006300;
-  --delta-bad: #e34948;
+  --delta-good: #2d7a3f;
+  --delta-bad: #b3433c;
 
-  --series-1: #2a78d6; /* blue */
-  --series-2: #eb6834; /* orange */
-  --series-3: #1baf7a; /* aqua */
-  --series-4: #eda100; /* yellow */
-  --series-5: #e87ba4; /* magenta */
+  --series-1: #2d6bab; /* slate blue */
+  --series-2: #b35a2a; /* terracotta */
+  --series-3: #1f8a6f; /* pine teal */
+  --series-4: #b8862f; /* muted ochre */
+  --series-5: #9c4f6b; /* muted mauve */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,14 +29,14 @@
     --gridline: #2c2c2a;
     --baseline: #383835;
     --border: rgba(255, 255, 255, 0.10);
-    --delta-good: #0ca30c;
-    --delta-bad: #e66767;
+    --delta-good: #4caf5f;
+    --delta-bad: #d16860;
 
-    --series-1: #3987e5;
-    --series-2: #d95926;
-    --series-3: #199e70;
-    --series-4: #c98500;
-    --series-5: #d55181;
+    --series-1: #4a7bc4;
+    --series-2: #c96b3a;
+    --series-3: #2ba17f;
+    --series-4: #b0832f;
+    --series-5: #b05f7d;
   }
 }
 
@@ -50,14 +50,14 @@
   --gridline: #2c2c2a;
   --baseline: #383835;
   --border: rgba(255, 255, 255, 0.10);
-  --delta-good: #0ca30c;
-  --delta-bad: #e66767;
+  --delta-good: #4caf5f;
+  --delta-bad: #d16860;
 
-  --series-1: #3987e5;
-  --series-2: #d95926;
-  --series-3: #199e70;
-  --series-4: #c98500;
-  --series-5: #d55181;
+  --series-1: #4a7bc4;
+  --series-2: #c96b3a;
+  --series-3: #2ba17f;
+  --series-4: #b0832f;
+  --series-5: #b05f7d;
 }
 
 * {
@@ -188,6 +188,29 @@ body {
 .chart-wrap {
   position: relative;
   height: 220px;
+}
+
+.meter {
+  margin-top: 14px;
+}
+
+.meter .meter-track {
+  height: 10px;
+  border-radius: 6px;
+  background: var(--gridline);
+  overflow: hidden;
+}
+
+.meter .meter-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--series-1);
+}
+
+.meter .meter-label {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
 .chart-wrap.chart-tall {
