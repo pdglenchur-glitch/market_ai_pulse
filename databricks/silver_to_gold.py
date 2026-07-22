@@ -136,25 +136,28 @@ spark.sql(
 )
 print("Built workspace.gold.attention_index")
 
-# --- dev_momentum: week-over-week star growth per repo ---
+# --- dev_momentum: week-over-week star growth per repo.
+# Pipeline runs daily, so one row accumulates per repo per day - lag by 7
+# rows (not 1) to compare against ~7 days ago rather than yesterday. ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.dev_momentum AS
     SELECT
         repo, snapshot_date, stars,
-        stars - LAG(stars) OVER (PARTITION BY repo ORDER BY snapshot_date) AS weekly_star_growth
+        stars - LAG(stars, 7) OVER (PARTITION BY repo ORDER BY snapshot_date) AS weekly_star_growth
     FROM workspace.silver.dev_momentum
     """
 )
 print("Built workspace.gold.dev_momentum")
 
-# --- research_pace: week-over-week change in arXiv submission counts ---
+# --- research_pace: week-over-week change in arXiv submission counts.
+# Same daily-cadence lag-by-7 reasoning as dev_momentum above. ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.research_pace AS
     SELECT
         category, snapshot_date, count,
-        count - LAG(count) OVER (PARTITION BY category ORDER BY snapshot_date) AS change_from_prior_week
+        count - LAG(count, 7) OVER (PARTITION BY category ORDER BY snapshot_date) AS change_from_prior_week
     FROM workspace.silver.research_pace
     """
 )

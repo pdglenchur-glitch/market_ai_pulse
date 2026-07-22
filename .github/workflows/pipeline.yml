@@ -1,11 +1,15 @@
-# Single weekly cron: ingest -> trigger transform -> export -> publish
+# Single daily cron: ingest -> trigger transform -> export -> publish
+# Was weekly ("0 6 * * 1", Mondays) through Phase 5; switched to daily once the
+# rate-limit review found no external API blocker. If Databricks Free Edition
+# compute quota becomes an issue, revert to the line above — that's the only
+# change needed to roll back.
 name: pipeline
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Mondays 06:00 UTC
-    - cron: "0 6 * * 1"
+    # Daily 06:00 UTC
+    - cron: "0 6 * * *"
 
 permissions:
   contents: write
