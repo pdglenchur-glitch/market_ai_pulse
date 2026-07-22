@@ -235,17 +235,17 @@ market-ai-pulse/
 
 ### Phase 4 — Publish
 
-- [ ] **4.1** Write `export_gold_to_json.py`: connect via the Databricks SQL connector, query `market_daily`, write `docs/data/market_daily.json`
-- [ ] **4.2** Extend it for `sector_rotation.json`
-- [ ] **4.3** Extend it for `volatility.json`
-- [ ] **4.4** Extend it for `macro_snapshot.json`
-- [ ] **4.5** Extend it for `ai_vs_market.json`
-- [ ] **4.6** Extend it for `attention_index.json`
-- [ ] **4.7** Extend it for `dev_momentum.json`
-- [ ] **4.8** Extend it for `research_pace.json`
-- [ ] **4.9** Add the export step to `pipeline.yml`, running only after the Lakeflow job succeeds
-- [ ] **4.10** Add a commit-and-push step using the default `GITHUB_TOKEN` (with `contents: write` permission set on the job)
-- [ ] **4.11** Confirm GitHub Pages rebuilds automatically after that push
+- [x] **4.1** Write `export_gold_to_json.py`: connect via the Databricks SQL connector, query `market_daily`, write `docs/data/market_daily.json`
+- [x] **4.2** Extend it for `sector_rotation.json`
+- [x] **4.3** Extend it for `volatility.json`
+- [x] **4.4** Extend it for `macro_snapshot.json`
+- [x] **4.5** Extend it for `ai_vs_market.json`
+- [x] **4.6** Extend it for `attention_index.json`
+- [x] **4.7** Extend it for `dev_momentum.json`
+- [x] **4.8** Extend it for `research_pace.json` — all 8 built in one pass, sharing one `export_table()` helper; imports `warehouse.py` from `databricks/` via `sys.path` insert
+- [x] **4.9** Add the export step to `pipeline.yml`, running only after the Lakeflow job succeeds
+- [x] **4.10** Add a commit-and-push step using the default `GITHUB_TOKEN` (with `contents: write` permission set on the job) — no-ops cleanly when gold data is unchanged. Fixed a bug found here: the Phase 3 `.gitignore` fix for `ingestion/data/` used an unanchored `data/` pattern that was also silently ignoring `docs/data/`, which would have blocked every future publish. Now `/data/` and `/ingestion/data/` are each anchored explicitly.
+- [x] **4.11** Confirm GitHub Pages rebuilds automatically after that push — confirmed live at `docs/data/market_daily.json` on the public Pages URL, `Last-Modified` matching the commit, real data committed by `github-actions[bot]`
 
 ### Phase 5 — Dashboard
 
