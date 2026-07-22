@@ -14,5 +14,7 @@ spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.bronze")
 for name in SOURCES:
     path = f"{VOLUME_DIR}/{name}.json"
     df = spark.read.option("multiline", "true").json(path)
-    df.write.format("delta").mode("overwrite").saveAsTable(f"workspace.bronze.{name}")
+    df.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(
+        f"workspace.bronze.{name}"
+    )
     print(f"Refreshed workspace.bronze.{name}")
