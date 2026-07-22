@@ -1,7 +1,5 @@
-"""Phase 1 thin vertical slice: pull one day of S&P 500 data via yfinance.
-
-Fetches the most recent daily bar for the S&P 500 index (^GSPC) and writes
-it to a local JSON file, to be picked up by land_to_r2.py (step 1.3).
+"""Pull one day of market data via yfinance: the S&P 500 benchmark, sector
+ETFs (for sector_rotation), and the AI basket (for ai_vs_market).
 """
 import argparse
 import json
@@ -10,34 +8,56 @@ from pathlib import Path
 
 import yfinance as yf
 
-SYMBOL = "^GSPC"
+BENCHMARK = "^GSPC"
+SECTOR_ETFS = ["XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLRE", "XLU", "XLC"]
+AI_BASKET = ["NVDA", "MSFT", "GOOGL", "META", "PLTR", "AMD", "BOTZ"]
+ALL_SYMBOLS = [BENCHMARK] + SECTOR_ETFS + AI_BASKET
+
 DEFAULT_OUTPUT = Path("data/raw/market_data.json")
 
 
-def fetch_latest_day(symbol: str = SYMBOL) -> dict:
-    history = yf.Ticker(symbol).history(period="5d", interval="1d")
-    if history.empty:
-        raise RuntimeError(f"No data returned for {symbol}")
+def symbol_category(symbol: str) -> str:
+    if symbol == BENCHMARK:
+        return "benchmark"
+    if symbol in SECTOR_ETFS:
+        return "sector"
+    return "ai_basket"
 
-    latest = history.iloc[-1]
-    return {
-        "symbol": symbol,
-        "date": history.index[-1].strftime("%Y-%m-%d"),
-        "open": round(float(latest["Open"]), 2),
-        "high": round(float(latest["High"]), 2),
-        "low": round(float(latest["Low"]), 2),
-        "close": round(float(latest["Close"]), 2),
-        "volume": int(latest["Volume"]),
-        "fetched_at": datetime.now(timezone.utc).isoformat(),
-    }
+
+def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
+    data = yf.download(symbols, period="5d", interval="1d", group_by="ticker", progress=False)
+
+    records = []
+    for symbol in symbols:
+        history = data[symbol].dropna(how="all")
+        if history.empty:
+            raise RuntimeError(f"No data returned for {symbol}")
+
+        latest = history.iloc[-1]
+        records.append(
+            {
+                "symbol": symbol,
+                "category": symbol_category(symbol),
+                "date": history.index[-1].strftime("%Y-%m-%d"),
+                "open": round(float(latest["Open"]), 2),
+                "high": round(float(latest["High"]), 2),
+                "low": round(float(latest["Low"]), 2),
+                "close": round(float(latest["Close"]), 2),
+                "volume": int(latest["Volume"]),
+            }
+        )
+    return records
 
 
 def run(output: Path = DEFAULT_OUTPUT) -> Path:
-    record = fetch_latest_day()
+    payload = {
+        "records": fetch_latest_day_all(),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+    }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(record, indent=2))
+    output.write_text(json.dumps(payload, indent=2))
     print(f"Wrote {output}")
-    print(json.dumps(record, indent=2))
+    print(json.dumps(payload, indent=2))
     return output
 
 
