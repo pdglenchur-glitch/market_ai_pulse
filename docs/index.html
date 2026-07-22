@@ -1,11 +1,60 @@
-<!-- Placeholder — implemented in Phase 5 (step 5.1) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Market &amp; AI Pulse</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <p>Coming soon.</p>
+  <div class="page">
+    <header class="page-header">
+      <div>
+        <h1>Market &amp; AI Pulse</h1>
+        <p class="subtitle" id="last-updated">Loading data&hellip;</p>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Toggle theme</button>
+    </header>
+
+    <div class="panel-grid">
+      <section class="panel panel-wide" id="panel-market">
+        <h2>Market Snapshot</h2>
+        <p class="panel-meta">S&amp;P 500 benchmark, latest close and daily move</p>
+        <div id="market-content"></div>
+      </section>
+
+      <section class="panel panel-wide" id="panel-sector">
+        <h2>Sector Rotation</h2>
+        <p class="panel-meta">Daily return by sector ETF</p>
+        <div id="sector-content"></div>
+      </section>
+
+      <section class="panel" id="panel-volatility">
+        <h2>Volatility</h2>
+        <p class="panel-meta">Rolling 20-day realized volatility, S&amp;P 500</p>
+        <div id="volatility-content"></div>
+      </section>
+
+      <section class="panel" id="panel-macro">
+        <h2>Macro Backdrop</h2>
+        <p class="panel-meta">Latest reading and trend per indicator</p>
+        <div id="macro-content"></div>
+      </section>
+
+      <section class="panel panel-wide" id="panel-ai">
+        <h2>AI Pulse</h2>
+        <p class="panel-meta">AI vs. market, public attention, dev momentum, research pace</p>
+        <div id="ai-content"></div>
+      </section>
+    </div>
+
+    <footer>
+      Data refreshes weekly via an automated pipeline &mdash;
+      <a href="https://github.com/pdglenchur-glitch/market_ai_pulse" target="_blank" rel="noopener">source on GitHub</a>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
