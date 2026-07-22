@@ -1,5 +1,5 @@
 # Single weekly cron: ingest -> trigger transform -> export -> publish
-# (transform/export/publish steps added in Phases 3-4; this currently covers ingestion only)
+# (export/publish steps added in Phase 4; this currently covers ingest + transform)
 name: pipeline
 
 on:
@@ -9,7 +9,7 @@ on:
     - cron: "0 6 * * 1"
 
 jobs:
-  ingest:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,3 +28,9 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python run_ingestion.py
         working-directory: ingestion
+      - name: Trigger Lakeflow transform job and wait for it to finish
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python trigger_and_poll_job.py
+        working-directory: orchestration

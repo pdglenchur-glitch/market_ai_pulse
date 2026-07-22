@@ -1,1 +1,22 @@
-# Placeholder — implemented in Phase 3 (step 3.14). No native schedule attached by design.
+# Lakeflow job definition (step 3.14). Deliberately has no `schedule:` field —
+# this job only ever runs when trigger_and_poll_job.py calls run-now via the
+# Jobs API. Read and applied idempotently (create-or-update by name) by
+# orchestration/trigger_and_poll_job.py on every pipeline run.
+name: market-ai-pulse-transform
+
+git:
+  url: https://github.com/pdglenchur-glitch/market_ai_pulse
+  provider: gitHub
+  branch: main
+
+environment_version: "3"
+
+tasks:
+  - task_key: bronze_read
+    python_file: databricks/land_volume_to_bronze.py
+  - task_key: bronze_to_silver
+    python_file: databricks/bronze_to_silver.py
+    depends_on: bronze_read
+  - task_key: silver_to_gold
+    python_file: databricks/silver_to_gold.py
+    depends_on: bronze_to_silver
