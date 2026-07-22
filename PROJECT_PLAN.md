@@ -168,8 +168,8 @@ market-ai-pulse/
 - [x] **0.1** Create the repo folder structure shown in Section 8 (empty placeholder files are fine for now)
 - [x] **0.2** Initialize git locally, commit, push to the GitHub remote
 - [x] **0.3** Confirm GitHub Pages is set to serve from `/docs` on the main branch — confirmed live at https://pdglenchur-glitch.github.io/market_ai_pulse/ (200 OK, serving placeholder index.html)
-- [ ] **0.4** Write a throwaway workflow (`.github/workflows/test_secrets.yml`) that only prints `true`/`false` for whether each secret is present — never the value — triggered manually (`workflow_dispatch`)
-- [ ] **0.5** Run that workflow manually, confirm all seven secrets show `true`
+- [x] **0.4** Write a throwaway workflow (`.github/workflows/test_secrets.yml`) that only prints `true`/`false` for whether each secret is present — never the value — triggered manually (`workflow_dispatch`)
+- [x] **0.5** Run that workflow manually, confirm all seven secrets show `true` — run [29899974190](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29899974190), all 7 secrets `true`
 - [ ] **0.6** Write a small local test script that authenticates to Databricks with `DATABRICKS_HOST` + `DATABRICKS_TOKEN` and lists catalogs; confirm `workspace` appears
 - [ ] **0.7** Extend that script (or write a second one) to confirm it can see the `raw_landing` volume at `/Volumes/workspace/default/raw_landing/`
 - [ ] **0.8** Write a small local test script that authenticates to R2 with the four `R2_*` secrets via `boto3` and lists bucket contents (should return empty)

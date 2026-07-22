@@ -1,0 +1,6 @@
+databricks-sdk
+databricks-sql-connector
+boto3
+python-dotenv
+requests
+yfinance
