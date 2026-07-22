@@ -145,6 +145,7 @@ market-ai-pulse/
 ├── requirements.txt
 ├── .env.example               # local-only credential template (.env is gitignored)
 ├── ingestion/
+│   ├── run_ingestion.py           # single entrypoint pipeline.yml calls; wraps every source below
 │   ├── pull_market_data.py
 │   ├── pull_macro_data.py
 │   ├── pull_attention_data.py
@@ -200,14 +201,14 @@ market-ai-pulse/
 
 ### Phase 2 — Automate ingestion for all sources
 
-- [ ] **2.1** Wrap the Phase 1 scripts into a single ingestion entrypoint
-- [ ] **2.2** Write `pipeline.yml` with a weekly `schedule:` cron and a `workflow_dispatch` trigger, running just the market data step
-- [ ] **2.3** Manually dispatch it, confirm it succeeds unattended
-- [ ] **2.4** Add `pull_macro_data.py` (FRED), wire it into the same workflow
-- [ ] **2.5** Add `pull_attention_data.py` (Wikipedia Pageviews), wire it in
-- [ ] **2.6** Add `pull_dev_momentum.py` (GitHub API), wire it in
-- [ ] **2.7** Add `pull_research_pace.py` (arXiv), wire it in
-- [ ] **2.8** Manually dispatch the full workflow, confirm every source lands correctly in both R2 and the Databricks volume
+- [x] **2.1** Wrap the Phase 1 scripts into a single ingestion entrypoint — `ingestion/run_ingestion.py`, iterates a `SOURCES` list, lands each result in R2 + volume
+- [x] **2.2** Write `pipeline.yml` with a weekly `schedule:` cron and a `workflow_dispatch` trigger, running just the market data step — Mondays 06:00 UTC + manual dispatch
+- [x] **2.3** Manually dispatch it, confirm it succeeds unattended — run [29936971804](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29936971804)
+- [x] **2.4** Add `pull_macro_data.py` (FRED), wire it into the same workflow — CPI, unemployment rate, fed funds rate, 10Y yield
+- [x] **2.5** Add `pull_attention_data.py` (Wikipedia Pageviews), wire it in — Artificial_intelligence, ChatGPT, Large_language_model articles
+- [x] **2.6** Add `pull_dev_momentum.py` (GitHub API), wire it in — star snapshots on 5 curated repos (openai-python, transformers, pytorch, langchain, ollama)
+- [x] **2.7** Add `pull_research_pace.py` (arXiv), wire it in — weekly submission counts for cs.AI, cs.LG via `opensearch:totalResults` (not by paging every entry)
+- [x] **2.8** Manually dispatch the full workflow, confirm every source lands correctly in both R2 and the Databricks volume — run [29937382852](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29937382852), independently verified via list calls: all 5 files present in both R2 and the volume
 
 ### Phase 3 — Transform (medallion layers), API-triggered
 
