@@ -2,3 +2,9 @@
 name: pipeline
 on:
   workflow_dispatch: {}
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "pipeline.yml not yet implemented — see PROJECT_PLAN.md Phase 2"
