@@ -46,3 +46,9 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: python land_volume_to_bronze.py
         working-directory: databricks
+      - name: Query bronze table to confirm full chain (step 1.8)
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python query_bronze_market_data.py
+        working-directory: databricks
