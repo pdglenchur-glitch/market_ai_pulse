@@ -14,19 +14,19 @@
   {
     "repo": "ollama/ollama",
     "snapshot_date": "2026-07-22",
-    "stars": 176656,
+    "stars": 176654,
     "weekly_star_growth": null
   },
   {
     "repo": "openai/openai-python",
     "snapshot_date": "2026-07-22",
-    "stars": 31206,
+    "stars": 31207,
     "weekly_star_growth": null
   },
   {
     "repo": "pytorch/pytorch",
     "snapshot_date": "2026-07-22",
-    "stars": 101858,
+    "stars": 101857,
     "weekly_star_growth": null
   }
 ]
