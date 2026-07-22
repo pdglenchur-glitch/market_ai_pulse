@@ -23,6 +23,37 @@ Several panels above still show "Accumulating history" — that's expected, not 
 - Is AI, specifically, outperforming or lagging the broader market?
 - Is public attention on AI rising, and is the open-source/research ecosystem still accelerating?
 
+## Reading the dashboard
+
+### Market Snapshot
+
+The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." **Open/High/Low/Close** are the price at the start of the trading day, the highest and lowest it touched, and where it ended; the number under the main figure shows how much it moved versus the prior day (green = up, red = down).
+
+**Day's range** is a single bar spanning the day's low to its high — a wide bar means a volatile day, a narrow one means a quiet day. It's colored the same way (green if the index ended the day higher than it opened, red if lower), and as more days accumulate this turns into a strip of bars — effectively a simplified candlestick chart.
+
+### Sector Rotation
+
+A sector ETF is a basket of stocks from one slice of the economy — e.g. `XLK` holds tech companies, `XLE` holds energy companies. This chart shows how much each sector moved that day, so you can see which parts of the economy are leading and which are lagging. "Rotation" refers to money flowing out of some sectors and into others over time.
+
+### Volatility
+
+A measure of how much the market has been swinging up and down lately, based on the last 20 trading days (about a month). Higher means a choppier, more nervous market; lower means a calmer one. "Realized" volatility means it's calculated from what actually happened, not a forecast.
+
+### Macro Backdrop
+
+- **CPI** (Consumer Price Index) — the standard measure of inflation: how much prices for everyday goods and services have changed. Rising CPI means things are getting more expensive.
+- **Unemployment rate** — the percentage of people looking for work who don't have a job. Higher means a weaker job market.
+- **Fed funds rate** — the base interest rate set by the Federal Reserve. It ripples through the whole economy: mortgages, credit cards, savings accounts, and business loans all move with it.
+- **10Y yield** — the interest rate the U.S. government pays to borrow money for 10 years. Widely watched as a signal of where investors expect the economy and interest rates to head.
+- **Rates compared** chart puts the fed funds rate, unemployment rate, and 10Y yield side by side since all three are already percentages. CPI is left out of this chart on purpose — it's an index level (currently in the low 300s), not a percentage, so plotting it next to the others would be comparing different units on the same scale.
+
+### AI Pulse
+
+- **AI basket vs. S&P 500** — the "AI basket" is a handful of stocks closely tied to the AI boom (Nvidia, Microsoft, Google, Meta, Palantir, AMD) plus an AI-themed ETF (`BOTZ`). This compares their average daily move against the S&P 500's — a positive spread means AI stocks are outperforming the broader market that day, negative means they're lagging it.
+- **Research pace** — how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster.
+- **Public attention** — Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Once enough days have accumulated, this switches from raw view counts to a trend line indexed to each article's first-observed day (so you can compare their *rate of change* even though ChatGPT gets vastly more raw traffic than the others).
+- **Dev momentum** — GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption.
+
 ## How it works
 
 One GitHub Actions workflow, on one daily cron trigger, does the entire pipeline in sequence:
