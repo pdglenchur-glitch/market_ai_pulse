@@ -51,11 +51,12 @@ function deferredResize(chart) {
   return chart;
 }
 
-function divergingBarChart(canvas, labels, values, formatValue) {
+function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
   const good = cssVar("--delta-good");
   const bad = cssVar("--delta-bad");
   const gridline = cssVar("--gridline");
   const textMuted = cssVar("--text-muted");
+  const fullLabels = tooltipLabels || labels;
 
   return deferredResize(new Chart(canvas, {
     type: "bar",
@@ -77,6 +78,7 @@ function divergingBarChart(canvas, labels, values, formatValue) {
         legend: { display: false },
         tooltip: {
           callbacks: {
+            title: (items) => fullLabels[items[0].dataIndex],
             label: (ctx) => formatValue(ctx.raw),
           },
         },
@@ -447,6 +449,24 @@ async function renderAiPulse() {
       ? "Public attention trend (Wikipedia pageviews, indexed to first day = 100)"
       : "Public attention (Wikipedia pageviews)";
 
+    // research_pace's "trailing 7d" count is itself already a rolling window -
+    // what a single day's bar can't show is whether that rolling count is
+    // rising or falling. Once 2+ days exist, plot the count over time instead.
+    const researchDates = [...new Set(researchPace.map((r) => r.snapshot_date))].sort();
+    const researchTrendReady = researchDates.length >= 2;
+    const researchHeading = researchTrendReady
+      ? "Research pace trend (arXiv, trailing 7d count)"
+      : "Research pace (arXiv, trailing 7d)";
+
+    // Raw star count is dominated by each repo's overall popularity and barely
+    // moves day to day - it can't show "momentum". weekly_star_growth is the
+    // actual momentum signal, but it's null until 7 daily snapshots exist
+    // (LAG(7) - see silver_to_gold.py), so fall back to raw counts until then.
+    const devGrowthReady = devMomentum.some((r) => r.weekly_star_growth !== null);
+    const devHeading = devGrowthReady
+      ? "Dev momentum (weekly star growth)"
+      : "Dev momentum (GitHub stars)";
+
     el.innerHTML = `
       <div class="two-col">
         <div>
@@ -462,7 +482,7 @@ async function renderAiPulse() {
           }
         </div>
         <div>
-          <h3>Research pace (arXiv, trailing 7d)</h3>
+          <h3>${researchHeading}</h3>
           <div class="chart-wrap" style="height:160px"><canvas id="research-chart"></canvas></div>
         </div>
       </div>
@@ -473,7 +493,7 @@ async function renderAiPulse() {
           <div class="chart-wrap"><canvas id="attention-chart"></canvas></div>
         </div>
         <div>
-          <h3>Dev momentum (GitHub stars)</h3>
+          <h3>${devHeading}</h3>
           <div class="chart-wrap"><canvas id="dev-chart"></canvas></div>
         </div>
       </div>
@@ -488,12 +508,26 @@ async function renderAiPulse() {
       );
     }
 
-    categoricalBarChart(
-      document.getElementById("research-chart"),
-      researchPace.map((r) => r.category),
-      researchPace.map((r) => r.count),
-      (v) => fmtNumber(v, 0)
-    );
+    if (researchTrendReady) {
+      const byCategory = {};
+      for (const row of researchPace) {
+        (byCategory[row.category] ??= []).push(row);
+      }
+      const categories = Object.keys(byCategory);
+      const series = categories.map((category, i) => ({
+        label: category,
+        data: researchDates.map((d) => byCategory[category].find((r) => r.snapshot_date === d)?.count ?? null),
+        colorVar: `--series-${(i % 5) + 1}`,
+      }));
+      multiLineChart(document.getElementById("research-chart"), researchDates, series, (v) => fmtNumber(v, 0));
+    } else {
+      categoricalBarChart(
+        document.getElementById("research-chart"),
+        researchPace.map((r) => r.category),
+        researchPace.map((r) => r.count),
+        (v) => fmtNumber(v, 0)
+      );
+    }
 
     const byArticle = {};
     for (const row of attention) {
@@ -523,14 +557,27 @@ async function renderAiPulse() {
       const prev = latestByRepo[row.repo];
       if (!prev || row.snapshot_date > prev.snapshot_date) latestByRepo[row.repo] = row;
     }
-    const devRows = Object.values(latestByRepo).sort((a, b) => b.stars - a.stars);
-    categoricalBarChart(
-      document.getElementById("dev-chart"),
-      devRows.map((r) => r.repo.split("/")[1]),
-      devRows.map((r) => r.stars),
-      (v) => fmtNumber(v, 0),
-      devRows.map((r) => r.repo)
-    );
+    if (devGrowthReady) {
+      const devRows = Object.values(latestByRepo).sort(
+        (a, b) => (b.weekly_star_growth ?? -Infinity) - (a.weekly_star_growth ?? -Infinity)
+      );
+      divergingBarChart(
+        document.getElementById("dev-chart"),
+        devRows.map((r) => r.repo.split("/")[1]),
+        devRows.map((r) => r.weekly_star_growth),
+        (v) => fmtNumber(v, 0),
+        devRows.map((r) => r.repo)
+      );
+    } else {
+      const devRows = Object.values(latestByRepo).sort((a, b) => b.stars - a.stars);
+      categoricalBarChart(
+        document.getElementById("dev-chart"),
+        devRows.map((r) => r.repo.split("/")[1]),
+        devRows.map((r) => r.stars),
+        (v) => fmtNumber(v, 0),
+        devRows.map((r) => r.repo)
+      );
+    }
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load AI pulse data: ${err.message}</p>`;
   }
