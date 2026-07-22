@@ -1,0 +1,4 @@
+# Placeholder — built out in Phase 2 (Section 9 of PROJECT_PLAN.md)
+name: pipeline
+on:
+  workflow_dispatch: {}
