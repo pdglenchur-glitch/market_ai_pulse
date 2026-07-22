@@ -1,0 +1,30 @@
+[
+  {
+    "series": "10y_yield",
+    "date": "2026-07-20",
+    "value": 4.6,
+    "change": null,
+    "trend": "n/a"
+  },
+  {
+    "series": "cpi",
+    "date": "2026-06-01",
+    "value": 332.568,
+    "change": null,
+    "trend": "n/a"
+  },
+  {
+    "series": "fed_funds_rate",
+    "date": "2026-06-01",
+    "value": 3.63,
+    "change": null,
+    "trend": "n/a"
+  },
+  {
+    "series": "unemployment_rate",
+    "date": "2026-06-01",
+    "value": 4.2,
+    "change": null,
+    "trend": "n/a"
+  }
+]
