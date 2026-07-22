@@ -269,7 +269,7 @@ market-ai-pulse/
 
 ### Phase 6 — Prove the automation, then polish
 
-- [ ] **6.1** Manually trigger the full `pipeline.yml` once and confirm every step passes with no manual intervention
+- [x] **6.1** Manually trigger the full `pipeline.yml` once and confirm every step passes with no manual intervention — run [29950196867](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29950196867), all 4 steps (ingest, transform trigger+poll, export, commit+push) passed clean, ~4 min end to end
 - [ ] **6.2** Let one real scheduled weekly run fire on its own; confirm the dashboard updates without you touching anything
 - [ ] **6.3** Write `README.md` with the architecture diagram, screenshots, and the live link
 - [ ] **6.4** Write a short design-decisions section (R2 vs AWS S3, Free Edition constraints, why the dashboard is static, why one workflow orchestrates everything, why crypto was cut) — this is the paragraph you'll actually use in interviews
