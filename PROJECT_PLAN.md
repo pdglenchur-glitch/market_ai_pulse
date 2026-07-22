@@ -125,6 +125,7 @@ All sources are pulled together in the same weekly run.
   - [x] `DATABRICKS_TOKEN`
   - [x] `FRED_API_KEY`
 - [ ] `GH_TOKEN` — intentionally deferred, add only if the GitHub API rate limit becomes a problem
+- [x] `gh` CLI installed locally and authenticated (`gh auth login`) — lets Claude Code dispatch and poll GitHub Actions runs directly for the rest of the build
 
 Nothing left to do outside Claude Code. Everything from here is code.
 
@@ -136,6 +137,11 @@ Nothing left to do outside Claude Code. Everything from here is code.
 market-ai-pulse/
 ├── .github/workflows/
 │   └── pipeline.yml          # single weekly cron: ingest -> trigger transform -> export -> publish
+├── scripts/                  # reusable local/CI debugging scripts (not part of the pipeline)
+│   ├── test_databricks_connection.py
+│   └── test_r2_connection.py
+├── requirements.txt
+├── .env.example               # local-only credential template (.env is gitignored)
 ├── ingestion/
 │   ├── pull_market_data.py
 │   ├── pull_macro_data.py
