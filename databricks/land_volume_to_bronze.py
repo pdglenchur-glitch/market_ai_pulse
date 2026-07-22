@@ -16,7 +16,7 @@ def main() -> None:
         cursor.execute(
             f"""
             CREATE OR REPLACE TABLE workspace.bronze.market_data AS
-            SELECT * FROM read_files('{VOLUME_FILE}', format => 'json')
+            SELECT * FROM read_files('{VOLUME_FILE}', format => 'json', multiLine => true)
             """
         )
         print("Created/replaced workspace.bronze.market_data")
