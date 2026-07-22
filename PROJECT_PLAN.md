@@ -38,7 +38,7 @@ flowchart LR
 
 ### Orchestration & scheduling — how "automatic" actually works
 
-Everything is driven by **one GitHub Actions workflow on one weekly cron trigger**, not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
+Everything is driven by **one GitHub Actions workflow on one daily cron trigger** (`0 6 * * *`), not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
 
 1. **Ingest** — pull all data sources, land raw files in the R2 bucket
 2. **Stage** — push the same files into the Databricks Unity Catalog volume
@@ -49,6 +49,10 @@ Everything is driven by **one GitHub Actions workflow on one weekly cron trigger
 The Lakeflow job's own native cron trigger stays **disabled** — it only ever runs when called by step 3, which avoids two independent schedules drifting out of sync.
 
 Because Databricks Free Edition's serverless compute restricts outbound internet to a trusted-domain allowlist, all outward-facing work (calling free APIs, writing to R2, pushing to GitHub) happens from GitHub Actions, not from inside Databricks. Databricks only ever does the transform.
+
+**Weekly → daily (2026-07-22):** switched after a rate-limit review found no external API blocker — yfinance, FRED, Wikipedia, arXiv, and R2 all have generous headroom at daily volume, and the GitHub REST API's 5 requests/day is trivial even unauthenticated (`GH_TOKEN` skipped for now; see Section 7). The one real unknown is **Databricks Free Edition's compute quota** — untested at ~30 job-runs/month vs. the ~4/month this was originally built and proven against. **If that becomes a problem, reverting is a one-line change**: in `.github/workflows/pipeline.yml`, swap the cron back to `"0 6 * * 1"` (Mondays). Watch for Databricks Jobs API errors in the "Trigger Lakeflow transform job" step as the signal something's wrong.
+
+Switching to daily also resolves the `weekly_star_growth` / `change_from_prior_week` gold columns' semantics: they're computed via `LAG(..., 7)` (7 *rows*, i.e. 7 daily snapshots) rather than `LAG(1)`, since one row now accumulates per source per calendar day. At the original weekly cadence `LAG(1)` was correct; at daily cadence it would have silently become day-over-day instead of week-over-week.
 
 ---
 
@@ -76,7 +80,7 @@ This path is what the raw-file-landing step and the Lakeflow bronze read task bo
 | `yfinance` | Benchmark (`^GSPC`), 11 SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLRE, XLU, XLC), AI basket (NVDA, MSFT, GOOGL, META, PLTR, AMD, BOTZ) | None | Unofficial but widely used |
 | FRED (St. Louis Fed) | CPI, unemployment, fed funds rate, 10Y yield | Free API key (in secrets) | Macro data doesn't move week to week anyway |
 | Wikipedia Pageviews API | Attention signal — pageviews on "Artificial intelligence," "ChatGPT," "Large language model" | None | Official, stable. **Do not use pytrends** — archived April 2025, unreliable |
-| GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at weekly cadence) | Add `GH_TOKEN` later only if rate-limited |
+| GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at daily cadence — 5 req/day vs. a 60/hour cap) | Add `GH_TOKEN` later only if rate-limited |
 | arXiv API | New paper counts, cs.AI / cs.LG | None | Simple XML response |
 
 All sources are pulled together in the same weekly run.
@@ -279,6 +283,6 @@ market-ai-pulse/
 
 ## 11. Open questions to settle during the build
 
-- [ ] Whether the AI basket lives in its own gold table or merges into `market_daily` with a flag column
+- [x] Whether the AI basket lives in its own gold table or merges into `market_daily` with a flag column — resolved in Phase 3: merged into `market_daily`, distinguished via the `category` column (`benchmark` / `sector` / `ai_basket`)
 - [ ] How much historical depth to retain for trend charts (e.g. 1 year rolling window)
-- [ ] Whether/when to split some sources onto a faster (e.g. daily) cadence once weekly is stable
+- [x] Whether/when to split some sources onto a faster (e.g. daily) cadence once weekly is stable — resolved 2026-07-22: switched the whole pipeline to daily (all sources move together, not split individually) — see the "Weekly → daily" note in Section 2
