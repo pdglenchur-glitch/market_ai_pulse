@@ -2,6 +2,8 @@
 
 A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a free, publicly viewable dashboard tracking market performance, macro conditions, and AI-sector momentum.
 
+**Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/ · **Continuity doc:** [PROJECT_MEMORY.md](PROJECT_MEMORY.md) (design decisions, bugs fixed, session-to-session context)
+
 **Status: all manual account setup is complete.** Every credential exists, every service is provisioned, the Unity Catalog volume is created. What's left is entirely buildable in Claude Code — see Section 7 for exactly what's done, and Section 9 for the build plan.
 
 **How to use this doc:** hand Claude Code **one numbered step at a time** (e.g. "let's do step 1.3"), not a whole phase at once — the steps are deliberately broken into small, independently verifiable pieces so each one has a clear "did this work, yes or no" before moving to the next. Check items off as they're completed so the file stays an accurate log of where the build actually is.
@@ -83,13 +85,13 @@ This path is what the raw-file-landing step and the Lakeflow bronze read task bo
 | GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at daily cadence — 5 req/day vs. a 60/hour cap) | Add `GH_TOKEN` later only if rate-limited |
 | arXiv API | New paper counts, cs.AI / cs.LG | None | Simple XML response |
 
-All sources are pulled together in the same weekly run.
+All sources are pulled together in the same daily run.
 
 ---
 
 ## 5. Tech stack
 
-- **Ingestion & orchestration:** GitHub Actions (single `schedule:` cron, weekly)
+- **Ingestion & orchestration:** GitHub Actions (single `schedule:` cron, daily)
 - **Object storage:** Cloudflare R2 (S3 API-compatible, free forever — 10GB storage, zero egress)
 - **Lakehouse:** Databricks Free Edition — Unity Catalog volume, Lakeflow job (API-triggered, not self-scheduled), Delta Lake
 - **Publishing:** Databricks SQL connector query + JSON export, run from the same GitHub Actions workflow
@@ -142,7 +144,7 @@ Nothing left to do outside Claude Code. Everything from here is code.
 ```
 market-ai-pulse/
 ├── .github/workflows/
-│   └── pipeline.yml          # single weekly cron: ingest -> trigger transform -> export -> publish
+│   └── pipeline.yml          # single daily cron: ingest -> trigger transform -> export -> publish
 ├── scripts/                  # reusable local/CI debugging scripts (not part of the pipeline)
 │   ├── test_databricks_connection.py
 │   └── test_r2_connection.py
@@ -175,7 +177,8 @@ market-ai-pulse/
 │   ├── styles.css
 │   └── data/                 # published JSON lands here
 ├── README.md
-└── PROJECT_PLAN.md           # this file
+├── PROJECT_PLAN.md           # this file
+└── PROJECT_MEMORY.md         # narrative continuity doc — design decisions, bugs fixed, why
 ```
 
 ---
@@ -261,6 +264,8 @@ market-ai-pulse/
 - [x] **5.6** Build the AI pulse panel (combining `ai_vs_market`, `attention_index`, `dev_momentum`, `research_pace`) — spread stat tile + arXiv count tiles + two bar charts (attention, dev momentum)
 - [x] **5.7** Mobile-responsive pass — verified via headless-browser screenshots (not just code review) at 390px width; found and fixed two real Chart.js bugs: bars rendering at ~1/4 height until a deferred `resize()` forces a remeasure (an initial-sizing race), and the last rotated x-axis label clipping within its own canvas (fixed with a consistent 45° rotation, more right-side padding, and shortening dev-momentum labels to repo name only — full `owner/repo` still shown in the tooltip)
 - [x] **5.8** Open the public GitHub Pages link in a browser you're not logged into anything on — confirm it loads with zero login — verified with a fresh incognito headless profile (no cookies/session) against the live URL; renders correctly
+
+**Post-5.8 design polish (2026-07-22, user feedback):** every panel now has a real visualization (previously 3 of 5 panels were stat-tiles-only) — OHLC range bar (Market Snapshot), progress meter → line chart (Volatility), rate-comparison bar chart excluding CPI's mismatched unit (Macro Backdrop), diverging AI-vs-market bar + research-pace bar (AI Pulse). Also replaced the dataviz skill's bright default categorical palette with a custom darker/muted one, validated (not eyeballed) via `scripts/validate_palette.js` for both light and dark mode. Separately fixed `attention_index`: it was showing 100 for every article — not a bug in the data, but a metric that's baselined to each article's first-observed day and therefore can't say anything with only one day of history, compounded by using a bar chart (wrong form for an inherently time-series/trend metric). Now shows raw pageviews until 2+ days exist, then a multi-line trend chart. Full detail in [PROJECT_MEMORY.md](PROJECT_MEMORY.md).
 
 ### Phase 6 — Prove the automation, then polish
 
