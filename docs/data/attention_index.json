@@ -16,5 +16,23 @@
     "date": "2026-07-21",
     "views": 5610,
     "attention_index": 100.0
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-22",
+    "views": 20508,
+    "attention_index": 98.98638864755284
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-22",
+    "views": 171848,
+    "attention_index": 109.44477703193265
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-22",
+    "views": 5927,
+    "attention_index": 105.650623885918
   }
 ]

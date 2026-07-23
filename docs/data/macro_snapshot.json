@@ -1,10 +1,10 @@
 [
   {
     "series": "10y_yield",
-    "date": "2026-07-20",
-    "value": 4.6,
-    "change": null,
-    "trend": "n/a"
+    "date": "2026-07-21",
+    "value": 4.63,
+    "change": 0.03000000000000025,
+    "trend": "up"
   },
   {
     "series": "cpi",
