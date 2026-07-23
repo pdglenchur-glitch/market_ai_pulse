@@ -1,0 +1,20 @@
+name: tmp-register-git-cred
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt
+      - env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_GIT_PAT: ${{ secrets.DATABRICKS_GIT_PAT }}
+        run: python _register_git_credential.py
+        working-directory: orchestration
