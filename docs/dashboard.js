@@ -269,6 +269,16 @@ function multiLineChart(canvas, labels, series, formatValue) {
   }));
 }
 
+function latestPerKey(rows, keyFn, dateFn) {
+  const byKey = {};
+  for (const row of rows) {
+    const key = keyFn(row);
+    const prev = byKey[key];
+    if (!prev || dateFn(row) > dateFn(prev)) byKey[key] = row;
+  }
+  return Object.values(byKey);
+}
+
 function meter(pct, label) {
   return `
     <div class="meter">
@@ -281,7 +291,11 @@ async function renderMarketSnapshot() {
   const el = document.getElementById("market-content");
   try {
     const data = await fetchJson("market_daily");
-    const benchmark = data.find((r) => r.symbol === "^GSPC");
+    const benchmark = latestPerKey(
+      data.filter((r) => r.symbol === "^GSPC"),
+      (r) => r.symbol,
+      (r) => r.date
+    )[0];
     if (!benchmark) throw new Error("Benchmark row not found");
 
     const deltaText = benchmark.daily_return === null
@@ -318,9 +332,11 @@ async function renderSectorRotation() {
   const el = document.getElementById("sector-content");
   try {
     const data = await fetchJson("market_daily");
-    const sectors = data
-      .filter((r) => r.category === "sector")
-      .sort((a, b) => (b.daily_return ?? -Infinity) - (a.daily_return ?? -Infinity));
+    const sectors = latestPerKey(
+      data.filter((r) => r.category === "sector"),
+      (r) => r.symbol,
+      (r) => r.date
+    ).sort((a, b) => (b.daily_return ?? -Infinity) - (a.daily_return ?? -Infinity));
 
     if (sectors.every((r) => r.daily_return === null)) {
       el.innerHTML = `
