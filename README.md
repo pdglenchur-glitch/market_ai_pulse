@@ -29,8 +29,6 @@ Several panels above still show "Accumulating history" — that's expected, not 
 
 The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." **Open/High/Low/Close** are the price at the start of the trading day, the highest and lowest it touched, and where it ended; the number under the main figure shows how much it moved versus the prior day (green = up, red = down).
 
-**Day's range** is a candlestick-style bar: a thin gray line spans the full low-to-high range for the day (a long line means a volatile day, a short one means a quiet day), and a thicker colored bar within it spans specifically from open to close — green if the index ended the day higher than it opened, red if lower. As more days accumulate this turns into a strip of these, effectively a simplified candlestick chart.
-
 ### Sector Rotation
 
 A sector ETF is a basket of stocks from one slice of the economy — e.g. `XLK` holds tech companies, `XLE` holds energy companies. This chart shows how much each sector moved that day, so you can see which parts of the economy are leading and which are lagging. "Rotation" refers to money flowing out of some sectors and into others over time.
