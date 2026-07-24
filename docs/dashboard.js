@@ -152,6 +152,8 @@ function rangeBarChart(canvas, label, low, high, open, close) {
   const gridline = cssVar("--gridline");
   const textMuted = cssVar("--text-muted");
   const color = close >= open ? good : bad;
+  const bodyLow = Math.min(open, close);
+  const bodyHigh = Math.max(open, close);
   const span = high - low;
   const pad = span > 0 ? span * 0.4 : Math.abs(high) * 0.01 || 1;
 
@@ -161,8 +163,22 @@ function rangeBarChart(canvas, label, low, high, open, close) {
       labels: [label],
       datasets: [
         {
+          // The wick: the full low-high range, thin, muted - always visible
+          // even when open and close are close together.
+          label: "Range",
           data: [[low, high]],
+          backgroundColor: textMuted,
+          barThickness: 4,
+          borderRadius: 2,
+          borderSkipped: false,
+        },
+        {
+          // The body: specifically open-to-close, thick and colored by
+          // direction - this is what actually answers "close vs. open".
+          label: "Open/close",
+          data: [[bodyLow, bodyHigh]],
           backgroundColor: color,
+          barThickness: 32,
           borderRadius: 4,
           borderSkipped: false,
         },
@@ -175,6 +191,7 @@ function rangeBarChart(canvas, label, low, high, open, close) {
       plugins: {
         legend: { display: false },
         tooltip: {
+          filter: (item) => item.datasetIndex === 1,
           callbacks: {
             label: () => [
               `Open: ${fmtNumber(open)}`,
@@ -192,7 +209,7 @@ function rangeBarChart(canvas, label, low, high, open, close) {
           grid: { color: gridline },
           ticks: { color: textMuted, callback: (v) => fmtNumber(v, 0) },
         },
-        y: { grid: { display: false }, ticks: { color: textMuted } },
+        y: { grid: { display: false }, ticks: { color: textMuted }, grouped: false },
       },
     },
   }));
