@@ -59,24 +59,23 @@ spark.sql(
 )
 print("Built workspace.gold.volatility")
 
-# --- macro_snapshot: latest value per series + trend direction ---
+# --- macro_snapshot: full history per series + trend direction vs. the prior
+# observation. Exports every observation (not just the latest) so the
+# dashboard can compute change over an arbitrary window client-side; the
+# "latest" reading it shows by default is just the max date per series. ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.macro_snapshot AS
-    SELECT series, date, value, change, trend FROM (
-        SELECT
-            series, date, value,
-            value - LAG(value) OVER (PARTITION BY series ORDER BY date) AS change,
-            CASE
-                WHEN LAG(value) OVER (PARTITION BY series ORDER BY date) IS NULL THEN 'n/a'
-                WHEN value > LAG(value) OVER (PARTITION BY series ORDER BY date) THEN 'up'
-                WHEN value < LAG(value) OVER (PARTITION BY series ORDER BY date) THEN 'down'
-                ELSE 'flat'
-            END AS trend,
-            ROW_NUMBER() OVER (PARTITION BY series ORDER BY date DESC) AS rn
-        FROM workspace.silver.macro_data
-    )
-    WHERE rn = 1
+    SELECT
+        series, date, value,
+        value - LAG(value) OVER (PARTITION BY series ORDER BY date) AS change,
+        CASE
+            WHEN LAG(value) OVER (PARTITION BY series ORDER BY date) IS NULL THEN 'n/a'
+            WHEN value > LAG(value) OVER (PARTITION BY series ORDER BY date) THEN 'up'
+            WHEN value < LAG(value) OVER (PARTITION BY series ORDER BY date) THEN 'down'
+            ELSE 'flat'
+        END AS trend
+    FROM workspace.silver.macro_data
     """
 )
 print("Built workspace.gold.macro_snapshot")

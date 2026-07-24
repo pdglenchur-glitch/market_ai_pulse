@@ -51,6 +51,89 @@ function deferredResize(chart) {
   return chart;
 }
 
+// ---- time-window helpers ---------------------------------------------
+// Shared across every chart that lets the viewer pick how far back to look.
+// Two computation primitives cover every metric on the dashboard:
+//   - compoundReturn: for series that already have a daily % return column
+//     (sector_rotation, ai_vs_market) - compounds those returns over the
+//     window, which is mathematically the same as (end-start)/start but
+//     doesn't require re-fetching raw prices.
+//   - windowDeltaByGroup: for level-valued series (star counts, macro
+//     rates) - just end-value minus start-value within the window.
+
+const WINDOW_OPTIONS = [
+  { label: "7D", days: 7 },
+  { label: "30D", days: 30 },
+  { label: "90D", days: 90 },
+  { label: "All", days: null },
+];
+
+function addDaysToDateStr(dateStr, delta) {
+  const d = new Date(`${dateStr}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + delta);
+  return d.toISOString().slice(0, 10);
+}
+
+function filterByWindow(rows, dateKey, days) {
+  if (days == null || rows.length === 0) return rows;
+  const latest = rows.reduce((max, r) => (r[dateKey] > max ? r[dateKey] : max), rows[0][dateKey]);
+  const cutoff = addDaysToDateStr(latest, -days);
+  return rows.filter((r) => r[dateKey] >= cutoff);
+}
+
+function groupBy(rows, keyFn) {
+  const groups = {};
+  for (const row of rows) (groups[keyFn(row)] ??= []).push(row);
+  return groups;
+}
+
+function compoundReturn(rows, dateKey, valueKey, days) {
+  const windowed = filterByWindow(rows, dateKey, days).filter((r) => r[valueKey] !== null);
+  if (windowed.length === 0) return null;
+  return windowed.reduce((acc, r) => acc * (1 + r[valueKey]), 1) - 1;
+}
+
+function windowCompoundReturnByGroup(rows, groupKey, dateKey, valueKey, days) {
+  const groups = groupBy(rows, (r) => r[groupKey]);
+  const result = {};
+  for (const [key, groupRows] of Object.entries(groups)) {
+    result[key] = compoundReturn(groupRows, dateKey, valueKey, days);
+  }
+  return result;
+}
+
+function windowDeltaByGroup(rows, groupKey, dateKey, valueKey, days) {
+  const groups = groupBy(
+    rows.filter((r) => r[valueKey] !== null && r[valueKey] !== undefined),
+    (r) => r[groupKey]
+  );
+  const result = {};
+  for (const [key, groupRows] of Object.entries(groups)) {
+    const windowed = filterByWindow(groupRows, dateKey, days).sort((a, b) => a[dateKey].localeCompare(b[dateKey]));
+    result[key] = windowed.length < 2 ? null : windowed[windowed.length - 1][valueKey] - windowed[0][valueKey];
+  }
+  return result;
+}
+
+function windowSelectorHtml(active) {
+  const buttons = WINDOW_OPTIONS.map(
+    (opt) =>
+      `<button type="button" data-days="${opt.days}" class="${opt.days === active ? "active" : ""}">${opt.label}</button>`
+  ).join("");
+  return `<div class="window-selector">${buttons}</div>`;
+}
+
+function wireWindowSelector(container, onSelect) {
+  container.querySelectorAll(".window-selector button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const days = btn.dataset.days === "null" ? null : Number(btn.dataset.days);
+      onSelect(days);
+    });
+  });
+}
+
+// ---- chart builders -----------------------------------------------------
+
 function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
   const good = cssVar("--delta-good");
   const bad = cssVar("--delta-bad");
@@ -235,6 +318,8 @@ function meter(pct, label) {
     </div>`;
 }
 
+// ---- panels ---------------------------------------------------------------
+
 async function renderMarketSnapshot() {
   const el = document.getElementById("market-content");
   try {
@@ -267,30 +352,39 @@ async function renderMarketSnapshot() {
 async function renderSectorRotation() {
   const el = document.getElementById("sector-content");
   try {
-    const data = await fetchJson("market_daily");
-    const sectors = latestPerKey(
-      data.filter((r) => r.category === "sector"),
-      (r) => r.symbol,
-      (r) => r.date
-    ).sort((a, b) => (b.daily_return ?? -Infinity) - (a.daily_return ?? -Infinity));
+    const data = await fetchJson("sector_rotation");
 
-    if (sectors.every((r) => r.daily_return === null)) {
+    if (data.every((r) => r.daily_return === null)) {
       el.innerHTML = `
         <div class="stat-tile">
-          <div class="stat-label">Daily return by sector</div>
+          <div class="stat-label">Return by sector</div>
           <div class="stat-value">—</div>
           <div class="stat-delta neutral">Accumulating history — needs a second day of data</div>
         </div>`;
       return;
     }
 
-    el.innerHTML = `<div class="chart-wrap chart-tall"><canvas id="sector-chart"></canvas></div>`;
-    divergingBarChart(
-      document.getElementById("sector-chart"),
-      sectors.map((r) => r.symbol),
-      sectors.map((r) => r.daily_return),
-      fmtPct
-    );
+    let days = null;
+    const draw = () => {
+      const changes = windowCompoundReturnByGroup(data, "symbol", "date", "daily_return", days);
+      const symbols = Object.keys(changes)
+        .filter((s) => changes[s] !== null)
+        .sort((a, b) => changes[b] - changes[a]);
+
+      el.innerHTML = `
+        <div class="chart-header">
+          <h3>Return by sector</h3>
+          ${windowSelectorHtml(days)}
+        </div>
+        <div class="chart-wrap chart-tall"><canvas id="sector-chart"></canvas></div>
+      `;
+      wireWindowSelector(el, (newDays) => {
+        days = newDays;
+        draw();
+      });
+      divergingBarChart(document.getElementById("sector-chart"), symbols, symbols.map((s) => changes[s]), fmtPct);
+    };
+    draw();
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load sector data: ${err.message}</p>`;
   }
@@ -314,19 +408,31 @@ async function renderVolatility() {
       return;
     }
 
-    el.innerHTML = `
-      ${statTile("Rolling 20-day volatility", fmtPct(latest.rolling_20d_volatility), `As of ${latest.date}`, "neutral")}
-      <div class="subsection">
-        <h3>Volatility over time</h3>
-        <div class="chart-wrap"><canvas id="volatility-chart"></canvas></div>
-      </div>
-    `;
-    lineChart(
-      document.getElementById("volatility-chart"),
-      withValues.map((d) => d.date),
-      withValues.map((d) => d.rolling_20d_volatility),
-      fmtPct
-    );
+    let days = null;
+    const draw = () => {
+      const windowed = filterByWindow(withValues, "date", days);
+      el.innerHTML = `
+        ${statTile("Rolling 20-day volatility", fmtPct(latest.rolling_20d_volatility), `As of ${latest.date}`, "neutral")}
+        <div class="subsection">
+          <div class="chart-header">
+            <h3>Volatility over time</h3>
+            ${windowSelectorHtml(days)}
+          </div>
+          <div class="chart-wrap"><canvas id="volatility-chart"></canvas></div>
+        </div>
+      `;
+      wireWindowSelector(el, (newDays) => {
+        days = newDays;
+        draw();
+      });
+      lineChart(
+        document.getElementById("volatility-chart"),
+        windowed.map((d) => d.date),
+        windowed.map((d) => d.rolling_20d_volatility),
+        fmtPct
+      );
+    };
+    draw();
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load volatility data: ${err.message}</p>`;
   }
@@ -343,37 +449,262 @@ async function renderMacro() {
       "10y_yield": "10Y Yield",
     };
     const trendArrow = { up: "▲", down: "▼", flat: "→", "n/a": "" };
-
-    const tiles = data
-      .map((row) => {
-        const label = labels[row.series] || row.series;
-        const cls = row.trend === "up" ? "good" : row.trend === "down" ? "bad" : "neutral";
-        const deltaText = row.trend === "n/a" ? `As of ${row.date}` : `${trendArrow[row.trend]} ${fmtNumber(row.change)} (${row.date})`;
-        return statTile(label, fmtNumber(row.value), deltaText, cls);
-      })
-      .join("");
-
     // CPI is an index level, not a percentage - it stays in the KPI row only.
     // The three rate-like series share a unit (%), so they're comparable on one chart.
     const rateSeries = ["unemployment_rate", "fed_funds_rate", "10y_yield"];
     const rateRows = data.filter((row) => rateSeries.includes(row.series));
 
-    el.innerHTML = `
-      <div class="kpi-row">${tiles}</div>
-      <div class="subsection">
-        <h3>Rates compared (%)</h3>
-        <div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>
-      </div>
-    `;
-    categoricalBarChart(
-      document.getElementById("macro-rate-chart"),
-      rateRows.map((row) => labels[row.series] || row.series),
-      rateRows.map((row) => row.value),
-      (v) => `${fmtNumber(v)}%`
-    );
+    let days = null;
+    const draw = () => {
+      const latestRows = latestPerKey(data, (r) => r.series, (r) => r.date);
+      const tiles = latestRows
+        .map((row) => {
+          const label = labels[row.series] || row.series;
+          const cls = row.trend === "up" ? "good" : row.trend === "down" ? "bad" : "neutral";
+          const deltaText = row.trend === "n/a" ? `As of ${row.date}` : `${trendArrow[row.trend]} ${fmtNumber(row.change)} (${row.date})`;
+          return statTile(label, fmtNumber(row.value), deltaText, cls);
+        })
+        .join("");
+
+      const changes = windowDeltaByGroup(rateRows, "series", "date", "value", days);
+      const seriesKeys = Object.keys(changes).filter((s) => changes[s] !== null);
+
+      el.innerHTML = `
+        <div class="kpi-row">${tiles}</div>
+        <div class="subsection">
+          <div class="chart-header">
+            <h3>Rates: change (percentage points)</h3>
+            ${windowSelectorHtml(days)}
+          </div>
+          ${
+            seriesKeys.length === 0
+              ? `<p class="panel-meta">Accumulating history — needs a second reading in this window</p>`
+              : `<div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>`
+          }
+        </div>
+      `;
+      wireWindowSelector(el, (newDays) => {
+        days = newDays;
+        draw();
+      });
+
+      if (seriesKeys.length > 0) {
+        divergingBarChart(
+          document.getElementById("macro-rate-chart"),
+          seriesKeys.map((s) => labels[s] || s),
+          seriesKeys.map((s) => changes[s]),
+          (v) => `${v >= 0 ? "+" : ""}${fmtNumber(v)}pp`
+        );
+      }
+    };
+    draw();
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load macro data: ${err.message}</p>`;
   }
+}
+
+function renderSpreadChart(container, aiVsMarket) {
+  if (aiVsMarket.every((r) => r.spread === null)) {
+    container.innerHTML = `
+      <h3>AI basket vs. S&amp;P 500</h3>
+      <div class="stat-tile">
+        <div class="stat-label">Spread</div>
+        <div class="stat-value">—</div>
+        <div class="stat-delta neutral">Accumulating history — needs a second day of data</div>
+      </div>`;
+    return;
+  }
+
+  let days = null;
+  const draw = () => {
+    const aiReturn = compoundReturn(aiVsMarket, "date", "ai_basket_return", days);
+    const benchReturn = compoundReturn(aiVsMarket, "date", "benchmark_return", days);
+    const ready = aiReturn !== null && benchReturn !== null;
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>AI basket vs. S&amp;P 500</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      ${
+        ready
+          ? `<div class="chart-wrap" style="height:160px"><canvas id="ai-spread-chart"></canvas></div>`
+          : `<p class="panel-meta">Not enough history in this window yet</p>`
+      }
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    if (ready) {
+      divergingBarChart(
+        document.getElementById("ai-spread-chart"),
+        ["AI basket", "S&P 500"],
+        [aiReturn, benchReturn],
+        fmtPct
+      );
+    }
+  };
+  draw();
+}
+
+function renderResearchChart(container, researchPace) {
+  const dates = [...new Set(researchPace.map((r) => r.snapshot_date))].sort();
+
+  if (dates.length < 2) {
+    container.innerHTML = `
+      <h3>Research pace (arXiv, trailing 7d)</h3>
+      <div class="chart-wrap" style="height:160px"><canvas id="research-chart"></canvas></div>
+    `;
+    categoricalBarChart(
+      document.getElementById("research-chart"),
+      researchPace.map((r) => r.category),
+      researchPace.map((r) => r.count),
+      (v) => fmtNumber(v, 0)
+    );
+    return;
+  }
+
+  let days = null;
+  const draw = () => {
+    const windowed = filterByWindow(researchPace, "snapshot_date", days);
+    const windowDates = [...new Set(windowed.map((r) => r.snapshot_date))].sort();
+    const byCategory = groupBy(windowed, (r) => r.category);
+    const categories = Object.keys(byCategory);
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>Research pace trend (arXiv, trailing 7d count)</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      <div class="chart-wrap" style="height:160px"><canvas id="research-chart"></canvas></div>
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    const series = categories.map((category, i) => ({
+      label: category,
+      data: windowDates.map((d) => byCategory[category].find((r) => r.snapshot_date === d)?.count ?? null),
+      colorVar: `--series-${(i % 5) + 1}`,
+    }));
+    multiLineChart(document.getElementById("research-chart"), windowDates, series, (v) => fmtNumber(v, 0));
+  };
+  draw();
+}
+
+function renderAttentionChart(container, attention) {
+  const dates = [...new Set(attention.map((r) => r.date))].sort();
+  const byArticle = groupBy(attention, (r) => r.article);
+  const articles = Object.keys(byArticle);
+
+  if (dates.length < 2) {
+    container.innerHTML = `
+      <h3>Public attention (Wikipedia pageviews)</h3>
+      <div class="chart-wrap"><canvas id="attention-chart"></canvas></div>
+    `;
+    const latestRows = articles.map((a) => byArticle[a][byArticle[a].length - 1]);
+    categoricalBarChart(
+      document.getElementById("attention-chart"),
+      latestRows.map((r) => r.article.replace(/_/g, " ")),
+      latestRows.map((r) => r.views),
+      (v) => fmtNumber(v, 0)
+    );
+    return;
+  }
+
+  let days = null;
+  const draw = () => {
+    const windowed = filterByWindow(attention, "date", days);
+    const windowDates = [...new Set(windowed.map((r) => r.date))].sort();
+    const byArticleWindowed = groupBy(windowed, (r) => r.article);
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>Public attention trend (Wikipedia pageviews, indexed to window start = 100)</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      <div class="chart-wrap"><canvas id="attention-chart"></canvas></div>
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    const series = Object.keys(byArticleWindowed).map((article, i) => {
+      const rows = byArticleWindowed[article].slice().sort((a, b) => a.date.localeCompare(b.date));
+      const baseline = rows[0]?.views;
+      return {
+        label: article.replace(/_/g, " "),
+        data: windowDates.map((d) => {
+          const row = rows.find((r) => r.date === d);
+          return row && baseline ? (row.views / baseline) * 100 : null;
+        }),
+        colorVar: `--series-${(i % 5) + 1}`,
+      };
+    });
+    multiLineChart(document.getElementById("attention-chart"), windowDates, series, (v) => fmtNumber(v, 0));
+  };
+  draw();
+}
+
+function renderDevChart(container, devMomentum) {
+  const dates = [...new Set(devMomentum.map((r) => r.snapshot_date))].sort();
+  const byRepo = groupBy(devMomentum, (r) => r.repo);
+  const repos = Object.keys(byRepo);
+
+  if (dates.length < 2) {
+    container.innerHTML = `
+      <h3>Dev momentum (GitHub stars)</h3>
+      <div class="chart-wrap"><canvas id="dev-chart"></canvas></div>
+    `;
+    const latestRows = repos.map((r) => byRepo[r][byRepo[r].length - 1]).sort((a, b) => b.stars - a.stars);
+    categoricalBarChart(
+      document.getElementById("dev-chart"),
+      latestRows.map((r) => r.repo.split("/")[1]),
+      latestRows.map((r) => r.stars),
+      (v) => fmtNumber(v, 0),
+      latestRows.map((r) => r.repo)
+    );
+    return;
+  }
+
+  let days = null;
+  const draw = () => {
+    const changes = windowDeltaByGroup(devMomentum, "repo", "snapshot_date", "stars", days);
+    const withChanges = Object.keys(changes)
+      .filter((r) => changes[r] !== null)
+      .sort((a, b) => changes[b] - changes[a]);
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>Dev momentum (star growth)</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      ${
+        withChanges.length === 0
+          ? `<p class="panel-meta">Not enough history in this window yet</p>`
+          : `<div class="chart-wrap"><canvas id="dev-chart"></canvas></div>`
+      }
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    if (withChanges.length > 0) {
+      divergingBarChart(
+        document.getElementById("dev-chart"),
+        withChanges.map((r) => r.split("/")[1]),
+        withChanges.map((r) => changes[r]),
+        (v) => fmtNumber(v, 0),
+        withChanges
+      );
+    }
+  };
+  draw();
 }
 
 async function renderAiPulse() {
@@ -386,150 +717,21 @@ async function renderAiPulse() {
       fetchJson("research_pace"),
     ]);
 
-    const latestSpread = aiVsMarket[aiVsMarket.length - 1];
-    const spreadReady = latestSpread && latestSpread.spread !== null;
-
-    // attention_index is baselined to each article's first-observed day, so
-    // with only one day of history every article trivially reads 100 - it
-    // can't show anything until there's a second day to compare against.
-    // It's also inherently a trend metric (indexed like a stock chart), so
-    // once ready it belongs on a line chart over time, not a bar of the
-    // current value - a bar chart can never show "rising or falling".
-    const attentionDates = [...new Set(attention.map((r) => r.date))].sort();
-    const attentionTrendReady = attentionDates.length >= 2;
-    const attentionHeading = attentionTrendReady
-      ? "Public attention trend (Wikipedia pageviews, indexed to first day = 100)"
-      : "Public attention (Wikipedia pageviews)";
-
-    // research_pace's "trailing 7d" count is itself already a rolling window -
-    // what a single day's bar can't show is whether that rolling count is
-    // rising or falling. Once 2+ days exist, plot the count over time instead.
-    const researchDates = [...new Set(researchPace.map((r) => r.snapshot_date))].sort();
-    const researchTrendReady = researchDates.length >= 2;
-    const researchHeading = researchTrendReady
-      ? "Research pace trend (arXiv, trailing 7d count)"
-      : "Research pace (arXiv, trailing 7d)";
-
-    // Raw star count is dominated by each repo's overall popularity and barely
-    // moves day to day - it can't show "momentum". weekly_star_growth is the
-    // actual momentum signal, but it's null until 7 daily snapshots exist
-    // (LAG(7) - see silver_to_gold.py), so fall back to raw counts until then.
-    const devGrowthReady = devMomentum.some((r) => r.weekly_star_growth !== null);
-    const devHeading = devGrowthReady
-      ? "Dev momentum (weekly star growth)"
-      : "Dev momentum (GitHub stars)";
-
     el.innerHTML = `
       <div class="two-col">
-        <div>
-          <h3>AI basket vs. S&amp;P 500 (daily return)</h3>
-          ${
-            spreadReady
-              ? `<div class="chart-wrap" style="height:160px"><canvas id="ai-spread-chart"></canvas></div>`
-              : `<div class="stat-tile">
-                   <div class="stat-label">Spread</div>
-                   <div class="stat-value">—</div>
-                   <div class="stat-delta neutral">Accumulating history — needs a second day of data</div>
-                 </div>`
-          }
-        </div>
-        <div>
-          <h3>${researchHeading}</h3>
-          <div class="chart-wrap" style="height:160px"><canvas id="research-chart"></canvas></div>
-        </div>
+        <div id="ai-spread-panel"></div>
+        <div id="ai-research-panel"></div>
       </div>
-
       <div class="two-col subsection">
-        <div>
-          <h3>${attentionHeading}</h3>
-          <div class="chart-wrap"><canvas id="attention-chart"></canvas></div>
-        </div>
-        <div>
-          <h3>${devHeading}</h3>
-          <div class="chart-wrap"><canvas id="dev-chart"></canvas></div>
-        </div>
+        <div id="ai-attention-panel"></div>
+        <div id="ai-dev-panel"></div>
       </div>
     `;
 
-    if (spreadReady) {
-      divergingBarChart(
-        document.getElementById("ai-spread-chart"),
-        ["AI basket", "S&P 500"],
-        [latestSpread.ai_basket_return, latestSpread.benchmark_return],
-        fmtPct
-      );
-    }
-
-    if (researchTrendReady) {
-      const byCategory = {};
-      for (const row of researchPace) {
-        (byCategory[row.category] ??= []).push(row);
-      }
-      const categories = Object.keys(byCategory);
-      const series = categories.map((category, i) => ({
-        label: category,
-        data: researchDates.map((d) => byCategory[category].find((r) => r.snapshot_date === d)?.count ?? null),
-        colorVar: `--series-${(i % 5) + 1}`,
-      }));
-      multiLineChart(document.getElementById("research-chart"), researchDates, series, (v) => fmtNumber(v, 0));
-    } else {
-      categoricalBarChart(
-        document.getElementById("research-chart"),
-        researchPace.map((r) => r.category),
-        researchPace.map((r) => r.count),
-        (v) => fmtNumber(v, 0)
-      );
-    }
-
-    const byArticle = {};
-    for (const row of attention) {
-      (byArticle[row.article] ??= []).push(row);
-    }
-    const articles = Object.keys(byArticle);
-
-    if (attentionTrendReady) {
-      const series = articles.map((article, i) => ({
-        label: article.replace(/_/g, " "),
-        data: attentionDates.map((d) => byArticle[article].find((r) => r.date === d)?.attention_index ?? null),
-        colorVar: `--series-${(i % 5) + 1}`,
-      }));
-      multiLineChart(document.getElementById("attention-chart"), attentionDates, series, (v) => fmtNumber(v, 0));
-    } else {
-      const latestRows = articles.map((article) => byArticle[article][byArticle[article].length - 1]);
-      categoricalBarChart(
-        document.getElementById("attention-chart"),
-        latestRows.map((r) => r.article.replace(/_/g, " ")),
-        latestRows.map((r) => r.views),
-        (v) => fmtNumber(v, 0)
-      );
-    }
-
-    const latestByRepo = {};
-    for (const row of devMomentum) {
-      const prev = latestByRepo[row.repo];
-      if (!prev || row.snapshot_date > prev.snapshot_date) latestByRepo[row.repo] = row;
-    }
-    if (devGrowthReady) {
-      const devRows = Object.values(latestByRepo).sort(
-        (a, b) => (b.weekly_star_growth ?? -Infinity) - (a.weekly_star_growth ?? -Infinity)
-      );
-      divergingBarChart(
-        document.getElementById("dev-chart"),
-        devRows.map((r) => r.repo.split("/")[1]),
-        devRows.map((r) => r.weekly_star_growth),
-        (v) => fmtNumber(v, 0),
-        devRows.map((r) => r.repo)
-      );
-    } else {
-      const devRows = Object.values(latestByRepo).sort((a, b) => b.stars - a.stars);
-      categoricalBarChart(
-        document.getElementById("dev-chart"),
-        devRows.map((r) => r.repo.split("/")[1]),
-        devRows.map((r) => r.stars),
-        (v) => fmtNumber(v, 0),
-        devRows.map((r) => r.repo)
-      );
-    }
+    renderSpreadChart(document.getElementById("ai-spread-panel"), aiVsMarket);
+    renderResearchChart(document.getElementById("ai-research-panel"), researchPace);
+    renderAttentionChart(document.getElementById("ai-attention-panel"), attention);
+    renderDevChart(document.getElementById("ai-dev-panel"), devMomentum);
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load AI pulse data: ${err.message}</p>`;
   }
