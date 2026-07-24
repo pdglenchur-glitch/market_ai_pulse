@@ -4,7 +4,7 @@ A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a fr
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/ · **Continuity doc:** [PROJECT_MEMORY.md](PROJECT_MEMORY.md) (design decisions, bugs fixed, session-to-session context)
 
-**Status: all manual account setup is complete.** Every credential exists, every service is provisioned, the Unity Catalog volume is created. What's left is entirely buildable in Claude Code — see Section 7 for exactly what's done, and Section 9 for the build plan.
+**Status: build complete.** All of Phases 0–6 in Section 9 are done — the pipeline runs daily, unattended, and has been confirmed via a real scheduled (not manually dispatched) run. Remaining open items are non-blocking (Section 11).
 
 **How to use this doc:** hand Claude Code **one numbered step at a time** (e.g. "let's do step 1.3"), not a whole phase at once — the steps are deliberately broken into small, independently verifiable pieces so each one has a clear "did this work, yes or no" before moving to the next. Check items off as they're completed so the file stays an accurate log of where the build actually is.
 
@@ -270,7 +270,7 @@ market-ai-pulse/
 ### Phase 6 — Prove the automation, then polish
 
 - [x] **6.1** Manually trigger the full `pipeline.yml` once and confirm every step passes with no manual intervention — run [29950196867](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29950196867), all 4 steps (ingest, transform trigger+poll, export, commit+push) passed clean, ~4 min end to end
-- [ ] **6.2** Let one real scheduled weekly run fire on its own; confirm the dashboard updates without you touching anything
+- [x] **6.2** Let one real scheduled weekly run fire on its own; confirm the dashboard updates without you touching anything — confirmed via run [29990293897](https://github.com/pdglenchur-glitch/market_ai_pulse/actions/runs/29990293897), `event: schedule` (not manually dispatched), fired and succeeded unattended overnight while the repo was private — also incidentally proved the Databricks Git credential works for real scheduled runs, not just manual verification
 - [x] **6.3** Write `README.md` with the architecture diagram, screenshots, and the live link — light/dark screenshots of the live dashboard in `screenshots/`
 - [x] **6.4** Write a short design-decisions section (R2 vs AWS S3, Free Edition constraints, why the dashboard is static, why one workflow orchestrates everything, why crypto was cut) — this is the paragraph you'll actually use in interviews — in `README.md`
 - [x] **6.5** Add failure alerting to the workflow (a step that notifies on failure, since a silent weekly failure means a stale dashboard with no obvious sign) — opens a GitHub issue labeled `pipeline-failure` on `failure()` (comments instead of duplicating if one's already open), auto-closes it on the next `success()`. Uses the default `GITHUB_TOKEN` (`issues: write` permission added) — no new secrets. All three paths (create, comment-not-duplicate, auto-close) verified via a temporary test workflow before wiring into the real pipeline
