@@ -467,7 +467,7 @@ async function renderMacro() {
         .join("");
 
       const changes = windowDeltaByGroup(rateRows, "series", "date", "value", days);
-      const seriesKeys = Object.keys(changes).filter((s) => changes[s] !== null);
+      const anyData = rateSeries.some((s) => changes[s] !== undefined);
 
       el.innerHTML = `
         <div class="kpi-row">${tiles}</div>
@@ -477,9 +477,9 @@ async function renderMacro() {
             ${windowSelectorHtml(days)}
           </div>
           ${
-            seriesKeys.length === 0
-              ? `<p class="panel-meta">Accumulating history — needs a second reading in this window</p>`
-              : `<div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>`
+            anyData
+              ? `<div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>`
+              : `<p class="panel-meta">Accumulating history</p>`
           }
         </div>
       `;
@@ -488,12 +488,12 @@ async function renderMacro() {
         draw();
       });
 
-      if (seriesKeys.length > 0) {
+      if (anyData) {
         divergingBarChart(
           document.getElementById("macro-rate-chart"),
-          seriesKeys.map((s) => labels[s] || s),
-          seriesKeys.map((s) => changes[s]),
-          (v) => `${v >= 0 ? "+" : ""}${fmtNumber(v)}pp`
+          rateSeries.map((s) => labels[s] || s),
+          rateSeries.map((s) => (changes[s] === undefined ? null : changes[s])),
+          (v) => (v === null ? "Not enough history in this window yet" : `${v >= 0 ? "+" : ""}${fmtNumber(v)}pp`)
         );
       }
     };
