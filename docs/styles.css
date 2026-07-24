@@ -292,10 +292,10 @@ footer a {
 
 @media (max-width: 760px) {
   .panel-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .two-col {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .page-header h1 {
     font-size: 1.25rem;
