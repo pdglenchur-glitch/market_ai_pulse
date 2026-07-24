@@ -147,10 +147,11 @@ function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
       labels,
       datasets: [
         {
-          data: values,
+          data: values.map((v) => (v === null ? 0 : v)),
           backgroundColor: values.map((v) => (v === null ? textMuted : v >= 0 ? good : bad)),
           borderRadius: 4,
           borderSkipped: false,
+          minBarLength: 4,
         },
       ],
     },
@@ -162,7 +163,7 @@ function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
         tooltip: {
           callbacks: {
             title: (items) => fullLabels[items[0].dataIndex],
-            label: (ctx) => formatValue(ctx.raw),
+            label: (ctx) => formatValue(values[ctx.dataIndex]),
           },
         },
       },
