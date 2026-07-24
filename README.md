@@ -4,14 +4,7 @@ A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a fr
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
-![Dashboard, light mode](screenshots/dashboard-light.png)
-
-<details>
-<summary>Dark mode</summary>
-
-![Dashboard, dark mode](screenshots/dashboard-dark.png)
-
-</details>
+![Dashboard, dark mode](screenshots/dashboard_dark.png)
 
 Several panels above still show "Accumulating history" — that's expected, not broken. Some metrics (rolling volatility, week-over-week deltas) are mathematically undefined until enough daily runs have accumulated; see [PROJECT_MEMORY.md](PROJECT_MEMORY.md) for exactly how long each one takes.
 
