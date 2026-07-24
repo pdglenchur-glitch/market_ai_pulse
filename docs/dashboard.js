@@ -146,75 +146,6 @@ function categoricalBarChart(canvas, labels, values, formatValue, tooltipLabels)
   }));
 }
 
-function rangeBarChart(canvas, label, low, high, open, close) {
-  const good = cssVar("--delta-good");
-  const bad = cssVar("--delta-bad");
-  const gridline = cssVar("--gridline");
-  const textMuted = cssVar("--text-muted");
-  const color = close >= open ? good : bad;
-  const bodyLow = Math.min(open, close);
-  const bodyHigh = Math.max(open, close);
-  const span = high - low;
-  const pad = span > 0 ? span * 0.4 : Math.abs(high) * 0.01 || 1;
-
-  return deferredResize(new Chart(canvas, {
-    type: "bar",
-    data: {
-      labels: [label],
-      datasets: [
-        {
-          // The wick: the full low-high range, thin, muted - always visible
-          // even when open and close are close together.
-          label: "Range",
-          data: [[low, high]],
-          backgroundColor: textMuted,
-          barThickness: 4,
-          borderRadius: 2,
-          borderSkipped: false,
-        },
-        {
-          // The body: specifically open-to-close, thick and colored by
-          // direction - this is what actually answers "close vs. open".
-          label: "Open/close",
-          data: [[bodyLow, bodyHigh]],
-          backgroundColor: color,
-          barThickness: 32,
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-      ],
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          filter: (item) => item.datasetIndex === 1,
-          callbacks: {
-            label: () => [
-              `Open: ${fmtNumber(open)}`,
-              `Close: ${fmtNumber(close)}`,
-              `High: ${fmtNumber(high)}`,
-              `Low: ${fmtNumber(low)}`,
-            ],
-          },
-        },
-      },
-      scales: {
-        x: {
-          min: low - pad,
-          max: high + pad,
-          grid: { color: gridline },
-          ticks: { color: textMuted, callback: (v) => fmtNumber(v, 0) },
-        },
-        y: { grid: { display: false }, ticks: { color: textMuted }, grouped: false },
-      },
-    },
-  }));
-}
-
 function lineChart(canvas, labels, values, formatValue, colorVar = "--series-1") {
   const color = cssVar(colorVar);
   const gridline = cssVar("--gridline");
@@ -327,19 +258,7 @@ async function renderMarketSnapshot() {
         ${statTile("Low", fmtNumber(benchmark.low))}
       </div>
       <p class="panel-meta" style="margin-top:12px">As of ${benchmark.date}</p>
-      <div class="subsection">
-        <h3>Day's range (colored by close vs. open)</h3>
-        <div class="chart-wrap" style="height:110px"><canvas id="market-range-chart"></canvas></div>
-      </div>
     `;
-    rangeBarChart(
-      document.getElementById("market-range-chart"),
-      benchmark.symbol,
-      benchmark.low,
-      benchmark.high,
-      benchmark.open,
-      benchmark.close
-    );
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load market data: ${err.message}</p>`;
   }
