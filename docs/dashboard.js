@@ -27,9 +27,9 @@ function deltaArrow(value) {
   return value > 0 ? "▲ " : "▼ ";
 }
 
-function statTile(label, value, deltaText, deltaCls) {
+function statTile(label, value, deltaText, deltaCls, titleAttr) {
   return `
-    <div class="stat-tile">
+    <div class="stat-tile"${titleAttr ? ` title="${titleAttr}"` : ""}>
       <div class="stat-label">${label}</div>
       <div class="stat-value">${value}</div>
       ${deltaText !== undefined ? `<div class="stat-delta ${deltaCls}">${deltaText}</div>` : ""}
@@ -62,6 +62,7 @@ function deferredResize(chart) {
 //     rates) - just end-value minus start-value within the window.
 
 const WINDOW_OPTIONS = [
+  { label: "1D", days: 1 },
   { label: "7D", days: 7 },
   { label: "30D", days: 30 },
   { label: "90D", days: 90 },
@@ -87,10 +88,22 @@ function groupBy(rows, keyFn) {
   return groups;
 }
 
+// Both return { value, startDate, endDate } (or null if there's not enough
+// history yet) so callers can show exactly which dates a comparison covers,
+// not just the computed number.
+
 function compoundReturn(rows, dateKey, valueKey, days) {
-  const windowed = filterByWindow(rows, dateKey, days).filter((r) => r[valueKey] !== null);
+  const sorted = rows.slice().sort((a, b) => a[dateKey].localeCompare(b[dateKey]));
+  const windowed = filterByWindow(sorted, dateKey, days).filter((r) => r[valueKey] !== null);
   if (windowed.length === 0) return null;
-  return windowed.reduce((acc, r) => acc * (1 + r[valueKey]), 1) - 1;
+  const value = windowed.reduce((acc, r) => acc * (1 + r[valueKey]), 1) - 1;
+  // A daily-return series values day T against day T-1's close, so the true
+  // comparison start is one trading day before the first windowed row, not
+  // the row itself - look it up in the full (unfiltered-by-window) history.
+  const firstIdx = sorted.findIndex((r) => r[dateKey] === windowed[0][dateKey]);
+  const startDate = firstIdx > 0 ? sorted[firstIdx - 1][dateKey] : windowed[0][dateKey];
+  const endDate = windowed[windowed.length - 1][dateKey];
+  return { value, startDate, endDate };
 }
 
 function windowCompoundReturnByGroup(rows, groupKey, dateKey, valueKey, days) {
@@ -110,7 +123,14 @@ function windowDeltaByGroup(rows, groupKey, dateKey, valueKey, days) {
   const result = {};
   for (const [key, groupRows] of Object.entries(groups)) {
     const windowed = filterByWindow(groupRows, dateKey, days).sort((a, b) => a[dateKey].localeCompare(b[dateKey]));
-    result[key] = windowed.length < 2 ? null : windowed[windowed.length - 1][valueKey] - windowed[0][valueKey];
+    result[key] =
+      windowed.length < 2
+        ? null
+        : {
+            value: windowed[windowed.length - 1][valueKey] - windowed[0][valueKey],
+            startDate: windowed[0][dateKey],
+            endDate: windowed[windowed.length - 1][dateKey],
+          };
   }
   return result;
 }
@@ -134,7 +154,7 @@ function wireWindowSelector(container, onSelect) {
 
 // ---- chart builders -----------------------------------------------------
 
-function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
+function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels, dateRanges) {
   const good = cssVar("--delta-good");
   const bad = cssVar("--delta-bad");
   const gridline = cssVar("--gridline");
@@ -164,6 +184,7 @@ function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels) {
           callbacks: {
             title: (items) => fullLabels[items[0].dataIndex],
             label: (ctx) => formatValue(values[ctx.dataIndex]),
+            afterLabel: (ctx) => (dateRanges && dateRanges[ctx.dataIndex]) || undefined,
           },
         },
       },
@@ -325,26 +346,45 @@ async function renderMarketSnapshot() {
   const el = document.getElementById("market-content");
   try {
     const data = await fetchJson("market_daily");
-    const benchmark = latestPerKey(
-      data.filter((r) => r.symbol === "^GSPC"),
-      (r) => r.symbol,
-      (r) => r.date
-    )[0];
-    if (!benchmark) throw new Error("Benchmark row not found");
+    const rows = data.filter((r) => r.symbol === "^GSPC").sort((a, b) => a.date.localeCompare(b.date));
+    if (rows.length === 0) throw new Error("Benchmark row not found");
+    const latest = rows[rows.length - 1];
 
-    const deltaText = benchmark.daily_return === null
-      ? "First reading — no prior day yet"
-      : `${deltaArrow(benchmark.daily_return)}${fmtPct(benchmark.daily_return)} (${fmtNumber(benchmark.change)})`;
+    let days = 1;
+    const draw = () => {
+      const windowed = filterByWindow(rows, "date", days);
+      const first = windowed[0];
+      const periodHigh = Math.max(...windowed.map((r) => r.high));
+      const periodLow = Math.min(...windowed.map((r) => r.low));
+      const ret = compoundReturn(rows, "date", "daily_return", days);
+      const deltaText = ret === null ? "First reading — no prior day yet" : `${deltaArrow(ret.value)}${fmtPct(ret.value)}`;
+      const rangeText = ret ? `${ret.startDate} → ${ret.endDate}` : `As of ${latest.date}`;
 
-    el.innerHTML = `
-      <div class="kpi-row">
-        ${statTile("S&amp;P 500 (^GSPC)", fmtNumber(benchmark.close), deltaText, deltaClass(benchmark.daily_return))}
-        ${statTile("Open", fmtNumber(benchmark.open))}
-        ${statTile("High", fmtNumber(benchmark.high))}
-        ${statTile("Low", fmtNumber(benchmark.low))}
-      </div>
-      <p class="panel-meta" style="margin-top:12px">As of ${benchmark.date}</p>
-    `;
+      el.innerHTML = `
+        <div class="chart-header">
+          <h3>S&amp;P 500 snapshot</h3>
+          ${windowSelectorHtml(days)}
+        </div>
+        <div class="kpi-row">
+          ${statTile(
+            "S&amp;P 500 (^GSPC)",
+            fmtNumber(latest.close),
+            deltaText,
+            deltaClass(ret ? ret.value : null),
+            ret ? `Compared to close on ${ret.startDate}` : undefined
+          )}
+          ${statTile("Open", fmtNumber(first.open), undefined, undefined, `Open on ${first.date}`)}
+          ${statTile("High", fmtNumber(periodHigh), undefined, undefined, `Highest daily high, ${first.date} → ${latest.date}`)}
+          ${statTile("Low", fmtNumber(periodLow), undefined, undefined, `Lowest daily low, ${first.date} → ${latest.date}`)}
+        </div>
+        <p class="panel-meta" style="margin-top:12px" title="${rangeText}">Window: ${rangeText}</p>
+      `;
+      wireWindowSelector(el, (newDays) => {
+        days = newDays;
+        draw();
+      });
+    };
+    draw();
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load market data: ${err.message}</p>`;
   }
@@ -370,7 +410,7 @@ async function renderSectorRotation() {
       const changes = windowCompoundReturnByGroup(data, "symbol", "date", "daily_return", days);
       const symbols = Object.keys(changes)
         .filter((s) => changes[s] !== null)
-        .sort((a, b) => changes[b] - changes[a]);
+        .sort((a, b) => changes[b].value - changes[a].value);
 
       el.innerHTML = `
         <div class="chart-header">
@@ -383,7 +423,14 @@ async function renderSectorRotation() {
         days = newDays;
         draw();
       });
-      divergingBarChart(document.getElementById("sector-chart"), symbols, symbols.map((s) => changes[s]), fmtPct);
+      divergingBarChart(
+        document.getElementById("sector-chart"),
+        symbols,
+        symbols.map((s) => changes[s].value),
+        fmtPct,
+        undefined,
+        symbols.map((s) => `${changes[s].startDate} → ${changes[s].endDate}`)
+      );
     };
     draw();
   } catch (err) {
@@ -499,8 +546,10 @@ async function renderMacro() {
         divergingBarChart(
           document.getElementById("macro-rate-chart"),
           rateSeries.map((s) => labels[s] || s),
-          rateSeries.map((s) => (changes[s] === undefined ? null : changes[s])),
-          (v) => (v === null ? "Not enough history in this window yet" : `${v >= 0 ? "+" : ""}${fmtNumber(v)}pp`)
+          rateSeries.map((s) => (changes[s] ? changes[s].value : null)),
+          (v) => (v === null ? "Not enough history in this window yet" : `${v >= 0 ? "+" : ""}${fmtNumber(v)}pp`),
+          undefined,
+          rateSeries.map((s) => (changes[s] ? `${changes[s].startDate} → ${changes[s].endDate}` : undefined))
         );
       }
     };
@@ -548,8 +597,10 @@ function renderSpreadChart(container, aiVsMarket) {
       divergingBarChart(
         document.getElementById("ai-spread-chart"),
         ["AI basket", "S&P 500"],
-        [aiReturn, benchReturn],
-        fmtPct
+        [aiReturn.value, benchReturn.value],
+        fmtPct,
+        undefined,
+        [`${aiReturn.startDate} → ${aiReturn.endDate}`, `${benchReturn.startDate} → ${benchReturn.endDate}`]
       );
     }
   };
@@ -683,7 +734,7 @@ function renderDevChart(container, devMomentum) {
     const changes = windowDeltaByGroup(devMomentum, "repo", "snapshot_date", "stars", days);
     const withChanges = Object.keys(changes)
       .filter((r) => changes[r] !== null)
-      .sort((a, b) => changes[b] - changes[a]);
+      .sort((a, b) => changes[b].value - changes[a].value);
 
     container.innerHTML = `
       <div class="chart-header">
@@ -705,9 +756,10 @@ function renderDevChart(container, devMomentum) {
       divergingBarChart(
         document.getElementById("dev-chart"),
         withChanges.map((r) => r.split("/")[1]),
-        withChanges.map((r) => changes[r]),
+        withChanges.map((r) => changes[r].value),
         (v) => fmtNumber(v, 0),
-        withChanges
+        withChanges,
+        withChanges.map((r) => `${changes[r].startDate} → ${changes[r].endDate}`)
       );
     }
   };

@@ -15,7 +15,7 @@ A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a fr
 
 Several panels above still show "Accumulating history" — that's expected, not broken. Some metrics (rolling volatility, week-over-week deltas) are mathematically undefined until enough daily runs have accumulated; see [PROJECT_MEMORY.md](PROJECT_MEMORY.md) for exactly how long each one takes.
 
-Most charts have a **7D / 30D / 90D / All** selector in the top-right corner — each chart remembers its own selection independently, so you can look at 30 days of one metric and 90 of another at the same time.
+Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner — each remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
 
 ## What it answers
 
@@ -29,7 +29,7 @@ Most charts have a **7D / 30D / 90D / All** selector in the top-right corner —
 
 ### Market Snapshot
 
-The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." **Open/High/Low/Close** are the price at the start of the trading day, the highest and lowest it touched, and where it ended; the number under the main figure shows how much it moved versus the prior day (green = up, red = down).
+The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." This panel is window-aware like the rest: **Close** is always the latest price, but **Open/High/Low** and the percent change below it are computed over whatever window you've selected — e.g. on 30D, "Open" is the opening price 30 days ago and "High"/"Low" are the highest and lowest the index touched at any point in that window (green = up, red = down). Defaults to **1D** (today vs. yesterday) since that's the most common thing to check.
 
 ### Sector Rotation
 
