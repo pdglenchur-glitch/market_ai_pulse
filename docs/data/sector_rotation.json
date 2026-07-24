@@ -6,9 +6,21 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLB",
+    "date": "2026-07-23",
+    "daily_return": -0.010428964974419542,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLC",
     "date": "2026-07-22",
     "daily_return": null,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLC",
+    "date": "2026-07-23",
+    "daily_return": -0.03498168498168505,
     "trailing_5d_return": null
   },
   {
@@ -18,9 +30,21 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLE",
+    "date": "2026-07-23",
+    "daily_return": 0.0030405405405405355,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLF",
     "date": "2026-07-22",
     "daily_return": null,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLF",
+    "date": "2026-07-23",
+    "daily_return": -0.00392506690454949,
     "trailing_5d_return": null
   },
   {
@@ -30,9 +54,21 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLI",
+    "date": "2026-07-23",
+    "daily_return": 0.017277047805423558,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLK",
     "date": "2026-07-22",
     "daily_return": null,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLK",
+    "date": "2026-07-23",
+    "daily_return": -0.010095967160370674,
     "trailing_5d_return": null
   },
   {
@@ -42,9 +78,21 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLP",
+    "date": "2026-07-23",
+    "daily_return": -0.013865844986963756,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLRE",
     "date": "2026-07-22",
     "daily_return": null,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLRE",
+    "date": "2026-07-23",
+    "daily_return": -0.0013330371028659224,
     "trailing_5d_return": null
   },
   {
@@ -54,15 +102,33 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLU",
+    "date": "2026-07-23",
+    "daily_return": 0.0056607881558893534,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLV",
     "date": "2026-07-22",
     "daily_return": null,
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLV",
+    "date": "2026-07-23",
+    "daily_return": 0.012607413912061662,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLY",
     "date": "2026-07-22",
     "daily_return": null,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLY",
+    "date": "2026-07-23",
+    "daily_return": -0.04613225749868436,
     "trailing_5d_return": null
   }
 ]

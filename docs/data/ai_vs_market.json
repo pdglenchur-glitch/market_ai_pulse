@@ -4,5 +4,11 @@
     "ai_basket_return": null,
     "benchmark_return": null,
     "spread": null
+  },
+  {
+    "date": "2026-07-23",
+    "ai_basket_return": -0.02743812931555285,
+    "benchmark_return": -0.01208967643513232,
+    "spread": -0.01534845288042053
   }
 ]
