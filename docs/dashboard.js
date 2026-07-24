@@ -468,6 +468,7 @@ async function renderMacro() {
 
       const changes = windowDeltaByGroup(rateRows, "series", "date", "value", days);
       const anyData = rateSeries.some((s) => changes[s] !== undefined);
+      const pending = rateSeries.filter((s) => changes[s] === undefined || changes[s] === null).map((s) => labels[s] || s);
 
       el.innerHTML = `
         <div class="kpi-row">${tiles}</div>
@@ -480,6 +481,11 @@ async function renderMacro() {
             anyData
               ? `<div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>`
               : `<p class="panel-meta">Accumulating history</p>`
+          }
+          ${
+            anyData && pending.length > 0
+              ? `<p class="panel-meta">${pending.join(" and ")} update monthly — no bar until a second reading lands.</p>`
+              : ""
           }
         </div>
       `;
