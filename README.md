@@ -15,6 +15,8 @@ A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a fr
 
 Several panels above still show "Accumulating history" — that's expected, not broken. Some metrics (rolling volatility, week-over-week deltas) are mathematically undefined until enough daily runs have accumulated; see [PROJECT_MEMORY.md](PROJECT_MEMORY.md) for exactly how long each one takes.
 
+Most charts have a **7D / 30D / 90D / All** selector in the top-right corner — each chart remembers its own selection independently, so you can look at 30 days of one metric and 90 of another at the same time.
+
 ## What it answers
 
 - How did major indices and sectors move, and who's driving it?
@@ -31,7 +33,7 @@ The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it
 
 ### Sector Rotation
 
-A sector ETF is a basket of stocks from one slice of the economy — e.g. `XLK` holds tech companies, `XLE` holds energy companies. This chart shows how much each sector moved that day, so you can see which parts of the economy are leading and which are lagging. "Rotation" refers to money flowing out of some sectors and into others over time.
+A sector ETF is a basket of stocks from one slice of the economy — e.g. `XLK` holds tech companies, `XLE` holds energy companies. This chart shows each sector's return over the selected window, so you can see which parts of the economy are leading and which are lagging over whatever timeframe you're interested in. "Rotation" refers to money flowing out of some sectors and into others over time.
 
 ### Volatility
 
@@ -43,14 +45,14 @@ A measure of how much the market has been swinging up and down lately, based on 
 - **Unemployment rate** — the percentage of people looking for work who don't have a job. Higher means a weaker job market.
 - **Fed funds rate** — the base interest rate set by the Federal Reserve. It ripples through the whole economy: mortgages, credit cards, savings accounts, and business loans all move with it.
 - **10Y yield** — the interest rate the U.S. government pays to borrow money for 10 years. Widely watched as a signal of where investors expect the economy and interest rates to head.
-- **Rates compared** chart puts the fed funds rate, unemployment rate, and 10Y yield side by side since all three are already percentages. CPI is left out of this chart on purpose — it's an index level (currently in the low 300s), not a percentage, so plotting it next to the others would be comparing different units on the same scale.
+- **Rates: change** chart shows how much each rate has moved (in percentage points) over the selected window — e.g. "the 10Y yield is up 0.3pp over the last 30 days." CPI is left out of this chart on purpose — it's an index level (currently in the low 300s), not a percentage, so plotting it next to the others would be comparing different units on the same scale. The KPI tiles above it still show each series' current level and its most recent single-reading change, regardless of the chart's selected window.
 
 ### AI Pulse
 
-- **AI basket vs. S&P 500** — the "AI basket" is a handful of stocks closely tied to the AI boom (Nvidia, Microsoft, Google, Meta, Palantir, AMD) plus an AI-themed ETF (`BOTZ`). This compares their average daily move against the S&P 500's — a positive spread means AI stocks are outperforming the broader market that day, negative means they're lagging it.
-- **Research pace** — how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Once 2+ days have accumulated, this becomes a line chart of that count over time, since the interesting question is whether the pace is *rising or falling*, not what it happens to be on any single day.
-- **Public attention** — Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Once enough days have accumulated, this switches from raw view counts to a trend line indexed to each article's first-observed day (so you can compare their *rate of change* even though ChatGPT gets vastly more raw traffic than the others).
-- **Dev momentum** — GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption. Raw star count barely moves day to day and is dominated by how big a project already is, so once a project has 7 days of history this switches to *weekly star growth* instead — how many new stars it gained in the last week, which is the actual momentum signal.
+- **AI basket vs. S&P 500** — the "AI basket" is a handful of stocks closely tied to the AI boom (Nvidia, Microsoft, Google, Meta, Palantir, AMD) plus an AI-themed ETF (`BOTZ`). This compares their combined return against the S&P 500's over the selected window — a positive spread means AI stocks are outperforming the broader market over that timeframe, negative means they're lagging it.
+- **Research pace** — how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Once 2+ days have accumulated, this becomes a line chart of that count over time (filterable to the selected window), since the interesting question is whether the pace is *rising or falling*, not what it happens to be on any single day.
+- **Public attention** — Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Once enough days have accumulated, this switches from raw view counts to a trend line indexed to 100 at the *start of the selected window* (so switching the window re-baselines the comparison, letting you see each article's rate of change within that specific timeframe even though ChatGPT gets vastly more raw traffic than the others).
+- **Dev momentum** — GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption. Raw star count barely moves day to day and is dominated by how big a project already is, so once 2+ days of history exist this switches to *star growth over the selected window* instead — how many new stars a project gained in that timeframe, which is the actual momentum signal.
 
 ## How it works
 
