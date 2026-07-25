@@ -1,6 +1,6 @@
 # Market & AI Pulse
 
-A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a free, publicly viewable dashboard tracking market performance, macro conditions, and AI-sector momentum.
+An end-to-end data analytics pipeline that sources market, macroeconomic, and AI-sector data from five live APIs, models it through a SQL-based medallion (bronze/silver/gold) architecture, and publishes the results as a free, automatically refreshing public dashboard. It's a self-contained demonstration of the core data analyst workflow — sourcing and cleaning real-world data, transforming it with SQL, and turning it into visualizations a non-technical reader can actually understand — running on a daily cron with zero manual intervention.
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
