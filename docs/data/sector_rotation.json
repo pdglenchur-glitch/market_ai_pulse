@@ -12,6 +12,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLB",
+    "date": "2026-07-24",
+    "daily_return": 0.01928812885265458,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLC",
     "date": "2026-07-22",
     "daily_return": null,
@@ -21,6 +27,12 @@
     "symbol": "XLC",
     "date": "2026-07-23",
     "daily_return": -0.03498168498168505,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLC",
+    "date": "2026-07-24",
+    "daily_return": 0.008730309356614174,
     "trailing_5d_return": null
   },
   {
@@ -36,6 +48,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLE",
+    "date": "2026-07-24",
+    "daily_return": 0.004041764904007998,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLF",
     "date": "2026-07-22",
     "daily_return": null,
@@ -45,6 +63,12 @@
     "symbol": "XLF",
     "date": "2026-07-23",
     "daily_return": -0.00392506690454949,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLF",
+    "date": "2026-07-24",
+    "daily_return": 0.008597528210639513,
     "trailing_5d_return": null
   },
   {
@@ -60,6 +84,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLI",
+    "date": "2026-07-24",
+    "daily_return": 0.0039573485764537696,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLK",
     "date": "2026-07-22",
     "daily_return": null,
@@ -69,6 +99,12 @@
     "symbol": "XLK",
     "date": "2026-07-23",
     "daily_return": -0.010095967160370674,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLK",
+    "date": "2026-07-24",
+    "daily_return": -0.014401793219389147,
     "trailing_5d_return": null
   },
   {
@@ -84,6 +120,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLP",
+    "date": "2026-07-24",
+    "daily_return": 0.011056363417858452,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLRE",
     "date": "2026-07-22",
     "daily_return": null,
@@ -93,6 +135,12 @@
     "symbol": "XLRE",
     "date": "2026-07-23",
     "daily_return": -0.0013330371028659224,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLRE",
+    "date": "2026-07-24",
+    "daily_return": 0.022246941045606226,
     "trailing_5d_return": null
   },
   {
@@ -108,6 +156,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLU",
+    "date": "2026-07-24",
+    "daily_return": 0.002164970772894597,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLV",
     "date": "2026-07-22",
     "daily_return": null,
@@ -120,6 +174,12 @@
     "trailing_5d_return": null
   },
   {
+    "symbol": "XLV",
+    "date": "2026-07-24",
+    "daily_return": 0.00699950445986122,
+    "trailing_5d_return": null
+  },
+  {
     "symbol": "XLY",
     "date": "2026-07-22",
     "daily_return": null,
@@ -129,6 +189,12 @@
     "symbol": "XLY",
     "date": "2026-07-23",
     "daily_return": -0.04613225749868436,
+    "trailing_5d_return": null
+  },
+  {
+    "symbol": "XLY",
+    "date": "2026-07-24",
+    "daily_return": 0.005976461934534677,
     "trailing_5d_return": null
   }
 ]
