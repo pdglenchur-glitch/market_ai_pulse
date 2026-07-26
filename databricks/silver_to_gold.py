@@ -21,16 +21,15 @@ spark.sql(
 )
 print("Built workspace.gold.market_daily")
 
-# --- sector_rotation: trailing performance by sector ETF ---
+# --- sector_rotation: per-sector daily return (dashboard compounds this over
+# whatever window the viewer selects, client-side) ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.sector_rotation AS
     SELECT
         symbol, date,
         (close - LAG(close) OVER (PARTITION BY symbol ORDER BY date))
-            / LAG(close) OVER (PARTITION BY symbol ORDER BY date) AS daily_return,
-        (close - LAG(close, 5) OVER (PARTITION BY symbol ORDER BY date))
-            / LAG(close, 5) OVER (PARTITION BY symbol ORDER BY date) AS trailing_5d_return
+            / LAG(close) OVER (PARTITION BY symbol ORDER BY date) AS daily_return
     FROM workspace.silver.market_data
     WHERE category = 'sector'
     """
@@ -38,6 +37,11 @@ spark.sql(
 print("Built workspace.gold.sector_rotation")
 
 # --- volatility: rolling 20-observation realized volatility of the S&P 500 ---
+# STDDEV over a ROWS BETWEEN 19 PRECEDING frame happily returns a (very noisy)
+# value from as few as 2 real observations - it doesn't require the frame to
+# actually be full. Gate it explicitly on a running count of real returns so
+# "rolling 20-day" only ever reports once 20 real observations exist, instead
+# of silently emitting a near-meaningless number labeled as a 20-day figure.
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.volatility AS
@@ -48,13 +52,21 @@ spark.sql(
                 / LAG(close) OVER (PARTITION BY symbol ORDER BY date) AS daily_return
         FROM workspace.silver.market_data
         WHERE symbol = '^GSPC'
+    ),
+    numbered AS (
+        SELECT *,
+            SUM(CASE WHEN daily_return IS NOT NULL THEN 1 ELSE 0 END)
+                OVER (PARTITION BY symbol ORDER BY date) AS return_count
+        FROM returns
     )
     SELECT
         symbol, date,
-        STDDEV(daily_return) OVER (
-            PARTITION BY symbol ORDER BY date ROWS BETWEEN 19 PRECEDING AND CURRENT ROW
-        ) AS rolling_20d_volatility
-    FROM returns
+        CASE
+            WHEN return_count >= 20 THEN STDDEV(daily_return) OVER (
+                PARTITION BY symbol ORDER BY date ROWS BETWEEN 19 PRECEDING AND CURRENT ROW
+            )
+        END AS rolling_20d_volatility
+    FROM numbered
     """
 )
 print("Built workspace.gold.volatility")
@@ -135,28 +147,23 @@ spark.sql(
 )
 print("Built workspace.gold.attention_index")
 
-# --- dev_momentum: week-over-week star growth per repo.
-# Pipeline runs daily, so one row accumulates per repo per day - lag by 7
-# rows (not 1) to compare against ~7 days ago rather than yesterday. ---
+# --- dev_momentum: star count per repo per day (dashboard computes growth
+# over whatever window the viewer selects, client-side) ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.dev_momentum AS
-    SELECT
-        repo, snapshot_date, stars,
-        stars - LAG(stars, 7) OVER (PARTITION BY repo ORDER BY snapshot_date) AS weekly_star_growth
+    SELECT repo, snapshot_date, stars
     FROM workspace.silver.dev_momentum
     """
 )
 print("Built workspace.gold.dev_momentum")
 
-# --- research_pace: week-over-week change in arXiv submission counts.
-# Same daily-cadence lag-by-7 reasoning as dev_momentum above. ---
+# --- research_pace: arXiv trailing-7d submission count per day (dashboard
+# plots this as a trend line, filterable to whatever window is selected) ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.research_pace AS
-    SELECT
-        category, snapshot_date, count,
-        count - LAG(count, 7) OVER (PARTITION BY category ORDER BY snapshot_date) AS change_from_prior_week
+    SELECT category, snapshot_date, count
     FROM workspace.silver.research_pace
     """
 )

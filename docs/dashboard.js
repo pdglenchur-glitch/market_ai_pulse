@@ -92,9 +92,18 @@ function groupBy(rows, keyFn) {
 // history yet) so callers can show exactly which dates a comparison covers,
 // not just the computed number.
 
+// filterByWindow's cutoff spans `days + 1` calendar days (inclusive of both
+// ends), which is what a level-to-level endpoint comparison needs (e.g.
+// windowDeltaByGroup) - but daily_return rows are each *already* a 1-day-back
+// delta, so compounding them only needs a span of exactly `days`. Without
+// this adjustment, an "N-day" window silently compounds N+1 days of return.
+function periodSpanDays(days) {
+  return days == null ? null : Math.max(days - 1, 0);
+}
+
 function compoundReturn(rows, dateKey, valueKey, days) {
   const sorted = rows.slice().sort((a, b) => a[dateKey].localeCompare(b[dateKey]));
-  const windowed = filterByWindow(sorted, dateKey, days).filter((r) => r[valueKey] !== null);
+  const windowed = filterByWindow(sorted, dateKey, periodSpanDays(days)).filter((r) => r[valueKey] !== null);
   if (windowed.length === 0) return null;
   const value = windowed.reduce((acc, r) => acc * (1 + r[valueKey]), 1) - 1;
   // A daily-return series values day T against day T-1's close, so the true
@@ -352,7 +361,7 @@ async function renderMarketSnapshot() {
 
     let days = 1;
     const draw = () => {
-      const windowed = filterByWindow(rows, "date", days);
+      const windowed = filterByWindow(rows, "date", periodSpanDays(days));
       const first = windowed[0];
       const periodHigh = Math.max(...windowed.map((r) => r.high));
       const periodLow = Math.min(...windowed.map((r) => r.low));
