@@ -144,6 +144,41 @@ function windowDeltaByGroup(rows, groupKey, dateKey, valueKey, days) {
   return result;
 }
 
+// Sums valueKey per group within the window (e.g. total trading volume per
+// symbol) rather than differencing endpoints. Every group shares the same
+// window, so the date range is returned once for the whole result rather
+// than per group.
+function windowSumByGroup(rows, groupKey, dateKey, valueKey, days) {
+  const windowed = filterByWindow(
+    rows.filter((r) => r[valueKey] !== null && r[valueKey] !== undefined),
+    dateKey,
+    days
+  );
+  const sums = {};
+  for (const row of windowed) {
+    sums[row[groupKey]] = (sums[row[groupKey]] || 0) + row[valueKey];
+  }
+  const dates = windowed.map((r) => r[dateKey]).sort();
+  return {
+    sums,
+    startDate: dates[0],
+    endDate: dates[dates.length - 1],
+  };
+}
+
+// Keeps the top n groups by value (descending) and folds the rest into a
+// single "Other" bucket, for donut/pie forms where too many slices stop
+// being colorblind-distinguishable.
+function topNPlusOther(sums, n, otherLabel = "Other") {
+  const entries = Object.entries(sums).sort((a, b) => b[1] - a[1]);
+  const kept = entries.slice(0, n);
+  const rest = entries.slice(n);
+  const otherTotal = rest.reduce((acc, [, v]) => acc + v, 0);
+  const result = kept.map(([key, value]) => ({ key, value }));
+  if (rest.length > 0) result.push({ key: otherLabel, value: otherTotal });
+  return result;
+}
+
 function windowSelectorHtml(active) {
   const buttons = WINDOW_OPTIONS.map(
     (opt) =>
@@ -331,6 +366,46 @@ function multiLineChart(canvas, labels, series, formatValue) {
   }));
 }
 
+function donutChart(canvas, labels, values, formatValue, colors) {
+  const surface = cssVar("--surface-1");
+  const textMuted = cssVar("--text-muted");
+  const total = values.reduce((acc, v) => acc + v, 0);
+
+  return deferredResize(new Chart(canvas, {
+    type: "doughnut",
+    data: {
+      labels,
+      datasets: [
+        {
+          data: values,
+          backgroundColor: colors,
+          borderColor: surface,
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: "bottom",
+          labels: { color: textMuted, boxWidth: 12, font: { size: 11 } },
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const pct = total > 0 ? (ctx.raw / total) * 100 : 0;
+              return `${ctx.label}: ${pct.toFixed(1)}% (${formatValue(ctx.raw)})`;
+            },
+          },
+        },
+      },
+    },
+  }));
+}
+
 function latestPerKey(rows, keyFn, dateFn) {
   const byKey = {};
   for (const row of rows) {
@@ -414,37 +489,84 @@ async function renderSectorRotation() {
       return;
     }
 
-    let days = 30;
-    const draw = () => {
-      const changes = windowCompoundReturnByGroup(data, "symbol", "date", "daily_return", days);
-      const symbols = Object.keys(changes)
-        .filter((s) => changes[s] !== null)
-        .sort((a, b) => changes[b].value - changes[a].value);
-
-      el.innerHTML = `
-        <div class="chart-header">
-          <h3>Return by sector</h3>
-          ${windowSelectorHtml(days)}
-        </div>
-        <div class="chart-wrap chart-tall"><canvas id="sector-chart"></canvas></div>
-      `;
-      wireWindowSelector(el, (newDays) => {
-        days = newDays;
-        draw();
-      });
-      divergingBarChart(
-        document.getElementById("sector-chart"),
-        symbols,
-        symbols.map((s) => changes[s].value),
-        fmtPct,
-        undefined,
-        symbols.map((s) => `${changes[s].startDate} → ${changes[s].endDate}`)
-      );
-    };
-    draw();
+    el.innerHTML = `
+      <div id="sector-return-panel"></div>
+      <div id="sector-volume-panel" class="subsection"></div>
+    `;
+    renderSectorReturnChart(document.getElementById("sector-return-panel"), data);
+    renderSectorVolumeChart(document.getElementById("sector-volume-panel"), data);
   } catch (err) {
     el.innerHTML = `<p class="panel-error">Couldn't load sector data: ${err.message}</p>`;
   }
+}
+
+function renderSectorReturnChart(container, data) {
+  let days = 30;
+  const draw = () => {
+    const changes = windowCompoundReturnByGroup(data, "symbol", "date", "daily_return", days);
+    const symbols = Object.keys(changes)
+      .filter((s) => changes[s] !== null)
+      .sort((a, b) => changes[b].value - changes[a].value);
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>Return by sector</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      <div class="chart-wrap chart-tall"><canvas id="sector-chart"></canvas></div>
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+    divergingBarChart(
+      document.getElementById("sector-chart"),
+      symbols,
+      symbols.map((s) => changes[s].value),
+      fmtPct,
+      undefined,
+      symbols.map((s) => `${changes[s].startDate} → ${changes[s].endDate}`)
+    );
+  };
+  draw();
+}
+
+function renderSectorVolumeChart(container, data) {
+  let days = 30;
+  const draw = () => {
+    const { sums, startDate, endDate } = windowSumByGroup(data, "symbol", "date", "volume", days);
+    const slices = topNPlusOther(sums, 6);
+    const ready = slices.length > 0;
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>Trading volume share by sector</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      ${
+        ready
+          ? `<div class="chart-wrap"><canvas id="sector-volume-chart"></canvas></div>
+             <p class="panel-meta" style="margin-top:8px">Window: ${startDate} → ${endDate}</p>`
+          : `<p class="panel-meta">Not enough history in this window yet</p>`
+      }
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    if (ready) {
+      const colors = slices.map((s, i) => (s.key === "Other" ? cssVar("--text-muted") : cssVar(`--series-${i + 1}`)));
+      donutChart(
+        document.getElementById("sector-volume-chart"),
+        slices.map((s) => s.key),
+        slices.map((s) => s.value),
+        (v) => fmtNumber(v, 0),
+        colors
+      );
+    }
+  };
+  draw();
 }
 
 async function renderVolatility() {
@@ -568,7 +690,20 @@ async function renderMacro() {
   }
 }
 
-function renderSpreadChart(container, aiVsMarket) {
+// Fixed roster, fixed color per symbol (never rank-based) since these seven
+// names don't change day to day, unlike sector volume share above.
+const AI_BASKET_COLOR_ORDER = ["NVDA", "MSFT", "GOOGL", "META", "PLTR", "AMD", "BOTZ"];
+
+function renderSpreadChart(container, aiVsMarket, aiBasketDetail) {
+  container.innerHTML = `
+    <div id="ai-spread-return-panel"></div>
+    <div id="ai-basket-volume-panel" class="subsection"></div>
+  `;
+  renderAiSpreadReturnChart(document.getElementById("ai-spread-return-panel"), aiVsMarket);
+  renderAiBasketVolumeChart(document.getElementById("ai-basket-volume-panel"), aiBasketDetail);
+}
+
+function renderAiSpreadReturnChart(container, aiVsMarket) {
   if (aiVsMarket.every((r) => r.spread === null)) {
     container.innerHTML = `
       <h3>AI basket vs. S&amp;P 500</h3>
@@ -610,6 +745,44 @@ function renderSpreadChart(container, aiVsMarket) {
         fmtPct,
         undefined,
         [`${aiReturn.startDate} → ${aiReturn.endDate}`, `${benchReturn.startDate} → ${benchReturn.endDate}`]
+      );
+    }
+  };
+  draw();
+}
+
+function renderAiBasketVolumeChart(container, aiBasketDetail) {
+  let days = 30;
+  const draw = () => {
+    const { sums, startDate, endDate } = windowSumByGroup(aiBasketDetail, "symbol", "date", "volume", days);
+    const symbols = AI_BASKET_COLOR_ORDER.filter((s) => sums[s] > 0);
+    const ready = symbols.length > 0;
+
+    container.innerHTML = `
+      <div class="chart-header">
+        <h3>AI basket composition (trading volume)</h3>
+        ${windowSelectorHtml(days)}
+      </div>
+      ${
+        ready
+          ? `<div class="chart-wrap"><canvas id="ai-basket-volume-chart"></canvas></div>
+             <p class="panel-meta" style="margin-top:8px">Window: ${startDate} → ${endDate}</p>`
+          : `<p class="panel-meta">Not enough history in this window yet</p>`
+      }
+    `;
+    wireWindowSelector(container, (newDays) => {
+      days = newDays;
+      draw();
+    });
+
+    if (ready) {
+      const colors = symbols.map((s) => cssVar(`--series-${AI_BASKET_COLOR_ORDER.indexOf(s) + 1}`));
+      donutChart(
+        document.getElementById("ai-basket-volume-chart"),
+        symbols,
+        symbols.map((s) => sums[s]),
+        (v) => fmtNumber(v, 0),
+        colors
       );
     }
   };
@@ -778,8 +951,9 @@ function renderDevChart(container, devMomentum) {
 async function renderAiPulse() {
   const el = document.getElementById("ai-content");
   try {
-    const [aiVsMarket, attention, devMomentum, researchPace] = await Promise.all([
+    const [aiVsMarket, aiBasketDetail, attention, devMomentum, researchPace] = await Promise.all([
       fetchJson("ai_vs_market"),
+      fetchJson("ai_basket_detail"),
       fetchJson("attention_index"),
       fetchJson("dev_momentum"),
       fetchJson("research_pace"),
@@ -796,7 +970,7 @@ async function renderAiPulse() {
       </div>
     `;
 
-    renderSpreadChart(document.getElementById("ai-spread-panel"), aiVsMarket);
+    renderSpreadChart(document.getElementById("ai-spread-panel"), aiVsMarket, aiBasketDetail);
     renderResearchChart(document.getElementById("ai-research-panel"), researchPace);
     renderAttentionChart(document.getElementById("ai-attention-panel"), attention);
     renderDevChart(document.getElementById("ai-dev-panel"), devMomentum);

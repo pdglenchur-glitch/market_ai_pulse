@@ -22,12 +22,13 @@ spark.sql(
 print("Built workspace.gold.market_daily")
 
 # --- sector_rotation: per-sector daily return (dashboard compounds this over
-# whatever window the viewer selects, client-side) ---
+# whatever window the viewer selects, client-side). volume carried through for
+# the trading-volume-share donut. ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.sector_rotation AS
     SELECT
-        symbol, date,
+        symbol, date, volume,
         (close - LAG(close) OVER (PARTITION BY symbol ORDER BY date))
             / LAG(close) OVER (PARTITION BY symbol ORDER BY date) AS daily_return
     FROM workspace.silver.market_data
@@ -123,6 +124,22 @@ spark.sql(
     """
 )
 print("Built workspace.gold.ai_vs_market")
+
+# --- ai_basket_detail: per-symbol rows for the AI basket, for the
+# trading-volume-composition donut (ai_vs_market above only has the
+# basket-level average, not individual holdings) ---
+spark.sql(
+    """
+    CREATE OR REPLACE TABLE workspace.gold.ai_basket_detail AS
+    SELECT
+        symbol, date, volume,
+        (close - LAG(close) OVER (PARTITION BY symbol ORDER BY date))
+            / LAG(close) OVER (PARTITION BY symbol ORDER BY date) AS daily_return
+    FROM workspace.silver.market_data
+    WHERE category = 'ai_basket'
+    """
+)
+print("Built workspace.gold.ai_basket_detail")
 
 # --- attention_index: normalized pageview trend, indexed to each article's first observed day ---
 spark.sql(

@@ -16,6 +16,8 @@
   --series-3: #1f8a6f; /* pine teal */
   --series-4: #b8862f; /* muted ochre */
   --series-5: #9c4f6b; /* muted mauve */
+  --series-6: #357a2b; /* muted green */
+  --series-7: #5b4f9e; /* muted violet */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +39,8 @@
     --series-3: #2ba17f;
     --series-4: #b0832f;
     --series-5: #b05f7d;
+    --series-6: #4a9040;
+    --series-7: #7d72c0;
   }
 }
 
@@ -58,6 +62,8 @@
   --series-3: #2ba17f;
   --series-4: #b0832f;
   --series-5: #b05f7d;
+  --series-6: #4a9040;
+  --series-7: #7d72c0;
 }
 
 * {

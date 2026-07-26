@@ -21,6 +21,7 @@ TABLES = {
     "volatility": "date",
     "macro_snapshot": "series",
     "ai_vs_market": "date",
+    "ai_basket_detail": "symbol, date",
     "attention_index": "article, date",
     "dev_momentum": "repo, snapshot_date",
     "research_pace": "category, snapshot_date",
