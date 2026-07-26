@@ -5,6 +5,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / "databricks"))
 from warehouse import connect  # noqa: E402
 
+NAN_CHECK = """
+SELECT symbol, date, open, high, low, close, volume
+FROM workspace.silver.market_data
+WHERE isnan(open) OR isnan(high) OR isnan(low) OR isnan(close)
+   OR open IS NULL OR high IS NULL OR low IS NULL OR close IS NULL
+"""
+
 QUERIES = {
     "silver market_data": "SELECT COUNT(*), MIN(date), MAX(date), COUNT(DISTINCT symbol) FROM workspace.silver.market_data",
     "gold market_daily": "SELECT COUNT(*), MIN(date), MAX(date), COUNT(DISTINCT symbol) FROM workspace.gold.market_daily",
@@ -24,6 +31,10 @@ with conn.cursor() as cursor:
             print(" ", row)
     print("=== tables in workspace.silver ===")
     cursor.execute("SHOW TABLES IN workspace.silver")
+    for row in cursor.fetchall():
+        print(" ", row)
+    print("=== NaN/NULL rows in market_data ===")
+    cursor.execute(NAN_CHECK)
     for row in cursor.fetchall():
         print(" ", row)
 conn.close()
