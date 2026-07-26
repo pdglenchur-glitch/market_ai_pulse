@@ -1,14 +1,14 @@
 # Market & AI Pulse
 
-An end-to-end data analytics pipeline that sources market, macroeconomic, and AI-sector data from five live APIs, models it through a SQL-based medallion (bronze/silver/gold) architecture, and publishes the results as a free, automatically refreshing public dashboard. It's a self-contained demonstration of the core data analyst workflow — sourcing and cleaning real-world data, transforming it with SQL, and turning it into visualizations a non-technical reader can actually understand — running on a daily cron with zero manual intervention.
+An end-to-end data analytics pipeline that sources market, macroeconomic, and AI-sector data from five live APIs, models it through a SQL-based medallion (bronze/silver/gold) architecture, and publishes the results as a free, automatically refreshing public dashboard. It's a self-contained demonstration of the core data analyst workflow: sourcing and cleaning real-world data, transforming it with SQL, and turning it into visualizations a non-technical reader can actually understand, all running on a daily cron with zero manual intervention.
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
 ![Dashboard, dark mode](screenshots/dashboard_dark.png)
 
-The charts above are backed by a full year of history (backfilled once from each source's own historical API, then left to accumulate daily from there) — a still-thin "Accumulating history" panel just means that specific metric is new or genuinely has no earlier reading yet, not that anything's broken.
+The charts above are backed by a full year of history, backfilled once from each source's own historical API and accumulating daily since.
 
-Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner — each remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
+Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner, and each one remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
 
 ## What it answers
 
@@ -22,30 +22,30 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 
 ### Market Snapshot
 
-The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." This panel is window-aware like the rest: **Close** is always the latest price, but **Open/High/Low** and the percent change below it are computed over whatever window you've selected — e.g. on 30D, "Open" is the opening price 30 days ago and "High"/"Low" are the highest and lowest the index touched at any point in that window (green = up, red = down). Defaults to **30D**, like every other panel — pick 1D for today vs. yesterday.
+The S&P 500 is a stock index made up of 500 of the largest U.S. companies, and it's the standard shorthand for "how is the stock market doing." This panel is window-aware like the rest: **Close** is always the latest price, but **Open/High/Low** and the percent change below it are computed over whatever window you've selected. On 30D, for example, "Open" is the opening price 30 days ago and "High"/"Low" are the highest and lowest the index touched at any point in that window (green = up, red = down). Defaults to **30D** like every other panel; pick 1D for today vs. yesterday.
 
 ### Sector Rotation
 
-A sector ETF is a basket of stocks from one slice of the economy — e.g. `XLK` holds tech companies, `XLE` holds energy companies. This chart shows each sector's return over the selected window, so you can see which parts of the economy are leading and which are lagging over whatever timeframe you're interested in. "Rotation" refers to money flowing out of some sectors and into others over time.
+A sector ETF is a basket of stocks from one slice of the economy: `XLK` holds tech companies, `XLE` holds energy companies. This chart shows each sector's return over the selected window, so you can see which parts of the economy are leading and which are lagging over whatever timeframe you're interested in. "Rotation" refers to money flowing out of some sectors and into others over time.
 
 ### Volatility
 
-A measure of how much the market has been swinging up and down lately, based on the last 20 trading days (about a month). Higher means a choppier, more nervous market; lower means a calmer one. "Realized" volatility means it's calculated from what actually happened, not a forecast.
+A measure of how much the market has been swinging up and down lately, based on the last 20 trading days (about a month). Higher means a choppier, more nervous market; lower means a calmer one. "Realized" volatility means it's calculated from what actually happened rather than forecasted.
 
 ### Macro Backdrop
 
-- **CPI** (Consumer Price Index) — the standard measure of inflation: how much prices for everyday goods and services have changed. Rising CPI means things are getting more expensive.
-- **Unemployment rate** — the percentage of people looking for work who don't have a job. Higher means a weaker job market.
-- **Fed funds rate** — the base interest rate set by the Federal Reserve. It ripples through the whole economy: mortgages, credit cards, savings accounts, and business loans all move with it.
-- **10Y yield** — the interest rate the U.S. government pays to borrow money for 10 years. Widely watched as a signal of where investors expect the economy and interest rates to head.
-- **Rates: change** chart shows how much each rate has moved (in percentage points) over the selected window — e.g. "the 10Y yield is up 0.3pp over the last 30 days." CPI is left out of this chart on purpose — it's an index level (currently in the low 300s), not a percentage, so plotting it next to the others would be comparing different units on the same scale. The KPI tiles above it still show each series' current level and its most recent single-reading change, regardless of the chart's selected window.
+- **CPI** (Consumer Price Index): the standard measure of inflation, tracking how much prices for everyday goods and services have changed. Rising CPI means things are getting more expensive.
+- **Unemployment rate**: the percentage of people looking for work who don't have a job. Higher means a weaker job market.
+- **Fed funds rate**: the base interest rate set by the Federal Reserve. It ripples through the whole economy: mortgages, credit cards, savings accounts, and business loans all move with it.
+- **10Y yield**: the interest rate the U.S. government pays to borrow money for 10 years. Widely watched as a signal of where investors expect the economy and interest rates to head.
+- **Rates: change** chart shows how much each rate has moved, in percentage points, over the selected window (for example, "the 10Y yield is up 0.3pp over the last 30 days"). CPI is left out of this chart on purpose: it's an index level (currently in the low 300s) rather than a percentage, so plotting it next to the others would mean comparing different units on the same scale. The KPI tiles above it still show each series' current level and its most recent single-reading change, regardless of the chart's selected window.
 
 ### AI Pulse
 
-- **AI basket vs. S&P 500** — the "AI basket" is a handful of stocks closely tied to the AI boom (Nvidia, Microsoft, Google, Meta, Palantir, AMD) plus an AI-themed ETF (`BOTZ`). This compares their combined return against the S&P 500's over the selected window — a positive spread means AI stocks are outperforming the broader market over that timeframe, negative means they're lagging it.
-- **Research pace** — how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Once 2+ days have accumulated, this becomes a line chart of that count over time (filterable to the selected window), since the interesting question is whether the pace is *rising or falling*, not what it happens to be on any single day.
-- **Public attention** — Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Once enough days have accumulated, this switches from raw view counts to a trend line indexed to 100 at the *start of the selected window* (so switching the window re-baselines the comparison, letting you see each article's rate of change within that specific timeframe even though ChatGPT gets vastly more raw traffic than the others).
-- **Dev momentum** — GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption. Raw star count barely moves day to day and is dominated by how big a project already is, so once 2+ days of history exist this switches to *star growth over the selected window* instead — how many new stars a project gained in that timeframe, which is the actual momentum signal.
+- **AI basket vs. S&P 500**: the "AI basket" is a handful of stocks closely tied to the AI boom (Nvidia, Microsoft, Google, Meta, Palantir, AMD) plus an AI-themed ETF (`BOTZ`). This compares their combined return against the S&P 500's over the selected window. A positive spread means AI stocks are outperforming the broader market over that timeframe; a negative spread means they're lagging it.
+- **Research pace**: how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Shown as a line chart of that trailing count over time, filterable to the selected window, since the interesting question is whether the pace is *rising or falling* rather than what it happens to be on any single day.
+- **Public attention**: Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Shown as a trend line indexed to 100 at the *start of the selected window*, so switching the window re-baselines the comparison and lets you see each article's rate of change within that specific timeframe even though ChatGPT gets vastly more raw traffic than the others.
+- **Dev momentum**: GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption. Raw star count barely moves day to day and is dominated by how big a project already is, so the chart shows *star growth over the selected window* instead: how many new stars a project gained in that timeframe, which is the actual momentum signal.
 
 ## How it works
 
@@ -63,27 +63,27 @@ flowchart LR
     G --> H[GitHub Pages\npublic dashboard]
 ```
 
-1. **Ingest** — pull market data (yfinance), macro indicators (FRED), public attention (Wikipedia Pageviews), dev momentum (GitHub), and research pace (arXiv); land raw files in R2
-2. **Stage** — push the same files into a Databricks Unity Catalog volume
-3. **Transform** — trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
-4. **Export** — query the finished gold tables and write JSON
-5. **Publish** — commit the JSON into `docs/`, which GitHub Pages serves automatically
+1. **Ingest**: pull market data (yfinance), macro indicators (FRED), public attention (Wikipedia Pageviews), dev momentum (GitHub), and research pace (arXiv); land raw files in R2
+2. **Stage**: push the same files into a Databricks Unity Catalog volume
+3. **Transform**: trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
+4. **Export**: query the finished gold tables and write JSON
+5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
 
 No manual steps once triggered, no compute running outside of when the pipeline actually needs it.
 
 ## Design decisions
 
-**Cloudflare R2 instead of AWS S3.** Databricks Free Edition can't mount a customer-owned S3 bucket, so *some* separate landing zone was required regardless of provider. R2 won on cost and simplicity for a project with no production SLA: free forever up to 10GB storage with zero egress fees, and an S3-compatible API means the same `boto3` code that would talk to S3 works unmodified — there's no R2-specific SDK to learn, and switching providers later is a config change, not a rewrite.
+**Cloudflare R2 instead of AWS S3.** Databricks Free Edition can't mount a customer-owned S3 bucket, so *some* separate landing zone was required regardless of provider. R2 won on cost and simplicity for a project with no production SLA: free forever up to 10GB storage with zero egress fees, and an S3-compatible API means the same `boto3` code that would talk to S3 works unmodified. There's no R2-specific SDK to learn, and switching providers later is just a config change.
 
-**Databricks Free Edition's constraints shaped the whole architecture, not just one corner of it.** Two limits in particular: serverless compute only reaches a trusted-domain allowlist (so it can't call yfinance, FRED, Wikipedia, GitHub, or arXiv directly), and there's no way to expose a Databricks-native dashboard publicly without a viewer account. Both are solved the same way — push everything that needs open internet or public visibility *out* of Databricks. GitHub Actions does all external API calls and all publishing; Databricks does only the transform, triggered and polled from outside.
+**Databricks Free Edition's constraints shaped the whole architecture.** Two limits in particular: serverless compute only reaches a trusted-domain allowlist, so it can't call yfinance, FRED, Wikipedia, GitHub, or arXiv directly, and there's no way to expose a Databricks-native dashboard publicly without a viewer account. Both are solved the same way: push everything that needs open internet or public visibility *out* of Databricks. GitHub Actions does all external API calls and all publishing; Databricks does only the transform, triggered and polled from outside.
 
-**The dashboard is static HTML/JS reading a JSON file, not a live-querying app.** No dashboard-side database credentials to secure, nothing to keep warm, and it hosts for free on GitHub Pages. The tradeoff — data is only as fresh as the last pipeline run, not real-time — is the right one for a system whose backing data (daily market closes, monthly CPI) doesn't change faster than daily anyway.
+**The dashboard is static HTML/JS reading a JSON file.** No dashboard-side database credentials to secure, nothing to keep warm, and it hosts for free on GitHub Pages. The tradeoff (data is only as fresh as the last pipeline run) is the right one for a system whose backing data (daily market closes, monthly CPI) doesn't change faster than daily anyway.
 
-**One GitHub Actions workflow orchestrates the entire pipeline, not five independent ones.** Ingestion, the Databricks transform trigger, export, and publish all live in a single job that runs top to bottom. The alternative — separate scheduled workflows per stage — creates a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that entirely; the Databricks job itself also has no schedule of its own for the same reason, and only ever runs when this workflow calls it.
+**One GitHub Actions workflow orchestrates the entire pipeline.** Ingestion, the Databricks transform trigger, export, and publish all live in a single job that runs top to bottom. Separate scheduled workflows per stage would create a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that entirely; the Databricks job itself also has no schedule of its own for the same reason, and only ever runs when this workflow calls it.
 
-**Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary — market, macro, and AI coverage stood fine without it.
+**Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 
 ## Docs
 
-- [`PROJECT_PLAN.md`](PROJECT_PLAN.md) — full architecture, established config, and a step-by-step build log (what's done, what's left)
-- [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md) — narrative history: design decisions and why, bugs hit and how they were fixed
+- [`PROJECT_PLAN.md`](PROJECT_PLAN.md): full architecture, established config, and a step-by-step build log (what's done, what's left)
+- [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md): narrative history covering design decisions and why, and bugs hit and how they were fixed
