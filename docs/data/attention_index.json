@@ -1,74 +1,6644 @@
 [
   {
     "article": "Artificial_intelligence",
+    "date": "2025-07-22",
+    "views": 14978,
+    "attention_index": 100.0
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-23",
+    "views": 15821,
+    "attention_index": 105.62825477366803
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-24",
+    "views": 16449,
+    "attention_index": 109.8210709039925
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-25",
+    "views": 15277,
+    "attention_index": 101.9962611830685
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-26",
+    "views": 12805,
+    "attention_index": 85.49205501402056
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-27",
+    "views": 12174,
+    "attention_index": 81.27920950727734
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-28",
+    "views": 15650,
+    "attention_index": 104.48658031779945
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-29",
+    "views": 15689,
+    "attention_index": 104.74696221124316
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-30",
+    "views": 18600,
+    "attention_index": 124.18213379623448
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-07-31",
+    "views": 16011,
+    "attention_index": 106.89678194685538
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-01",
+    "views": 15139,
+    "attention_index": 101.07490986780611
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-02",
+    "views": 13512,
+    "attention_index": 90.21231139003872
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-03",
+    "views": 20358,
+    "attention_index": 135.9193483776205
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-04",
+    "views": 20263,
+    "attention_index": 135.28508479102683
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-05",
+    "views": 18465,
+    "attention_index": 123.28081185739083
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-06",
+    "views": 19630,
+    "attention_index": 131.05888636667112
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-07",
+    "views": 17492,
+    "attention_index": 116.7846174389104
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-08",
+    "views": 20704,
+    "attention_index": 138.22940312458272
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-09",
+    "views": 24441,
+    "attention_index": 163.17932968353585
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-10",
+    "views": 24662,
+    "attention_index": 164.65482707971694
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-11",
+    "views": 20567,
+    "attention_index": 137.31472826812657
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-12",
+    "views": 30771,
+    "attention_index": 205.44131392709306
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-13",
+    "views": 22714,
+    "attention_index": 151.64908532514355
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-14",
+    "views": 32597,
+    "attention_index": 217.63252770730404
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-15",
+    "views": 21858,
+    "attention_index": 145.93403658699427
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-16",
+    "views": 24135,
+    "attention_index": 161.1363332888236
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-17",
+    "views": 26962,
+    "attention_index": 180.01068233408998
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-18",
+    "views": 30152,
+    "attention_index": 201.30858592602485
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-19",
+    "views": 26338,
+    "attention_index": 175.84457203899052
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-20",
+    "views": 21914,
+    "attention_index": 146.30791828014424
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-21",
+    "views": 32483,
+    "attention_index": 216.87141140339165
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-22",
+    "views": 19086,
+    "attention_index": 127.42689277607158
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-23",
+    "views": 32138,
+    "attention_index": 214.56803311523566
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-24",
+    "views": 27207,
+    "attention_index": 181.64641474162104
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-25",
+    "views": 30276,
+    "attention_index": 202.13646681799972
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-26",
+    "views": 28178,
+    "attention_index": 188.12925624248896
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-27",
+    "views": 17649,
+    "attention_index": 117.83282147149153
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-28",
+    "views": 24310,
+    "attention_index": 162.3047135799172
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-29",
+    "views": 15723,
+    "attention_index": 104.97396181065564
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-30",
+    "views": 13803,
+    "attention_index": 92.15516090265723
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-08-31",
+    "views": 13937,
+    "attention_index": 93.04980638269463
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-01",
+    "views": 19150,
+    "attention_index": 127.85418613967153
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-02",
+    "views": 18625,
+    "attention_index": 124.3490452663907
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-03",
+    "views": 30324,
+    "attention_index": 202.4569368406997
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-04",
+    "views": 28980,
+    "attention_index": 193.4837762051008
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-05",
+    "views": 32193,
+    "attention_index": 214.93523834957938
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-06",
+    "views": 20970,
+    "attention_index": 140.005341167045
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-07",
+    "views": 17670,
+    "attention_index": 117.97302710642275
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-08",
+    "views": 29614,
+    "attention_index": 197.7166510882628
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-09",
+    "views": 21755,
+    "attention_index": 145.2463613299506
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-10",
+    "views": 21844,
+    "attention_index": 145.84056616370677
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-11",
+    "views": 24631,
+    "attention_index": 164.44785685672318
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-12",
+    "views": 23908,
+    "attention_index": 159.62077713980506
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-13",
+    "views": 19573,
+    "attention_index": 130.67832821471492
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-14",
+    "views": 21634,
+    "attention_index": 144.43850981439445
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-15",
+    "views": 24455,
+    "attention_index": 163.27280010682335
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-16",
+    "views": 27264,
+    "attention_index": 182.02697289357727
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-17",
+    "views": 24180,
+    "attention_index": 161.43677393510484
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-18",
+    "views": 22393,
+    "attention_index": 149.50594204833754
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-19",
+    "views": 22106,
+    "attention_index": 147.58979837094407
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-20",
+    "views": 17611,
+    "attention_index": 117.57911603685405
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-21",
+    "views": 16240,
+    "attention_index": 108.42569101348644
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-22",
+    "views": 21224,
+    "attention_index": 141.7011617038323
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-23",
+    "views": 20516,
+    "attention_index": 136.97422886900787
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-24",
+    "views": 20135,
+    "attention_index": 134.43049806382695
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-25",
+    "views": 21575,
+    "attention_index": 144.04459874482575
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-26",
+    "views": 17879,
+    "attention_index": 119.36840699692883
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-27",
+    "views": 15730,
+    "attention_index": 105.02069702229937
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-28",
+    "views": 16258,
+    "attention_index": 108.54586727199893
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-29",
+    "views": 19800,
+    "attention_index": 132.19388436373347
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-09-30",
+    "views": 23303,
+    "attention_index": 155.5815195620243
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-01",
+    "views": 23753,
+    "attention_index": 158.58592602483643
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-02",
+    "views": 36144,
+    "attention_index": 241.31392709306985
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-03",
+    "views": 28233,
+    "attention_index": 188.49646147683268
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-04",
+    "views": 28549,
+    "attention_index": 190.60622245960744
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-05",
+    "views": 18361,
+    "attention_index": 122.58646014154093
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-06",
+    "views": 20350,
+    "attention_index": 135.8659367071705
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-07",
+    "views": 21079,
+    "attention_index": 140.73307517692615
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-08",
+    "views": 20028,
+    "attention_index": 133.7161169715583
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-09",
+    "views": 21218,
+    "attention_index": 141.6611029509948
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-10",
+    "views": 18080,
+    "attention_index": 120.71037521698491
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-11",
+    "views": 16344,
+    "attention_index": 109.12004272933635
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-12",
+    "views": 15782,
+    "attention_index": 105.36787288022434
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-13",
+    "views": 24254,
+    "attention_index": 161.93083188676727
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-14",
+    "views": 38319,
+    "attention_index": 255.8352249966618
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-15",
+    "views": 43941,
+    "attention_index": 293.3702764053946
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-16",
+    "views": 45204,
+    "attention_index": 301.8026438776873
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-17",
+    "views": 19131,
+    "attention_index": 127.72733342235279
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-18",
+    "views": 18035,
+    "attention_index": 120.4099345707037
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-19",
+    "views": 15282,
+    "attention_index": 102.02964347709975
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-20",
+    "views": 19352,
+    "attention_index": 129.20283081853384
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-21",
+    "views": 19718,
+    "attention_index": 131.64641474162104
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-22",
+    "views": 20698,
+    "attention_index": 138.18934437174522
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-23",
+    "views": 21106,
+    "attention_index": 140.9133395646949
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-24",
+    "views": 26606,
+    "attention_index": 177.6338629990653
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-25",
+    "views": 19258,
+    "attention_index": 128.57524369074642
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-26",
+    "views": 18389,
+    "attention_index": 122.77340098811591
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-27",
+    "views": 24081,
+    "attention_index": 160.77580451328615
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-28",
+    "views": 24463,
+    "attention_index": 163.32621177727333
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-29",
+    "views": 23366,
+    "attention_index": 156.002136466818
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-30",
+    "views": 26043,
+    "attention_index": 173.875016691147
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-10-31",
+    "views": 24824,
+    "attention_index": 165.73641340632926
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-01",
+    "views": 17993,
+    "attention_index": 120.12952330084123
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-02",
+    "views": 22815,
+    "attention_index": 152.32340766457472
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-03",
+    "views": 23575,
+    "attention_index": 157.3975163573241
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-04",
+    "views": 20727,
+    "attention_index": 138.38296167712645
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-05",
+    "views": 22218,
+    "attention_index": 148.33756175724395
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-06",
+    "views": 23129,
+    "attention_index": 154.41981572973697
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-07",
+    "views": 24776,
+    "attention_index": 165.41594338362933
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-08",
+    "views": 17680,
+    "attention_index": 118.03979169448525
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-09",
+    "views": 16226,
+    "attention_index": 108.33222059019896
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-10",
+    "views": 20130,
+    "attention_index": 134.3971157697957
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-11",
+    "views": 22316,
+    "attention_index": 148.99185472025638
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-12",
+    "views": 21061,
+    "attention_index": 140.61289891841366
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-13",
+    "views": 21372,
+    "attention_index": 142.68927760715718
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-14",
+    "views": 19165,
+    "attention_index": 127.95433302176527
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-15",
+    "views": 15986,
+    "attention_index": 106.72987047669915
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-16",
+    "views": 19605,
+    "attention_index": 130.8919748965149
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-17",
+    "views": 20081,
+    "attention_index": 134.06996928828949
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-18",
+    "views": 23214,
+    "attention_index": 154.98731472826813
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-19",
+    "views": 20473,
+    "attention_index": 136.68714114033918
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-20",
+    "views": 22557,
+    "attention_index": 150.6008812925624
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-21",
+    "views": 23274,
+    "attention_index": 155.3879022566431
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-22",
+    "views": 18901,
+    "attention_index": 126.19174789691547
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-23",
+    "views": 17880,
+    "attention_index": 119.37508345573508
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-24",
+    "views": 21328,
+    "attention_index": 142.3955134196822
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-25",
+    "views": 19764,
+    "attention_index": 131.9535318467085
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-26",
+    "views": 21024,
+    "attention_index": 140.36586994258244
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-27",
+    "views": 25137,
+    "attention_index": 167.82614501268526
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-28",
+    "views": 22730,
+    "attention_index": 151.75590866604352
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-29",
+    "views": 25548,
+    "attention_index": 170.5701695820537
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-11-30",
+    "views": 25758,
+    "attention_index": 171.972225931366
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-01",
+    "views": 28819,
+    "attention_index": 192.4088663372947
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-02",
+    "views": 32072,
+    "attention_index": 214.1273868340232
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-03",
+    "views": 39478,
+    "attention_index": 263.5732407531045
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-04",
+    "views": 40388,
+    "attention_index": 269.6488182667913
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-05",
+    "views": 36372,
+    "attention_index": 242.83615970089465
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-06",
+    "views": 35198,
+    "attention_index": 234.99799706235814
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-07",
+    "views": 29461,
+    "attention_index": 196.69515289090666
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-08",
+    "views": 23441,
+    "attention_index": 156.50287087728668
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-09",
+    "views": 21917,
+    "attention_index": 146.32794765656297
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-10",
+    "views": 42589,
+    "attention_index": 284.3437040993457
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-11",
+    "views": 27246,
+    "attention_index": 181.90679663506478
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-12",
+    "views": 24895,
+    "attention_index": 166.21044198157298
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-13",
+    "views": 23515,
+    "attention_index": 156.99692882894914
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-14",
+    "views": 24286,
+    "attention_index": 162.14447856856725
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-15",
+    "views": 25233,
+    "attention_index": 168.4670850580852
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-16",
+    "views": 21725,
+    "attention_index": 145.04606756576314
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-17",
+    "views": 26638,
+    "attention_index": 177.84750968086527
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-18",
+    "views": 29329,
+    "attention_index": 195.81386032848178
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-19",
+    "views": 41692,
+    "attention_index": 278.3549205501402
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-20",
+    "views": 13436,
+    "attention_index": 89.70490052076379
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-21",
+    "views": 16167,
+    "attention_index": 107.93830952063026
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-22",
+    "views": 16885,
+    "attention_index": 112.73200694351715
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-23",
+    "views": 18220,
+    "attention_index": 121.64507944985981
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-24",
+    "views": 19552,
+    "attention_index": 130.53812257978367
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-25",
+    "views": 20635,
+    "attention_index": 137.76872746695153
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-26",
+    "views": 15982,
+    "attention_index": 106.70316464147416
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-27",
+    "views": 24687,
+    "attention_index": 164.82173854987315
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-28",
+    "views": 22734,
+    "attention_index": 151.78261450126854
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-29",
+    "views": 24820,
+    "attention_index": 165.70970757110427
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-30",
+    "views": 21985,
+    "attention_index": 146.7819468553879
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2025-12-31",
+    "views": 20187,
+    "attention_index": 134.7776739217519
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-01",
+    "views": 16461,
+    "attention_index": 109.90118840966751
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-02",
+    "views": 20493,
+    "attention_index": 136.82067031646415
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-03",
+    "views": 23963,
+    "attention_index": 159.98798237414874
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-04",
+    "views": 24553,
+    "attention_index": 163.92709306983576
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-05",
+    "views": 28695,
+    "attention_index": 191.5809854453198
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-06",
+    "views": 25954,
+    "attention_index": 173.28081185739083
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-07",
+    "views": 24111,
+    "attention_index": 160.97609827747362
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-08",
+    "views": 29740,
+    "attention_index": 198.5578848978502
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-09",
+    "views": 24370,
+    "attention_index": 162.70530110829216
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-10",
+    "views": 20597,
+    "attention_index": 137.51502203231408
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-11",
+    "views": 20961,
+    "attention_index": 139.94525303778875
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-12",
+    "views": 24651,
+    "attention_index": 164.58138603284817
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-13",
+    "views": 23923,
+    "attention_index": 159.72092402189878
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-14",
+    "views": 22455,
+    "attention_index": 149.919882494325
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-15",
+    "views": 19346,
+    "attention_index": 129.16277206569634
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-16",
+    "views": 18035,
+    "attention_index": 120.4099345707037
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-17",
+    "views": 16937,
+    "attention_index": 113.07918280144212
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-18",
+    "views": 17033,
+    "attention_index": 113.72012284684203
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-19",
+    "views": 19447,
+    "attention_index": 129.83709440512752
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-20",
+    "views": 21164,
+    "attention_index": 141.30057417545734
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-21",
+    "views": 19019,
+    "attention_index": 126.97957003605286
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-22",
+    "views": 20949,
+    "attention_index": 139.86513553211378
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-23",
+    "views": 23001,
+    "attention_index": 153.56522900253705
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-24",
+    "views": 19009,
+    "attention_index": 126.9128054479904
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-25",
+    "views": 16400,
+    "attention_index": 109.49392442248632
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-26",
+    "views": 23607,
+    "attention_index": 157.61116303912405
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-27",
+    "views": 24909,
+    "attention_index": 166.30391240486045
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-28",
+    "views": 25183,
+    "attention_index": 168.13326211777274
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-29",
+    "views": 21139,
+    "attention_index": 141.1336627053011
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-30",
+    "views": 17327,
+    "attention_index": 115.68300173587929
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-01-31",
+    "views": 14083,
+    "attention_index": 94.024569368407
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-01",
+    "views": 16484,
+    "attention_index": 110.05474696221125
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-02",
+    "views": 19386,
+    "attention_index": 129.4298304179463
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-03",
+    "views": 20632,
+    "attention_index": 137.7486980905328
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-04",
+    "views": 23202,
+    "attention_index": 154.90719722259314
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-05",
+    "views": 25362,
+    "attention_index": 169.32834824409133
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-06",
+    "views": 26415,
+    "attention_index": 176.3586593670717
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-07",
+    "views": 34052,
+    "attention_index": 227.3467752703966
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-08",
+    "views": 33438,
+    "attention_index": 223.24742956335962
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-09",
+    "views": 41289,
+    "attention_index": 275.6643076512218
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-10",
+    "views": 56739,
+    "attention_index": 378.8155962077714
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-11",
+    "views": 66555,
+    "attention_index": 444.3517158499132
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-12",
+    "views": 68227,
+    "attention_index": 455.51475497396183
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-13",
+    "views": 46360,
+    "attention_index": 309.52063025771133
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-14",
+    "views": 27755,
+    "attention_index": 185.3051141674456
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-15",
+    "views": 22552,
+    "attention_index": 150.56749899853116
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-16",
+    "views": 32151,
+    "attention_index": 214.65482707971694
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-17",
+    "views": 38347,
+    "attention_index": 256.02216584323673
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-18",
+    "views": 40771,
+    "attention_index": 272.20590198958473
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-19",
+    "views": 25771,
+    "attention_index": 172.05901989584726
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-20",
+    "views": 35244,
+    "attention_index": 235.3051141674456
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-21",
+    "views": 44138,
+    "attention_index": 294.6855387902257
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-22",
+    "views": 43164,
+    "attention_index": 288.182667912939
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-23",
+    "views": 46393,
+    "attention_index": 309.7409533983175
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-24",
+    "views": 40033,
+    "attention_index": 267.27867539057286
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-25",
+    "views": 37519,
+    "attention_index": 250.49405795166246
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-26",
+    "views": 136294,
+    "attention_index": 909.9612765389237
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-27",
+    "views": 120903,
+    "attention_index": 807.2038990519429
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-02-28",
+    "views": 128045,
+    "attention_index": 854.8871678461744
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-01",
+    "views": 126073,
+    "attention_index": 841.7211910802511
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-02",
+    "views": 154803,
+    "attention_index": 1033.5358525837896
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-03",
+    "views": 185846,
+    "attention_index": 1240.7931633061826
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-04",
+    "views": 123790,
+    "attention_index": 826.4788356255842
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-05",
+    "views": 132482,
+    "attention_index": 884.5106155695019
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-06",
+    "views": 90846,
+    "attention_index": 606.5295767125117
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-07",
+    "views": 140342,
+    "attention_index": 936.9875817866204
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-08",
+    "views": 187236,
+    "attention_index": 1250.0734410468688
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-09",
+    "views": 160664,
+    "attention_index": 1072.666577647216
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-10",
+    "views": 216088,
+    "attention_index": 1442.7026305247698
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-11",
+    "views": 141266,
+    "attention_index": 943.1566297235946
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-12",
+    "views": 125684,
+    "attention_index": 839.12404860462
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-13",
+    "views": 77150,
+    "attention_index": 515.0887969021231
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-14",
+    "views": 182529,
+    "attention_index": 1218.647349445854
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-15",
+    "views": 129747,
+    "attention_index": 866.2505007344105
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-16",
+    "views": 159517,
+    "attention_index": 1065.008679396448
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-17",
+    "views": 125850,
+    "attention_index": 840.2323407664575
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-18",
+    "views": 150123,
+    "attention_index": 1002.2900253705435
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-19",
+    "views": 118769,
+    "attention_index": 792.956335959407
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-20",
+    "views": 87999,
+    "attention_index": 587.5216984911203
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-21",
+    "views": 26735,
+    "attention_index": 178.49512618507143
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-22",
+    "views": 27579,
+    "attention_index": 184.13005741754574
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-23",
+    "views": 34284,
+    "attention_index": 228.89571371344636
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-24",
+    "views": 86792,
+    "attention_index": 579.4632127119776
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-25",
+    "views": 33747,
+    "attention_index": 225.3104553344906
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-26",
+    "views": 32173,
+    "attention_index": 214.80170917345438
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-27",
+    "views": 29214,
+    "attention_index": 195.04606756576314
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-28",
+    "views": 27804,
+    "attention_index": 185.63226064895179
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-29",
+    "views": 24105,
+    "attention_index": 160.93603952463613
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-30",
+    "views": 124201,
+    "attention_index": 829.2228601949527
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-03-31",
+    "views": 29163,
+    "attention_index": 194.7055681666444
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-01",
+    "views": 27568,
+    "attention_index": 184.05661637067698
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-02",
+    "views": 24731,
+    "attention_index": 165.11550273734812
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-03",
+    "views": 23122,
+    "attention_index": 154.3730805180932
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-04",
+    "views": 22098,
+    "attention_index": 147.53638670049406
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-05",
+    "views": 24622,
+    "attention_index": 164.38776872746695
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-06",
+    "views": 25294,
+    "attention_index": 168.8743490452664
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-07",
+    "views": 26067,
+    "attention_index": 174.035251702497
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-08",
+    "views": 29407,
+    "attention_index": 196.33462411536922
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-09",
+    "views": 23397,
+    "attention_index": 156.2091066898117
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-10",
+    "views": 26115,
+    "attention_index": 174.35572172519696
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-11",
+    "views": 29883,
+    "attention_index": 199.51261850714383
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-12",
+    "views": 25191,
+    "attention_index": 168.18667378822272
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-13",
+    "views": 27000,
+    "attention_index": 180.26438776872746
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-14",
+    "views": 30650,
+    "attention_index": 204.6334624115369
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-15",
+    "views": 31341,
+    "attention_index": 209.2468954466551
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-16",
+    "views": 32926,
+    "attention_index": 219.82908265456
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-17",
+    "views": 29392,
+    "attention_index": 196.23447723327547
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-18",
+    "views": 24304,
+    "attention_index": 162.2646548270797
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-19",
+    "views": 24189,
+    "attention_index": 161.49686206436107
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-20",
+    "views": 27607,
+    "attention_index": 184.3169982641207
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-21",
+    "views": 24623,
+    "attention_index": 164.3944451862732
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-22",
+    "views": 26694,
+    "attention_index": 178.2213913740152
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-23",
+    "views": 29212,
+    "attention_index": 195.03271464815063
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-24",
+    "views": 26978,
+    "attention_index": 180.11750567498999
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-25",
+    "views": 26577,
+    "attention_index": 177.44024569368406
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-26",
+    "views": 24041,
+    "attention_index": 160.50874616103619
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-27",
+    "views": 30671,
+    "attention_index": 204.77366804646815
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-28",
+    "views": 29168,
+    "attention_index": 194.73895046067565
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-29",
+    "views": 28803,
+    "attention_index": 192.3020429963947
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-04-30",
+    "views": 25074,
+    "attention_index": 167.40552810789157
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-01",
+    "views": 24350,
+    "attention_index": 162.5717719321672
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-02",
+    "views": 24838,
+    "attention_index": 165.82988382961676
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-03",
+    "views": 24876,
+    "attention_index": 166.08358926425424
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-04",
+    "views": 29186,
+    "attention_index": 194.85912671918814
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-05",
+    "views": 31637,
+    "attention_index": 211.22312725330485
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-06",
+    "views": 47289,
+    "attention_index": 315.7230604887168
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-07",
+    "views": 31769,
+    "attention_index": 212.10441981572973
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-08",
+    "views": 37675,
+    "attention_index": 251.5355855254373
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-09",
+    "views": 26522,
+    "attention_index": 177.07304045934035
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-10",
+    "views": 28305,
+    "attention_index": 188.97716651088263
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-11",
+    "views": 31715,
+    "attention_index": 211.74389104019227
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-12",
+    "views": 29993,
+    "attention_index": 200.24702897583123
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-13",
+    "views": 34849,
+    "attention_index": 232.66791293897717
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-14",
+    "views": 33593,
+    "attention_index": 224.28228067832822
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-15",
+    "views": 26509,
+    "attention_index": 176.98624649485913
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-16",
+    "views": 24498,
+    "attention_index": 163.55988783549205
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-17",
+    "views": 24488,
+    "attention_index": 163.49312324742957
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-18",
+    "views": 35427,
+    "attention_index": 236.5269061289892
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-19",
+    "views": 28314,
+    "attention_index": 189.03725464013888
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-20",
+    "views": 28721,
+    "attention_index": 191.75457337428227
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-21",
+    "views": 28453,
+    "attention_index": 189.9652824142075
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-22",
+    "views": 30016,
+    "attention_index": 200.40058752837493
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-23",
+    "views": 29342,
+    "attention_index": 195.90065429296303
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-24",
+    "views": 27232,
+    "attention_index": 181.81332621177728
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-25",
+    "views": 28702,
+    "attention_index": 191.62772065696353
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-26",
+    "views": 27941,
+    "attention_index": 186.54693550540793
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-27",
+    "views": 31664,
+    "attention_index": 211.40339164107357
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-28",
+    "views": 32974,
+    "attention_index": 220.14955267725998
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-29",
+    "views": 33158,
+    "attention_index": 221.37802109760983
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-30",
+    "views": 32711,
+    "attention_index": 218.39364401121645
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-05-31",
+    "views": 31980,
+    "attention_index": 213.5131526238483
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-01",
+    "views": 38866,
+    "attention_index": 259.48724796368003
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-02",
+    "views": 41178,
+    "attention_index": 274.92322072372815
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-03",
+    "views": 31073,
+    "attention_index": 207.4576044865803
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-04",
+    "views": 32499,
+    "attention_index": 216.97823474429163
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-05",
+    "views": 31559,
+    "attention_index": 210.7023634664174
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-06",
+    "views": 24803,
+    "attention_index": 165.59620777139804
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-07",
+    "views": 29726,
+    "attention_index": 198.4644144745627
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-08",
+    "views": 25360,
+    "attention_index": 169.31499532647885
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-09",
+    "views": 39270,
+    "attention_index": 262.1845373214047
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-10",
+    "views": 25574,
+    "attention_index": 170.74375751101616
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-11",
+    "views": 26508,
+    "attention_index": 176.97957003605288
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-12",
+    "views": 25771,
+    "attention_index": 172.05901989584726
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-13",
+    "views": 28258,
+    "attention_index": 188.66337294698891
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-14",
+    "views": 30252,
+    "attention_index": 201.97623180664976
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-15",
+    "views": 26002,
+    "attention_index": 173.6012818800908
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-16",
+    "views": 26565,
+    "attention_index": 177.36012818800907
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-17",
+    "views": 26545,
+    "attention_index": 177.22659901188408
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-18",
+    "views": 28680,
+    "attention_index": 191.48083856322606
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-19",
+    "views": 23979,
+    "attention_index": 160.09480571504875
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-20",
+    "views": 25211,
+    "attention_index": 168.32020296434771
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-21",
+    "views": 24879,
+    "attention_index": 166.10361864067298
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-22",
+    "views": 33100,
+    "attention_index": 220.99078648684736
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-23",
+    "views": 35335,
+    "attention_index": 235.91267191881425
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-24",
+    "views": 28628,
+    "attention_index": 191.1336627053011
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-25",
+    "views": 30332,
+    "attention_index": 202.5103485111497
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-26",
+    "views": 26861,
+    "attention_index": 179.33635999465884
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-27",
+    "views": 26100,
+    "attention_index": 174.2555748431032
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-28",
+    "views": 26740,
+    "attention_index": 178.5285084791027
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-29",
+    "views": 27939,
+    "attention_index": 186.53358258779545
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-06-30",
+    "views": 24280,
+    "attention_index": 162.10441981572973
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-01",
+    "views": 26787,
+    "attention_index": 178.8423020429964
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-02",
+    "views": 26187,
+    "attention_index": 174.83642675924688
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-03",
+    "views": 26653,
+    "attention_index": 177.94765656295903
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-04",
+    "views": 23326,
+    "attention_index": 155.73507811456804
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-05",
+    "views": 21771,
+    "attention_index": 145.3531846708506
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-06",
+    "views": 21586,
+    "attention_index": 144.11803979169449
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-07",
+    "views": 24092,
+    "attention_index": 160.84924556015488
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-08",
+    "views": 29276,
+    "attention_index": 195.46000801175057
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-09",
+    "views": 25927,
+    "attention_index": 173.10054746962211
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-10",
+    "views": 19522,
+    "attention_index": 130.33782881559623
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-11",
+    "views": 17376,
+    "attention_index": 116.01014821738549
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-12",
+    "views": 18265,
+    "attention_index": 121.94552009614101
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-13",
+    "views": 21340,
+    "attention_index": 142.4756309253572
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-14",
+    "views": 20206,
+    "attention_index": 134.90452663907064
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-15",
+    "views": 21071,
+    "attention_index": 140.67966350647617
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-16",
+    "views": 22071,
+    "attention_index": 147.35612231272532
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-17",
+    "views": 28805,
+    "attention_index": 192.3153959140072
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-18",
+    "views": 21184,
+    "attention_index": 141.43410335158234
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-19",
+    "views": 25632,
+    "attention_index": 171.1309921217786
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-20",
+    "views": 19977,
+    "attention_index": 133.37561757243958
+  },
+  {
+    "article": "Artificial_intelligence",
     "date": "2026-07-21",
     "views": 20718,
-    "attention_index": 100.0
+    "attention_index": 138.32287354787022
   },
   {
     "article": "Artificial_intelligence",
     "date": "2026-07-22",
     "views": 20508,
-    "attention_index": 98.98638864755284
+    "attention_index": 136.9208171985579
   },
   {
     "article": "Artificial_intelligence",
     "date": "2026-07-23",
     "views": 22725,
-    "attention_index": 109.68722849695915
+    "attention_index": 151.72252637201228
   },
   {
     "article": "Artificial_intelligence",
     "date": "2026-07-24",
     "views": 19636,
-    "attention_index": 94.77748817453421
+    "attention_index": 131.0989451195086
+  },
+  {
+    "article": "Artificial_intelligence",
+    "date": "2026-07-25",
+    "views": 16063,
+    "attention_index": 107.24395780478035
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-22",
+    "views": 112110,
+    "attention_index": 100.0
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-23",
+    "views": 104232,
+    "attention_index": 92.97297297297298
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-24",
+    "views": 142856,
+    "attention_index": 127.42485059316742
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-25",
+    "views": 134309,
+    "attention_index": 119.80108821692981
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-26",
+    "views": 116686,
+    "attention_index": 104.08170546784407
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-27",
+    "views": 120013,
+    "attention_index": 107.04932655427706
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-28",
+    "views": 140637,
+    "attention_index": 125.44554455445545
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-29",
+    "views": 145512,
+    "attention_index": 129.79395236820977
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-30",
+    "views": 144403,
+    "attention_index": 128.8047453393988
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-07-31",
+    "views": 147882,
+    "attention_index": 131.9079475515119
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-01",
+    "views": 136908,
+    "attention_index": 122.1193470698421
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-02",
+    "views": 113780,
+    "attention_index": 101.48960842030148
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-03",
+    "views": 116369,
+    "attention_index": 103.79894746231379
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-04",
+    "views": 143021,
+    "attention_index": 127.57202747301757
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-05",
+    "views": 146156,
+    "attention_index": 130.36838819017035
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-06",
+    "views": 153446,
+    "attention_index": 136.87093033627687
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-07",
+    "views": 152357,
+    "attention_index": 135.8995629292659
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-08",
+    "views": 145543,
+    "attention_index": 129.82160378199984
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-09",
+    "views": 140148,
+    "attention_index": 125.00936580144501
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-10",
+    "views": 142477,
+    "attention_index": 127.0867897600571
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-11",
+    "views": 154364,
+    "attention_index": 137.68976897689768
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-12",
+    "views": 151464,
+    "attention_index": 135.10302381589509
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-13",
+    "views": 165592,
+    "attention_index": 147.7049326554277
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-14",
+    "views": 186349,
+    "attention_index": 166.21978414057622
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-15",
+    "views": 163721,
+    "attention_index": 146.03603603603602
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-16",
+    "views": 124528,
+    "attention_index": 111.07662117563109
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-17",
+    "views": 122006,
+    "attention_index": 108.82704486664882
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-18",
+    "views": 156444,
+    "attention_index": 139.54508964409956
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-19",
+    "views": 160787,
+    "attention_index": 143.4189635179734
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-20",
+    "views": 163164,
+    "attention_index": 145.53920256890552
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-21",
+    "views": 162073,
+    "attention_index": 144.56605119971456
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-22",
+    "views": 152525,
+    "attention_index": 136.04941575238604
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-23",
+    "views": 123487,
+    "attention_index": 110.14806886094016
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-24",
+    "views": 120877,
+    "attention_index": 107.81999821603783
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-25",
+    "views": 155725,
+    "attention_index": 138.9037552403889
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-26",
+    "views": 153285,
+    "attention_index": 136.72732138078675
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-27",
+    "views": 152043,
+    "attention_index": 135.61948086700562
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-28",
+    "views": 156133,
+    "attention_index": 139.26768352510928
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-29",
+    "views": 135533,
+    "attention_index": 120.89287307109089
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-30",
+    "views": 117967,
+    "attention_index": 105.22433324413522
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-08-31",
+    "views": 108213,
+    "attention_index": 96.52394969226651
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-01",
+    "views": 125420,
+    "attention_index": 111.87226830791188
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-02",
+    "views": 154643,
+    "attention_index": 137.93863170100792
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-03",
+    "views": 171655,
+    "attention_index": 153.11301400410312
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-04",
+    "views": 168027,
+    "attention_index": 149.8769066095799
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-05",
+    "views": 156827,
+    "attention_index": 139.88671840156988
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-06",
+    "views": 125605,
+    "attention_index": 112.03728480956204
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-07",
+    "views": 134351,
+    "attention_index": 119.83855142270986
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-08",
+    "views": 177815,
+    "attention_index": 158.6076175185086
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-09",
+    "views": 180580,
+    "attention_index": 161.07394523236107
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-10",
+    "views": 183152,
+    "attention_index": 163.36812059584335
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-11",
+    "views": 180621,
+    "attention_index": 161.1105164570511
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-12",
+    "views": 167134,
+    "attention_index": 149.08036749620908
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-13",
+    "views": 137915,
+    "attention_index": 123.01757202747301
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-14",
+    "views": 139365,
+    "attention_index": 124.31094460797432
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-15",
+    "views": 180348,
+    "attention_index": 160.86700561948086
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-16",
+    "views": 184904,
+    "attention_index": 164.93087146552494
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-17",
+    "views": 182210,
+    "attention_index": 162.52787440906252
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-18",
+    "views": 179566,
+    "attention_index": 160.16947640710018
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-19",
+    "views": 160900,
+    "attention_index": 143.5197573811435
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-20",
+    "views": 126754,
+    "attention_index": 113.06217108197308
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-21",
+    "views": 135669,
+    "attention_index": 121.01418249933103
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-22",
+    "views": 178141,
+    "attention_index": 158.8984033538489
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-23",
+    "views": 177587,
+    "attention_index": 158.4042458299884
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-24",
+    "views": 178453,
+    "attention_index": 159.17670145392918
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-25",
+    "views": 170531,
+    "attention_index": 152.1104272589421
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-26",
+    "views": 153609,
+    "attention_index": 137.016323253947
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-27",
+    "views": 114820,
+    "attention_index": 102.41726875390242
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-28",
+    "views": 124697,
+    "attention_index": 111.22736597984122
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-29",
+    "views": 161296,
+    "attention_index": 143.87298189278388
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-09-30",
+    "views": 167177,
+    "attention_index": 149.1187226830791
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-01",
+    "views": 160739,
+    "attention_index": 143.37614842565338
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-02",
+    "views": 163503,
+    "attention_index": 145.84158415841583
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-03",
+    "views": 149701,
+    "attention_index": 133.53046115422353
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-04",
+    "views": 117986,
+    "attention_index": 105.24128088484524
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-05",
+    "views": 129021,
+    "attention_index": 115.08429221300509
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-06",
+    "views": 169711,
+    "attention_index": 151.37900276514137
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-07",
+    "views": 166445,
+    "attention_index": 148.46579252519848
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-08",
+    "views": 170644,
+    "attention_index": 152.2112211221122
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-09",
+    "views": 165623,
+    "attention_index": 147.73258406921775
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-10",
+    "views": 144584,
+    "attention_index": 128.96619391668898
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-11",
+    "views": 116665,
+    "attention_index": 104.06297386495407
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-12",
+    "views": 124660,
+    "attention_index": 111.19436267951119
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-13",
+    "views": 161362,
+    "attention_index": 143.93185264472393
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-14",
+    "views": 171086,
+    "attention_index": 152.6054767638926
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-15",
+    "views": 168463,
+    "attention_index": 150.26581036482028
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-16",
+    "views": 168914,
+    "attention_index": 150.66809383641066
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-17",
+    "views": 154024,
+    "attention_index": 137.3864954062974
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-18",
+    "views": 124707,
+    "attention_index": 111.23628579074123
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-19",
+    "views": 132057,
+    "attention_index": 117.79234680224779
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-20",
+    "views": 172434,
+    "attention_index": 153.80786727321382
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-21",
+    "views": 295404,
+    "attention_index": 263.4947819106235
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-22",
+    "views": 227418,
+    "attention_index": 202.85255552582285
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-23",
+    "views": 160139,
+    "attention_index": 142.84095977165282
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-24",
+    "views": 142615,
+    "attention_index": 127.20988315047721
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-25",
+    "views": 113512,
+    "attention_index": 101.25055748818126
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-26",
+    "views": 100112,
+    "attention_index": 89.2980108821693
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-27",
+    "views": 117961,
+    "attention_index": 105.21898135759523
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-28",
+    "views": 119524,
+    "attention_index": 106.6131478012666
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-29",
+    "views": 121644,
+    "attention_index": 108.50414771206852
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-30",
+    "views": 132823,
+    "attention_index": 118.47560431718847
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-10-31",
+    "views": 128672,
+    "attention_index": 114.77299081259477
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-01",
+    "views": 111140,
+    "attention_index": 99.13477834269914
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-02",
+    "views": 124146,
+    "attention_index": 110.73588439925072
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-03",
+    "views": 159721,
+    "attention_index": 142.46811167603246
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-04",
+    "views": 166885,
+    "attention_index": 148.85826420479887
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-05",
+    "views": 153343,
+    "attention_index": 136.77905628400677
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-06",
+    "views": 148950,
+    "attention_index": 132.86058335563285
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-07",
+    "views": 137603,
+    "attention_index": 122.73927392739274
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-08",
+    "views": 108861,
+    "attention_index": 97.1019534385871
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-09",
+    "views": 111672,
+    "attention_index": 99.60931228257961
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-10",
+    "views": 149540,
+    "attention_index": 133.38685219873338
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-11",
+    "views": 146267,
+    "attention_index": 130.46739809116045
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-12",
+    "views": 150968,
+    "attention_index": 134.66060119525466
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-13",
+    "views": 145887,
+    "attention_index": 130.12844527696012
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-14",
+    "views": 136094,
+    "attention_index": 121.39327446258139
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-15",
+    "views": 101974,
+    "attention_index": 90.95887967175096
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-16",
+    "views": 108701,
+    "attention_index": 96.95923646418696
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-17",
+    "views": 141057,
+    "attention_index": 125.82017661225582
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-18",
+    "views": 327469,
+    "attention_index": 292.0961555615021
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-19",
+    "views": 134555,
+    "attention_index": 120.02051556507003
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-20",
+    "views": 139004,
+    "attention_index": 123.988939434484
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-21",
+    "views": 121088,
+    "attention_index": 108.00820622602801
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-22",
+    "views": 96362,
+    "attention_index": 85.95308179466595
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-23",
+    "views": 100664,
+    "attention_index": 89.79038444384979
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-24",
+    "views": 128629,
+    "attention_index": 114.73463562572475
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-25",
+    "views": 124979,
+    "attention_index": 111.47890464722148
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-26",
+    "views": 116390,
+    "attention_index": 103.81767906520383
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-27",
+    "views": 103924,
+    "attention_index": 92.69824279725269
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-28",
+    "views": 96806,
+    "attention_index": 86.34912139862635
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-29",
+    "views": 91726,
+    "attention_index": 81.81785746142182
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-11-30",
+    "views": 101473,
+    "attention_index": 90.51199714566052
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-01",
+    "views": 130931,
+    "attention_index": 116.78797609490678
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-02",
+    "views": 139683,
+    "attention_index": 124.59459459459458
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-03",
+    "views": 128648,
+    "attention_index": 114.75158326643475
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-04",
+    "views": 125738,
+    "attention_index": 112.15591829453216
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-05",
+    "views": 118504,
+    "attention_index": 105.7033270894657
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-06",
+    "views": 94748,
+    "attention_index": 84.51342431540452
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-07",
+    "views": 97776,
+    "attention_index": 87.21434305592722
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-08",
+    "views": 126473,
+    "attention_index": 112.81152439568281
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-09",
+    "views": 136266,
+    "attention_index": 121.54669521006154
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-10",
+    "views": 131923,
+    "attention_index": 117.67282133618768
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-11",
+    "views": 132832,
+    "attention_index": 118.48363214699849
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-12",
+    "views": 123311,
+    "attention_index": 109.9910801891
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-13",
+    "views": 94862,
+    "attention_index": 84.61511015966462
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-14",
+    "views": 95243,
+    "attention_index": 84.95495495495496
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-15",
+    "views": 120646,
+    "attention_index": 107.6139505842476
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-16",
+    "views": 121579,
+    "attention_index": 108.44616894121846
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-17",
+    "views": 115712,
+    "attention_index": 103.21291588618323
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-18",
+    "views": 115111,
+    "attention_index": 102.67683525109268
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-19",
+    "views": 122853,
+    "attention_index": 109.58255284987959
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-20",
+    "views": 102223,
+    "attention_index": 91.18098296316118
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-21",
+    "views": 92085,
+    "attention_index": 82.13807867273214
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-22",
+    "views": 99098,
+    "attention_index": 88.39354205690839
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-23",
+    "views": 97342,
+    "attention_index": 86.82722326286682
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-24",
+    "views": 86242,
+    "attention_index": 76.92623316385692
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-25",
+    "views": 86703,
+    "attention_index": 77.33743644634734
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-26",
+    "views": 86181,
+    "attention_index": 76.87182231736686
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-27",
+    "views": 88291,
+    "attention_index": 78.75390241726875
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-28",
+    "views": 85998,
+    "attention_index": 76.7085897778967
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-29",
+    "views": 96599,
+    "attention_index": 86.16448131299617
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-30",
+    "views": 94892,
+    "attention_index": 84.64186959236464
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2025-12-31",
+    "views": 88680,
+    "attention_index": 79.1008830612791
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-01",
+    "views": 85397,
+    "attention_index": 76.17250914280618
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-02",
+    "views": 94639,
+    "attention_index": 84.41619837659442
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-03",
+    "views": 92694,
+    "attention_index": 82.68129515654267
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-04",
+    "views": 96935,
+    "attention_index": 86.46418695923647
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-05",
+    "views": 110772,
+    "attention_index": 98.8065293015788
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-06",
+    "views": 115949,
+    "attention_index": 103.42431540451342
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-07",
+    "views": 120830,
+    "attention_index": 107.77807510480777
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-08",
+    "views": 116566,
+    "attention_index": 103.97466773704397
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-09",
+    "views": 112590,
+    "attention_index": 100.42815092320043
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-10",
+    "views": 92435,
+    "attention_index": 82.45027205423246
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-11",
+    "views": 92415,
+    "attention_index": 82.43243243243244
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-12",
+    "views": 123614,
+    "attention_index": 110.26135045937026
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-13",
+    "views": 120240,
+    "attention_index": 107.25180626170724
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-14",
+    "views": 119957,
+    "attention_index": 106.999375613237
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-15",
+    "views": 118773,
+    "attention_index": 105.94327000267594
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-16",
+    "views": 111693,
+    "attention_index": 99.62804388546964
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-17",
+    "views": 88363,
+    "attention_index": 78.81812505574882
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-18",
+    "views": 91564,
+    "attention_index": 81.67335652484168
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-19",
+    "views": 107835,
+    "attention_index": 96.18678084024619
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-20",
+    "views": 117707,
+    "attention_index": 104.99241816073499
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-21",
+    "views": 120758,
+    "attention_index": 107.71385246632772
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-22",
+    "views": 120823,
+    "attention_index": 107.77183123717778
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-23",
+    "views": 114470,
+    "attention_index": 102.1050753724021
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-24",
+    "views": 92669,
+    "attention_index": 82.65899562929266
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-25",
+    "views": 91730,
+    "attention_index": 81.82142538578182
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-26",
+    "views": 115723,
+    "attention_index": 103.22272767817321
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-27",
+    "views": 116958,
+    "attention_index": 104.32432432432432
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-28",
+    "views": 125419,
+    "attention_index": 111.87137632682187
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-29",
+    "views": 124526,
+    "attention_index": 111.07483721345108
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-30",
+    "views": 115357,
+    "attention_index": 102.8962625992329
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-01-31",
+    "views": 94607,
+    "attention_index": 84.38765498171439
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-01",
+    "views": 98355,
+    "attention_index": 87.73080010703774
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-02",
+    "views": 138511,
+    "attention_index": 123.54919275711356
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-03",
+    "views": 197256,
+    "attention_index": 175.94862188921593
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-04",
+    "views": 177178,
+    "attention_index": 158.03942556417806
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-05",
+    "views": 140473,
+    "attention_index": 125.29925965569531
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-06",
+    "views": 84173,
+    "attention_index": 75.08072428864509
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-07",
+    "views": 67139,
+    "attention_index": 59.88671840156988
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-08",
+    "views": 68202,
+    "attention_index": 60.83489430024084
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-09",
+    "views": 82294,
+    "attention_index": 73.4046918205334
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-10",
+    "views": 82651,
+    "attention_index": 73.72312906966371
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-11",
+    "views": 97532,
+    "attention_index": 86.99669966996699
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-12",
+    "views": 96996,
+    "attention_index": 86.51859780572651
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-13",
+    "views": 80607,
+    "attention_index": 71.8999197217019
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-14",
+    "views": 68110,
+    "attention_index": 60.75283203996076
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-15",
+    "views": 65594,
+    "attention_index": 58.50860761751851
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-16",
+    "views": 87517,
+    "attention_index": 78.06350905360806
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-17",
+    "views": 104358,
+    "attention_index": 93.08536259031308
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-18",
+    "views": 104030,
+    "attention_index": 92.7927927927928
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-19",
+    "views": 80600,
+    "attention_index": 71.89367585407189
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-20",
+    "views": 82456,
+    "attention_index": 73.54919275711354
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-21",
+    "views": 68451,
+    "attention_index": 61.056997591651054
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-22",
+    "views": 76712,
+    "attention_index": 68.42565337614842
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-23",
+    "views": 99794,
+    "attention_index": 89.01436089554902
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-24",
+    "views": 99272,
+    "attention_index": 88.54874676656856
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-25",
+    "views": 82253,
+    "attention_index": 73.36812059584337
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-26",
+    "views": 82933,
+    "attention_index": 73.97466773704397
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-27",
+    "views": 77296,
+    "attention_index": 68.94657033270894
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-02-28",
+    "views": 61829,
+    "attention_index": 55.15029881366515
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-01",
+    "views": 67398,
+    "attention_index": 60.11774150388012
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-02",
+    "views": 89051,
+    "attention_index": 79.43180804566943
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-03",
+    "views": 85050,
+    "attention_index": 75.86299170457586
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-04",
+    "views": 93617,
+    "attention_index": 83.5045937026135
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-05",
+    "views": 73451,
+    "attention_index": 65.51690304165551
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-06",
+    "views": 73423,
+    "attention_index": 65.49192757113549
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-07",
+    "views": 58628,
+    "attention_index": 52.2950673445723
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-08",
+    "views": 61635,
+    "attention_index": 54.97725448220498
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-09",
+    "views": 75761,
+    "attention_index": 67.57737935955758
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-10",
+    "views": 85454,
+    "attention_index": 76.22335206493622
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-11",
+    "views": 86109,
+    "attention_index": 76.8075996788868
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-12",
+    "views": 80800,
+    "attention_index": 72.07207207207207
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-13",
+    "views": 68422,
+    "attention_index": 61.031130140041036
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-14",
+    "views": 58064,
+    "attention_index": 51.7919900098118
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-15",
+    "views": 60112,
+    "attention_index": 53.61876728213362
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-16",
+    "views": 95205,
+    "attention_index": 84.92105967353493
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-17",
+    "views": 118069,
+    "attention_index": 105.3153153153153
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-18",
+    "views": 108693,
+    "attention_index": 96.95210061546695
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-19",
+    "views": 105980,
+    "attention_index": 94.53215591829454
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-20",
+    "views": 98216,
+    "attention_index": 87.6068147355276
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-21",
+    "views": 82859,
+    "attention_index": 73.90866113638391
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-22",
+    "views": 87206,
+    "attention_index": 77.78610293461779
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-23",
+    "views": 109858,
+    "attention_index": 97.99125858531798
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-24",
+    "views": 76941,
+    "attention_index": 68.62991704575863
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-25",
+    "views": 76965,
+    "attention_index": 68.65132459191865
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-26",
+    "views": 72394,
+    "attention_index": 64.57407902952458
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-27",
+    "views": 71503,
+    "attention_index": 63.779323878333784
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-28",
+    "views": 52046,
+    "attention_index": 46.42404781018642
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-29",
+    "views": 54535,
+    "attention_index": 48.64418874319865
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-30",
+    "views": 74347,
+    "attention_index": 66.31611809829631
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-03-31",
+    "views": 71749,
+    "attention_index": 63.99875122647399
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-01",
+    "views": 74035,
+    "attention_index": 66.03781999821604
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-02",
+    "views": 64185,
+    "attention_index": 57.25180626170725
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-03",
+    "views": 53241,
+    "attention_index": 47.48996521273749
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-04",
+    "views": 54473,
+    "attention_index": 48.58888591561859
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-05",
+    "views": 52518,
+    "attention_index": 46.845062884666845
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-06",
+    "views": 66209,
+    "attention_index": 59.05717598786906
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-07",
+    "views": 67232,
+    "attention_index": 59.969672642939976
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-08",
+    "views": 62046,
+    "attention_index": 55.34385871019535
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-09",
+    "views": 66054,
+    "attention_index": 58.91891891891892
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-10",
+    "views": 55450,
+    "attention_index": 49.46035144054946
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-11",
+    "views": 49044,
+    "attention_index": 43.74632057800375
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-12",
+    "views": 46671,
+    "attention_index": 41.629649451431625
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-13",
+    "views": 78846,
+    "attention_index": 70.32914102221032
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-14",
+    "views": 70794,
+    "attention_index": 63.146909285523144
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-15",
+    "views": 57840,
+    "attention_index": 51.5921862456516
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-16",
+    "views": 67227,
+    "attention_index": 59.96521273748997
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-17",
+    "views": 90952,
+    "attention_index": 81.12746409776112
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-18",
+    "views": 83717,
+    "attention_index": 74.67398091160467
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-19",
+    "views": 87305,
+    "attention_index": 77.87440906252787
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-20",
+    "views": 123738,
+    "attention_index": 110.37195611453036
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-21",
+    "views": 114388,
+    "attention_index": 102.03193292302204
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-22",
+    "views": 114655,
+    "attention_index": 102.27009187405227
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-23",
+    "views": 112978,
+    "attention_index": 100.77423958612077
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-24",
+    "views": 100982,
+    "attention_index": 90.07403443047008
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-25",
+    "views": 81870,
+    "attention_index": 73.02649183837303
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-26",
+    "views": 87400,
+    "attention_index": 77.95914726607795
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-27",
+    "views": 121519,
+    "attention_index": 108.3926500758184
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-28",
+    "views": 122539,
+    "attention_index": 109.3024707876193
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-29",
+    "views": 116895,
+    "attention_index": 104.26812951565427
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-04-30",
+    "views": 75686,
+    "attention_index": 67.51048077780752
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-01",
+    "views": 39851,
+    "attention_index": 35.54633841762554
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-02",
+    "views": 43068,
+    "attention_index": 38.415841584158414
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-03",
+    "views": 37736,
+    "attention_index": 33.65979841227366
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-04",
+    "views": 49722,
+    "attention_index": 44.35108375702435
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-05",
+    "views": 52705,
+    "attention_index": 47.011863348497016
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-06",
+    "views": 63139,
+    "attention_index": 56.31879404156632
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-07",
+    "views": 55587,
+    "attention_index": 49.582552849879576
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-08",
+    "views": 48251,
+    "attention_index": 43.03897957363304
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-09",
+    "views": 39069,
+    "attention_index": 34.84880920524485
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-10",
+    "views": 38543,
+    "attention_index": 34.37962715190438
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-11",
+    "views": 52572,
+    "attention_index": 46.89322986352689
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-12",
+    "views": 51118,
+    "attention_index": 45.5962893586656
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-13",
+    "views": 57387,
+    "attention_index": 51.18811881188119
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-14",
+    "views": 55301,
+    "attention_index": 49.32744625813933
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-15",
+    "views": 91978,
+    "attention_index": 82.04263669610205
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-16",
+    "views": 85009,
+    "attention_index": 75.82642047988583
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-17",
+    "views": 85427,
+    "attention_index": 76.1992685755062
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-18",
+    "views": 115721,
+    "attention_index": 103.22094371599322
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-19",
+    "views": 116398,
+    "attention_index": 103.82481491392383
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-20",
+    "views": 123673,
+    "attention_index": 110.3139773436803
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-21",
+    "views": 114035,
+    "attention_index": 101.71706359825173
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-22",
+    "views": 101578,
+    "attention_index": 90.60565516011062
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-23",
+    "views": 92397,
+    "attention_index": 82.41637677281241
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-24",
+    "views": 85653,
+    "attention_index": 76.4008563018464
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-25",
+    "views": 109370,
+    "attention_index": 97.55597181339756
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-26",
+    "views": 116665,
+    "attention_index": 104.06297386495407
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-27",
+    "views": 109348,
+    "attention_index": 97.53634822941754
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-28",
+    "views": 114882,
+    "attention_index": 102.47257158148247
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-29",
+    "views": 111646,
+    "attention_index": 99.58612077423959
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-30",
+    "views": 88394,
+    "attention_index": 78.84577646953885
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-05-31",
+    "views": 86108,
+    "attention_index": 76.80670769779681
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-01",
+    "views": 98921,
+    "attention_index": 88.23566140397824
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-02",
+    "views": 68228,
+    "attention_index": 60.85808580858085
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-03",
+    "views": 69973,
+    "attention_index": 62.41459281063242
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-04",
+    "views": 67447,
+    "attention_index": 60.161448577290166
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-05",
+    "views": 69788,
+    "attention_index": 62.24957630898225
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-06",
+    "views": 86734,
+    "attention_index": 77.36508786013736
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-07",
+    "views": 87630,
+    "attention_index": 78.16430291677815
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-08",
+    "views": 111258,
+    "attention_index": 99.24003211131924
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-09",
+    "views": 111711,
+    "attention_index": 99.64409954508965
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-10",
+    "views": 109549,
+    "attention_index": 97.71563642850771
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-11",
+    "views": 102577,
+    "attention_index": 91.4967442690215
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-12",
+    "views": 98270,
+    "attention_index": 87.65498171438766
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-13",
+    "views": 98106,
+    "attention_index": 87.5086968156275
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-14",
+    "views": 92932,
+    "attention_index": 82.89358665596289
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-15",
+    "views": 117410,
+    "attention_index": 104.72749977700472
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-16",
+    "views": 115045,
+    "attention_index": 102.61796449915262
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-17",
+    "views": 118062,
+    "attention_index": 105.30907144768531
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-18",
+    "views": 108311,
+    "attention_index": 96.61136383908661
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-19",
+    "views": 97118,
+    "attention_index": 86.62741949870663
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-20",
+    "views": 87053,
+    "attention_index": 77.64962982784766
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-21",
+    "views": 91518,
+    "attention_index": 81.63232539470164
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-22",
+    "views": 110733,
+    "attention_index": 98.77174203906878
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-23",
+    "views": 112679,
+    "attention_index": 100.50753724021051
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-24",
+    "views": 108464,
+    "attention_index": 96.74783694585675
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-25",
+    "views": 106964,
+    "attention_index": 95.40986531085541
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-26",
+    "views": 91993,
+    "attention_index": 82.05601641245207
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-27",
+    "views": 80111,
+    "attention_index": 71.45749710106146
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-28",
+    "views": 77352,
+    "attention_index": 68.996521273749
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-29",
+    "views": 91269,
+    "attention_index": 81.4102221032914
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-06-30",
+    "views": 97180,
+    "attention_index": 86.6827223262867
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-01",
+    "views": 93615,
+    "attention_index": 83.5028097404335
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-02",
+    "views": 92146,
+    "attention_index": 82.19248951922219
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-03",
+    "views": 82936,
+    "attention_index": 73.97734368031398
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-04",
+    "views": 69113,
+    "attention_index": 61.64748907323164
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-05",
+    "views": 73966,
+    "attention_index": 65.97627330300597
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-06",
+    "views": 97043,
+    "attention_index": 86.56052091695656
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-07",
+    "views": 108032,
+    "attention_index": 96.36250111497637
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-08",
+    "views": 100934,
+    "attention_index": 90.03121933815002
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-09",
+    "views": 103111,
+    "attention_index": 91.97306217108198
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-10",
+    "views": 96246,
+    "attention_index": 85.84961198822585
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-11",
+    "views": 85457,
+    "attention_index": 76.22602800820623
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-12",
+    "views": 89070,
+    "attention_index": 79.44875568637944
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-13",
+    "views": 107967,
+    "attention_index": 96.30452234412631
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-14",
+    "views": 120314,
+    "attention_index": 107.31781286236732
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-15",
+    "views": 120564,
+    "attention_index": 107.54080813486755
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-16",
+    "views": 67538,
+    "attention_index": 60.24261885648025
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-17",
+    "views": 42766,
+    "attention_index": 38.14646329497815
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-18",
+    "views": 33681,
+    "attention_index": 30.04281509232004
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-19",
+    "views": 34144,
+    "attention_index": 30.455802336990455
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-20",
+    "views": 41653,
+    "attention_index": 37.153688341807154
   },
   {
     "article": "ChatGPT",
     "date": "2026-07-21",
     "views": 157018,
-    "attention_index": 100.0
+    "attention_index": 140.05708678976006
   },
   {
     "article": "ChatGPT",
     "date": "2026-07-22",
     "views": 171848,
-    "attention_index": 109.44477703193265
+    "attention_index": 153.2851663544733
   },
   {
     "article": "ChatGPT",
     "date": "2026-07-23",
     "views": 215279,
-    "attention_index": 137.10466315963774
+    "attention_index": 192.02479707430203
   },
   {
     "article": "ChatGPT",
     "date": "2026-07-24",
     "views": 159133,
-    "attention_index": 101.34697932721089
+    "attention_index": 141.94362679511195
+  },
+  {
+    "article": "ChatGPT",
+    "date": "2026-07-25",
+    "views": 126503,
+    "attention_index": 112.83828382838283
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-22",
+    "views": 4944,
+    "attention_index": 100.0
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-23",
+    "views": 4973,
+    "attention_index": 100.58656957928802
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-24",
+    "views": 4867,
+    "attention_index": 98.44255663430421
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-25",
+    "views": 4798,
+    "attention_index": 97.04692556634305
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-26",
+    "views": 5705,
+    "attention_index": 115.39239482200647
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-27",
+    "views": 3597,
+    "attention_index": 72.75485436893204
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-28",
+    "views": 5002,
+    "attention_index": 101.17313915857605
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-29",
+    "views": 4799,
+    "attention_index": 97.06715210355988
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-30",
+    "views": 4900,
+    "attention_index": 99.11003236245955
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-07-31",
+    "views": 4591,
+    "attention_index": 92.86003236245955
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-01",
+    "views": 4428,
+    "attention_index": 89.56310679611651
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-02",
+    "views": 3615,
+    "attention_index": 73.11893203883496
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-03",
+    "views": 3546,
+    "attention_index": 71.72330097087378
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-04",
+    "views": 4940,
+    "attention_index": 99.91909385113269
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-05",
+    "views": 4836,
+    "attention_index": 97.81553398058253
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-06",
+    "views": 5055,
+    "attention_index": 102.24514563106797
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-07",
+    "views": 5575,
+    "attention_index": 112.76294498381878
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-08",
+    "views": 5950,
+    "attention_index": 120.34789644012945
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-09",
+    "views": 4052,
+    "attention_index": 81.957928802589
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-10",
+    "views": 4415,
+    "attention_index": 89.30016181229773
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-11",
+    "views": 5856,
+    "attention_index": 118.44660194174756
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-12",
+    "views": 5899,
+    "attention_index": 119.3163430420712
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-13",
+    "views": 5489,
+    "attention_index": 111.02346278317152
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-14",
+    "views": 5297,
+    "attention_index": 107.13996763754045
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-15",
+    "views": 4856,
+    "attention_index": 98.2200647249191
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-16",
+    "views": 3859,
+    "attention_index": 78.05420711974111
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-17",
+    "views": 3721,
+    "attention_index": 75.26294498381877
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-18",
+    "views": 5409,
+    "attention_index": 109.40533980582525
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-19",
+    "views": 5715,
+    "attention_index": 115.59466019417475
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-20",
+    "views": 5755,
+    "attention_index": 116.40372168284789
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-21",
+    "views": 5895,
+    "attention_index": 119.23543689320388
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-22",
+    "views": 5565,
+    "attention_index": 112.56067961165049
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-23",
+    "views": 3950,
+    "attention_index": 79.89482200647248
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-24",
+    "views": 4443,
+    "attention_index": 89.86650485436894
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-25",
+    "views": 5678,
+    "attention_index": 114.84627831715211
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-26",
+    "views": 6828,
+    "attention_index": 138.10679611650485
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-27",
+    "views": 5453,
+    "attention_index": 110.29530744336569
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-28",
+    "views": 5452,
+    "attention_index": 110.27508090614886
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-29",
+    "views": 4671,
+    "attention_index": 94.47815533980582
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-30",
+    "views": 3686,
+    "attention_index": 74.55501618122977
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-08-31",
+    "views": 3586,
+    "attention_index": 72.53236245954693
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-01",
+    "views": 5009,
+    "attention_index": 101.31472491909386
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-02",
+    "views": 5500,
+    "attention_index": 111.24595469255662
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-03",
+    "views": 5815,
+    "attention_index": 117.61731391585761
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-04",
+    "views": 5882,
+    "attention_index": 118.9724919093851
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-05",
+    "views": 6254,
+    "attention_index": 126.4967637540453
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-06",
+    "views": 4682,
+    "attention_index": 94.70064724919094
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-07",
+    "views": 4251,
+    "attention_index": 85.98300970873787
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-08",
+    "views": 5559,
+    "attention_index": 112.43932038834951
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-09",
+    "views": 5876,
+    "attention_index": 118.85113268608414
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-10",
+    "views": 5472,
+    "attention_index": 110.67961165048543
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-11",
+    "views": 5853,
+    "attention_index": 118.38592233009709
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-12",
+    "views": 5231,
+    "attention_index": 105.80501618122977
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-13",
+    "views": 3812,
+    "attention_index": 77.10355987055017
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-14",
+    "views": 5114,
+    "attention_index": 103.43851132686083
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-15",
+    "views": 5250,
+    "attention_index": 106.18932038834951
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-16",
+    "views": 5406,
+    "attention_index": 109.34466019417475
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-17",
+    "views": 5330,
+    "attention_index": 107.80744336569579
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-18",
+    "views": 5490,
+    "attention_index": 111.04368932038835
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-19",
+    "views": 4981,
+    "attention_index": 100.74838187702267
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-20",
+    "views": 4200,
+    "attention_index": 84.9514563106796
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-21",
+    "views": 4156,
+    "attention_index": 84.06148867313917
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-22",
+    "views": 5426,
+    "attention_index": 109.74919093851132
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-23",
+    "views": 5472,
+    "attention_index": 110.67961165048543
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-24",
+    "views": 5203,
+    "attention_index": 105.23867313915858
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-25",
+    "views": 4948,
+    "attention_index": 100.08090614886731
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-26",
+    "views": 4779,
+    "attention_index": 96.6626213592233
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-27",
+    "views": 3419,
+    "attention_index": 69.15453074433657
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-28",
+    "views": 3720,
+    "attention_index": 75.24271844660194
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-29",
+    "views": 4851,
+    "attention_index": 98.11893203883496
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-09-30",
+    "views": 5510,
+    "attention_index": 111.44822006472492
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-01",
+    "views": 4840,
+    "attention_index": 97.89644012944983
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-02",
+    "views": 4947,
+    "attention_index": 100.06067961165049
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-03",
+    "views": 5105,
+    "attention_index": 103.25647249190939
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-04",
+    "views": 3884,
+    "attention_index": 78.55987055016182
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-05",
+    "views": 4106,
+    "attention_index": 83.05016181229773
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-06",
+    "views": 5863,
+    "attention_index": 118.58818770226537
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-07",
+    "views": 5548,
+    "attention_index": 112.21682847896439
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-08",
+    "views": 7867,
+    "attention_index": 159.12216828478964
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-09",
+    "views": 7220,
+    "attention_index": 146.03559870550163
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-10",
+    "views": 5114,
+    "attention_index": 103.43851132686083
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-11",
+    "views": 3644,
+    "attention_index": 73.70550161812298
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-12",
+    "views": 3823,
+    "attention_index": 77.32605177993528
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-13",
+    "views": 5467,
+    "attention_index": 110.5784789644013
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-14",
+    "views": 5457,
+    "attention_index": 110.37621359223301
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-15",
+    "views": 5579,
+    "attention_index": 112.8438511326861
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-16",
+    "views": 5239,
+    "attention_index": 105.96682847896439
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-17",
+    "views": 4733,
+    "attention_index": 95.73220064724919
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-18",
+    "views": 3952,
+    "attention_index": 79.93527508090615
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-19",
+    "views": 4859,
+    "attention_index": 98.28074433656958
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-20",
+    "views": 5606,
+    "attention_index": 113.38996763754045
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-21",
+    "views": 5949,
+    "attention_index": 120.32766990291262
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-22",
+    "views": 10777,
+    "attention_index": 217.98139158576052
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-23",
+    "views": 6829,
+    "attention_index": 138.12702265372167
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-24",
+    "views": 7094,
+    "attention_index": 143.48705501618122
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-25",
+    "views": 6276,
+    "attention_index": 126.94174757281553
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-26",
+    "views": 4934,
+    "attention_index": 99.79773462783172
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-27",
+    "views": 7752,
+    "attention_index": 156.79611650485435
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-28",
+    "views": 8650,
+    "attention_index": 174.95954692556634
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-29",
+    "views": 10453,
+    "attention_index": 211.42799352750808
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-30",
+    "views": 8424,
+    "attention_index": 170.3883495145631
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-10-31",
+    "views": 9505,
+    "attention_index": 192.2532362459547
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-01",
+    "views": 5087,
+    "attention_index": 102.89239482200647
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-02",
+    "views": 4869,
+    "attention_index": 98.48300970873787
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-03",
+    "views": 6819,
+    "attention_index": 137.9247572815534
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-04",
+    "views": 8226,
+    "attention_index": 166.38349514563106
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-05",
+    "views": 9207,
+    "attention_index": 186.2257281553398
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-06",
+    "views": 8319,
+    "attention_index": 168.26456310679612
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-07",
+    "views": 6828,
+    "attention_index": 138.10679611650485
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-08",
+    "views": 4553,
+    "attention_index": 92.09142394822007
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-09",
+    "views": 4548,
+    "attention_index": 91.99029126213593
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-10",
+    "views": 5940,
+    "attention_index": 120.14563106796116
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-11",
+    "views": 7233,
+    "attention_index": 146.29854368932038
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-12",
+    "views": 7470,
+    "attention_index": 151.09223300970874
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-13",
+    "views": 6623,
+    "attention_index": 133.96035598705504
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-14",
+    "views": 5600,
+    "attention_index": 113.2686084142395
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-15",
+    "views": 3679,
+    "attention_index": 74.41343042071198
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-16",
+    "views": 4889,
+    "attention_index": 98.88754045307444
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-17",
+    "views": 5526,
+    "attention_index": 111.77184466019416
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-18",
+    "views": 6713,
+    "attention_index": 135.78074433656957
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-19",
+    "views": 5961,
+    "attention_index": 120.57038834951457
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-20",
+    "views": 6480,
+    "attention_index": 131.06796116504856
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-21",
+    "views": 4920,
+    "attention_index": 99.51456310679612
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-22",
+    "views": 3924,
+    "attention_index": 79.36893203883496
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-23",
+    "views": 4411,
+    "attention_index": 89.21925566343042
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-24",
+    "views": 6214,
+    "attention_index": 125.68770226537215
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-25",
+    "views": 6335,
+    "attention_index": 128.13511326860842
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-26",
+    "views": 5158,
+    "attention_index": 104.3284789644013
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-27",
+    "views": 4684,
+    "attention_index": 94.7411003236246
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-28",
+    "views": 4510,
+    "attention_index": 91.22168284789643
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-29",
+    "views": 3573,
+    "attention_index": 72.26941747572816
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-11-30",
+    "views": 3801,
+    "attention_index": 76.88106796116504
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-01",
+    "views": 5356,
+    "attention_index": 108.33333333333333
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-02",
+    "views": 5458,
+    "attention_index": 110.39644012944984
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-03",
+    "views": 5472,
+    "attention_index": 110.67961165048543
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-04",
+    "views": 5566,
+    "attention_index": 112.58090614886731
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-05",
+    "views": 6057,
+    "attention_index": 122.5121359223301
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-06",
+    "views": 3465,
+    "attention_index": 70.08495145631069
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-07",
+    "views": 3653,
+    "attention_index": 73.88754045307444
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-08",
+    "views": 4838,
+    "attention_index": 97.85598705501619
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-09",
+    "views": 5025,
+    "attention_index": 101.6383495145631
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-10",
+    "views": 5087,
+    "attention_index": 102.89239482200647
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-11",
+    "views": 5180,
+    "attention_index": 104.77346278317152
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-12",
+    "views": 4971,
+    "attention_index": 100.54611650485437
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-13",
+    "views": 3759,
+    "attention_index": 76.03155339805825
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-14",
+    "views": 3417,
+    "attention_index": 69.11407766990291
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-15",
+    "views": 4584,
+    "attention_index": 92.71844660194175
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-16",
+    "views": 4671,
+    "attention_index": 94.47815533980582
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-17",
+    "views": 4466,
+    "attention_index": 90.331715210356
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-18",
+    "views": 4625,
+    "attention_index": 93.54773462783172
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-19",
+    "views": 4144,
+    "attention_index": 83.81877022653723
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-20",
+    "views": 3246,
+    "attention_index": 65.65533980582524
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-21",
+    "views": 3935,
+    "attention_index": 79.59142394822007
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-22",
+    "views": 3878,
+    "attention_index": 78.43851132686083
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-23",
+    "views": 4234,
+    "attention_index": 85.63915857605178
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-24",
+    "views": 3567,
+    "attention_index": 72.14805825242718
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-25",
+    "views": 3638,
+    "attention_index": 73.58414239482201
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-26",
+    "views": 3352,
+    "attention_index": 67.79935275080906
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-27",
+    "views": 3313,
+    "attention_index": 67.01051779935275
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-28",
+    "views": 3357,
+    "attention_index": 67.9004854368932
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-29",
+    "views": 4888,
+    "attention_index": 98.86731391585761
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-30",
+    "views": 4165,
+    "attention_index": 84.24352750809061
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2025-12-31",
+    "views": 3920,
+    "attention_index": 79.28802588996764
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-01",
+    "views": 3639,
+    "attention_index": 73.60436893203884
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-02",
+    "views": 4345,
+    "attention_index": 87.88430420711974
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-03",
+    "views": 3695,
+    "attention_index": 74.73705501618123
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-04",
+    "views": 4205,
+    "attention_index": 85.05258899676376
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-05",
+    "views": 4787,
+    "attention_index": 96.82443365695794
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-06",
+    "views": 5365,
+    "attention_index": 108.5153721682848
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-07",
+    "views": 4483,
+    "attention_index": 90.67556634304206
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-08",
+    "views": 4681,
+    "attention_index": 94.68042071197411
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-09",
+    "views": 4515,
+    "attention_index": 91.32281553398059
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-10",
+    "views": 3597,
+    "attention_index": 72.75485436893204
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-11",
+    "views": 3642,
+    "attention_index": 73.66504854368931
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-12",
+    "views": 4958,
+    "attention_index": 100.28317152103561
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-13",
+    "views": 5439,
+    "attention_index": 110.0121359223301
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-14",
+    "views": 5492,
+    "attention_index": 111.08414239482201
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-15",
+    "views": 5038,
+    "attention_index": 101.90129449838187
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-16",
+    "views": 5218,
+    "attention_index": 105.54207119741102
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-17",
+    "views": 3681,
+    "attention_index": 74.45388349514563
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-18",
+    "views": 3940,
+    "attention_index": 79.69255663430421
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-19",
+    "views": 4871,
+    "attention_index": 98.52346278317152
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-20",
+    "views": 4753,
+    "attention_index": 96.13673139158576
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-21",
+    "views": 5590,
+    "attention_index": 113.0663430420712
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-22",
+    "views": 12228,
+    "attention_index": 247.33009708737862
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-23",
+    "views": 4164,
+    "attention_index": 84.22330097087378
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-24",
+    "views": 2889,
+    "attention_index": 58.43446601941748
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-25",
+    "views": 3561,
+    "attention_index": 72.02669902912622
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-26",
+    "views": 4371,
+    "attention_index": 88.41019417475728
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-27",
+    "views": 4439,
+    "attention_index": 89.78559870550163
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-28",
+    "views": 5023,
+    "attention_index": 101.59789644012945
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-29",
+    "views": 4504,
+    "attention_index": 91.10032362459548
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-30",
+    "views": 16546,
+    "attention_index": 334.668284789644
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-01-31",
+    "views": 3281,
+    "attention_index": 66.36326860841424
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-01",
+    "views": 3585,
+    "attention_index": 72.5121359223301
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-02",
+    "views": 5726,
+    "attention_index": 115.81715210355988
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-03",
+    "views": 6243,
+    "attention_index": 126.2742718446602
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-04",
+    "views": 7540,
+    "attention_index": 152.50809061488673
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-05",
+    "views": 5983,
+    "attention_index": 121.0153721682848
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-06",
+    "views": 6844,
+    "attention_index": 138.4304207119741
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-07",
+    "views": 4650,
+    "attention_index": 94.05339805825243
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-08",
+    "views": 5340,
+    "attention_index": 108.00970873786409
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-09",
+    "views": 6264,
+    "attention_index": 126.6990291262136
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-10",
+    "views": 6754,
+    "attention_index": 136.61003236245955
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-11",
+    "views": 7223,
+    "attention_index": 146.0962783171521
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-12",
+    "views": 8852,
+    "attention_index": 179.0453074433657
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-13",
+    "views": 6356,
+    "attention_index": 128.5598705501618
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-14",
+    "views": 4974,
+    "attention_index": 100.60679611650485
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-15",
+    "views": 4878,
+    "attention_index": 98.66504854368931
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-16",
+    "views": 6365,
+    "attention_index": 128.74190938511327
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-17",
+    "views": 6244,
+    "attention_index": 126.29449838187703
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-18",
+    "views": 6486,
+    "attention_index": 131.18932038834953
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-19",
+    "views": 7076,
+    "attention_index": 143.12297734627833
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-20",
+    "views": 6314,
+    "attention_index": 127.71035598705502
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-21",
+    "views": 5535,
+    "attention_index": 111.95388349514563
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-22",
+    "views": 5521,
+    "attention_index": 111.67071197411002
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-23",
+    "views": 6618,
+    "attention_index": 133.85922330097085
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-24",
+    "views": 8563,
+    "attention_index": 173.19983818770226
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-25",
+    "views": 8019,
+    "attention_index": 162.19660194174756
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-26",
+    "views": 7490,
+    "attention_index": 151.4967637540453
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-27",
+    "views": 7648,
+    "attention_index": 154.69255663430422
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-02-28",
+    "views": 7537,
+    "attention_index": 152.44741100323625
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-01",
+    "views": 6263,
+    "attention_index": 126.67880258899675
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-02",
+    "views": 9214,
+    "attention_index": 186.3673139158576
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-03",
+    "views": 7118,
+    "attention_index": 143.9724919093851
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-04",
+    "views": 6884,
+    "attention_index": 139.23948220064725
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-05",
+    "views": 6743,
+    "attention_index": 136.38754045307445
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-06",
+    "views": 6130,
+    "attention_index": 123.98867313915858
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-07",
+    "views": 6051,
+    "attention_index": 122.39077669902913
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-08",
+    "views": 5590,
+    "attention_index": 113.0663430420712
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-09",
+    "views": 7905,
+    "attention_index": 159.89077669902915
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-10",
+    "views": 7715,
+    "attention_index": 156.04773462783172
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-11",
+    "views": 7812,
+    "attention_index": 158.0097087378641
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-12",
+    "views": 6928,
+    "attention_index": 140.1294498381877
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-13",
+    "views": 6669,
+    "attention_index": 134.89077669902915
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-14",
+    "views": 5293,
+    "attention_index": 107.05906148867315
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-15",
+    "views": 5716,
+    "attention_index": 115.61488673139158
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-16",
+    "views": 6739,
+    "attention_index": 136.30663430420714
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-17",
+    "views": 7019,
+    "attention_index": 141.9700647249191
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-18",
+    "views": 6706,
+    "attention_index": 135.63915857605178
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-19",
+    "views": 6276,
+    "attention_index": 126.94174757281553
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-20",
+    "views": 11372,
+    "attention_index": 230.01618122977345
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-21",
+    "views": 5082,
+    "attention_index": 102.79126213592234
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-22",
+    "views": 5302,
+    "attention_index": 107.2411003236246
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-23",
+    "views": 6424,
+    "attention_index": 129.93527508090614
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-24",
+    "views": 6269,
+    "attention_index": 126.80016181229774
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-25",
+    "views": 6486,
+    "attention_index": 131.18932038834953
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-26",
+    "views": 6880,
+    "attention_index": 139.15857605177993
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-27",
+    "views": 6114,
+    "attention_index": 123.66504854368931
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-28",
+    "views": 5582,
+    "attention_index": 112.90453074433657
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-29",
+    "views": 5208,
+    "attention_index": 105.33980582524272
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-30",
+    "views": 96436,
+    "attention_index": 1950.5663430420711
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-03-31",
+    "views": 6170,
+    "attention_index": 124.79773462783173
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-01",
+    "views": 6306,
+    "attention_index": 127.54854368932038
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-02",
+    "views": 5713,
+    "attention_index": 115.5542071197411
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-03",
+    "views": 5553,
+    "attention_index": 112.31796116504856
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-04",
+    "views": 4764,
+    "attention_index": 96.35922330097088
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-05",
+    "views": 5040,
+    "attention_index": 101.94174757281553
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-06",
+    "views": 6163,
+    "attention_index": 124.6561488673139
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-07",
+    "views": 6611,
+    "attention_index": 133.71763754045307
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-08",
+    "views": 9790,
+    "attention_index": 198.0177993527508
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-09",
+    "views": 8983,
+    "attention_index": 181.69498381877023
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-10",
+    "views": 6276,
+    "attention_index": 126.94174757281553
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-11",
+    "views": 5478,
+    "attention_index": 110.8009708737864
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-12",
+    "views": 5568,
+    "attention_index": 112.62135922330097
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-13",
+    "views": 6835,
+    "attention_index": 138.24838187702267
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-14",
+    "views": 6918,
+    "attention_index": 139.9271844660194
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-15",
+    "views": 6813,
+    "attention_index": 137.80339805825244
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-16",
+    "views": 7688,
+    "attention_index": 155.50161812297733
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-17",
+    "views": 5655,
+    "attention_index": 114.38106796116504
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-18",
+    "views": 5280,
+    "attention_index": 106.79611650485437
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-19",
+    "views": 5341,
+    "attention_index": 108.02993527508092
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-20",
+    "views": 6307,
+    "attention_index": 127.56877022653721
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-21",
+    "views": 5940,
+    "attention_index": 120.14563106796116
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-22",
+    "views": 5684,
+    "attention_index": 114.96763754045307
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-23",
+    "views": 5721,
+    "attention_index": 115.71601941747574
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-24",
+    "views": 5170,
+    "attention_index": 104.57119741100325
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-25",
+    "views": 4339,
+    "attention_index": 87.76294498381877
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-26",
+    "views": 4096,
+    "attention_index": 82.84789644012946
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-27",
+    "views": 5660,
+    "attention_index": 114.48220064724919
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-28",
+    "views": 6333,
+    "attention_index": 128.09466019417474
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-29",
+    "views": 5937,
+    "attention_index": 120.08495145631069
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-04-30",
+    "views": 5666,
+    "attention_index": 114.60355987055016
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-01",
+    "views": 5888,
+    "attention_index": 119.0938511326861
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-02",
+    "views": 4520,
+    "attention_index": 91.42394822006472
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-03",
+    "views": 4626,
+    "attention_index": 93.56796116504854
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-04",
+    "views": 5559,
+    "attention_index": 112.43932038834951
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-05",
+    "views": 5550,
+    "attention_index": 112.25728155339804
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-06",
+    "views": 5825,
+    "attention_index": 117.81957928802589
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-07",
+    "views": 5846,
+    "attention_index": 118.24433656957929
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-08",
+    "views": 5141,
+    "attention_index": 103.9846278317152
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-09",
+    "views": 4473,
+    "attention_index": 90.47330097087378
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-10",
+    "views": 5037,
+    "attention_index": 101.88106796116504
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-11",
+    "views": 5322,
+    "attention_index": 107.64563106796116
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-12",
+    "views": 5138,
+    "attention_index": 103.92394822006472
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-13",
+    "views": 5354,
+    "attention_index": 108.29288025889967
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-14",
+    "views": 4927,
+    "attention_index": 99.65614886731392
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-15",
+    "views": 4734,
+    "attention_index": 95.75242718446601
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-16",
+    "views": 3642,
+    "attention_index": 73.66504854368931
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-17",
+    "views": 4086,
+    "attention_index": 82.64563106796116
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-18",
+    "views": 5280,
+    "attention_index": 106.79611650485437
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-19",
+    "views": 5408,
+    "attention_index": 109.38511326860842
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-20",
+    "views": 5350,
+    "attention_index": 108.21197411003236
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-21",
+    "views": 5599,
+    "attention_index": 113.24838187702267
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-22",
+    "views": 5040,
+    "attention_index": 101.94174757281553
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-23",
+    "views": 4587,
+    "attention_index": 92.77912621359224
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-24",
+    "views": 4632,
+    "attention_index": 93.68932038834951
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-25",
+    "views": 4929,
+    "attention_index": 99.69660194174757
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-26",
+    "views": 5094,
+    "attention_index": 103.03398058252426
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-27",
+    "views": 5321,
+    "attention_index": 107.62540453074433
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-28",
+    "views": 6374,
+    "attention_index": 128.92394822006472
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-29",
+    "views": 6165,
+    "attention_index": 124.69660194174756
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-30",
+    "views": 4238,
+    "attention_index": 85.7200647249191
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-05-31",
+    "views": 4689,
+    "attention_index": 94.84223300970875
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-01",
+    "views": 6648,
+    "attention_index": 134.46601941747574
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-02",
+    "views": 5979,
+    "attention_index": 120.93446601941748
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-03",
+    "views": 5568,
+    "attention_index": 112.62135922330097
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-04",
+    "views": 6060,
+    "attention_index": 122.57281553398059
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-05",
+    "views": 7870,
+    "attention_index": 159.18284789644014
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-06",
+    "views": 5264,
+    "attention_index": 106.4724919093851
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-07",
+    "views": 4512,
+    "attention_index": 91.2621359223301
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-08",
+    "views": 5616,
+    "attention_index": 113.59223300970874
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-09",
+    "views": 6436,
+    "attention_index": 130.1779935275081
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-10",
+    "views": 6102,
+    "attention_index": 123.42233009708738
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-11",
+    "views": 5526,
+    "attention_index": 111.77184466019416
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-12",
+    "views": 4849,
+    "attention_index": 98.0784789644013
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-13",
+    "views": 5616,
+    "attention_index": 113.59223300970874
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-14",
+    "views": 5274,
+    "attention_index": 106.6747572815534
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-15",
+    "views": 6154,
+    "attention_index": 124.47411003236246
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-16",
+    "views": 5856,
+    "attention_index": 118.44660194174756
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-17",
+    "views": 5510,
+    "attention_index": 111.44822006472492
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-18",
+    "views": 5662,
+    "attention_index": 114.52265372168284
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-19",
+    "views": 5295,
+    "attention_index": 107.0995145631068
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-20",
+    "views": 4521,
+    "attention_index": 91.44417475728154
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-21",
+    "views": 4395,
+    "attention_index": 88.89563106796116
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-22",
+    "views": 5744,
+    "attention_index": 116.18122977346279
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-23",
+    "views": 6020,
+    "attention_index": 121.76375404530744
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-24",
+    "views": 6073,
+    "attention_index": 122.83576051779934
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-25",
+    "views": 6100,
+    "attention_index": 123.38187702265373
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-26",
+    "views": 5248,
+    "attention_index": 106.14886731391586
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-27",
+    "views": 4429,
+    "attention_index": 89.58333333333334
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-28",
+    "views": 4891,
+    "attention_index": 98.9279935275081
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-29",
+    "views": 6011,
+    "attention_index": 121.581715210356
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-06-30",
+    "views": 5183,
+    "attention_index": 104.83414239482201
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-01",
+    "views": 4873,
+    "attention_index": 98.56391585760518
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-02",
+    "views": 4397,
+    "attention_index": 88.93608414239482
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-03",
+    "views": 4295,
+    "attention_index": 86.87297734627832
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-04",
+    "views": 3871,
+    "attention_index": 78.29692556634305
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-05",
+    "views": 4187,
+    "attention_index": 84.68851132686083
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-06",
+    "views": 4609,
+    "attention_index": 93.22411003236246
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-07",
+    "views": 4938,
+    "attention_index": 99.87864077669903
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-08",
+    "views": 5014,
+    "attention_index": 101.41585760517799
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-09",
+    "views": 5549,
+    "attention_index": 112.23705501618122
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-10",
+    "views": 4710,
+    "attention_index": 95.26699029126213
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-11",
+    "views": 4308,
+    "attention_index": 87.13592233009709
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-12",
+    "views": 4248,
+    "attention_index": 85.92233009708737
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-13",
+    "views": 5032,
+    "attention_index": 101.77993527508092
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-14",
+    "views": 5575,
+    "attention_index": 112.76294498381878
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-15",
+    "views": 5343,
+    "attention_index": 108.07038834951457
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-16",
+    "views": 4939,
+    "attention_index": 99.89886731391586
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-17",
+    "views": 4934,
+    "attention_index": 99.79773462783172
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-18",
+    "views": 4405,
+    "attention_index": 89.09789644012946
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-19",
+    "views": 4127,
+    "attention_index": 83.47491909385113
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-20",
+    "views": 5940,
+    "attention_index": 120.14563106796116
   },
   {
     "article": "Large_language_model",
     "date": "2026-07-21",
     "views": 5610,
-    "attention_index": 100.0
+    "attention_index": 113.47087378640776
   },
   {
     "article": "Large_language_model",
     "date": "2026-07-22",
     "views": 5927,
-    "attention_index": 105.650623885918
+    "attention_index": 119.88268608414239
   },
   {
     "article": "Large_language_model",
     "date": "2026-07-23",
     "views": 5413,
-    "attention_index": 96.48841354723707
+    "attention_index": 109.48624595469256
   },
   {
     "article": "Large_language_model",
     "date": "2026-07-24",
     "views": 5081,
-    "attention_index": 90.5704099821747
+    "attention_index": 102.77103559870551
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-07-25",
+    "views": 4277,
+    "attention_index": 86.5088996763754
   }
 ]
