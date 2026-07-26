@@ -215,20 +215,25 @@ def fetch_trailing_7d_count(category: str, as_of: date) -> int:
     date_range = f"[{start:%Y%m%d%H%M%S} TO {end:%Y%m%d%H%M%S}]"
     search_query = f"cat:{category} AND submittedDate:{date_range}"
     backoff = 15
-    for attempt in range(6):
-        response = requests.get(ARXIV_URL, params={"search_query": search_query, "max_results": 1}, timeout=30)
-        if response.status_code == 429:
-            if attempt == 5:
-                response.raise_for_status()
-            print(f"  429 for {category} {as_of}, backing off {backoff}s")
+    last_exc = None
+    for attempt in range(8):
+        try:
+            response = requests.get(ARXIV_URL, params={"search_query": search_query, "max_results": 1}, timeout=60)
+            if response.status_code == 429:
+                print(f"  429 for {category} {as_of}, backing off {backoff}s")
+                time.sleep(backoff)
+                backoff = min(backoff * 2, 120)
+                continue
+            response.raise_for_status()
+            root = ElementTree.fromstring(response.text)
+            total = root.find("opensearch:totalResults", ARXIV_NS)
+            return int(total.text)
+        except requests.exceptions.RequestException as exc:
+            last_exc = exc
+            print(f"  request error for {category} {as_of}: {exc!r}, backing off {backoff}s")
             time.sleep(backoff)
-            backoff *= 2
-            continue
-        response.raise_for_status()
-        root = ElementTree.fromstring(response.text)
-        total = root.find("opensearch:totalResults", ARXIV_NS)
-        return int(total.text)
-    raise RuntimeError("unreachable")
+            backoff = min(backoff * 2, 120)
+    raise RuntimeError(f"exhausted retries for {category} {as_of}") from last_exc
 
 
 def fetch_research_pace_history() -> list[tuple]:
