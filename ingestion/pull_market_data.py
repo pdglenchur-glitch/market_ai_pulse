@@ -29,7 +29,12 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
 
     records = []
     for symbol in symbols:
-        history = data[symbol].dropna(how="all")
+        # dropna(how="all") only drops a row if every column is NaN. yfinance
+        # can return a most-recent row with real volume but NaN OHLC when
+        # that day's price data hasn't fully settled yet - drop any row
+        # missing an OHLC value specifically, so the latest *usable* row gets
+        # picked instead of a partially-populated one.
+        history = data[symbol].dropna(subset=["Open", "High", "Low", "Close"])
         if history.empty:
             raise RuntimeError(f"No data returned for {symbol}")
 

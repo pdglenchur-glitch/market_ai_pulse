@@ -95,7 +95,10 @@ def fetch_market_history() -> list[tuple]:
     fetched_at = datetime.now(timezone.utc).isoformat()
     rows = []
     for symbol in ALL_SYMBOLS:
-        history = data[symbol].dropna(how="all")
+        # dropna(how="all") lets through a row with real volume but NaN OHLC
+        # (seen in practice for the most-recent, not-yet-settled trading day)
+        # - require the actual OHLC columns to be present.
+        history = data[symbol].dropna(subset=["Open", "High", "Low", "Close"])
         for idx, r in history.iterrows():
             rows.append(
                 (

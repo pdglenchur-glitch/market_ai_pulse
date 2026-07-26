@@ -13,8 +13,8 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -r requirements.txt
-      - name: Diagnose silver table state
+      - name: Clean up NaN rows from a yfinance data-freshness glitch
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run: python _diag_silver.py
+        run: python _cleanup_nan.py
