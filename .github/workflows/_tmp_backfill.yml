@@ -13,9 +13,8 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -r requirements.txt
-      - name: Backfill research_pace history into silver
+      - name: Diagnose silver table state
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-        run: python _backfill_history.py research_pace
+        run: python _diag_silver.py
