@@ -694,15 +694,6 @@ async function renderMacro() {
 // names don't change day to day, unlike sector volume share above.
 const AI_BASKET_COLOR_ORDER = ["NVDA", "MSFT", "GOOGL", "META", "PLTR", "AMD", "BOTZ"];
 
-function renderSpreadChart(container, aiVsMarket, aiBasketDetail) {
-  container.innerHTML = `
-    <div id="ai-spread-return-panel"></div>
-    <div id="ai-basket-volume-panel" class="subsection"></div>
-  `;
-  renderAiSpreadReturnChart(document.getElementById("ai-spread-return-panel"), aiVsMarket);
-  renderAiBasketVolumeChart(document.getElementById("ai-basket-volume-panel"), aiBasketDetail);
-}
-
 function renderAiSpreadReturnChart(container, aiVsMarket) {
   if (aiVsMarket.every((r) => r.spread === null)) {
     container.innerHTML = `
@@ -962,15 +953,17 @@ async function renderAiPulse() {
     el.innerHTML = `
       <div class="two-col">
         <div id="ai-spread-panel"></div>
-        <div id="ai-research-panel"></div>
+        <div id="ai-basket-volume-panel"></div>
       </div>
       <div class="two-col subsection">
+        <div id="ai-research-panel"></div>
         <div id="ai-attention-panel"></div>
-        <div id="ai-dev-panel"></div>
       </div>
+      <div class="subsection" id="ai-dev-panel"></div>
     `;
 
-    renderSpreadChart(document.getElementById("ai-spread-panel"), aiVsMarket, aiBasketDetail);
+    renderAiSpreadReturnChart(document.getElementById("ai-spread-panel"), aiVsMarket);
+    renderAiBasketVolumeChart(document.getElementById("ai-basket-volume-panel"), aiBasketDetail);
     renderResearchChart(document.getElementById("ai-research-panel"), researchPace);
     renderAttentionChart(document.getElementById("ai-attention-panel"), attention);
     renderDevChart(document.getElementById("ai-dev-panel"), devMomentum);
