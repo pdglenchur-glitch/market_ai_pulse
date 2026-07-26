@@ -214,18 +214,20 @@ def fetch_trailing_7d_count(category: str, as_of: date) -> int:
     start = end - timedelta(days=7)
     date_range = f"[{start:%Y%m%d%H%M%S} TO {end:%Y%m%d%H%M%S}]"
     search_query = f"cat:{category} AND submittedDate:{date_range}"
-    for attempt in range(3):
-        try:
-            response = requests.get(ARXIV_URL, params={"search_query": search_query, "max_results": 1}, timeout=30)
-            response.raise_for_status()
-            root = ElementTree.fromstring(response.text)
-            total = root.find("opensearch:totalResults", ARXIV_NS)
-            return int(total.text)
-        except Exception as exc:  # noqa: BLE001
-            if attempt == 2:
-                raise
-            print(f"  retrying {category} {as_of} after error: {exc}")
-            time.sleep(3)
+    backoff = 15
+    for attempt in range(6):
+        response = requests.get(ARXIV_URL, params={"search_query": search_query, "max_results": 1}, timeout=30)
+        if response.status_code == 429:
+            if attempt == 5:
+                response.raise_for_status()
+            print(f"  429 for {category} {as_of}, backing off {backoff}s")
+            time.sleep(backoff)
+            backoff *= 2
+            continue
+        response.raise_for_status()
+        root = ElementTree.fromstring(response.text)
+        total = root.find("opensearch:totalResults", ARXIV_NS)
+        return int(total.text)
     raise RuntimeError("unreachable")
 
 
@@ -240,7 +242,7 @@ def fetch_research_pace_history() -> list[tuple]:
         for category in RESEARCH_CATEGORIES:
             count = fetch_trailing_7d_count(category, day)
             rows.append((category, day.isoformat(), count, fetched_at))
-            time.sleep(1.2)
+            time.sleep(4)
         i += 1
         if i % 30 == 0:
             print(f"  ...{i}/{n_days} days done")
@@ -264,17 +266,28 @@ def backfill_research_pace(cursor) -> None:
     merge_and_cleanup(cursor, stage, "workspace.silver.research_pace", ["category", "snapshot_date"])
 
 
+ALL_SOURCES = ["market_data", "macro_data", "attention_data", "research_pace"]
+
+
 def main() -> None:
+    # Pass source names as argv to re-run a subset (e.g. after a partial
+    # failure) instead of redoing sources that already succeeded - each
+    # source's MERGE is independent and idempotent either way.
+    sources = sys.argv[1:] or ALL_SOURCES
     conn = connect()
     with conn.cursor() as cursor:
-        print("=== market_data ===")
-        backfill_market_data(cursor)
-        print("=== macro_data ===")
-        backfill_macro_data(cursor, os.environ["FRED_API_KEY"])
-        print("=== attention_data ===")
-        backfill_attention_data(cursor)
-        print("=== research_pace ===")
-        backfill_research_pace(cursor)
+        if "market_data" in sources:
+            print("=== market_data ===")
+            backfill_market_data(cursor)
+        if "macro_data" in sources:
+            print("=== macro_data ===")
+            backfill_macro_data(cursor, os.environ["FRED_API_KEY"])
+        if "attention_data" in sources:
+            print("=== attention_data ===")
+            backfill_attention_data(cursor)
+        if "research_pace" in sources:
+            print("=== research_pace ===")
+            backfill_research_pace(cursor)
     conn.close()
     print("Backfill complete.")
 
