@@ -6,7 +6,7 @@ An end-to-end data analytics pipeline that sources market, macroeconomic, and AI
 
 ![Dashboard, dark mode](screenshots/dashboard_dark.png)
 
-Several panels above still show "Accumulating history" — that's expected, not broken. Some metrics (rolling volatility, week-over-week deltas) are mathematically undefined until enough daily runs have accumulated; see [PROJECT_MEMORY.md](PROJECT_MEMORY.md) for exactly how long each one takes.
+The charts above are backed by a full year of history (backfilled once from each source's own historical API, then left to accumulate daily from there) — a still-thin "Accumulating history" panel just means that specific metric is new or genuinely has no earlier reading yet, not that anything's broken.
 
 Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner — each remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
 
