@@ -22,7 +22,7 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 
 ### Market Snapshot
 
-The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." This panel is window-aware like the rest: **Close** is always the latest price, but **Open/High/Low** and the percent change below it are computed over whatever window you've selected — e.g. on 30D, "Open" is the opening price 30 days ago and "High"/"Low" are the highest and lowest the index touched at any point in that window (green = up, red = down). Defaults to **1D** (today vs. yesterday) since that's the most common thing to check.
+The S&P 500 is a stock index made up of 500 of the largest U.S. companies — it's the standard shorthand for "how is the stock market doing." This panel is window-aware like the rest: **Close** is always the latest price, but **Open/High/Low** and the percent change below it are computed over whatever window you've selected — e.g. on 30D, "Open" is the opening price 30 days ago and "High"/"Low" are the highest and lowest the index touched at any point in that window (green = up, red = down). Defaults to **30D**, like every other panel — pick 1D for today vs. yesterday.
 
 ### Sector Rotation
 

@@ -359,7 +359,7 @@ async function renderMarketSnapshot() {
     if (rows.length === 0) throw new Error("Benchmark row not found");
     const latest = rows[rows.length - 1];
 
-    let days = 1;
+    let days = 30;
     const draw = () => {
       const windowed = filterByWindow(rows, "date", periodSpanDays(days));
       const first = windowed[0];
@@ -414,7 +414,7 @@ async function renderSectorRotation() {
       return;
     }
 
-    let days = null;
+    let days = 30;
     const draw = () => {
       const changes = windowCompoundReturnByGroup(data, "symbol", "date", "daily_return", days);
       const symbols = Object.keys(changes)
@@ -465,7 +465,7 @@ async function renderVolatility() {
       return;
     }
 
-    let days = null;
+    let days = 30;
     const draw = () => {
       const windowed = filterByWindow(withValues, "date", days);
       el.innerHTML = `
@@ -511,7 +511,7 @@ async function renderMacro() {
     const rateSeries = ["unemployment_rate", "fed_funds_rate", "10y_yield"];
     const rateRows = data.filter((row) => rateSeries.includes(row.series));
 
-    let days = null;
+    let days = 30;
     const draw = () => {
       const latestRows = latestPerKey(data, (r) => r.series, (r) => r.date);
       const tiles = latestRows
@@ -580,7 +580,7 @@ function renderSpreadChart(container, aiVsMarket) {
     return;
   }
 
-  let days = null;
+  let days = 30;
   const draw = () => {
     const aiReturn = compoundReturn(aiVsMarket, "date", "ai_basket_return", days);
     const benchReturn = compoundReturn(aiVsMarket, "date", "benchmark_return", days);
@@ -633,7 +633,7 @@ function renderResearchChart(container, researchPace) {
     return;
   }
 
-  let days = null;
+  let days = 30;
   const draw = () => {
     const windowed = filterByWindow(researchPace, "snapshot_date", days);
     const windowDates = [...new Set(windowed.map((r) => r.snapshot_date))].sort();
@@ -682,7 +682,7 @@ function renderAttentionChart(container, attention) {
     return;
   }
 
-  let days = null;
+  let days = 30;
   const draw = () => {
     const windowed = filterByWindow(attention, "date", days);
     const windowDates = [...new Set(windowed.map((r) => r.date))].sort();
@@ -738,7 +738,7 @@ function renderDevChart(container, devMomentum) {
     return;
   }
 
-  let days = null;
+  let days = 30;
   const draw = () => {
     const changes = windowDeltaByGroup(devMomentum, "repo", "snapshot_date", "stars", days);
     const withChanges = Object.keys(changes)
