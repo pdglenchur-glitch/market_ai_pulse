@@ -7,3 +7,4 @@ venv/
 .DS_Store
 /data/
 /ingestion/data/
+.ipynb_checkpoints/

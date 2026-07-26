@@ -18,6 +18,15 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 - Is AI, specifically, outperforming or lagging the broader market?
 - Is public attention on AI rising, and is the open-source/research ecosystem still accelerating?
 
+## Key findings
+
+Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a monthly-refreshable notebook that pulls the same published data and digs into a few questions the dashboard itself doesn't answer directly. Two headline results from the current run:
+
+- The AI basket has outperformed the S&P 500 by **12.1 points** over the trailing year, but that "basket" is really a concentration bet: **NVDA alone accounts for 49% of its combined trading volume.**
+- Does AI-sector search attention lead or lag the stock moves? A full-year day-to-day correlation test says no, routine search interest shows no reliable relationship either way, but an event study on the handful of genuinely large attention spikes shows a real (if small-sample) gap worth tracking as more data accumulates.
+
+Full methodology, all five findings, and the charts behind them are in the notebook, along with instructions for re-running it against whatever the pipeline has accumulated since.
+
 ## Reading the dashboard
 
 ### Market Snapshot
@@ -89,3 +98,4 @@ No manual steps once triggered, no compute running outside of when the pipeline 
 
 - [`PROJECT_PLAN.md`](PROJECT_PLAN.md): full architecture, established config, and a step-by-step build log (what's done, what's left)
 - [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md): narrative history covering design decisions and why, and bugs hit and how they were fixed
+- [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb): the monthly analysis notebook behind the Key findings section above
