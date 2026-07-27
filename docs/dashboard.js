@@ -627,27 +627,34 @@ async function renderMacro() {
       fed_funds_rate: "Fed Funds Rate",
       "10y_yield": "10Y Yield",
     };
-    const trendArrow = { up: "▲", down: "▼", flat: "→", "n/a": "" };
-    // CPI is an index level, not a percentage - it stays in the KPI row only.
-    // The three rate-like series share a unit (%), so they're comparable on one chart.
+    const allSeries = Object.keys(labels);
+    // CPI is an index level, not a percentage, so it stays out of the rates
+    // bar chart (mixing units on one axis would be a real dataviz mistake) -
+    // but it still gets its own window-aware KPI tile like the other three.
     const rateSeries = ["unemployment_rate", "fed_funds_rate", "10y_yield"];
-    const rateRows = data.filter((row) => rateSeries.includes(row.series));
 
     let days = 30;
     const draw = () => {
-      const latestRows = latestPerKey(data, (r) => r.series, (r) => r.date);
-      const tiles = latestRows
-        .map((row) => {
-          const label = labels[row.series] || row.series;
-          const cls = row.trend === "up" ? "good" : row.trend === "down" ? "bad" : "neutral";
-          const deltaText = row.trend === "n/a" ? `As of ${row.date}` : `${trendArrow[row.trend]} ${fmtNumber(row.change)} (${row.date})`;
-          return statTile(label, fmtNumber(row.value), deltaText, cls);
+      const latestBySeries = Object.fromEntries(
+        latestPerKey(data, (r) => r.series, (r) => r.date).map((row) => [row.series, row])
+      );
+      const changes = windowDeltaByGroup(data, "series", "date", "value", days);
+
+      const tiles = allSeries
+        .map((series) => {
+          const row = latestBySeries[series];
+          if (!row) return "";
+          const label = labels[series] || series;
+          const change = changes[series];
+          const deltaText = change
+            ? `${deltaArrow(change.value)}${fmtNumber(change.value)} (${change.startDate} → ${change.endDate})`
+            : "Not enough history in this window";
+          return statTile(label, fmtNumber(row.value), deltaText, deltaClass(change ? change.value : null));
         })
         .join("");
 
-      const changes = windowDeltaByGroup(rateRows, "series", "date", "value", days);
-      const anyData = rateSeries.some((s) => changes[s] !== undefined);
-      const pending = rateSeries.filter((s) => changes[s] === undefined || changes[s] === null).map((s) => labels[s] || s);
+      const anyRateData = rateSeries.some((s) => changes[s]);
+      const pending = rateSeries.filter((s) => !changes[s]).map((s) => labels[s] || s);
 
       el.innerHTML = `
         <div class="kpi-row">${tiles}</div>
@@ -657,12 +664,12 @@ async function renderMacro() {
             ${windowSelectorHtml(days)}
           </div>
           ${
-            anyData
+            anyRateData
               ? `<div class="chart-wrap" style="height:170px"><canvas id="macro-rate-chart"></canvas></div>`
               : `<p class="panel-meta">Accumulating history</p>`
           }
           ${
-            anyData && pending.length > 0
+            anyRateData && pending.length > 0
               ? `<p class="panel-meta">${pending.join(" and ")} update monthly — no bar until a second reading lands.</p>`
               : ""
           }
@@ -673,7 +680,7 @@ async function renderMacro() {
         draw();
       });
 
-      if (anyData) {
+      if (anyRateData) {
         divergingBarChart(
           document.getElementById("macro-rate-chart"),
           rateSeries.map((s) => labels[s] || s),
