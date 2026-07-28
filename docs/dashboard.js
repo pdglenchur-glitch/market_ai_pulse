@@ -697,10 +697,6 @@ async function renderMacro() {
   }
 }
 
-// Fixed roster, fixed color per symbol (never rank-based) since these seven
-// names don't change day to day, unlike sector volume share above.
-const AI_BASKET_COLOR_ORDER = ["NVDA", "MSFT", "GOOGL", "META", "PLTR", "AMD", "BOTZ"];
-
 function renderAiSpreadReturnChart(container, aiVsMarket) {
   if (aiVsMarket.every((r) => r.spread === null)) {
     container.innerHTML = `
@@ -753,8 +749,12 @@ function renderAiBasketVolumeChart(container, aiBasketDetail) {
   let days = 30;
   const draw = () => {
     const { sums, startDate, endDate } = windowSumByGroup(aiBasketDetail, "symbol", "date", "volume", days);
-    const symbols = AI_BASKET_COLOR_ORDER.filter((s) => sums[s] > 0);
-    const ready = symbols.length > 0;
+    // 11-name basket, same fold-to-top-N pattern as the sector donut above -
+    // an 11-way fixed-color roster exceeds what a categorical palette can
+    // keep colorblind-distinguishable, so this ranks by rank position each
+    // render rather than assigning a stable color per symbol.
+    const slices = topNPlusOther(sums, 6);
+    const ready = slices.length > 0;
 
     container.innerHTML = `
       <div class="chart-header">
@@ -774,11 +774,11 @@ function renderAiBasketVolumeChart(container, aiBasketDetail) {
     });
 
     if (ready) {
-      const colors = symbols.map((s) => cssVar(`--series-${AI_BASKET_COLOR_ORDER.indexOf(s) + 1}`));
+      const colors = slices.map((s, i) => (s.key === "Other" ? cssVar("--text-muted") : cssVar(`--series-${i + 1}`)));
       donutChart(
         document.getElementById("ai-basket-volume-chart"),
-        symbols,
-        symbols.map((s) => sums[s]),
+        slices.map((s) => s.key),
+        slices.map((s) => s.value),
         (v) => fmtNumber(v, 0),
         colors
       );
