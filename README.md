@@ -4,7 +4,9 @@ An end-to-end data analytics pipeline that sources market, macroeconomic, and AI
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
-![Dashboard, dark mode](screenshots/dashboard_dark.png)
+![Dashboard, dark mode - Market Snapshot, Sector Rotation, Volatility, Macro Backdrop](screenshots/dashboard_dark_top.png)
+
+![Dashboard, dark mode - AI Pulse](screenshots/dashboard_dark_bottom.png)
 
 The charts above are backed by a full year of history, backfilled once from each source's own historical API and accumulating daily since.
 
