@@ -749,10 +749,10 @@ function renderAiBasketVolumeChart(container, aiBasketDetail) {
   let days = 30;
   const draw = () => {
     const { sums, startDate, endDate } = windowSumByGroup(aiBasketDetail, "symbol", "date", "volume", days);
-    // 11-name basket, same fold-to-top-N pattern as the sector donut above -
-    // an 11-way fixed-color roster exceeds what a categorical palette can
-    // keep colorblind-distinguishable, so this ranks by rank position each
-    // render rather than assigning a stable color per symbol.
+    // Same fold-to-top-N pattern as the sector donut above - the basket has
+    // grown past what a categorical palette can keep colorblind-distinguishable
+    // per fixed symbol, so this ranks by rank position each render rather than
+    // assigning a stable color per symbol.
     const slices = topNPlusOther(sums, 6);
     const ready = slices.length > 0;
 
