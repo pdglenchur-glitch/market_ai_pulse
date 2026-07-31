@@ -14,8 +14,9 @@ AI_BASKET = [
     "NVDA", "AMD", "AVGO", "TSM", "AMAT", "MU",  # chip design, foundry, equipment, memory
     "MSFT", "GOOGL", "AMZN", "CRWV",  # hyperscale cloud + neocloud compute
     "META", "PLTR",  # AI capex / enterprise software
-    "VRT", "DLR", "BE",  # datacenter power, real estate, on-site generation
+    "VRT", "DLR", "BE", "CEG",  # datacenter power, real estate, on-site + grid-scale generation
     "ANET",  # datacenter networking
+    "SMCI",  # AI server/systems integration
     "BOTZ",  # thematic ETF, passive diversification check
 ]
 ALL_SYMBOLS = [BENCHMARK] + SECTOR_ETFS + AI_BASKET
