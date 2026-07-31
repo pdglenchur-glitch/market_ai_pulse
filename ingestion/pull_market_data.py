@@ -10,7 +10,14 @@ import yfinance as yf
 
 BENCHMARK = "^GSPC"
 SECTOR_ETFS = ["XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLRE", "XLU", "XLC"]
-AI_BASKET = ["NVDA", "AMD", "AVGO", "MSFT", "GOOGL", "AMZN", "META", "PLTR", "VRT", "DLR", "BOTZ"]
+AI_BASKET = [
+    "NVDA", "AMD", "AVGO", "TSM", "AMAT", "MU",  # chip design, foundry, equipment, memory
+    "MSFT", "GOOGL", "AMZN", "CRWV",  # hyperscale cloud + neocloud compute
+    "META", "PLTR",  # AI capex / enterprise software
+    "VRT", "DLR", "BE",  # datacenter power, real estate, on-site generation
+    "ANET",  # datacenter networking
+    "BOTZ",  # thematic ETF, passive diversification check
+]
 ALL_SYMBOLS = [BENCHMARK] + SECTOR_ETFS + AI_BASKET
 
 DEFAULT_OUTPUT = Path("data/raw/market_data.json")
