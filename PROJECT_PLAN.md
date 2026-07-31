@@ -79,7 +79,7 @@ This path is what the raw-file-landing step and the Lakeflow bronze read task bo
 
 | Source | Provides | Auth | Notes |
 |---|---|---|---|
-| `yfinance` | Benchmark (`^GSPC`), 11 SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLRE, XLU, XLC), AI basket (NVDA, AMD, AVGO, MSFT, GOOGL, AMZN, META, PLTR, VRT, DLR, BOTZ) | None | Unofficial but widely used |
+| `yfinance` | Benchmark (`^GSPC`), 11 SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLRE, XLU, XLC), AI basket (NVDA, AMD, AVGO, TSM, AMAT, MU, MSFT, GOOGL, AMZN, CRWV, META, PLTR, VRT, DLR, BE, ANET, BOTZ) | None | Unofficial but widely used |
 | FRED (St. Louis Fed) | CPI, unemployment, fed funds rate, 10Y yield | Free API key (in secrets) | Macro data doesn't move week to week anyway |
 | Wikipedia Pageviews API | Attention signal — pageviews on "Artificial intelligence," "ChatGPT," "Large language model" | None | Official, stable. **Do not use pytrends** — archived April 2025, unreliable |
 | GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at daily cadence — 5 req/day vs. a 60/hour cap) | Add `GH_TOKEN` later only if rate-limited |
