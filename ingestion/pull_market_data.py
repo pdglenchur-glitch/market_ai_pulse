@@ -1,5 +1,18 @@
-"""Pull one day of market data via yfinance: the S&P 500 benchmark, sector
+"""Pull recent market data via yfinance: the S&P 500 benchmark, sector
 ETFs (for sector_rotation), and the AI basket (for ai_vs_market).
+
+Captures the trailing few settled days per symbol each run, not just the
+single latest one. Yahoo/yfinance's backend can lag publishing a trading
+day's finalized close by more than the ~12 hours between market close and
+the next morning's cron run - confirmed 2026-08-04, when Monday
+2026-08-03's close still wasn't available when Tuesday's scheduled run
+fired, and by the time it was, a single-day-per-run design had already
+moved on to whatever was then latest, permanently skipping 2026-08-03
+until it was manually backfilled. bronze_to_silver.py already MERGEs
+market_data by (symbol, date), so writing overlapping days each run is a
+no-op for dates already captured and a real recovery for ones that
+weren't - this makes the pipeline self-healing against that class of
+provider lag instead of needing a manual backfill every time it recurs.
 """
 import argparse
 import json
@@ -32,6 +45,9 @@ def symbol_category(symbol: str) -> str:
     return "ai_basket"
 
 
+RECENT_DAYS_PER_RUN = 3  # trailing settled days captured each run; see module docstring
+
+
 def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
     data = yf.download(symbols, period="5d", interval="1d", group_by="ticker", progress=False)
 
@@ -40,25 +56,24 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
         # dropna(how="all") only drops a row if every column is NaN. yfinance
         # can return a most-recent row with real volume but NaN OHLC when
         # that day's price data hasn't fully settled yet - drop any row
-        # missing an OHLC value specifically, so the latest *usable* row gets
-        # picked instead of a partially-populated one.
+        # missing an OHLC value specifically, so only usable rows get kept.
         history = data[symbol].dropna(subset=["Open", "High", "Low", "Close"])
         if history.empty:
             raise RuntimeError(f"No data returned for {symbol}")
 
-        latest = history.iloc[-1]
-        records.append(
-            {
-                "symbol": symbol,
-                "category": symbol_category(symbol),
-                "date": history.index[-1].strftime("%Y-%m-%d"),
-                "open": round(float(latest["Open"]), 2),
-                "high": round(float(latest["High"]), 2),
-                "low": round(float(latest["Low"]), 2),
-                "close": round(float(latest["Close"]), 2),
-                "volume": int(latest["Volume"]),
-            }
-        )
+        for idx, row in history.tail(RECENT_DAYS_PER_RUN).iterrows():
+            records.append(
+                {
+                    "symbol": symbol,
+                    "category": symbol_category(symbol),
+                    "date": idx.strftime("%Y-%m-%d"),
+                    "open": round(float(row["Open"]), 2),
+                    "high": round(float(row["High"]), 2),
+                    "low": round(float(row["Low"]), 2),
+                    "close": round(float(row["Close"]), 2),
+                    "volume": int(row["Volume"]),
+                }
+            )
     return records
 
 
