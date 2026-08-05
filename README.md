@@ -83,9 +83,32 @@ flowchart LR
 3. **Transform**: trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
 4. **Export**: query the finished gold tables and write JSON
 5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
-6. **Report**: regenerate `monitoring/daily_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the day — this step runs even if an earlier one failed, so a bad day still produces a report explaining what went wrong
+6. **Report**: regenerate `monitoring/daily_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the day. This step runs even if an earlier one failed, since a bad day still needs a report explaining what went wrong
 
 No manual steps once triggered, no compute running outside of when the pipeline actually needs it.
+
+### Where the code for each step lives
+
+Every step above traces to real files, in the order they actually run:
+
+1. **Ingest** ([`ingestion/`](ingestion/)): [`run_ingestion.py`](ingestion/run_ingestion.py) calls each puller below in turn and lands its output in both R2 and the Databricks volume:
+   - [`pull_market_data.py`](ingestion/pull_market_data.py): S&P 500, sector ETFs, AI basket (yfinance)
+   - [`pull_macro_data.py`](ingestion/pull_macro_data.py): CPI, unemployment, fed funds rate, 10Y yield (FRED)
+   - [`pull_attention_data.py`](ingestion/pull_attention_data.py): Wikipedia pageviews
+   - [`pull_dev_momentum.py`](ingestion/pull_dev_momentum.py): GitHub star counts
+   - [`pull_research_pace.py`](ingestion/pull_research_pace.py): arXiv submission counts
+2. **Stage** happens inside the same ingest step, via [`land_to_r2.py`](ingestion/land_to_r2.py) and [`land_to_databricks_volume.py`](ingestion/land_to_databricks_volume.py). It's listed as a separate stage above because it's a distinct destination, not a distinct script.
+3. **Transform**: [`orchestration/trigger_and_poll_job.py`](orchestration/trigger_and_poll_job.py) triggers and polls the Databricks Job defined in [`databricks/lakeflow_job_config.yml`](databricks/lakeflow_job_config.yml), which runs three tasks in sequence on serverless compute:
+   - [`land_volume_to_bronze.py`](databricks/land_volume_to_bronze.py): raw volume files → bronze Delta tables
+   - [`bronze_to_silver.py`](databricks/bronze_to_silver.py): bronze → typed, deduplicated, natural-key-merged silver tables
+   - [`silver_to_gold.py`](databricks/silver_to_gold.py): silver → the 9 gold tables the dashboard actually reads
+4. **Export**: [`orchestration/export_gold_to_json.py`](orchestration/export_gold_to_json.py) queries every gold table and writes `docs/data/*.json`
+5. **Publish**: the same step commits and pushes `docs/data/`. The dashboard itself is [`docs/index.html`](docs/index.html) (page structure), [`docs/dashboard.js`](docs/dashboard.js) (every chart, KPI tile, and window selector), and [`docs/styles.css`](docs/styles.css) (palette and layout), all static and reading the JSON directly in the browser with no server involved
+6. **Report**: [`monitoring/daily_report.ipynb`](monitoring/daily_report.ipynb), regenerated and committed as the pipeline's last step
+
+One workflow file ties all of the above together on the actual daily schedule: [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
+
+Two more notebooks exist outside this daily chain: [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a separate, monthly-refreshable investment analysis meant to be run by hand, not by the pipeline. The `query_*.py` files in [`databricks/`](databricks/) and the connectivity checks in [`scripts/`](scripts/) are one-off diagnostics from early development, not part of the automated pipeline either.
 
 ## Design decisions
 
@@ -99,7 +122,7 @@ No manual steps once triggered, no compute running outside of when the pipeline 
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 
-**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself — the exact gap that let a full trading day quietly go missing from the dashboard for real (see `PROJECT_MEMORY.md` bug #19) while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
+**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself, the exact gap that let a full trading day quietly go missing from the dashboard for real (see `PROJECT_MEMORY.md` bug #19) while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
 
 ## Docs
 
