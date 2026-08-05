@@ -47,6 +47,7 @@ Everything is driven by **one GitHub Actions workflow on one daily cron trigger*
 3. **Trigger transform** — call the Databricks Jobs API (`run-now`) to kick off the Lakeflow job, then **poll** the run status until it finishes
 4. **Export** — once the Lakeflow run succeeds, query the finished gold Delta tables directly from GitHub Actions using the Databricks SQL connector, write to JSON
 5. **Publish** — commit that JSON into `docs/data/` and push; GitHub Pages rebuilds automatically on push
+6. **Report** — regenerate `monitoring/daily_report.ipynb` (queries the gold tables and the GitHub Actions run history directly, independent of steps 4-5) and commit it. This step runs with `if: always()`, so it executes and gets committed even when an earlier step failed, since a bad day is exactly when the report is most useful — see `monitoring/README.md`.
 
 The Lakeflow job's own native cron trigger stays **disabled** — it only ever runs when called by step 3, which avoids two independent schedules drifting out of sync.
 

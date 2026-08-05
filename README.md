@@ -75,6 +75,7 @@ flowchart LR
     B --> F[Export gold to JSON\nvia Databricks SQL connector]
     F --> G[Commit to repo\ndocs/data/]
     G --> H[GitHub Pages\npublic dashboard]
+    B --> I[Daily report\nmonitoring/daily_report.ipynb]
 ```
 
 1. **Ingest**: pull market data (yfinance), macro indicators (FRED), public attention (Wikipedia Pageviews), dev momentum (GitHub), and research pace (arXiv); land raw files in R2
@@ -82,6 +83,7 @@ flowchart LR
 3. **Transform**: trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
 4. **Export**: query the finished gold tables and write JSON
 5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
+6. **Report**: regenerate `monitoring/daily_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the day — this step runs even if an earlier one failed, so a bad day still produces a report explaining what went wrong
 
 No manual steps once triggered, no compute running outside of when the pipeline actually needs it.
 
@@ -97,8 +99,11 @@ No manual steps once triggered, no compute running outside of when the pipeline 
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 
+**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself — the exact gap that let a full trading day quietly go missing from the dashboard for real (see `PROJECT_MEMORY.md` bug #19) while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
+
 ## Docs
 
 - [`PROJECT_PLAN.md`](PROJECT_PLAN.md): full architecture, established config, and a step-by-step build log (what's done, what's left)
 - [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md): narrative history covering design decisions and why, and bugs hit and how they were fixed
 - [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb): the monthly analysis notebook behind the Key findings section above
+- [`monitoring/daily_report.ipynb`](monitoring/daily_report.ipynb): the pipeline's own daily health check, regenerated fresh every run
