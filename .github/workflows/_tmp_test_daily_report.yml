@@ -1,0 +1,25 @@
+name: tmp-test-daily-report
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt jupyter pandas
+      - name: Execute daily_report.ipynb (test run, not committed)
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: jupyter nbconvert --to notebook --execute --inplace monitoring/daily_report.ipynb
+      - name: Show rendered output
+        run: jupyter nbconvert --to script --stdout monitoring/daily_report.ipynb
+      - name: Dump full notebook JSON for inspection
+        run: cat monitoring/daily_report.ipynb
