@@ -52,6 +52,7 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
     data = yf.download(symbols, period="5d", interval="1d", group_by="ticker", progress=False)
 
     records = []
+    failed_symbols = []
     for symbol in symbols:
         # dropna(how="all") only drops a row if every column is NaN. yfinance
         # can return a most-recent row with real volume but NaN OHLC when
@@ -59,7 +60,13 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
         # missing an OHLC value specifically, so only usable rows get kept.
         history = data[symbol].dropna(subset=["Open", "High", "Low", "Close"])
         if history.empty:
-            raise RuntimeError(f"No data returned for {symbol}")
+            # One symbol missing data (confirmed for real 2026-08-07, XLV)
+            # shouldn't discard the other ~30 symbols' perfectly good data -
+            # skip it and continue, same "only fail loudly if everything
+            # failed" principle as run_ingestion.py's cross-source isolation.
+            print(f"  no data returned for {symbol}, skipping it this run")
+            failed_symbols.append(symbol)
+            continue
 
         for idx, row in history.tail(RECENT_DAYS_PER_RUN).iterrows():
             records.append(
@@ -74,6 +81,9 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
                     "volume": int(row["Volume"]),
                 }
             )
+
+    if failed_symbols and len(failed_symbols) == len(symbols):
+        raise RuntimeError(f"No data returned for any symbol: {', '.join(failed_symbols)}")
     return records
 
 
