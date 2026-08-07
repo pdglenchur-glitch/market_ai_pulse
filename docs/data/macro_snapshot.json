@@ -1820,6 +1820,13 @@
     "trend": "down"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-08-05",
+    "value": 4.63,
+    "change": 0.0,
+    "trend": "flat"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
