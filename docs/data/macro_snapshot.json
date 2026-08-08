@@ -1827,6 +1827,13 @@
     "trend": "flat"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-08-06",
+    "value": 4.69,
+    "change": 0.0600000000000005,
+    "trend": "up"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
@@ -2069,6 +2076,13 @@
     "date": "2026-06-01",
     "value": 4.2,
     "change": -0.09999999999999964,
+    "trend": "down"
+  },
+  {
+    "series": "unemployment_rate",
+    "date": "2026-07-01",
+    "value": 4.1,
+    "change": -0.10000000000000053,
     "trend": "down"
   }
 ]
