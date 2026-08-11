@@ -39,7 +39,19 @@ The S&P 500 is a stock index made up of 500 of the largest U.S. companies, and i
 
 ### Sector Rotation
 
-A sector ETF is a basket of stocks from one slice of the economy: `XLK` holds tech companies, `XLE` holds energy companies. This chart shows each sector's return over the selected window, so you can see which parts of the economy are leading and which are lagging over whatever timeframe you're interested in. "Rotation" refers to money flowing out of some sectors and into others over time.
+A sector ETF is a basket of stocks from one slice of the economy: `XLK` holds tech companies, `XLE` holds energy companies. This chart shows each sector's return over the selected window, so you can see which parts of the economy are leading and which are lagging over whatever timeframe you're interested in. "Rotation" refers to money flowing out of some sectors and into others over time. The panel tracks all 11 S&P 500 sectors, each via its SPDR Select Sector ETF:
+
+- **`XLK`** - Technology: hardware, software, and semiconductors (Apple, Microsoft, Nvidia)
+- **`XLF`** - Financials: banks, insurers, and payment networks (Berkshire Hathaway, JPMorgan Chase, Visa)
+- **`XLE`** - Energy: oil, gas, and energy equipment/services (Exxon Mobil, Chevron)
+- **`XLV`** - Health Care: pharma, biotech, and health insurers (Eli Lilly, Johnson & Johnson, UnitedHealth)
+- **`XLY`** - Consumer Discretionary: retail and goods people buy when they have spare cash (Amazon, Tesla, Home Depot)
+- **`XLP`** - Consumer Staples: goods people buy regardless of the economy (Costco, Walmart, Procter & Gamble)
+- **`XLI`** - Industrials: aerospace, defense, machinery, and transportation (GE Aerospace, Caterpillar, Union Pacific)
+- **`XLB`** - Materials: chemicals, mining, and packaging (Linde, Sherwin-Williams)
+- **`XLRE`** - Real Estate: REITs across data centers, warehouses, and commercial property (Prologis, American Tower)
+- **`XLU`** - Utilities: electric, gas, and water utilities (NextEra Energy, Southern Company)
+- **`XLC`** - Communication Services: media, telecom, and internet platforms (Alphabet, Meta, Netflix)
 
 Below it, **Trading volume share by sector** is a different lens on the same 11 sectors: not which sectors moved, but which ones actually had the most trading activity over the selected window. The top 6 sectors are shown individually, with the rest folded into "Other" since a donut with 11 razor-thin slices stops being readable.
 
