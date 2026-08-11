@@ -1580,8 +1580,14 @@
   {
     "symbol": "AMAT",
     "date": "2026-08-07",
-    "volume": 4551600,
+    "volume": 4555000,
     "daily_return": 0.022105103511033532
+  },
+  {
+    "symbol": "AMAT",
+    "date": "2026-08-10",
+    "volume": 7012200,
+    "daily_return": -0.03156879474718994
   },
   {
     "symbol": "AMD",
@@ -3164,8 +3170,14 @@
   {
     "symbol": "AMD",
     "date": "2026-08-07",
-    "volume": 26560000,
+    "volume": 26618800,
     "daily_return": -0.012099411379986836
+  },
+  {
+    "symbol": "AMD",
+    "date": "2026-08-10",
+    "volume": 19576500,
+    "daily_return": -0.028550148957298932
   },
   {
     "symbol": "AMZN",
@@ -4748,8 +4760,14 @@
   {
     "symbol": "AMZN",
     "date": "2026-08-07",
-    "volume": 33833300,
+    "volume": 33861400,
     "daily_return": 0.008153970469404347
+  },
+  {
+    "symbol": "AMZN",
+    "date": "2026-08-10",
+    "volume": 35684300,
+    "daily_return": 0.013152142232585094
   },
   {
     "symbol": "ANET",
@@ -6332,8 +6350,14 @@
   {
     "symbol": "ANET",
     "date": "2026-08-07",
-    "volume": 7202500,
+    "volume": 7208500,
     "daily_return": -0.018978785357737137
+  },
+  {
+    "symbol": "ANET",
+    "date": "2026-08-10",
+    "volume": 5430400,
+    "daily_return": 0.015105740181269004
   },
   {
     "symbol": "AVGO",
@@ -7916,8 +7940,14 @@
   {
     "symbol": "AVGO",
     "date": "2026-08-07",
-    "volume": 14680000,
+    "volume": 14698300,
     "daily_return": 0.01709584611360772
+  },
+  {
+    "symbol": "AVGO",
+    "date": "2026-08-10",
+    "volume": 13830000,
+    "daily_return": -0.012530390873386978
   },
   {
     "symbol": "BE",
@@ -9500,8 +9530,14 @@
   {
     "symbol": "BE",
     "date": "2026-08-07",
-    "volume": 15071700,
+    "volume": 15103400,
     "daily_return": -0.04201607267645005
+  },
+  {
+    "symbol": "BE",
+    "date": "2026-08-10",
+    "volume": 8991600,
+    "daily_return": -0.039710039208534734
   },
   {
     "symbol": "BOTZ",
@@ -11084,8 +11120,14 @@
   {
     "symbol": "BOTZ",
     "date": "2026-08-07",
-    "volume": 685100,
+    "volume": 686800,
     "daily_return": 0.018137520303194418
+  },
+  {
+    "symbol": "BOTZ",
+    "date": "2026-08-10",
+    "volume": 464400,
+    "daily_return": -0.005051847912789092
   },
   {
     "symbol": "CEG",
@@ -12668,8 +12710,14 @@
   {
     "symbol": "CEG",
     "date": "2026-08-07",
-    "volume": 2604300,
+    "volume": 2606100,
     "daily_return": 0.03366526235158929
+  },
+  {
+    "symbol": "CEG",
+    "date": "2026-08-10",
+    "volume": 1929000,
+    "daily_return": 0.002000815146911781
   },
   {
     "symbol": "CRWV",
@@ -14252,8 +14300,14 @@
   {
     "symbol": "CRWV",
     "date": "2026-08-07",
-    "volume": 18601100,
+    "volume": 18664100,
     "daily_return": 0.06258056955349822
+  },
+  {
+    "symbol": "CRWV",
+    "date": "2026-08-10",
+    "volume": 20757800,
+    "daily_return": -0.02735193559060333
   },
   {
     "symbol": "DLR",
@@ -15840,6 +15894,12 @@
     "daily_return": 0.006439551308683055
   },
   {
+    "symbol": "DLR",
+    "date": "2026-08-10",
+    "volume": 1601100,
+    "daily_return": -0.012899896800825593
+  },
+  {
     "symbol": "GOOGL",
     "date": "2025-07-22",
     "volume": 44660200,
@@ -17420,8 +17480,14 @@
   {
     "symbol": "GOOGL",
     "date": "2026-08-07",
-    "volume": 19805200,
+    "volume": 19859900,
     "daily_return": -0.009643605870020933
+  },
+  {
+    "symbol": "GOOGL",
+    "date": "2026-08-10",
+    "volume": 18958400,
+    "daily_return": 0.009088343211967175
   },
   {
     "symbol": "META",
@@ -19004,8 +19070,14 @@
   {
     "symbol": "META",
     "date": "2026-08-07",
-    "volume": 11226700,
+    "volume": 11250300,
     "daily_return": 0.003729445668757494
+  },
+  {
+    "symbol": "META",
+    "date": "2026-08-10",
+    "volume": 14950600,
+    "daily_return": 0.004762709001857686
   },
   {
     "symbol": "MSFT",
@@ -20588,8 +20660,14 @@
   {
     "symbol": "MSFT",
     "date": "2026-08-07",
-    "volume": 28818000,
+    "volume": 28846200,
     "daily_return": 0.0002600728203897
+  },
+  {
+    "symbol": "MSFT",
+    "date": "2026-08-10",
+    "volume": 31176700,
+    "daily_return": 0.012140242804856084
   },
   {
     "symbol": "MU",
@@ -22172,8 +22250,14 @@
   {
     "symbol": "MU",
     "date": "2026-08-07",
-    "volume": 34442200,
+    "volume": 34568500,
     "daily_return": -0.0044244273769952205
+  },
+  {
+    "symbol": "MU",
+    "date": "2026-08-10",
+    "volume": 27664000,
+    "daily_return": -0.018881684651936653
   },
   {
     "symbol": "NVDA",
@@ -23756,8 +23840,14 @@
   {
     "symbol": "NVDA",
     "date": "2026-08-07",
-    "volume": 105473700,
+    "volume": 105669400,
     "daily_return": 0.02269510023288734
+  },
+  {
+    "symbol": "NVDA",
+    "date": "2026-08-10",
+    "volume": 115521800,
+    "daily_return": -0.02862118235399177
   },
   {
     "symbol": "PLTR",
@@ -25340,8 +25430,14 @@
   {
     "symbol": "PLTR",
     "date": "2026-08-07",
-    "volume": 77382900,
+    "volume": 77579900,
     "daily_return": 0.10319394561313497
+  },
+  {
+    "symbol": "PLTR",
+    "date": "2026-08-10",
+    "volume": 57185000,
+    "daily_return": 0.018719841869658735
   },
   {
     "symbol": "SMCI",
@@ -26924,8 +27020,14 @@
   {
     "symbol": "SMCI",
     "date": "2026-08-07",
-    "volume": 32250400,
+    "volume": 32380700,
     "daily_return": 0.0595643294758339
+  },
+  {
+    "symbol": "SMCI",
+    "date": "2026-08-10",
+    "volume": 55962700,
+    "daily_return": 0.010600706713780978
   },
   {
     "symbol": "TSM",
@@ -28508,8 +28610,14 @@
   {
     "symbol": "TSM",
     "date": "2026-08-07",
-    "volume": 9145500,
+    "volume": 9159600,
     "daily_return": 0.0043998087039694685
+  },
+  {
+    "symbol": "TSM",
+    "date": "2026-08-10",
+    "volume": 11760600,
+    "daily_return": -0.003737739262927324
   },
   {
     "symbol": "VRT",
@@ -30092,7 +30200,13 @@
   {
     "symbol": "VRT",
     "date": "2026-08-07",
-    "volume": 3907000,
+    "volume": 3909500,
     "daily_return": -0.010066504342770064
+  },
+  {
+    "symbol": "VRT",
+    "date": "2026-08-10",
+    "volume": 2853900,
+    "daily_return": -0.008443465491923475
   }
 ]
