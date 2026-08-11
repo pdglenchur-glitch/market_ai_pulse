@@ -12,7 +12,6 @@ An analysis notebook that refreshes automatically every Monday, separate from th
 4. Sector return sensitivity to interest-rate moves
 5. Realized volatility trend and its outlier window
 6. AI infrastructure vs. the original core basket: return and volatility comparison
-7. AI basket vs. the broader tech sector (XLK): correlation, R-squared, and beta
 
 ## Refreshing automatically (weekly)
 

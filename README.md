@@ -22,14 +22,18 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 
 ## Key findings
 
-Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) refreshes automatically every Monday and pulls the same published data to dig into a few questions the dashboard itself doesn't answer directly. Four headline results from the current run:
+Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) refreshes automatically every Monday and pulls the same published data to dig into a few questions the dashboard itself doesn't answer directly. Every bullet below is generated straight from that run, two sentences or less each, and updates automatically every Monday, including how it moved versus the week before.
 
-- The AI basket has outperformed the S&P 500 by **60.7 points** over the trailing year (+83.6% vs. +22.9%). NVDA is still the single largest contributor to basket trading volume at **30%**, but across all 19 names the basket has moved from highly concentrated to unconcentrated by a standard Herfindahl measure.
-- The 10 infrastructure names (foundry, chip equipment, memory, neocloud compute, datacenter power, real estate, networking, and server integration) added since the original basket returned **+120.4%** on average versus **+45.3%** for the original core names, but at nearly double the volatility, and 3 of the 10 are actually down over the same window, a reminder that the infrastructure theme working broadly didn't mean every stock in it won.
-- Is the basket actually diversified away from the broader tech sector? Not really: its daily returns correlate with XLK (tech sector) at **+0.91**, tighter than its correlation with the S&P 500, and it moves at **1.23x** XLK's magnitude. It behaves more like leveraged tech-sector exposure than a distinct AI factor.
-- Does AI-sector search attention lead or lag the stock moves? A full-year day-to-day correlation test says no, routine search interest shows no reliable relationship either way, but an event study on the handful of genuinely large attention spikes shows a real (if small-sample) gap worth tracking as more data accumulates.
+<!-- KEY_FINDINGS_START -->
+- The AI basket has outperformed the S&P 500 by **+60.7 points** over the trailing year (+83.6% vs. +22.9%). The spread is not yet trackable, this is the first tracked snapshot.
+- Routine day-to-day AI-sector search attention shows no reliable link to stock moves (strongest lag correlation only +0.15), but the biggest attention spikes show a **+6.0-point** swing between the return before and after each one. That swing is not yet trackable, this is the first tracked snapshot.
+- **NVDA** still accounts for **30%** of the AI basket's trading volume, though the basket-wide Herfindahl index of 1288 is now unconcentrated overall. NVDA's share is not yet trackable, this is the first tracked snapshot.
+- **10 of 11** sectors fell on rising-yield days and rallied on falling-yield days as expected, with XLE the exception. The count following the pattern is not yet trackable, this is the first tracked snapshot.
+- Realized volatility peaked at **1.3%** on 2026-04-09 and has since eased to **0.91%** as of the latest reading. The latest reading is not yet trackable, this is the first tracked snapshot.
+- The infrastructure names added to the AI basket returned **+120.4%** on an equal-weighted basis versus **+45.3%** for the original core cohort, though 3 of those infrastructure names are actually down over the same window. The gap is not yet trackable, this is the first tracked snapshot.
+<!-- KEY_FINDINGS_END -->
 
-Full methodology, all five findings, and the charts behind them are in the notebook, along with instructions for re-running it against whatever the pipeline has accumulated since.
+Full methodology, all six findings and their week-over-week trend, and the charts behind them are in the notebook, along with instructions for re-running it against whatever the pipeline has accumulated since.
 
 ## Reading the dashboard
 
