@@ -8,3 +8,4 @@ venv/
 /data/
 /ingestion/data/
 .ipynb_checkpoints/
+/PROJECT_MEMORY.md

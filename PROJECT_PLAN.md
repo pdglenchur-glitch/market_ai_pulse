@@ -2,7 +2,7 @@
 
 A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a free, publicly viewable dashboard tracking market performance, macro conditions, and AI-sector momentum.
 
-**Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/ · **Continuity doc:** [PROJECT_MEMORY.md](PROJECT_MEMORY.md) (design decisions, bugs fixed, session-to-session context)
+**Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
 **Status: build complete.** All of Phases 0–6 in Section 9 are done — the pipeline runs daily, unattended, and has been confirmed via a real scheduled (not manually dispatched) run. Remaining open items are non-blocking (Section 11).
 
@@ -178,8 +178,7 @@ market-ai-pulse/
 │   ├── styles.css
 │   └── data/                 # published JSON lands here
 ├── README.md
-├── PROJECT_PLAN.md           # this file
-└── PROJECT_MEMORY.md         # narrative continuity doc — design decisions, bugs fixed, why
+└── PROJECT_PLAN.md           # this file
 ```
 
 ---
@@ -266,7 +265,7 @@ market-ai-pulse/
 - [x] **5.7** Mobile-responsive pass — verified via headless-browser screenshots (not just code review) at 390px width; found and fixed two real Chart.js bugs: bars rendering at ~1/4 height until a deferred `resize()` forces a remeasure (an initial-sizing race), and the last rotated x-axis label clipping within its own canvas (fixed with a consistent 45° rotation, more right-side padding, and shortening dev-momentum labels to repo name only — full `owner/repo` still shown in the tooltip)
 - [x] **5.8** Open the public GitHub Pages link in a browser you're not logged into anything on — confirm it loads with zero login — verified with a fresh incognito headless profile (no cookies/session) against the live URL; renders correctly
 
-**Post-5.8 design polish (2026-07-22, user feedback):** every panel now has a real visualization (previously 3 of 5 panels were stat-tiles-only) — OHLC range bar (Market Snapshot), progress meter → line chart (Volatility), rate-comparison bar chart excluding CPI's mismatched unit (Macro Backdrop), diverging AI-vs-market bar + research-pace bar (AI Pulse). Also replaced the dataviz skill's bright default categorical palette with a custom darker/muted one, validated (not eyeballed) via `scripts/validate_palette.js` for both light and dark mode. Separately fixed `attention_index`: it was showing 100 for every article — not a bug in the data, but a metric that's baselined to each article's first-observed day and therefore can't say anything with only one day of history, compounded by using a bar chart (wrong form for an inherently time-series/trend metric). Now shows raw pageviews until 2+ days exist, then a multi-line trend chart. Full detail in [PROJECT_MEMORY.md](PROJECT_MEMORY.md).
+**Post-5.8 design polish (2026-07-22, user feedback):** every panel now has a real visualization (previously 3 of 5 panels were stat-tiles-only) — OHLC range bar (Market Snapshot), progress meter → line chart (Volatility), rate-comparison bar chart excluding CPI's mismatched unit (Macro Backdrop), diverging AI-vs-market bar + research-pace bar (AI Pulse). Also replaced the dataviz skill's bright default categorical palette with a custom darker/muted one, validated (not eyeballed) via `scripts/validate_palette.js` for both light and dark mode. Separately fixed `attention_index`: it was showing 100 for every article — not a bug in the data, but a metric that's baselined to each article's first-observed day and therefore can't say anything with only one day of history, compounded by using a bar chart (wrong form for an inherently time-series/trend metric). Now shows raw pageviews until 2+ days exist, then a multi-line trend chart.
 
 ### Phase 6 — Prove the automation, then polish
 

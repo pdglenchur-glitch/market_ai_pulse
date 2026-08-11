@@ -1,8 +1,8 @@
 # Key Findings
 
-A monthly-refreshable analysis notebook, separate from the automated pipeline in the rest of this repo. The pipeline's job is to keep the dashboard current; this notebook's job is to periodically step back and ask what the accumulated history actually shows.
+An analysis notebook that refreshes automatically every Monday, separate from the daily automated pipeline in the rest of this repo. The pipeline's job is to keep the dashboard current; this notebook's job is to periodically step back and ask what the accumulated history actually shows.
 
-**[`key_findings.ipynb`](key_findings.ipynb)** pulls directly from the live dashboard's exported JSON (the same files the dashboard itself reads), so it always analyzes whatever the pipeline has published as of the moment you run it. No local data sync, no credentials, no Databricks access needed.
+**[`key_findings.ipynb`](key_findings.ipynb)** pulls directly from the live dashboard's exported JSON (the same files the dashboard itself reads), so it always analyzes whatever the pipeline has published as of the moment it runs. No local data sync, no credentials, no Databricks access needed.
 
 ## What's in it
 
@@ -12,22 +12,19 @@ A monthly-refreshable analysis notebook, separate from the automated pipeline in
 4. Sector return sensitivity to interest-rate moves
 5. Realized volatility trend and its outlier window
 6. AI infrastructure vs. the original core basket: return and volatility comparison
+7. AI basket vs. the broader tech sector (XLK): correlation, R-squared, and beta
 
-## Running it
+## Refreshing automatically (weekly)
+
+`pipeline.yml` adds a Monday-only step, after the day's dashboard data is already published, that re-executes this notebook and commits the result. It waits for GitHub Pages to actually be serving that day's data before running, since the notebook reads the live site rather than Databricks directly. This step is entirely additive: it never runs on any day but Monday, never blocks or modifies the daily dashboard pipeline, and only ever touches this notebook and `key_findings_history.json`.
+
+Each key finding above states how its headline number moved versus the prior week's run, computed directly from `key_findings_history.json`, a small file this notebook's own last cell appends to and that's committed alongside it. The comparison text is generated from that stored number, not written by hand, so it stays accurate as the numbers change week to week.
+
+## Running it manually
 
 ```
 pip install -r requirements.txt
 jupyter notebook key_findings.ipynb
 ```
 
-Then **Kernel → Restart & Run All**. Every number, table, and chart regenerates from whatever data is live at that moment — there's nothing to edit or update by hand.
-
-## Refreshing monthly
-
-Since the notebook always reads from the live dashboard rather than a saved snapshot, re-running it next month (or any time) picks up everything the pipeline has accumulated since. To keep a monthly record instead of just overwriting the same file:
-
-```
-jupyter nbconvert --to notebook --execute --output key_findings_2026-08.ipynb key_findings.ipynb
-```
-
-(swap the month in the output filename) — or just re-run and re-commit `key_findings.ipynb` in place if you'd rather keep a single always-current version and rely on git history for the trail of how findings changed over time.
+Then **Kernel → Restart & Run All**. Every number, table, and chart regenerates from whatever data is live at that moment, and the run adds its own entry to `key_findings_history.json` the same way the automated weekly run does, with nothing to edit or update by hand.

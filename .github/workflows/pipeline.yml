@@ -64,6 +64,44 @@ jobs:
           git add docs/data/*.json monitoring/daily_report.ipynb
           git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data and daily pipeline report"
           git push
+      # Everything below is additive and only ever touches analysis/key_findings.ipynb
+      # and analysis/key_findings_history.json. It never runs on any day but Monday, and
+      # it doesn't gate, block, or modify the dashboard-facing steps above in any way.
+      - name: Check if today is Monday (weekly key-findings refresh day)
+        id: day_check
+        run: |
+          if [ "$(date -u +%u)" = "1" ]; then
+            echo "is_monday=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_monday=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Wait for GitHub Pages to serve this week's data
+        if: steps.day_check.outputs.is_monday == 'true'
+        run: |
+          expected=$(python -c "import json; print(json.load(open('docs/data/market_daily.json'))[-1]['date'])")
+          echo "Waiting for Pages to serve latest market_daily date: $expected"
+          for i in $(seq 1 20); do
+            live=$(curl -fsS "https://pdglenchur-glitch.github.io/market_ai_pulse/data/market_daily.json" | python -c "import json,sys; print(json.load(sys.stdin)[-1]['date'])" 2>/dev/null || echo "")
+            if [ "$live" = "$expected" ]; then
+              echo "Pages is serving this week's data."
+              break
+            fi
+            echo "Not yet (got '$live'), retrying in 15s..."
+            sleep 15
+          done
+      - name: Refresh key findings notebook (weekly, analysis/ only)
+        if: steps.day_check.outputs.is_monday == 'true'
+        run: |
+          pip install jupyter pandas numpy matplotlib requests
+          jupyter nbconvert --to notebook --execute --inplace analysis/key_findings.ipynb
+      - name: Commit and push refreshed key findings
+        if: steps.day_check.outputs.is_monday == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add analysis/key_findings.ipynb analysis/key_findings_history.json
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Refresh weekly key findings"
+          git push
       - name: Open or update a failure alert issue
         if: failure()
         env:

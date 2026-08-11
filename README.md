@@ -22,7 +22,7 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 
 ## Key findings
 
-Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a monthly-refreshable notebook that pulls the same published data and digs into a few questions the dashboard itself doesn't answer directly. Four headline results from the current run:
+Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) refreshes automatically every Monday and pulls the same published data to dig into a few questions the dashboard itself doesn't answer directly. Four headline results from the current run:
 
 - The AI basket has outperformed the S&P 500 by **60.7 points** over the trailing year (+83.6% vs. +22.9%). NVDA is still the single largest contributor to basket trading volume at **30%**, but across all 19 names the basket has moved from highly concentrated to unconcentrated by a standard Herfindahl measure.
 - The 10 infrastructure names (foundry, chip equipment, memory, neocloud compute, datacenter power, real estate, networking, and server integration) added since the original basket returned **+120.4%** on average versus **+45.3%** for the original core names, but at nearly double the volatility, and 3 of the 10 are actually down over the same window, a reminder that the infrastructure theme working broadly didn't mean every stock in it won.
@@ -121,7 +121,7 @@ Every step above traces to real files, in the order they actually run:
 
 One workflow file ties all of the above together on the actual daily schedule: [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
 
-Two more notebooks exist outside this daily chain: [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a separate, monthly-refreshable investment analysis meant to be run by hand, not by the pipeline. The `query_*.py` files in [`databricks/`](databricks/) and the connectivity checks in [`scripts/`](scripts/) are one-off diagnostics from early development, not part of the automated pipeline either.
+One more notebook exists outside this daily chain: [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a separate investment analysis that refreshes on its own weekly (Monday) step, gated to only ever touch itself, never the daily dashboard chain above. It's also safe to run by hand anytime. The `query_*.py` files in [`databricks/`](databricks/) and the connectivity checks in [`scripts/`](scripts/) are one-off diagnostics from early development, not part of the automated pipeline either.
 
 ## Design decisions
 
@@ -135,11 +135,10 @@ Two more notebooks exist outside this daily chain: [`analysis/key_findings.ipynb
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 
-**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself, the exact gap that let a full trading day quietly go missing from the dashboard for real (see `PROJECT_MEMORY.md` bug #19) while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
+**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself, the exact gap that let a full trading day quietly go missing from the dashboard for real while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
 
 ## Docs
 
 - [`PROJECT_PLAN.md`](PROJECT_PLAN.md): full architecture, established config, and a step-by-step build log (what's done, what's left)
-- [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md): narrative history covering design decisions and why, and bugs hit and how they were fixed
-- [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb): the monthly analysis notebook behind the Key findings section above
+- [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb): the weekly analysis notebook behind the Key findings section above
 - [`monitoring/daily_report.ipynb`](monitoring/daily_report.ipynb): the pipeline's own daily health check, regenerated fresh every run

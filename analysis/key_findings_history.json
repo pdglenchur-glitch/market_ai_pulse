@@ -1,0 +1,49 @@
+[
+  {
+    "date": "2026-08-07",
+    "section_1": {
+      "ai_total_pct": 83.61993517598549,
+      "bench_total_pct": 22.949401073281493,
+      "spread_pts": 60.670534102703996
+    },
+    "section_2": {
+      "best_lag": 9,
+      "best_corr": 0.14959839682846932,
+      "gap_pts": 5.961012037604146,
+      "return_before_pct": -2.099971682688795,
+      "return_after_pct": 3.8610403549153505
+    },
+    "section_3": {
+      "top_symbol": "NVDA",
+      "top_share_pct": 29.5,
+      "hhi": 1287.66,
+      "effective_n": 7.766025192985725
+    },
+    "section_4": {
+      "typical_count": 10,
+      "total_sectors": 11,
+      "exceptions": [
+        "XLE"
+      ]
+    },
+    "section_5": {
+      "latest_vol_pct": 0.9067253300534128,
+      "max_vol_pct": 1.2889832997443733,
+      "max_date": "2026-04-09"
+    },
+    "section_6": {
+      "infra_final_pct": 120.36427076902791,
+      "core_final_pct": 45.26411294967898,
+      "gap_pts": 75.10015781934894,
+      "n_infra_negative": 3
+    },
+    "section_7": {
+      "xlk_corr": 0.9113110384212161,
+      "xlk_beta": 1.2333216598818855,
+      "xlk_r2": 0.8304878087483551,
+      "sp_corr": 0.8223100238318062,
+      "sp_beta": 2.218584404936507,
+      "sp_r2": 0.6761937752942656
+    }
+  }
+]
