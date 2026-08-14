@@ -3199,9 +3199,21 @@
     "high": 553.75,
     "low": 544.9,
     "close": 548.15,
-    "volume": 6916400,
+    "volume": 7495000,
     "change": 22.539999999999964,
     "daily_return": 0.04288350678259539
+  },
+  {
+    "symbol": "AMAT",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 548.81,
+    "high": 563.76,
+    "low": 531.79,
+    "close": 534.54,
+    "volume": 12795200,
+    "change": -13.610000000000014,
+    "daily_return": -0.02482897017239809
   },
   {
     "symbol": "AMD",
@@ -6403,9 +6415,21 @@
     "high": 491.69,
     "low": 480.88,
     "close": 482.93,
-    "volume": 18584500,
+    "volume": 18628300,
     "change": 8.610000000000014,
     "daily_return": 0.018152302243211363
+  },
+  {
+    "symbol": "AMD",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 483.0,
+    "high": 497.99,
+    "low": 481.0,
+    "close": 483.01,
+    "volume": 18704400,
+    "change": 0.07999999999998408,
+    "daily_return": 0.0001656554780195558
   },
   {
     "symbol": "AMZN",
@@ -9607,9 +9631,21 @@
     "high": 273.46,
     "low": 267.1,
     "close": 267.28,
-    "volume": 29882500,
+    "volume": 29941100,
     "change": -4.990000000000009,
     "daily_return": -0.01832739559995596
+  },
+  {
+    "symbol": "AMZN",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 267.24,
+    "high": 269.58,
+    "low": 264.71,
+    "close": 265.13,
+    "volume": 32106400,
+    "change": -2.1499999999999773,
+    "daily_return": -0.008043998802753582
   },
   {
     "symbol": "ANET",
@@ -12811,9 +12847,21 @@
     "high": 211.45,
     "low": 203.76,
     "close": 210.5,
-    "volume": 10004600,
+    "volume": 10008600,
     "change": 12.650000000000006,
     "daily_return": 0.06393732625726564
+  },
+  {
+    "symbol": "ANET",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 209.79,
+    "high": 210.11,
+    "low": 203.55,
+    "close": 203.62,
+    "volume": 7901000,
+    "change": -6.8799999999999955,
+    "daily_return": -0.03268408551068881
   },
   {
     "symbol": "AVGO",
@@ -16015,9 +16063,21 @@
     "high": 426.5,
     "low": 414.61,
     "close": 416.05,
-    "volume": 15838400,
+    "volume": 15859200,
     "change": -0.029999999999972715,
     "daily_return": -7.210151893860007e-05
+  },
+  {
+    "symbol": "AVGO",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 415.81,
+    "high": 424.92,
+    "low": 411.41,
+    "close": 417.82,
+    "volume": 13169000,
+    "change": 1.7699999999999818,
+    "daily_return": 0.0042542963586107005
   },
   {
     "symbol": "BE",
@@ -19219,9 +19279,21 @@
     "high": 249.99,
     "low": 231.18,
     "close": 237.16,
-    "volume": 15849800,
+    "volume": 15885700,
     "change": 25.94999999999999,
     "daily_return": 0.12286350078121296
+  },
+  {
+    "symbol": "BE",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 235.94,
+    "high": 253.31,
+    "low": 233.44,
+    "close": 236.22,
+    "volume": 11351400,
+    "change": -0.9399999999999977,
+    "daily_return": -0.003963568898633824
   },
   {
     "symbol": "BOTZ",
@@ -22423,9 +22495,21 @@
     "high": 38.15,
     "low": 37.75,
     "close": 37.81,
-    "volume": 408900,
+    "volume": 409600,
     "change": 0.3300000000000054,
     "daily_return": 0.008804695837780294
+  },
+  {
+    "symbol": "BOTZ",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 37.69,
+    "high": 37.9,
+    "low": 37.63,
+    "close": 37.82,
+    "volume": 729200,
+    "change": 0.00999999999999801,
+    "daily_return": 0.00026448029621787915
   },
   {
     "symbol": "CEG",
@@ -25627,9 +25711,21 @@
     "high": 285.5,
     "low": 277.95,
     "close": 278.68,
-    "volume": 2925800,
+    "volume": 2931000,
     "change": 0.3199999999999932,
     "daily_return": 0.0011495904583991706
+  },
+  {
+    "symbol": "CEG",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 279.81,
+    "high": 282.76,
+    "low": 276.7,
+    "close": 278.64,
+    "volume": 2261700,
+    "change": -0.040000000000020464,
+    "daily_return": -0.000143533802210494
   },
   {
     "symbol": "CRWV",
@@ -28831,9 +28927,21 @@
     "high": 111.83,
     "low": 105.44,
     "close": 107.73,
-    "volume": 87126700,
+    "volume": 87308400,
     "change": 17.41000000000001,
     "daily_return": 0.19275907883082388
+  },
+  {
+    "symbol": "CRWV",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 107.14,
+    "high": 117.49,
+    "low": 105.84,
+    "close": 106.29,
+    "volume": 50477700,
+    "change": -1.4399999999999977,
+    "daily_return": -0.01336675020885545
   },
   {
     "symbol": "DLR",
@@ -35239,9 +35347,21 @@
     "high": 346.48,
     "low": 340.88,
     "close": 343.54,
-    "volume": 24969800,
+    "volume": 25012000,
     "change": -0.2599999999999909,
     "daily_return": -0.0007562536358347612
+  },
+  {
+    "symbol": "GOOGL",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 345.77,
+    "high": 347.93,
+    "low": 343.76,
+    "close": 346.36,
+    "volume": 17822700,
+    "change": 2.819999999999993,
+    "daily_return": 0.008208651103219401
   },
   {
     "symbol": "META",
@@ -38443,9 +38563,21 @@
     "high": 604.5,
     "low": 578.21,
     "close": 578.85,
-    "volume": 16129000,
+    "volume": 16186900,
     "change": -20.269999999999982,
     "daily_return": -0.03383295500066762
+  },
+  {
+    "symbol": "META",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 580.71,
+    "high": 595.85,
+    "low": 579.39,
+    "close": 594.97,
+    "volume": 11129700,
+    "change": 16.120000000000005,
+    "daily_return": 0.02784831994471798
   },
   {
     "symbol": "MSFT",
@@ -41647,9 +41779,21 @@
     "high": 501.5,
     "low": 491.52,
     "close": 492.43,
-    "volume": 28557200,
+    "volume": 29001500,
     "change": -11.379999999999995,
     "daily_return": -0.022587880351719887
+  },
+  {
+    "symbol": "MSFT",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 493.27,
+    "high": 501.34,
+    "low": 493.01,
+    "close": 496.88,
+    "volume": 23017200,
+    "change": 4.449999999999989,
+    "daily_return": 0.009036817415673271
   },
   {
     "symbol": "MU",
@@ -44851,9 +44995,21 @@
     "high": 935.8,
     "low": 899.54,
     "close": 911.29,
-    "volume": 36606200,
+    "volume": 36804900,
     "change": 42.76999999999998,
     "daily_return": 0.049244692119928136
+  },
+  {
+    "symbol": "MU",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 912.89,
+    "high": 978.0,
+    "low": 906.5,
+    "close": 949.83,
+    "volume": 36462500,
+    "change": 38.54000000000008,
+    "daily_return": 0.042291696386441285
   },
   {
     "symbol": "NVDA",
@@ -48055,9 +48211,21 @@
     "high": 225.1,
     "low": 220.2,
     "close": 224.09,
-    "volume": 108543600,
+    "volume": 108783600,
     "change": 6.590000000000003,
     "daily_return": 0.030298850574712658
+  },
+  {
+    "symbol": "NVDA",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 225.06,
+    "high": 227.23,
+    "low": 223.71,
+    "close": 225.3,
+    "volume": 98607900,
+    "change": 1.210000000000008,
+    "daily_return": 0.0053996162256236685
   },
   {
     "symbol": "PLTR",
@@ -51259,9 +51427,21 @@
     "high": 175.09,
     "low": 168.34,
     "close": 171.04,
-    "volume": 35102800,
+    "volume": 35220300,
     "change": -3.9000000000000057,
     "daily_return": -0.0222933577226478
+  },
+  {
+    "symbol": "PLTR",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 173.4,
+    "high": 179.91,
+    "low": 172.33,
+    "close": 179.01,
+    "volume": 36369500,
+    "change": 7.969999999999999,
+    "daily_return": 0.046597287184284374
   },
   {
     "symbol": "SMCI",
@@ -54463,9 +54643,21 @@
     "high": 38.15,
     "low": 33.94,
     "close": 37.61,
-    "volume": 164983000,
+    "volume": 165736400,
     "change": 6.009999999999998,
     "daily_return": 0.19018987341772145
+  },
+  {
+    "symbol": "SMCI",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 38.28,
+    "high": 42.31,
+    "low": 38.2,
+    "close": 39.16,
+    "volume": 122419600,
+    "change": 1.5499999999999972,
+    "daily_return": 0.04121244349906932
   },
   {
     "symbol": "TSM",
@@ -57667,9 +57859,21 @@
     "high": 433.28,
     "low": 427.02,
     "close": 429.15,
-    "volume": 9521600,
+    "volume": 9534200,
     "change": 7.089999999999975,
     "daily_return": 0.01679855944652413
+  },
+  {
+    "symbol": "TSM",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 429.15,
+    "high": 436.04,
+    "low": 428.39,
+    "close": 430.49,
+    "volume": 8176300,
+    "change": 1.3400000000000318,
+    "daily_return": 0.0031224513573343397
   },
   {
     "symbol": "VRT",
@@ -60871,9 +61075,21 @@
     "high": 298.29,
     "low": 286.01,
     "close": 288.36,
-    "volume": 4019800,
+    "volume": 4034300,
     "change": 6.550000000000011,
     "daily_return": 0.02324261026933044
+  },
+  {
+    "symbol": "VRT",
+    "category": "ai_basket",
+    "date": "2026-08-13",
+    "open": 287.95,
+    "high": 293.51,
+    "low": 286.88,
+    "close": 287.07,
+    "volume": 3115300,
+    "change": -1.2900000000000205,
+    "daily_return": -0.00447357469829387
   },
   {
     "symbol": "XLB",
@@ -64080,6 +64296,18 @@
     "daily_return": -0.012396694214876103
   },
   {
+    "symbol": "XLB",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 52.6,
+    "high": 52.78,
+    "low": 52.22,
+    "close": 52.31,
+    "volume": 10407100,
+    "change": -0.269999999999996,
+    "daily_return": -0.005135032331684976
+  },
+  {
     "symbol": "XLC",
     "category": "sector",
     "date": "2025-07-22",
@@ -67284,6 +67512,18 @@
     "daily_return": -0.008987148377819719
   },
   {
+    "symbol": "XLC",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 110.86,
+    "high": 112.61,
+    "low": 110.82,
+    "close": 112.55,
+    "volume": 5538700,
+    "change": 2.280000000000001,
+    "daily_return": 0.020676521265983506
+  },
+  {
     "symbol": "XLE",
     "category": "sector",
     "date": "2025-07-22",
@@ -70483,9 +70723,21 @@
     "high": 61.17,
     "low": 60.34,
     "close": 61.03,
-    "volume": 22576400,
+    "volume": 22584200,
     "change": 0.10000000000000142,
     "daily_return": 0.0016412276382734518
+  },
+  {
+    "symbol": "XLE",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 60.52,
+    "high": 61.13,
+    "low": 60.23,
+    "close": 61.06,
+    "volume": 20698000,
+    "change": 0.030000000000001137,
+    "daily_return": 0.0004915615271178295
   },
   {
     "symbol": "XLF",
@@ -73687,9 +73939,21 @@
     "high": 58.0,
     "low": 57.68,
     "close": 57.92,
-    "volume": 18523600,
+    "volume": 18531700,
     "change": 0.12000000000000455,
     "daily_return": 0.002076124567474127
+  },
+  {
+    "symbol": "XLF",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 58.19,
+    "high": 58.31,
+    "low": 57.75,
+    "close": 58.26,
+    "volume": 23185500,
+    "change": 0.3399999999999963,
+    "daily_return": 0.00587016574585629
   },
   {
     "symbol": "XLI",
@@ -76896,6 +77160,18 @@
     "daily_return": 0.0009693053311793583
   },
   {
+    "symbol": "XLI",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 186.48,
+    "high": 186.67,
+    "low": 184.74,
+    "close": 185.79,
+    "volume": 4942500,
+    "change": -0.09000000000000341,
+    "daily_return": -0.00048418334409298155
+  },
+  {
     "symbol": "XLK",
     "category": "sector",
     "date": "2025-07-22",
@@ -80095,9 +80371,21 @@
     "high": 189.59,
     "low": 188.33,
     "close": 188.86,
-    "volume": 5883400,
+    "volume": 5887200,
     "change": 2.7700000000000102,
     "daily_return": 0.014885270568004783
+  },
+  {
+    "symbol": "XLK",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 189.13,
+    "high": 191.74,
+    "low": 188.86,
+    "close": 190.77,
+    "volume": 4870900,
+    "change": 1.9099999999999966,
+    "daily_return": 0.010113311447633149
   },
   {
     "symbol": "XLP",
@@ -83299,9 +83587,21 @@
     "high": 85.13,
     "low": 84.01,
     "close": 85.08,
-    "volume": 6433400,
+    "volume": 6448300,
     "change": 0.39000000000000057,
     "daily_return": 0.004605030109812263
+  },
+  {
+    "symbol": "XLP",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 85.61,
+    "high": 86.2,
+    "low": 85.51,
+    "close": 86.0,
+    "volume": 10351100,
+    "change": 0.9200000000000017,
+    "daily_return": 0.01081335213916316
   },
   {
     "symbol": "XLRE",
@@ -86508,6 +86808,18 @@
     "daily_return": 0.009301270417422952
   },
   {
+    "symbol": "XLRE",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 44.74,
+    "high": 45.2,
+    "low": 44.69,
+    "close": 45.12,
+    "volume": 5760400,
+    "change": 0.6299999999999955,
+    "daily_return": 0.014160485502359979
+  },
+  {
     "symbol": "XLU",
     "category": "sector",
     "date": "2025-07-22",
@@ -89707,9 +90019,21 @@
     "high": 43.96,
     "low": 43.64,
     "close": 43.84,
-    "volume": 15974500,
+    "volume": 15979000,
     "change": 0.21000000000000085,
     "daily_return": 0.004813201925280789
+  },
+  {
+    "symbol": "XLU",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 43.89,
+    "high": 44.2,
+    "low": 43.88,
+    "close": 44.04,
+    "volume": 17854200,
+    "change": 0.19999999999999574,
+    "daily_return": 0.0045620437956203404
   },
   {
     "symbol": "XLV",
@@ -92911,9 +93235,21 @@
     "high": 168.88,
     "low": 165.76,
     "close": 168.44,
-    "volume": 7137600,
+    "volume": 7138300,
     "change": 0.4300000000000068,
     "daily_return": 0.002559371465984208
+  },
+  {
+    "symbol": "XLV",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 169.49,
+    "high": 169.71,
+    "low": 167.84,
+    "close": 168.38,
+    "volume": 6722800,
+    "change": -0.060000000000002274,
+    "daily_return": -0.0003562099263832954
   },
   {
     "symbol": "XLY",
@@ -96115,9 +96451,21 @@
     "high": 119.32,
     "low": 117.55,
     "close": 117.89,
-    "volume": 4478500,
+    "volume": 4486900,
     "change": -1.3499999999999943,
     "daily_return": -0.011321704126132124
+  },
+  {
+    "symbol": "XLY",
+    "category": "sector",
+    "date": "2026-08-13",
+    "open": 118.04,
+    "high": 118.93,
+    "low": 117.89,
+    "close": 118.45,
+    "volume": 4520600,
+    "change": 0.5600000000000023,
+    "daily_return": 0.004750190855882621
   },
   {
     "symbol": "^GSPC",
@@ -99322,5 +99670,17 @@
     "volume": 4574170000,
     "change": 20.300000000000182,
     "daily_return": 0.0026267436142957197
+  },
+  {
+    "symbol": "^GSPC",
+    "category": "benchmark",
+    "date": "2026-08-13",
+    "open": 7763.18,
+    "high": 7816.7,
+    "low": 7763.18,
+    "close": 7798.99,
+    "volume": 4833230000,
+    "change": 50.48999999999978,
+    "daily_return": 0.0065160998903013205
   }
 ]
