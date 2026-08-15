@@ -1338,5 +1338,10 @@
     "symbol": "^GSPC",
     "date": "2026-08-13",
     "rolling_20d_volatility": 0.008802455526428448
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-08-14",
+    "rolling_20d_volatility": 0.008397481235443241
   }
 ]
