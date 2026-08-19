@@ -40,7 +40,7 @@ flowchart LR
 
 ### Orchestration & scheduling — how "automatic" actually works
 
-Everything is driven by **one GitHub Actions workflow on one daily cron trigger** (`0 6 * * *`), not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
+Everything is driven by **one GitHub Actions workflow on one daily cron trigger** (`0 13 * * *`), not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
 
 1. **Ingest** — pull all data sources, land raw files in the R2 bucket
 2. **Stage** — push the same files into the Databricks Unity Catalog volume
@@ -53,7 +53,7 @@ The Lakeflow job's own native cron trigger stays **disabled** — it only ever r
 
 Because Databricks Free Edition's serverless compute restricts outbound internet to a trusted-domain allowlist, all outward-facing work (calling free APIs, writing to R2, pushing to GitHub) happens from GitHub Actions, not from inside Databricks. Databricks only ever does the transform.
 
-**Weekly → daily (2026-07-22):** switched after a rate-limit review found no external API blocker — yfinance, FRED, Wikipedia, arXiv, and R2 all have generous headroom at daily volume, and the GitHub REST API's 5 requests/day is trivial even unauthenticated (`GH_TOKEN` skipped for now; see Section 7). The one real unknown is **Databricks Free Edition's compute quota** — untested at ~30 job-runs/month vs. the ~4/month this was originally built and proven against. **If that becomes a problem, reverting is a one-line change**: in `.github/workflows/pipeline.yml`, swap the cron back to `"0 6 * * 1"` (Mondays). Watch for Databricks Jobs API errors in the "Trigger Lakeflow transform job" step as the signal something's wrong.
+**Weekly → daily (2026-07-22):** switched after a rate-limit review found no external API blocker — yfinance, FRED, Wikipedia, arXiv, and R2 all have generous headroom at daily volume, and the GitHub REST API's 5 requests/day is trivial even unauthenticated (`GH_TOKEN` skipped for now; see Section 7). The one real unknown is **Databricks Free Edition's compute quota** — untested at ~30 job-runs/month vs. the ~4/month this was originally built and proven against. **If that becomes a problem, reverting is a one-line change**: in `.github/workflows/pipeline.yml`, swap the cron back to `"0 13 * * 1"` (Mondays). Watch for Databricks Jobs API errors in the "Trigger Lakeflow transform job" step as the signal something's wrong.
 
 Switching to daily also resolves the `weekly_star_growth` / `change_from_prior_week` gold columns' semantics: they're computed via `LAG(..., 7)` (7 *rows*, i.e. 7 daily snapshots) rather than `LAG(1)`, since one row now accumulates per source per calendar day. At the original weekly cadence `LAG(1)` was correct; at daily cadence it would have silently become day-over-day instead of week-over-week.
 

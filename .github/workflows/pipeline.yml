@@ -1,15 +1,22 @@
 # Single daily cron: ingest -> trigger transform -> export -> publish
-# Was weekly ("0 6 * * 1", Mondays) through Phase 5; switched to daily once the
+# Was weekly ("0 13 * * 1", Mondays) through Phase 5; switched to daily once the
 # rate-limit review found no external API blocker. If Databricks Free Edition
-# compute quota becomes an issue, revert to the line above — that's the only
-# change needed to roll back.
+# compute quota becomes an issue, revert to a weekly schedule at this same hour.
 name: pipeline
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Daily 06:00 UTC
-    - cron: "0 6 * * *"
+    # Daily 13:00 UTC (9am ET). Moved from 06:00 UTC on 2026-08-19 after two
+    # consecutive mornings where yfinance hadn't yet settled the prior day's
+    # close by 06:00 UTC (~10h after the 20:00 UTC market close) - confirmed
+    # live against yfinance both times, not assumed - so pull_market_data.py's
+    # NaN-OHLC safeguard correctly skipped that row, leaving the dashboard a
+    # trading day behind until the next run's trailing-3-day fetch caught up.
+    # 13:00 UTC gives ~17h of settlement buffer instead of ~10h. The
+    # trailing-window fetch still self-heals on the rare day even that isn't
+    # enough, same as before.
+    - cron: "0 13 * * *"
 
 permissions:
   contents: write
