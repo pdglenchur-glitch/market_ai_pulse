@@ -1628,14 +1628,20 @@
   {
     "symbol": "XLB",
     "date": "2026-08-19",
-    "volume": 10881700,
+    "volume": 10882900,
     "daily_return": 0.014291232135959868
   },
   {
     "symbol": "XLB",
     "date": "2026-08-20",
-    "volume": 1549861,
-    "daily_return": 0.0020944402132520835
+    "volume": 9366800,
+    "daily_return": -0.001904036557501931
+  },
+  {
+    "symbol": "XLB",
+    "date": "2026-08-21",
+    "volume": 1445478,
+    "daily_return": 0.019648988935520816
   },
   {
     "symbol": "XLC",
@@ -3272,8 +3278,14 @@
   {
     "symbol": "XLC",
     "date": "2026-08-20",
-    "volume": 383213,
-    "daily_return": 0.0008084800574919459
+    "volume": 3599100,
+    "daily_return": -0.005749191519942386
+  },
+  {
+    "symbol": "XLC",
+    "date": "2026-08-21",
+    "volume": 295369,
+    "daily_return": 0.003162269606071506
   },
   {
     "symbol": "XLE",
@@ -4904,14 +4916,20 @@
   {
     "symbol": "XLE",
     "date": "2026-08-19",
-    "volume": 25511000,
+    "volume": 25537800,
     "daily_return": -0.0015703517587939923
   },
   {
     "symbol": "XLE",
     "date": "2026-08-20",
-    "volume": 4432980,
-    "daily_return": 0.013054419628814066
+    "volume": 24288200,
+    "daily_return": 0.002673796791443877
+  },
+  {
+    "symbol": "XLE",
+    "date": "2026-08-21",
+    "volume": 3437425,
+    "daily_return": 0.005647058823529403
   },
   {
     "symbol": "XLF",
@@ -6542,14 +6560,20 @@
   {
     "symbol": "XLF",
     "date": "2026-08-19",
-    "volume": 35625000,
+    "volume": 35648300,
     "daily_return": -0.006224066390041606
   },
   {
     "symbol": "XLF",
     "date": "2026-08-20",
-    "volume": 3614106,
-    "daily_return": -0.0015657620041753012
+    "volume": 30696600,
+    "daily_return": -0.009220598469032604
+  },
+  {
+    "symbol": "XLF",
+    "date": "2026-08-21",
+    "volume": 2384435,
+    "daily_return": 0.010359964881474913
   },
   {
     "symbol": "XLI",
@@ -8180,14 +8204,20 @@
   {
     "symbol": "XLI",
     "date": "2026-08-19",
-    "volume": 8304000,
+    "volume": 8312100,
     "daily_return": -0.008824971400555671
   },
   {
     "symbol": "XLI",
     "date": "2026-08-20",
-    "volume": 940092,
-    "daily_return": -0.006540258312723263
+    "volume": 6497700,
+    "daily_return": -0.011981313547677815
+  },
+  {
+    "symbol": "XLI",
+    "date": "2026-08-21",
+    "volume": 483228,
+    "daily_return": 0.00589642320743173
   },
   {
     "symbol": "XLK",
@@ -9818,14 +9848,20 @@
   {
     "symbol": "XLK",
     "date": "2026-08-19",
-    "volume": 7303400,
+    "volume": 7310400,
     "daily_return": -0.010666953992026818
   },
   {
     "symbol": "XLK",
     "date": "2026-08-20",
-    "volume": 754616,
-    "daily_return": -0.0031583532999345685
+    "volume": 5010700,
+    "daily_return": -0.002940535830973601
+  },
+  {
+    "symbol": "XLK",
+    "date": "2026-08-21",
+    "volume": 680499,
+    "daily_return": 0.002075368651010352
   },
   {
     "symbol": "XLP",
@@ -11462,8 +11498,14 @@
   {
     "symbol": "XLP",
     "date": "2026-08-20",
-    "volume": 1607762,
-    "daily_return": -0.00774208458516295
+    "volume": 11494700,
+    "daily_return": -0.01409752715507295
+  },
+  {
+    "symbol": "XLP",
+    "date": "2026-08-21",
+    "volume": 993620,
+    "daily_return": 0.002578527894983745
   },
   {
     "symbol": "XLRE",
@@ -13094,14 +13136,20 @@
   {
     "symbol": "XLRE",
     "date": "2026-08-19",
-    "volume": 4615500,
+    "volume": 4617600,
     "daily_return": 0.00806632310105309
   },
   {
     "symbol": "XLRE",
     "date": "2026-08-20",
-    "volume": 609368,
-    "daily_return": 0.004000889086463652
+    "volume": 4409000,
+    "daily_return": 0.002000444543231747
+  },
+  {
+    "symbol": "XLRE",
+    "date": "2026-08-21",
+    "volume": 550336,
+    "daily_return": 0.0028837622005324437
   },
   {
     "symbol": "XLU",
@@ -14732,14 +14780,20 @@
   {
     "symbol": "XLU",
     "date": "2026-08-19",
-    "volume": 15810500,
+    "volume": 15856400,
     "daily_return": 0.0
   },
   {
     "symbol": "XLU",
     "date": "2026-08-20",
-    "volume": 2061895,
-    "daily_return": 0.004316219900045382
+    "volume": 17073400,
+    "daily_return": -0.005679236710586097
+  },
+  {
+    "symbol": "XLU",
+    "date": "2026-08-21",
+    "volume": 1624389,
+    "daily_return": -0.00228466986520451
   },
   {
     "symbol": "XLV",
@@ -16370,14 +16424,20 @@
   {
     "symbol": "XLV",
     "date": "2026-08-19",
-    "volume": 16527700,
+    "volume": 16538900,
     "daily_return": 0.03505567666293535
   },
   {
     "symbol": "XLV",
     "date": "2026-08-20",
-    "volume": 1507889,
-    "daily_return": -0.004553734061930848
+    "volume": 9672200,
+    "daily_return": -0.018727231329690463
+  },
+  {
+    "symbol": "XLV",
+    "date": "2026-08-21",
+    "volume": 1287758,
+    "daily_return": 0.004698648413481074
   },
   {
     "symbol": "XLY",
@@ -18014,7 +18074,13 @@
   {
     "symbol": "XLY",
     "date": "2026-08-20",
-    "volume": 880633,
-    "daily_return": -0.011215110886246717
+    "volume": 5155600,
+    "daily_return": -0.0161059111223543
+  },
+  {
+    "symbol": "XLY",
+    "date": "2026-08-21",
+    "volume": 630756,
+    "daily_return": 0.002913952691120922
   }
 ]
