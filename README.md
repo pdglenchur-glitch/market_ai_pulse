@@ -25,12 +25,12 @@ Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner
 Beyond the live dashboard, [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) refreshes automatically every Monday and pulls the same published data to dig into a few questions the dashboard itself doesn't answer directly. Every bullet below is generated straight from that run, two sentences or less each, and updates automatically every Monday, including how it moved versus the week before.
 
 <!-- KEY_FINDINGS_START -->
-- The AI basket has outperformed the S&P 500 by **+66.8 points** over the trailing year (+90.2% vs. +23.4%). The spread is up 6.2pts versus last week's 60.7pts (2026-08-07).
-- Routine day-to-day AI-sector search attention shows no reliable link to stock moves (strongest lag correlation only +0.16), but the biggest attention spikes show a **+6.0-point** swing between the return before and after each one. That swing is flat versus last week's 6.0pts (2026-08-07).
-- **NVDA** still accounts for **29%** of the AI basket's trading volume, though the basket-wide Herfindahl index of 1281 is now unconcentrated overall. NVDA's share is down 0.1% versus last week's 29.5% (2026-08-07).
-- **10 of 11** sectors fell on rising-yield days and rallied on falling-yield days as expected, with XLE the exception. The count following the pattern is flat versus last week's 10 sectors (2026-08-07).
-- Realized volatility peaked at **1.3%** on 2026-04-09 and has since eased to **0.84%** as of the latest reading. The latest reading is down 0.07% versus last week's 0.91% (2026-08-07).
-- The infrastructure names added to the AI basket returned **+137.1%** on an equal-weighted basis versus **+44.1%** for the original core cohort, though 3 of those infrastructure names are actually down over the same window. The gap is up 17.9pts versus last week's 75.1pts (2026-08-07).
+- The AI basket has outperformed the S&P 500 by **+55.2 points** over the trailing year (+76.4% vs. +21.3%). The spread is down 11.7pts versus last week's 66.8pts (2026-08-14).
+- Routine day-to-day AI-sector search attention shows no reliable link to stock moves (strongest lag correlation only +0.16), but the biggest attention spikes show a **+6.0-point** swing between the return before and after each one. That swing is flat versus last week's 6.0pts (2026-08-14).
+- **NVDA** still accounts for **29%** of the AI basket's trading volume, though the basket-wide Herfindahl index of 1277 is now unconcentrated overall. NVDA's share is down 0.1% versus last week's 29.4% (2026-08-14).
+- **10 of 11** sectors fell on rising-yield days and rallied on falling-yield days as expected, with XLE the exception. The count following the pattern is flat versus last week's 10 sectors (2026-08-14).
+- Realized volatility peaked at **1.3%** on 2026-04-09 and has since eased to **0.84%** as of the latest reading. The latest reading is flat versus last week's 0.84% (2026-08-14).
+- The infrastructure names added to the AI basket returned **+114.1%** on an equal-weighted basis versus **+37.6%** for the original core cohort, though 3 of those infrastructure names are actually down over the same window. The gap is down 16.5pts versus last week's 93.0pts (2026-08-14).
 <!-- KEY_FINDINGS_END -->
 
 Full methodology, all six findings and their week-over-week trend, and the charts behind them are in the notebook, along with instructions for re-running it against whatever the pipeline has accumulated since.
