@@ -1990,6 +1990,11 @@
     "count": 607
   },
   {
+    "category": "cs.AI",
+    "snapshot_date": "2026-08-24",
+    "count": 633
+  },
+  {
     "category": "cs.LG",
     "snapshot_date": "2025-07-22",
     "count": 746
@@ -3978,5 +3983,10 @@
     "category": "cs.LG",
     "snapshot_date": "2026-08-23",
     "count": 549
+  },
+  {
+    "category": "cs.LG",
+    "snapshot_date": "2026-08-24",
+    "count": 514
   }
 ]
