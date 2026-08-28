@@ -102,12 +102,12 @@
   {
     "symbol": "^GSPC",
     "date": "2025-08-19",
-    "rolling_20d_volatility": 0.006832760633653195
+    "rolling_20d_volatility": 0.006832760633653196
   },
   {
     "symbol": "^GSPC",
     "date": "2025-08-20",
-    "rolling_20d_volatility": 0.0066630732933930775
+    "rolling_20d_volatility": 0.006663073293393078
   },
   {
     "symbol": "^GSPC",
@@ -157,7 +157,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-09-04",
-    "rolling_20d_volatility": 0.006100045328014779
+    "rolling_20d_volatility": 0.006100045328014778
   },
   {
     "symbol": "^GSPC",
@@ -297,7 +297,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-10-14",
-    "rolling_20d_volatility": 0.008108865532468602
+    "rolling_20d_volatility": 0.0081088655324686
   },
   {
     "symbol": "^GSPC",
@@ -367,7 +367,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-11-03",
-    "rolling_20d_volatility": 0.009201283211994225
+    "rolling_20d_volatility": 0.009201283211994227
   },
   {
     "symbol": "^GSPC",
@@ -392,12 +392,12 @@
   {
     "symbol": "^GSPC",
     "date": "2025-11-10",
-    "rolling_20d_volatility": 0.007496276111922988
+    "rolling_20d_volatility": 0.007496276111922986
   },
   {
     "symbol": "^GSPC",
     "date": "2025-11-11",
-    "rolling_20d_volatility": 0.007466043269302727
+    "rolling_20d_volatility": 0.007466043269302728
   },
   {
     "symbol": "^GSPC",
@@ -417,7 +417,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-11-17",
-    "rolling_20d_volatility": 0.008153660541440878
+    "rolling_20d_volatility": 0.008153660541440877
   },
   {
     "symbol": "^GSPC",
@@ -442,7 +442,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-11-24",
-    "rolling_20d_volatility": 0.00923957652793083
+    "rolling_20d_volatility": 0.009239576527930832
   },
   {
     "symbol": "^GSPC",
@@ -482,7 +482,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-12-05",
-    "rolling_20d_volatility": 0.008714063574612178
+    "rolling_20d_volatility": 0.008714063574612177
   },
   {
     "symbol": "^GSPC",
@@ -517,7 +517,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-12-16",
-    "rolling_20d_volatility": 0.007372240409192469
+    "rolling_20d_volatility": 0.0073722404091924685
   },
   {
     "symbol": "^GSPC",
@@ -527,7 +527,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-12-18",
-    "rolling_20d_volatility": 0.007766456709157874
+    "rolling_20d_volatility": 0.007766456709157873
   },
   {
     "symbol": "^GSPC",
@@ -567,7 +567,7 @@
   {
     "symbol": "^GSPC",
     "date": "2025-12-31",
-    "rolling_20d_volatility": 0.005684897517650077
+    "rolling_20d_volatility": 0.005684897517650078
   },
   {
     "symbol": "^GSPC",
@@ -642,7 +642,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-01-23",
-    "rolling_20d_volatility": 0.00667465308036567
+    "rolling_20d_volatility": 0.006674653080365671
   },
   {
     "symbol": "^GSPC",
@@ -692,12 +692,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-02-06",
-    "rolling_20d_volatility": 0.008580073823406972
+    "rolling_20d_volatility": 0.008580073823406973
   },
   {
     "symbol": "^GSPC",
     "date": "2026-02-09",
-    "rolling_20d_volatility": 0.008519496667330931
+    "rolling_20d_volatility": 0.008519496667330933
   },
   {
     "symbol": "^GSPC",
@@ -707,7 +707,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-02-11",
-    "rolling_20d_volatility": 0.008532967185128899
+    "rolling_20d_volatility": 0.008532967185128897
   },
   {
     "symbol": "^GSPC",
@@ -747,7 +747,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-02-24",
-    "rolling_20d_volatility": 0.008046034277028378
+    "rolling_20d_volatility": 0.008046034277028376
   },
   {
     "symbol": "^GSPC",
@@ -797,7 +797,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-03-10",
-    "rolling_20d_volatility": 0.007333517850288678
+    "rolling_20d_volatility": 0.007333517850288679
   },
   {
     "symbol": "^GSPC",
@@ -857,12 +857,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-03-26",
-    "rolling_20d_volatility": 0.008958931732021681
+    "rolling_20d_volatility": 0.00895893173202168
   },
   {
     "symbol": "^GSPC",
     "date": "2026-03-27",
-    "rolling_20d_volatility": 0.009457080588706854
+    "rolling_20d_volatility": 0.009457080588706852
   },
   {
     "symbol": "^GSPC",
@@ -872,7 +872,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-03-31",
-    "rolling_20d_volatility": 0.011867313285807816
+    "rolling_20d_volatility": 0.011867313285807818
   },
   {
     "symbol": "^GSPC",
@@ -892,7 +892,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-04-07",
-    "rolling_20d_volatility": 0.011393279794759204
+    "rolling_20d_volatility": 0.011393279794759202
   },
   {
     "symbol": "^GSPC",
@@ -952,7 +952,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-04-23",
-    "rolling_20d_volatility": 0.011523537333662235
+    "rolling_20d_volatility": 0.011523537333662234
   },
   {
     "symbol": "^GSPC",
@@ -1092,7 +1092,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-06-03",
-    "rolling_20d_volatility": 0.006430936305663924
+    "rolling_20d_volatility": 0.006430936305663925
   },
   {
     "symbol": "^GSPC",
@@ -1107,7 +1107,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-06-08",
-    "rolling_20d_volatility": 0.008248874596693372
+    "rolling_20d_volatility": 0.008248874596693373
   },
   {
     "symbol": "^GSPC",
@@ -1142,12 +1142,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-06-17",
-    "rolling_20d_volatility": 0.010375373899594803
+    "rolling_20d_volatility": 0.010375373899594802
   },
   {
     "symbol": "^GSPC",
     "date": "2026-06-18",
-    "rolling_20d_volatility": 0.010378211789308846
+    "rolling_20d_volatility": 0.010378211789308844
   },
   {
     "symbol": "^GSPC",
@@ -1157,7 +1157,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-06-23",
-    "rolling_20d_volatility": 0.010871731730680597
+    "rolling_20d_volatility": 0.010871731730680595
   },
   {
     "symbol": "^GSPC",
@@ -1182,12 +1182,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-06-30",
-    "rolling_20d_volatility": 0.011162166619110783
+    "rolling_20d_volatility": 0.011162166619110785
   },
   {
     "symbol": "^GSPC",
     "date": "2026-07-01",
-    "rolling_20d_volatility": 0.011157890542972095
+    "rolling_20d_volatility": 0.011157890542972096
   },
   {
     "symbol": "^GSPC",
@@ -1227,7 +1227,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-07-14",
-    "rolling_20d_volatility": 0.008034153852684618
+    "rolling_20d_volatility": 0.008034153852684616
   },
   {
     "symbol": "^GSPC",
@@ -1242,12 +1242,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-07-17",
-    "rolling_20d_volatility": 0.006983266142106441
+    "rolling_20d_volatility": 0.006983266142106442
   },
   {
     "symbol": "^GSPC",
     "date": "2026-07-20",
-    "rolling_20d_volatility": 0.0065354625064180894
+    "rolling_20d_volatility": 0.00653546250641809
   },
   {
     "symbol": "^GSPC",
@@ -1257,12 +1257,12 @@
   {
     "symbol": "^GSPC",
     "date": "2026-07-22",
-    "rolling_20d_volatility": 0.005883532372887181
+    "rolling_20d_volatility": 0.00588353237288718
   },
   {
     "symbol": "^GSPC",
     "date": "2026-07-23",
-    "rolling_20d_volatility": 0.006557654384541868
+    "rolling_20d_volatility": 0.0065576543845418675
   },
   {
     "symbol": "^GSPC",
@@ -1352,7 +1352,7 @@
   {
     "symbol": "^GSPC",
     "date": "2026-08-18",
-    "rolling_20d_volatility": 0.008576408885835732
+    "rolling_20d_volatility": 0.00857640888583573
   },
   {
     "symbol": "^GSPC",
@@ -1382,6 +1382,11 @@
   {
     "symbol": "^GSPC",
     "date": "2026-08-26",
-    "rolling_20d_volatility": 0.007395072228852085
+    "rolling_20d_volatility": 0.007413504495391393
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-08-27",
+    "rolling_20d_volatility": 0.0067342334156172395
   }
 ]
