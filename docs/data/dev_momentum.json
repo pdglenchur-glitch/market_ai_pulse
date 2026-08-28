@@ -182,7 +182,7 @@
   {
     "repo": "huggingface/transformers",
     "snapshot_date": "2026-08-28",
-    "stars": 164571
+    "stars": 164579
   },
   {
     "repo": "langchain-ai/langchain",
@@ -367,7 +367,7 @@
   {
     "repo": "langchain-ai/langchain",
     "snapshot_date": "2026-08-28",
-    "stars": 145204
+    "stars": 145207
   },
   {
     "repo": "ollama/ollama",
@@ -552,7 +552,7 @@
   {
     "repo": "ollama/ollama",
     "snapshot_date": "2026-08-28",
-    "stars": 179655
+    "stars": 179663
   },
   {
     "repo": "openai/openai-python",
@@ -737,7 +737,7 @@
   {
     "repo": "openai/openai-python",
     "snapshot_date": "2026-08-28",
-    "stars": 31492
+    "stars": 31493
   },
   {
     "repo": "pytorch/pytorch",
@@ -922,6 +922,6 @@
   {
     "repo": "pytorch/pytorch",
     "snapshot_date": "2026-08-28",
-    "stars": 102652
+    "stars": 102654
   }
 ]
