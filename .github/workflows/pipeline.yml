@@ -1,22 +1,24 @@
-# Single daily cron: ingest -> trigger transform -> export -> publish
-# Was weekly ("0 13 * * 1", Mondays) through Phase 5; switched to daily once the
-# rate-limit review found no external API blocker. If Databricks Free Edition
-# compute quota becomes an issue, revert to a weekly schedule at this same hour.
+# Single weekly cron: ingest -> trigger transform -> export -> publish
+# Cadence history: weekly (Mondays) through Phase 5 -> daily on 2026-07-22 after
+# a rate-limit review found no external API blocker -> back to weekly on
+# 2026-09-01. Daily cadence (~30 job runs + ~30 SQL-warehouse spin-ups a month)
+# repeatedly tripped Databricks Free Edition's serverless compute throttle -
+# "Triggering new runs ... is currently disabled temporarily" on 2026-08-27, and
+# a warehouse "Cannot create the resource" + throttle again on 2026-09-01. Weekly
+# is ~4 of each a month, well inside Free Edition's tolerance, and the
+# trailing-window fetches (see below) keep it gap-free at that cadence.
 name: pipeline
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Daily 13:00 UTC (9am ET). Moved from 06:00 UTC on 2026-08-19 after two
-    # consecutive mornings where yfinance hadn't yet settled the prior day's
-    # close by 06:00 UTC (~10h after the 20:00 UTC market close) - confirmed
-    # live against yfinance both times, not assumed - so pull_market_data.py's
-    # NaN-OHLC safeguard correctly skipped that row, leaving the dashboard a
-    # trading day behind until the next run's trailing-3-day fetch caught up.
-    # 13:00 UTC gives ~17h of settlement buffer instead of ~10h. The
-    # trailing-window fetch still self-heals on the rare day even that isn't
-    # enough, same as before.
-    - cron: "0 13 * * *"
+    # Mondays 13:00 UTC (9am ET). The hour was moved from 06:00 to 13:00 on
+    # 2026-08-19 for yfinance settlement buffer (a prior day's finalized close
+    # can lag the 20:00 UTC market close by more than 10h); a Monday run also
+    # has the whole weekend of settlement behind it. GitHub's scheduler often
+    # fires this hours late - fine at weekly cadence, and every ingestion
+    # source re-fetches a trailing window so a late or skipped run self-heals.
+    - cron: "0 13 * * 1"
 
 permissions:
   contents: write
@@ -54,7 +56,7 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: python export_gold_to_json.py
         working-directory: orchestration
-      - name: Generate daily pipeline report
+      - name: Generate the pipeline run report
         if: always()
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -62,18 +64,20 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           pip install jupyter pandas
-          jupyter nbconvert --to notebook --execute --inplace monitoring/daily_report.ipynb
+          jupyter nbconvert --to notebook --execute --inplace monitoring/pipeline_report.ipynb
       - name: Commit and push updated data
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/*.json monitoring/daily_report.ipynb
-          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data and daily pipeline report"
+          git add docs/data/*.json monitoring/pipeline_report.ipynb
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data and pipeline run report"
           git push
       # Everything below is additive and only ever touches analysis/key_findings.ipynb
-      # and analysis/key_findings_history.json. It never runs on any day but Monday, and
-      # it doesn't gate, block, or modify the dashboard-facing steps above in any way.
+      # and analysis/key_findings_history.json. It only runs on a Monday - which every
+      # scheduled run now is, so it refreshes once a week as intended; the gate still
+      # matters for a mid-week workflow_dispatch, which should not touch the weekly
+      # analysis. It doesn't gate, block, or modify the dashboard-facing steps above.
       - name: Check if today is Monday (weekly key-findings refresh day)
         id: day_check
         run: |
@@ -125,7 +129,7 @@ jobs:
             gh issue create --repo "$GITHUB_REPOSITORY" \
               --title "Pipeline failure: $(date -u +%Y-%m-%d)" \
               --label pipeline-failure \
-              --body "The daily pipeline failed and the dashboard may now be stale. See the run: $RUN_URL"
+              --body "The weekly pipeline failed and the dashboard may now be stale. See the run: $RUN_URL"
           fi
       - name: Close any open failure alert now that the pipeline recovered
         if: success()

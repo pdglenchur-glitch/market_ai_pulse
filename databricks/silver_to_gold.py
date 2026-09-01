@@ -3,6 +3,13 @@
 Each gold table is fully recomputed from silver on every run (cheap, since
 silver already holds the accumulated history) — no merge/upsert needed here.
 
+`daily_return` is `(close - LAG(close))` over date-ordered rows, i.e. return
+vs. the previous *row*, which is a true daily return only while silver has
+every trading day. The pipeline runs weekly, so this relies on
+pull_market_data.py re-capturing a wide trailing window each run to keep the
+market series gap-free; a gap would silently make one row's daily_return a
+multi-day return, which the dashboard would then compound as if daily.
+
 Runs inside the job via git_source; `spark` is provided by the runtime.
 """
 spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.gold")
@@ -164,8 +171,8 @@ spark.sql(
 )
 print("Built workspace.gold.attention_index")
 
-# --- dev_momentum: star count per repo per day (dashboard computes growth
-# over whatever window the viewer selects, client-side) ---
+# --- dev_momentum: star count per repo per snapshot (one per weekly run;
+# dashboard computes growth over whatever window the viewer selects, client-side) ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.dev_momentum AS
@@ -175,8 +182,9 @@ spark.sql(
 )
 print("Built workspace.gold.dev_momentum")
 
-# --- research_pace: arXiv trailing-7d submission count per day (dashboard
-# plots this as a trend line, filterable to whatever window is selected) ---
+# --- research_pace: arXiv trailing-7d submission count, one point per weekly
+# run - i.e. non-overlapping weekly windows (dashboard plots this as a trend
+# line, filterable to whatever window is selected) ---
 spark.sql(
     """
     CREATE OR REPLACE TABLE workspace.gold.research_pace AS

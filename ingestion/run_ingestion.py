@@ -18,7 +18,7 @@ source, not just Research Pace. Now each source is isolated: a failure
 is logged and skipped, and the run only fails loudly (non-zero exit, so
 the existing GitHub Issue alert fires) if every single source failed,
 which is the real "something's fundamentally broken" signal. A single
-missing source shows up instead in monitoring/daily_report.ipynb's
+missing source shows up instead in monitoring/pipeline_report.ipynb's
 per-source freshness check, which exists specifically for this.
 """
 import land_to_databricks_volume

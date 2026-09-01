@@ -1,18 +1,26 @@
 """Pull recent market data via yfinance: the S&P 500 benchmark, sector
 ETFs (for sector_rotation), and the AI basket (for ai_vs_market).
 
-Captures the trailing few settled days per symbol each run, not just the
-single latest one. Yahoo/yfinance's backend can lag publishing a trading
-day's finalized close by more than the ~12 hours between market close and
-the next morning's cron run - confirmed 2026-08-04, when Monday
-2026-08-03's close still wasn't available when Tuesday's scheduled run
-fired, and by the time it was, a single-day-per-run design had already
-moved on to whatever was then latest, permanently skipping 2026-08-03
-until it was manually backfilled. bronze_to_silver.py already MERGEs
-market_data by (symbol, date), so writing overlapping days each run is a
-no-op for dates already captured and a real recovery for ones that
-weren't - this makes the pipeline self-healing against that class of
-provider lag instead of needing a manual backfill every time it recurs.
+Captures a trailing window of settled days per symbol each run, not just
+the single latest one, for two reasons:
+
+1. Provider lag. Yahoo/yfinance can publish a trading day's finalized close
+   more than 12h after the market close - confirmed 2026-08-04, when Monday
+   2026-08-03's close wasn't available when Tuesday's run fired, and a
+   single-day-per-run design had already moved past it, permanently skipping
+   that day until a manual backfill.
+2. Weekly cadence. The pipeline runs once a week (Mondays), so a run has to
+   cover every trading day since the last one - and enough extra to absorb a
+   run or two that GitHub's scheduler drops. RECENT_TRADING_DAYS_PER_RUN is
+   sized for roughly a month of missed runs.
+
+bronze_to_silver.py MERGEs market_data by (symbol, date), so writing
+overlapping days every run is a no-op for dates already captured and a real
+recovery for ones that weren't - the pipeline self-heals against both a
+late/dropped run and provider lag, with no manual backfill. Keeping every
+trading day dense also matters for correctness: silver_to_gold.py computes
+daily_return as (close - LAG(close)) over the date-ordered rows, so a gap
+would silently turn one row's "daily" return into a multi-day return.
 """
 import argparse
 import json
@@ -45,11 +53,15 @@ def symbol_category(symbol: str) -> str:
     return "ai_basket"
 
 
-RECENT_DAYS_PER_RUN = 3  # trailing settled days captured each run; see module docstring
+# Trailing settled trading days re-captured each run. Sized for weekly cadence
+# plus a wide margin: ~25 trading days is about five weeks, so the pipeline
+# stays gap-free even if GitHub's scheduler drops a month of Monday runs. See
+# the module docstring for why gap-free matters beyond just freshness.
+RECENT_TRADING_DAYS_PER_RUN = 25
 
 
 def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
-    data = yf.download(symbols, period="5d", interval="1d", group_by="ticker", progress=False)
+    data = yf.download(symbols, period="2mo", interval="1d", group_by="ticker", progress=False)
 
     records = []
     failed_symbols = []
@@ -68,7 +80,7 @@ def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
             failed_symbols.append(symbol)
             continue
 
-        for idx, row in history.tail(RECENT_DAYS_PER_RUN).iterrows():
+        for idx, row in history.tail(RECENT_TRADING_DAYS_PER_RUN).iterrows():
             records.append(
                 {
                     "symbol": symbol,

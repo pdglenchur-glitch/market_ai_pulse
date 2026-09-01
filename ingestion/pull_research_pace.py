@@ -25,7 +25,7 @@ def fetch_weekly_count(category: str) -> int:
     search_query = f"cat:{category} AND submittedDate:{date_range}"
 
     # arXiv occasionally rate-limits (429) or times out on a cold request;
-    # a bare, unretried call failing the whole daily pipeline over a
+    # a bare, unretried call failing the whole weekly pipeline over a
     # transient blip is a worse failure mode than waiting a few seconds.
     backoff = 5
     last_exc = None

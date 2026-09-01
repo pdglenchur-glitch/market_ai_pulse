@@ -1,6 +1,6 @@
 # Key Findings
 
-An analysis notebook that refreshes automatically every Monday, separate from the daily automated pipeline in the rest of this repo. The pipeline's job is to keep the dashboard current; this notebook's job is to periodically step back and ask what the accumulated history actually shows.
+An analysis notebook that refreshes automatically every Monday, as an additive step at the tail of the automated pipeline in the rest of this repo. The pipeline's job is to keep the dashboard current; this notebook's job is to periodically step back and ask what the accumulated history actually shows.
 
 **[`key_findings.ipynb`](key_findings.ipynb)** pulls directly from the live dashboard's exported JSON (the same files the dashboard itself reads), so it always analyzes whatever the pipeline has published as of the moment it runs. No local data sync, no credentials, no Databricks access needed.
 
@@ -15,7 +15,7 @@ An analysis notebook that refreshes automatically every Monday, separate from th
 
 ## Refreshing automatically (weekly)
 
-`pipeline.yml` adds a Monday-only step, after the day's dashboard data is already published, that re-executes this notebook and commits the result. It waits for GitHub Pages to actually be serving that day's data before running, since the notebook reads the live site rather than Databricks directly. This step is entirely additive: it never runs on any day but Monday, never blocks or modifies the daily dashboard pipeline, and only ever touches this notebook and `key_findings_history.json`.
+`pipeline.yml` adds a Monday-gated step, after that run's dashboard data is already published, that re-executes this notebook and commits the result. It waits for GitHub Pages to actually be serving the new data before running, since the notebook reads the live site rather than Databricks directly. This step is entirely additive: it only runs on a Monday (which every scheduled run now is, since the pipeline itself moved to a weekly Monday cron on 2026-09-01 — the gate still keeps a mid-week `workflow_dispatch` from touching the weekly analysis), never blocks or modifies the dashboard-facing steps, and only ever touches this notebook and `key_findings_history.json`.
 
 Each key finding above states how its headline number moved versus the prior week's run, computed directly from `key_findings_history.json`, a small file this notebook's own last cell appends to and that's committed alongside it. The comparison text is generated from that stored number, not written by hand, so it stays accurate as the numbers change week to week.
 

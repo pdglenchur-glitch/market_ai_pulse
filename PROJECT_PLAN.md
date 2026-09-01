@@ -4,7 +4,7 @@ A cron-scheduled, S3-backed, Databricks-powered ETL pipeline that publishes a fr
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
-**Status: build complete.** All of Phases 0–6 in Section 9 are done — the pipeline runs daily, unattended, and has been confirmed via a real scheduled (not manually dispatched) run. Remaining open items are non-blocking (Section 11).
+**Status: build complete.** All of Phases 0–6 in Section 9 are done — the pipeline runs weekly, unattended, and has been confirmed via a real scheduled (not manually dispatched) run. Remaining open items are non-blocking (Section 11).
 
 **How to use this doc:** hand Claude Code **one numbered step at a time** (e.g. "let's do step 1.3"), not a whole phase at once — the steps are deliberately broken into small, independently verifiable pieces so each one has a clear "did this work, yes or no" before moving to the next. Check items off as they're completed so the file stays an accurate log of where the build actually is.
 
@@ -40,24 +40,26 @@ flowchart LR
 
 ### Orchestration & scheduling — how "automatic" actually works
 
-Everything is driven by **one GitHub Actions workflow on one daily cron trigger** (`0 13 * * *`), not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
+Everything is driven by **one GitHub Actions workflow on one weekly cron trigger** (`0 13 * * 1`, Mondays 13:00 UTC), not several independent schedules. The single workflow run does all of this in sequence, and isn't considered successful until every step passes:
 
 1. **Ingest** — pull all data sources, land raw files in the R2 bucket
 2. **Stage** — push the same files into the Databricks Unity Catalog volume
 3. **Trigger transform** — call the Databricks Jobs API (`run-now`) to kick off the Lakeflow job, then **poll** the run status until it finishes
 4. **Export** — once the Lakeflow run succeeds, query the finished gold Delta tables directly from GitHub Actions using the Databricks SQL connector, write to JSON
 5. **Publish** — commit that JSON into `docs/data/` and push; GitHub Pages rebuilds automatically on push
-6. **Report** — regenerate `monitoring/daily_report.ipynb` (queries the gold tables and the GitHub Actions run history directly, independent of steps 4-5) and commit it. This step runs with `if: always()`, so it executes and gets committed even when an earlier step failed, since a bad day is exactly when the report is most useful — see `monitoring/README.md`.
+6. **Report** — regenerate `monitoring/pipeline_report.ipynb` (queries the gold tables and the GitHub Actions run history directly, independent of steps 4-5) and commit it. This step runs with `if: always()`, so it executes and gets committed even when an earlier step failed, since a bad run is exactly when the report is most useful — see `monitoring/README.md`.
 
 The Lakeflow job's own native cron trigger stays **disabled** — it only ever runs when called by step 3, which avoids two independent schedules drifting out of sync.
 
 Because Databricks Free Edition's serverless compute restricts outbound internet to a trusted-domain allowlist, all outward-facing work (calling free APIs, writing to R2, pushing to GitHub) happens from GitHub Actions, not from inside Databricks. Databricks only ever does the transform.
 
-**Weekly → daily (2026-07-22):** switched after a rate-limit review found no external API blocker — yfinance, FRED, Wikipedia, arXiv, and R2 all have generous headroom at daily volume, and the GitHub REST API's 5 requests/day is trivial even unauthenticated (`GH_TOKEN` skipped for now; see Section 7). The one real unknown is **Databricks Free Edition's compute quota** — untested at ~30 job-runs/month vs. the ~4/month this was originally built and proven against. **If that becomes a problem, reverting is a one-line change**: in `.github/workflows/pipeline.yml`, swap the cron back to `"0 13 * * 1"` (Mondays). Watch for Databricks Jobs API errors in the "Trigger Lakeflow transform job" step as the signal something's wrong.
+**Cadence history.** Built and proven weekly (Mondays) through Phase 5.
 
-**Update (2026-08-27):** that Jobs API error signal did fire — `NotFound: Triggering new runs for organization ... is currently disabled temporarily`, with the daily-report step failing alongside it on `BAD_REQUEST: Cannot create the resource` (blocked SQL warehouse). It was **not** the compute quota: the cause was an unmet **"Verify identity" prompt** in the Databricks Free Edition workspace, which gates serverless compute and job triggering account-wide until completed. Fixed with no code or cadence change by completing identity verification in the Databricks UI; the next run recovered fully. So if this exact error recurs, check the workspace for a "Verify identity" prompt before assuming a quota wall and reverting to weekly. A dormant leftover probe job (`market-ai-pulse-probe-bronze`, from the Section 3.14 Jobs-API de-risking) was also deleted from the workspace during this, purely as cleanup — it was referenced by nothing (`trigger_and_poll_job.py` only ever resolves `market-ai-pulse-transform` by exact name) and had no bearing on the failure or the fix. Full incident detail in `PROJECT_MEMORY.md` bug #21.
+- **Weekly → daily (2026-07-22):** switched after a rate-limit review found no external API blocker — yfinance, FRED, Wikipedia, arXiv, and R2 all have headroom at daily volume, and the GitHub REST API's 5 requests/day is trivial even unauthenticated. The one flagged unknown was **Databricks Free Edition's serverless compute limit**, untested at ~30 job-runs/month vs. the ~4/month it was proven against.
+- **2026-08-27:** the transform step failed with `NotFound: Triggering new runs ... is currently disabled temporarily` and the SQL warehouse with `BAD_REQUEST: Cannot create the resource`. Root cause that time was an unmet **"Verify identity" prompt** in the Databricks workspace, not usage — completing verification fixed it with no cadence change (`PROJECT_MEMORY.md` bug #21). A dormant leftover probe job was also deleted as cleanup, unrelated.
+- **Daily → weekly (2026-09-01):** the same errors recurred (`Cannot create the resource` on the warehouse at 17:15 UTC, then the triggering throttle at 18:04 UTC) with **no** identity prompt this time — i.e. the serverless compute throttle the daily-cadence risk note predicted, hit twice in a week. Reverted the cron to `"0 13 * * 1"`. Companion change: `pull_market_data.py` now re-captures ~25 trailing trading days per run (up from 3) so the market series stays gap-free at weekly cadence — a gap there would make `silver_to_gold.py`'s `(close - LAG(close))` daily_return a multi-day return that the dashboard compounds as if daily. Full detail in `PROJECT_MEMORY.md` bug #23.
 
-Switching to daily also resolves the `weekly_star_growth` / `change_from_prior_week` gold columns' semantics: they're computed via `LAG(..., 7)` (7 *rows*, i.e. 7 daily snapshots) rather than `LAG(1)`, since one row now accumulates per source per calendar day. At the original weekly cadence `LAG(1)` was correct; at daily cadence it would have silently become day-over-day instead of week-over-week.
+(An earlier draft of this note claimed the daily switch also required moving `weekly_star_growth` / `change_from_prior_week` from `LAG(1)` to `LAG(7)`. Those gold columns were later removed entirely — bug #14 — in favour of client-side window math in the dashboard, so no cadence-dependent `LAG` remains.)
 
 ---
 
@@ -85,16 +87,16 @@ This path is what the raw-file-landing step and the Lakeflow bronze read task bo
 | `yfinance` | Benchmark (`^GSPC`), 11 SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLRE, XLU, XLC), AI basket (NVDA, AMD, AVGO, TSM, AMAT, MU, MSFT, GOOGL, AMZN, CRWV, META, PLTR, VRT, DLR, BE, CEG, ANET, SMCI, BOTZ) | None | Unofficial but widely used |
 | FRED (St. Louis Fed) | CPI, unemployment, fed funds rate, 10Y yield | Free API key (in secrets) | Macro data doesn't move week to week anyway |
 | Wikipedia Pageviews API | Attention signal — pageviews on "Artificial intelligence," "ChatGPT," "Large language model" | None | Official, stable. **Do not use pytrends** — archived April 2025, unreliable |
-| GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is enough at daily cadence — 5 req/day vs. a 60/hour cap) | Add `GH_TOKEN` later only if rate-limited |
+| GitHub REST/Search API | Star growth on curated AI/ML repos | None needed yet (unauthenticated rate limit is far more than enough — ~5 req/week vs. a 60/hour cap) | Add `GH_TOKEN` later only if rate-limited |
 | arXiv API | New paper counts, cs.AI / cs.LG | None | Simple XML response |
 
-All sources are pulled together in the same daily run.
+All sources are pulled together in the same weekly run.
 
 ---
 
 ## 5. Tech stack
 
-- **Ingestion & orchestration:** GitHub Actions (single `schedule:` cron, daily)
+- **Ingestion & orchestration:** GitHub Actions (single `schedule:` cron, weekly on Mondays)
 - **Object storage:** Cloudflare R2 (S3 API-compatible, free forever — 10GB storage, zero egress)
 - **Lakehouse:** Databricks Free Edition — Unity Catalog volume, Lakeflow job (API-triggered, not self-scheduled), Delta Lake
 - **Publishing:** Databricks SQL connector query + JSON export, run from the same GitHub Actions workflow
@@ -147,7 +149,7 @@ Nothing left to do outside Claude Code. Everything from here is code.
 ```
 market-ai-pulse/
 ├── .github/workflows/
-│   └── pipeline.yml          # single daily cron: ingest -> trigger transform -> export -> publish
+│   └── pipeline.yml          # single weekly cron: ingest -> trigger transform -> export -> publish
 ├── scripts/                  # reusable local/CI debugging scripts (not part of the pipeline)
 │   ├── test_databricks_connection.py
 │   └── test_r2_connection.py
@@ -292,4 +294,4 @@ market-ai-pulse/
 
 - [x] Whether the AI basket lives in its own gold table or merges into `market_daily` with a flag column — resolved in Phase 3: merged into `market_daily`, distinguished via the `category` column (`benchmark` / `sector` / `ai_basket`)
 - [ ] How much historical depth to retain for trend charts (e.g. 1 year rolling window)
-- [x] Whether/when to split some sources onto a faster (e.g. daily) cadence once weekly is stable — resolved 2026-07-22: switched the whole pipeline to daily (all sources move together, not split individually) — see the "Weekly → daily" note in Section 2
+- [x] Whether/when to split some sources onto a faster (e.g. daily) cadence once weekly is stable — resolved: the whole pipeline moved to daily on 2026-07-22 (all sources together, not split), then back to weekly on 2026-09-01 after Databricks Free Edition's serverless compute throttle repeatedly refused the daily load. See the "Cadence history" note in Section 2.

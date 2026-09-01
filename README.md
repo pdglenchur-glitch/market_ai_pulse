@@ -1,6 +1,6 @@
 # Market & AI Pulse
 
-An end-to-end data analytics pipeline that sources market, macroeconomic, and AI-sector data from five live APIs, models it through a SQL-based medallion (bronze/silver/gold) architecture, and publishes the results as a free, automatically refreshing public dashboard. It's a self-contained demonstration of the core data analyst workflow: sourcing and cleaning real-world data, transforming it with SQL, and turning it into visualizations a non-technical reader can actually understand, all running on a daily cron with zero manual intervention.
+An end-to-end data analytics pipeline that sources market, macroeconomic, and AI-sector data from five live APIs, models it through a SQL-based medallion (bronze/silver/gold) architecture, and publishes the results as a free, automatically refreshing public dashboard. It's a self-contained demonstration of the core data analyst workflow: sourcing and cleaning real-world data, transforming it with SQL, and turning it into visualizations a non-technical reader can actually understand, all running on a weekly cron with zero manual intervention.
 
 **Live dashboard:** https://pdglenchur-glitch.github.io/market_ai_pulse/
 
@@ -8,7 +8,7 @@ An end-to-end data analytics pipeline that sources market, macroeconomic, and AI
 
 ![Dashboard, dark mode - AI Pulse](screenshots/DB_2.png)
 
-The charts above are backed by a full year of history, backfilled once from each source's own historical API and accumulating daily since.
+The charts above are backed by a full year of history, backfilled once from each source's own historical API and accumulating since. The pipeline runs weekly (see [Design decisions](#design-decisions)); each run re-captures a wide trailing window of market data, so the price-based panels stay day-by-day complete, while the slower signals — research pace, dev stars, public attention, the 10-year yield — advance one point per week.
 
 Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner, and each one remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
 
@@ -74,17 +74,17 @@ A measure of how much the market has been swinging up and down lately, based on 
 ### AI Pulse
 
 - **AI basket vs. S&P 500**: the "AI basket" spans the AI value chain rather than just a handful of mega-cap names, spanning chip design (Nvidia, AMD, Broadcom), the foundry and equipment behind them (TSMC, Applied Materials), AI memory (Micron), hyperscale cloud and neocloud compute (Microsoft, Google, Amazon, CoreWeave), AI research/social (Meta), enterprise AI software (Palantir), datacenter power and real estate (Vertiv, Digital Realty, Bloom Energy, Constellation Energy), networking (Arista Networks), AI server/systems integration (Super Micro Computer), and a thematic ETF (`BOTZ`) as a passive diversification check. This compares their combined return against the S&P 500's over the selected window. A positive spread means AI stocks are outperforming the broader market over that timeframe; a negative spread means they're lagging it. Below it, **AI basket composition** shows the same basket by trading volume share instead: which names are dominating activity within it over that window, not which one moved the most. The top 6 are shown individually, with the rest folded into "Other."
-- **Research pace**: how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Shown as a line chart of that trailing count over time, filterable to the selected window, since the interesting question is whether the pace is *rising or falling* rather than what it happens to be on any single day.
+- **Research pace**: how many new AI research papers were posted to [arXiv](https://arxiv.org) (the site researchers use to share papers, often before formal peer-reviewed publication) in the trailing 7 days, split into two overlapping fields: `cs.AI` (artificial intelligence broadly) and `cs.LG` (machine learning specifically). More papers posted means the research field is moving faster. Shown as a line chart of that trailing count over time (one point per weekly run), filterable to the selected window, since the interesting question is whether the pace is *rising or falling* rather than its level in any single week.
 - **Public attention**: Wikipedia pageviews on the "Artificial intelligence," "ChatGPT," and "Large language model" articles, as a rough stand-in for how much the general public is thinking about or searching for information on AI. Shown as a trend line indexed to 100 at the *start of the selected window*, so switching the window re-baselines the comparison and lets you see each article's rate of change within that specific timeframe even though ChatGPT gets vastly more raw traffic than the others.
 - **Dev momentum**: GitHub star counts for a handful of widely-used AI/ML open-source projects (PyTorch, Hugging Face Transformers, LangChain, Ollama, the OpenAI Python client), as a proxy for developer interest and adoption. Raw star count barely moves day to day and is dominated by how big a project already is, so the chart shows *star growth over the selected window* instead: how many new stars a project gained in that timeframe, which is the actual momentum signal.
 
 ## How it works
 
-One GitHub Actions workflow, on one daily cron trigger, does the entire pipeline in sequence:
+One GitHub Actions workflow, on one weekly cron trigger, does the entire pipeline in sequence:
 
 ```mermaid
 flowchart LR
-    A[Free APIs\nmarket, macro, AI signals] --> B[GitHub Actions\nsingle daily cron]
+    A[Free APIs\nmarket, macro, AI signals] --> B[GitHub Actions\nsingle weekly cron]
     B --> C[Cloudflare R2\nS3-compatible bucket]
     C --> D[Databricks volume\nUnity Catalog]
     D --> E[Lakeflow job\nbronze / silver / gold]
@@ -92,7 +92,7 @@ flowchart LR
     B --> F[Export gold to JSON\nvia Databricks SQL connector]
     F --> G[Commit to repo\ndocs/data/]
     G --> H[GitHub Pages\npublic dashboard]
-    B --> I[Daily report\nmonitoring/daily_report.ipynb]
+    B --> I[Run report\nmonitoring/pipeline_report.ipynb]
 ```
 
 1. **Ingest**: pull market data (yfinance), macro indicators (FRED), public attention (Wikipedia Pageviews), dev momentum (GitHub), and research pace (arXiv); land raw files in R2
@@ -100,7 +100,7 @@ flowchart LR
 3. **Transform**: trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
 4. **Export**: query the finished gold tables and write JSON
 5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
-6. **Report**: regenerate `monitoring/daily_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the day. This step runs even if an earlier one failed, since a bad day still needs a report explaining what went wrong
+6. **Report**: regenerate `monitoring/pipeline_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the run. This step runs even if an earlier one failed, since a bad run still needs a report explaining what went wrong
 
 No manual steps once triggered, no compute running outside of when the pipeline actually needs it.
 
@@ -121,11 +121,11 @@ Every step above traces to real files, in the order they actually run:
    - [`silver_to_gold.py`](databricks/silver_to_gold.py): silver → the 9 gold tables the dashboard actually reads
 4. **Export**: [`orchestration/export_gold_to_json.py`](orchestration/export_gold_to_json.py) queries every gold table and writes `docs/data/*.json`
 5. **Publish**: the same step commits and pushes `docs/data/`. The dashboard itself is [`docs/index.html`](docs/index.html) (page structure), [`docs/dashboard.js`](docs/dashboard.js) (every chart, KPI tile, and window selector), and [`docs/styles.css`](docs/styles.css) (palette and layout), all static and reading the JSON directly in the browser with no server involved
-6. **Report**: [`monitoring/daily_report.ipynb`](monitoring/daily_report.ipynb), regenerated and committed as the pipeline's last step
+6. **Report**: [`monitoring/pipeline_report.ipynb`](monitoring/pipeline_report.ipynb), regenerated and committed as the pipeline's last step
 
-One workflow file ties all of the above together on the actual daily schedule: [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
+One workflow file ties all of the above together on the actual weekly schedule: [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
 
-One more notebook exists outside this daily chain: [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a separate investment analysis that refreshes on its own weekly (Monday) step, gated to only ever touch itself, never the daily dashboard chain above. It's also safe to run by hand anytime. The `query_*.py` files in [`databricks/`](databricks/) and the connectivity checks in [`scripts/`](scripts/) are one-off diagnostics from early development, not part of the automated pipeline either.
+One more notebook exists alongside this chain: [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb) is a separate investment analysis. It runs as an additive Monday-gated step *after* the dashboard publish, gated to only ever touch itself and never the dashboard-facing steps above. Since the pipeline now runs weekly on Mondays, that step fires on essentially every scheduled run; the Monday gate still matters for a mid-week `workflow_dispatch`, which should not disturb the weekly analysis. It's also safe to run by hand anytime. The `query_*.py` files in [`databricks/`](databricks/) and the connectivity checks in [`scripts/`](scripts/) are one-off diagnostics from early development, not part of the automated pipeline either.
 
 ## Design decisions
 
@@ -133,16 +133,18 @@ One more notebook exists outside this daily chain: [`analysis/key_findings.ipynb
 
 **Databricks Free Edition's constraints shaped the whole architecture.** Two limits in particular: serverless compute only reaches a trusted-domain allowlist, so it can't call yfinance, FRED, Wikipedia, GitHub, or arXiv directly, and there's no way to expose a Databricks-native dashboard publicly without a viewer account. Both are solved the same way: push everything that needs open internet or public visibility *out* of Databricks. GitHub Actions does all external API calls and all publishing; Databricks does only the transform, triggered and polled from outside.
 
-**The dashboard is static HTML/JS reading a JSON file.** No dashboard-side database credentials to secure, nothing to keep warm, and it hosts for free on GitHub Pages. The tradeoff (data is only as fresh as the last pipeline run) is the right one for a system whose backing data (daily market closes, monthly CPI) doesn't change faster than daily anyway.
+**Weekly cadence, not daily.** The pipeline ran daily from 2026-07-22 until 2026-09-01, then reverted to a weekly Monday cron. Daily meant roughly 30 Databricks Job runs plus 30 serverless SQL-warehouse spin-ups a month, and Databricks Free Edition's serverless compute throttle started refusing that load: "Triggering new runs ... is currently disabled temporarily" on 2026-08-27, and a warehouse "Cannot create the resource" plus the same throttle again on 2026-09-01. Weekly is about four of each a month, comfortably inside Free Edition's limits. To keep this from thinning the data, `pull_market_data.py` re-captures roughly 25 trailing trading days every run and `bronze_to_silver.py` merges by `(symbol, date)`, so the price panels stay day-by-day complete and a dropped weekly run self-heals on the next one; the slower signals (research pace, dev stars, attention, 10Y yield) simply advance one point per week.
+
+**The dashboard is static HTML/JS reading a JSON file.** No dashboard-side database credentials to secure, nothing to keep warm, and it hosts for free on GitHub Pages. The tradeoff is that the latest values are only as fresh as the last weekly run, which is the right call for a portfolio piece: the point is the end-to-end pipeline, not real-time data, and the retroactive trailing-window fetches mean the *history* the charts show stays complete regardless of when you look.
 
 **One GitHub Actions workflow orchestrates the entire pipeline.** Ingestion, the Databricks transform trigger, export, and publish all live in a single job that runs top to bottom. Separate scheduled workflows per stage would create a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that entirely; the Databricks job itself also has no schedule of its own for the same reason, and only ever runs when this workflow calls it.
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 
-**The daily report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself, the exact gap that let a full trading day quietly go missing from the dashboard for real while every run still reported success. `monitoring/daily_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous day's version rather than accumulating a file per day.
+**The run report queries Databricks directly rather than the published JSON.** `analysis/key_findings.ipynb` deliberately reads the public JSON so anyone can run it with zero credentials, but a pipeline health check built the same way could be fooled by a bug in the export step itself, the exact gap that let a full trading day quietly go missing from the dashboard for real while every run still reported success. `monitoring/pipeline_report.ipynb` checks the actual gold tables and the GitHub Actions run history independently, then gets regenerated and committed as the pipeline's own last step, overwriting the previous run's version rather than accumulating a file per run.
 
 ## Docs
 
 - [`PROJECT_PLAN.md`](PROJECT_PLAN.md): full architecture, established config, and a step-by-step build log (what's done, what's left)
 - [`analysis/key_findings.ipynb`](analysis/key_findings.ipynb): the weekly analysis notebook behind the Key findings section above
-- [`monitoring/daily_report.ipynb`](monitoring/daily_report.ipynb): the pipeline's own daily health check, regenerated fresh every run
+- [`monitoring/pipeline_report.ipynb`](monitoring/pipeline_report.ipynb): the pipeline's own health check, regenerated fresh every run
