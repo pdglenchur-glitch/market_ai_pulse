@@ -1932,6 +1932,20 @@
     "trend": "up"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-08-28",
+    "value": 4.73,
+    "change": 0.0600000000000005,
+    "trend": "up"
+  },
+  {
+    "series": "10y_yield",
+    "date": "2026-09-03",
+    "value": 4.77,
+    "change": 0.03999999999999915,
+    "trend": "up"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
@@ -2107,6 +2121,13 @@
     "trend": "flat"
   },
   {
+    "series": "fed_funds_rate",
+    "date": "2026-08-01",
+    "value": 3.63,
+    "change": 0.0,
+    "trend": "flat"
+  },
+  {
     "series": "unemployment_rate",
     "date": "2025-07-01",
     "value": 4.3,
@@ -2189,5 +2210,12 @@
     "value": 4.1,
     "change": -0.10000000000000053,
     "trend": "down"
+  },
+  {
+    "series": "unemployment_rate",
+    "date": "2026-08-01",
+    "value": 4.1,
+    "change": 0.0,
+    "trend": "flat"
   }
 ]

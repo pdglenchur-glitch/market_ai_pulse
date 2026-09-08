@@ -1397,6 +1397,26 @@
   {
     "symbol": "^GSPC",
     "date": "2026-08-31",
-    "rolling_20d_volatility": 0.006000590262287668
+    "rolling_20d_volatility": 0.005986929744528296
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-09-01",
+    "rolling_20d_volatility": 0.004639340948086736
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-09-02",
+    "rolling_20d_volatility": 0.004778286082799006
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-09-03",
+    "rolling_20d_volatility": 0.0053503138584257105
+  },
+  {
+    "symbol": "^GSPC",
+    "date": "2026-09-04",
+    "rolling_20d_volatility": 0.005231225094361276
   }
 ]
