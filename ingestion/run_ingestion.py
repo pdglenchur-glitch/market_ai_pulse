@@ -2,7 +2,7 @@
 
 Runs every pull_*.py source and lands each resulting file in both R2 and
 the Databricks volume. This is the one command pipeline.yml calls for the
-"ingest" + "stage" steps of the weekly run (Section 2 of PROJECT_PLAN.md).
+"ingest" + "stage" steps of the daily run (Section 2 of PROJECT_PLAN.md).
 
 Sources are added here incrementally as Phase 2 builds each one out.
 

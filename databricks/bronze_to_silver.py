@@ -3,7 +3,7 @@
 Types, deduplicates, and historizes each source into an accumulating
 silver table keyed by its natural key, via MERGE — so a rerun on the same
 date/key updates that row in place instead of duplicating it. This is how
-history builds up over successive weekly runs (Section 11's open question).
+history builds up over successive runs (Section 11's open question).
 
 Runs inside the job via git_source; `spark` is provided by the runtime.
 """

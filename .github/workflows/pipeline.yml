@@ -1,24 +1,26 @@
-# Single weekly cron: ingest -> trigger transform -> export -> publish
-# Cadence history: weekly (Mondays) through Phase 5 -> daily on 2026-07-22 after
-# a rate-limit review found no external API blocker -> back to weekly on
-# 2026-09-01. Daily cadence (~30 job runs + ~30 SQL-warehouse spin-ups a month)
-# repeatedly tripped Databricks Free Edition's serverless compute throttle -
-# "Triggering new runs ... is currently disabled temporarily" on 2026-08-27, and
-# a warehouse "Cannot create the resource" + throttle again on 2026-09-01. Weekly
-# is ~4 of each a month, well inside Free Edition's tolerance, and the
-# trailing-window fetches (see below) keep it gap-free at that cadence.
+# Single daily cron: ingest -> trigger transform -> export -> publish
+# Cadence history: weekly (Mondays) through Phase 5 -> daily on 2026-07-22 -> back
+# to weekly on 2026-09-01 after Databricks Free Edition started throwing
+# "Triggering new runs ... is currently disabled temporarily", which looked like a
+# serverless compute throttle -> back to daily on 2026-09-07 once that error was
+# traced to the Jobs API run-now call specifically (not compute usage: manual UI
+# runs and the SQL warehouse were fine throughout) and fixed by switching the
+# transform to a file-arrival trigger - see the transform step below and
+# PROJECT_MEMORY bug #24. The trailing-window ingestion fetches (see below) keep
+# the market series gap-free even if GitHub's scheduler drops or delays a run.
 name: pipeline
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Mondays 13:00 UTC (9am ET). The hour was moved from 06:00 to 13:00 on
-    # 2026-08-19 for yfinance settlement buffer (a prior day's finalized close
-    # can lag the 20:00 UTC market close by more than 10h); a Monday run also
-    # has the whole weekend of settlement behind it. GitHub's scheduler often
-    # fires this hours late - fine at weekly cadence, and every ingestion
-    # source re-fetches a trailing window so a late or skipped run self-heals.
-    - cron: "0 13 * * 1"
+    # 13:00 UTC (9am ET). The hour was moved from 06:00 to 13:00 on 2026-08-19
+    # for a yfinance settlement buffer - a prior day's finalized close can lag
+    # the 20:00 UTC market close by more than 10h. GitHub's scheduler often
+    # fires this hours late or skips it entirely; that no longer touches the
+    # transform (file-arrival triggered, not clock-triggered), and every
+    # ingestion source re-fetches a trailing window so a late or skipped run
+    # self-heals on the next one.
+    - cron: "0 13 * * *"
 
 permissions:
   contents: write
@@ -79,10 +81,10 @@ jobs:
           git diff --staged --quiet && echo "No changes to commit" || git commit -m "Update dashboard data and pipeline run report"
           git push
       # Everything below is additive and only ever touches analysis/key_findings.ipynb
-      # and analysis/key_findings_history.json. It only runs on a Monday - which every
-      # scheduled run now is, so it refreshes once a week as intended; the gate still
-      # matters for a mid-week workflow_dispatch, which should not touch the weekly
-      # analysis. It doesn't gate, block, or modify the dashboard-facing steps above.
+      # and analysis/key_findings_history.json. The key-findings analysis stays weekly
+      # even though the pipeline runs daily: this gate runs it on Monday's pipeline run
+      # only and skips it the other six days (and on any mid-week workflow_dispatch). It
+      # doesn't gate, block, or modify the dashboard-facing steps above.
       - name: Check if today is Monday (weekly key-findings refresh day)
         id: day_check
         run: |
@@ -91,7 +93,7 @@ jobs:
           else
             echo "is_monday=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Wait for GitHub Pages to serve this week's data
+      - name: Wait for GitHub Pages to serve the latest data
         if: steps.day_check.outputs.is_monday == 'true'
         run: |
           expected=$(python -c "import json; print(json.load(open('docs/data/market_daily.json'))[-1]['date'])")
@@ -134,7 +136,7 @@ jobs:
             gh issue create --repo "$GITHUB_REPOSITORY" \
               --title "Pipeline failure: $(date -u +%Y-%m-%d)" \
               --label pipeline-failure \
-              --body "The weekly pipeline failed and the dashboard may now be stale. See the run: $RUN_URL"
+              --body "The daily pipeline failed and the dashboard may now be stale. See the run: $RUN_URL"
           fi
       - name: Close any open failure alert now that the pipeline recovered
         if: success()

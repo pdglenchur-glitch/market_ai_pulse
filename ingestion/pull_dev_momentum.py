@@ -1,9 +1,10 @@
 """Phase 2 step 2.6: pull current star counts for curated AI/ML repos.
 
-Snapshots stargazers_count once per run (weekly); growth over any window
-is computed client-side in the dashboard, not in the transform. The
-unauthenticated GitHub REST API is fine at weekly cadence (add GH_TOKEN
-later only if rate-limited).
+Snapshots stargazers_count once per run; growth over any window is
+computed client-side in the dashboard, not in the transform. The
+unauthenticated GitHub REST API (5 repos/run, well under the 60/hour
+unauthenticated cap even daily) is fine; add GH_TOKEN later only if
+rate-limited.
 """
 import json
 from datetime import datetime, timezone

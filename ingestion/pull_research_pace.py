@@ -1,7 +1,9 @@
-"""Phase 2 step 2.7: pull weekly new-paper counts from arXiv (cs.AI, cs.LG).
+"""Phase 2 step 2.7: pull trailing-7-day new-paper counts from arXiv (cs.AI, cs.LG).
 
 Uses the arXiv API's submittedDate range filter combined with
-opensearch:totalResults, so we only need the count, not every entry.
+opensearch:totalResults, so we only need the count, not every entry. Each
+run stamps the count for the trailing LOOKBACK_DAYS window; at the pipeline's
+daily cadence these are overlapping windows, i.e. a 7-day moving sum.
 """
 import json
 import time
@@ -25,8 +27,8 @@ def fetch_weekly_count(category: str) -> int:
     search_query = f"cat:{category} AND submittedDate:{date_range}"
 
     # arXiv occasionally rate-limits (429) or times out on a cold request;
-    # a bare, unretried call failing the whole weekly pipeline over a
-    # transient blip is a worse failure mode than waiting a few seconds.
+    # a bare, unretried call failing the whole pipeline over a transient
+    # blip is a worse failure mode than waiting a few seconds.
     backoff = 5
     last_exc = None
     for attempt in range(4):

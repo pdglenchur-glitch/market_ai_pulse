@@ -9,10 +9,11 @@ the single latest one, for two reasons:
    2026-08-03's close wasn't available when Tuesday's run fired, and a
    single-day-per-run design had already moved past it, permanently skipping
    that day until a manual backfill.
-2. Weekly cadence. The pipeline runs once a week (Mondays), so a run has to
-   cover every trading day since the last one - and enough extra to absorb a
-   run or two that GitHub's scheduler drops. RECENT_TRADING_DAYS_PER_RUN is
-   sized for roughly a month of missed runs.
+2. Dropped/late runs. The pipeline runs daily, but GitHub's scheduler fires
+   this cron hours late and sometimes skips it, so a run has to cover every
+   trading day since the last one that actually ran.
+   RECENT_TRADING_DAYS_PER_RUN is sized to absorb a run of consecutive
+   missed days, not just yesterday's.
 
 bronze_to_silver.py MERGEs market_data by (symbol, date), so writing
 overlapping days every run is a no-op for dates already captured and a real
@@ -53,11 +54,12 @@ def symbol_category(symbol: str) -> str:
     return "ai_basket"
 
 
-# Trailing settled trading days re-captured each run. Sized for weekly cadence
-# plus a wide margin: ~25 trading days is about five weeks, so the pipeline
-# stays gap-free even if GitHub's scheduler drops a month of Monday runs. See
-# the module docstring for why gap-free matters beyond just freshness.
-RECENT_TRADING_DAYS_PER_RUN = 25
+# Trailing settled trading days re-captured each run. At daily cadence a run
+# only needs the last day or two to stay gap-free, but ~10 trading days (about
+# two calendar weeks) gives a wide margin: the market series stays complete
+# even if GitHub's scheduler drops a straight run of daily jobs. See the module
+# docstring for why gap-free matters beyond just freshness.
+RECENT_TRADING_DAYS_PER_RUN = 10
 
 
 def fetch_latest_day_all(symbols: list[str] = ALL_SYMBOLS) -> list[dict]:
