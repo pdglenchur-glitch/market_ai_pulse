@@ -10,7 +10,7 @@ An end-to-end data analytics pipeline that sources market, macroeconomic, and AI
 
 The charts above are backed by a full year of history, backfilled once from each source's own historical API and accumulating since. The pipeline runs weekly (see [Design decisions](#design-decisions)); each run re-captures a wide trailing window of market data, so the price-based panels stay day-by-day complete, while the slower signals — research pace, dev stars, public attention, the 10-year yield — advance one point per week.
 
-Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner, and each one remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length.
+Every panel has a **1D / 7D / 30D / 90D / All** selector in the top-right corner, and each one remembers its own selection independently, so you can look at 1 day of one metric and 90 of another at the same time. Hovering over any comparison bar (or a Market Snapshot tile) shows the exact two dates being compared, not just the selected window length, and hovering a sector ETF or an AI-basket name shows a one-line description of what it is and where it sits in its sector or the AI value chain.
 
 ## What it answers
 

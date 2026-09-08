@@ -196,6 +196,77 @@ function wireWindowSelector(container, onSelect) {
   });
 }
 
+// ---- security descriptions --------------------------------------------
+// A one-line profile for every ticker on the dashboard: what it is, and
+// where it sits in its sector (the SPDR ETFs) or the AI value chain (the
+// basket names). Surfaced in chart tooltips via securityTooltipLines().
+
+const SECURITY_INFO = {
+  "^GSPC": "S&P 500: the 500 largest US public companies, the standard benchmark for the US stock market.",
+  "S&P 500": "The S&P 500 index (^GSPC), the broad-market benchmark the AI basket is measured against.",
+  "AI basket": "Equal-weighted basket of ~19 AI value-chain names spanning chips, foundry, memory, hyperscale cloud, datacenter power and real estate, networking, and systems integration. Hover a slice of the composition donut for the individual names.",
+
+  // SPDR Select Sector ETFs
+  "XLK": "Technology sector: hardware, software, and semiconductors. Top holdings Apple, Microsoft, Nvidia.",
+  "XLF": "Financials sector: banks, insurers, and payment networks. Top holdings Berkshire Hathaway, JPMorgan Chase, Visa.",
+  "XLE": "Energy sector: oil, gas, and energy equipment and services. Top holdings Exxon Mobil, Chevron.",
+  "XLV": "Health Care sector: pharma, biotech, and health insurers. Top holdings Eli Lilly, UnitedHealth, Johnson & Johnson.",
+  "XLY": "Consumer Discretionary sector: retail and goods people buy with spare cash. Top holdings Amazon, Tesla, Home Depot.",
+  "XLP": "Consumer Staples sector: goods people buy regardless of the economy. Top holdings Costco, Walmart, Procter & Gamble.",
+  "XLI": "Industrials sector: aerospace, defense, machinery, and transport. Top holdings GE Aerospace, Caterpillar, Union Pacific.",
+  "XLB": "Materials sector: chemicals, mining, and packaging. Top holdings Linde, Sherwin-Williams.",
+  "XLRE": "Real Estate sector: REITs across data centers, warehouses, and commercial property. Top holdings Prologis, American Tower.",
+  "XLU": "Utilities sector: electric, gas, and water utilities. Top holdings NextEra Energy, Southern Company.",
+  "XLC": "Communication Services sector: media, telecom, and internet platforms. Top holdings Alphabet, Meta, Netflix.",
+
+  // AI basket: chips, foundry, equipment, memory
+  "NVDA": "Nvidia: the dominant designer of GPUs and AI accelerators, at the center of the AI compute buildout.",
+  "AMD": "AMD: the number-two GPU and CPU designer, positioning its MI-series accelerators as the main challenger to Nvidia.",
+  "AVGO": "Broadcom: custom AI silicon (ASICs) for the hyperscalers, plus the switch chips that wire AI clusters together.",
+  "TSM": "TSMC: the contract foundry that manufactures almost every leading-edge AI chip.",
+  "AMAT": "Applied Materials: the largest maker of the deposition and etch equipment fabs need to build advanced chips.",
+  "MU": "Micron: high-bandwidth memory (HBM), which feeds AI training chips and is a recurring supply bottleneck.",
+  // AI basket: hyperscale and neocloud compute
+  "MSFT": "Microsoft: Azure cloud, the OpenAI partnership, and Copilot AI across its software franchise.",
+  "GOOGL": "Alphabet: Google Cloud, the Gemini models and DeepMind, and in-house TPU accelerators.",
+  "AMZN": "Amazon: AWS (the largest cloud platform), the Bedrock model service, and Trainium/Inferentia custom chips.",
+  "CRWV": "CoreWeave: a neocloud that rents GPU-only capacity to AI labs and enterprises.",
+  // AI basket: capex and enterprise software
+  "META": "Meta: heavy AI capex, the open-weight Llama models, and AI-driven ad targeting.",
+  "PLTR": "Palantir: enterprise and government software for putting AI models into operational use (the AIP platform).",
+  // AI basket: datacenter power, real estate, generation
+  "VRT": "Vertiv: power and cooling infrastructure for data centers, a direct beneficiary of rising rack densities.",
+  "DLR": "Digital Realty: a data-center REIT that owns and leases the buildings AI compute runs in.",
+  "BE": "Bloom Energy: on-site fuel-cell power systems, pitched as a way to power data centers around grid constraints.",
+  "CEG": "Constellation Energy: the largest US nuclear operator, contracting its output to power data centers.",
+  // AI basket: networking, systems integration, thematic check
+  "ANET": "Arista Networks: high-speed Ethernet switches that form the network fabric of large AI training clusters.",
+  "SMCI": "Super Micro Computer: builds and integrates the server and rack systems that house AI GPUs.",
+  "BOTZ": "Global X Robotics & AI ETF: a passive thematic basket, included as a diversification check against the hand-picked names.",
+};
+
+function wrapForTooltip(text, maxChars = 46) {
+  const lines = [];
+  let line = "";
+  for (const word of text.split(" ")) {
+    if (line && (line + " " + word).length > maxChars) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = line ? line + " " + word : word;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+// Chart.js afterBody callback: a blank spacer line then the wrapped
+// description, or undefined (no footer) for anything not a tracked security.
+function securityTooltipLines(items) {
+  const info = SECURITY_INFO[items && items[0] && items[0].label];
+  return info ? ["", ...wrapForTooltip(info)] : undefined;
+}
+
 // ---- chart builders -----------------------------------------------------
 
 function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels, dateRanges) {
@@ -229,6 +300,7 @@ function divergingBarChart(canvas, labels, values, formatValue, tooltipLabels, d
             title: (items) => fullLabels[items[0].dataIndex],
             label: (ctx) => formatValue(values[ctx.dataIndex]),
             afterLabel: (ctx) => (dateRanges && dateRanges[ctx.dataIndex]) || undefined,
+            afterBody: securityTooltipLines,
           },
         },
       },
@@ -278,6 +350,7 @@ function categoricalBarChart(canvas, labels, values, formatValue, tooltipLabels)
           callbacks: {
             title: (items) => fullLabels[items[0].dataIndex],
             label: (ctx) => formatValue(ctx.raw),
+            afterBody: securityTooltipLines,
           },
         },
       },
@@ -399,6 +472,7 @@ function donutChart(canvas, labels, values, formatValue, colors) {
               const pct = total > 0 ? (ctx.raw / total) * 100 : 0;
               return `${ctx.label}: ${pct.toFixed(1)}% (${formatValue(ctx.raw)})`;
             },
+            afterBody: securityTooltipLines,
           },
         },
       },
@@ -446,7 +520,7 @@ async function renderMarketSnapshot() {
 
       el.innerHTML = `
         <div class="chart-header">
-          <h3>S&amp;P 500 snapshot</h3>
+          <h3 title="${SECURITY_INFO["^GSPC"]}">S&amp;P 500 snapshot</h3>
           ${windowSelectorHtml(days)}
         </div>
         <div class="kpi-row">
