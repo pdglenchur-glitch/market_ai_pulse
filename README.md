@@ -87,8 +87,8 @@ flowchart LR
     A[Free APIs\nmarket, macro, AI signals] --> B[GitHub Actions\nsingle weekly cron]
     B --> C[Cloudflare R2\nS3-compatible bucket]
     C --> D[Databricks volume\nUnity Catalog]
-    D --> E[Lakeflow job\nbronze / silver / gold]
-    E -.triggered + polled by B.-> B
+    D -.file arrival triggers.-> E[Lakeflow job\nbronze / silver / gold]
+    E -.polled by B.-> B
     B --> F[Export gold to JSON\nvia Databricks SQL connector]
     F --> G[Commit to repo\ndocs/data/]
     G --> H[GitHub Pages\npublic dashboard]
@@ -96,8 +96,8 @@ flowchart LR
 ```
 
 1. **Ingest**: pull market data (yfinance), macro indicators (FRED), public attention (Wikipedia Pageviews), dev momentum (GitHub), and research pace (arXiv); land raw files in R2
-2. **Stage**: push the same files into a Databricks Unity Catalog volume
-3. **Transform**: trigger a real Databricks Job (bronze → silver → gold, running as PySpark tasks on serverless compute, code pulled live from this repo) via the Jobs API, and wait for it to finish
+2. **Stage**: push the same files into a Databricks Unity Catalog volume, in a fresh timestamped subdirectory
+3. **Transform**: the new files trip a **file-arrival trigger** on a real Databricks Job (bronze → silver → gold, PySpark tasks on serverless compute, code pulled live from this repo); GitHub Actions polls that run to completion. (It used to start the job over the Jobs API, until Databricks Free Edition disabled API job triggering for this account - see [Design decisions](#design-decisions).)
 4. **Export**: query the finished gold tables and write JSON
 5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
 6. **Report**: regenerate `monitoring/pipeline_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the run. This step runs even if an earlier one failed, since a bad run still needs a report explaining what went wrong
@@ -115,7 +115,7 @@ Every step above traces to real files, in the order they actually run:
    - [`pull_dev_momentum.py`](ingestion/pull_dev_momentum.py): GitHub star counts
    - [`pull_research_pace.py`](ingestion/pull_research_pace.py): arXiv submission counts
 2. **Stage** happens inside the same ingest step, via [`land_to_r2.py`](ingestion/land_to_r2.py) and [`land_to_databricks_volume.py`](ingestion/land_to_databricks_volume.py). It's listed as a separate stage above because it's a distinct destination, not a distinct script.
-3. **Transform**: [`orchestration/trigger_and_poll_job.py`](orchestration/trigger_and_poll_job.py) triggers and polls the Databricks Job defined in [`databricks/lakeflow_job_config.yml`](databricks/lakeflow_job_config.yml), which runs three tasks in sequence on serverless compute:
+3. **Transform**: [`orchestration/trigger_and_poll_job.py`](orchestration/trigger_and_poll_job.py) keeps the Databricks Job defined in [`databricks/lakeflow_job_config.yml`](databricks/lakeflow_job_config.yml) in sync with git and waits for the run its file-arrival trigger starts. The job runs three tasks in sequence on serverless compute:
    - [`land_volume_to_bronze.py`](databricks/land_volume_to_bronze.py): raw volume files → bronze Delta tables
    - [`bronze_to_silver.py`](databricks/bronze_to_silver.py): bronze → typed, deduplicated, natural-key-merged silver tables
    - [`silver_to_gold.py`](databricks/silver_to_gold.py): silver → the 9 gold tables the dashboard actually reads
@@ -137,7 +137,9 @@ One more notebook exists alongside this chain: [`analysis/key_findings.ipynb`](a
 
 **The dashboard is static HTML/JS reading a JSON file.** No dashboard-side database credentials to secure, nothing to keep warm, and it hosts for free on GitHub Pages. The tradeoff is that the latest values are only as fresh as the last weekly run, which is the right call for a portfolio piece: the point is the end-to-end pipeline, not real-time data, and the retroactive trailing-window fetches mean the *history* the charts show stays complete regardless of when you look.
 
-**One GitHub Actions workflow orchestrates the entire pipeline.** Ingestion, the Databricks transform trigger, export, and publish all live in a single job that runs top to bottom. Separate scheduled workflows per stage would create a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that entirely; the Databricks job itself also has no schedule of its own for the same reason, and only ever runs when this workflow calls it.
+**One GitHub Actions workflow orchestrates the entire pipeline.** Ingestion, waiting on the Databricks transform, export, and publish all live in a single job that runs top to bottom. Separate scheduled workflows per stage would create a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that.
+
+**The Databricks transform is triggered by file arrival, not by an API call.** It originally ran via a Jobs API `run-now` call from GitHub Actions, with the job carrying no schedule of its own so the two could never drift. That worked for two months, then on 2026-09-01 Databricks Free Edition started refusing API-initiated runs for this account ("Triggering new runs ... is currently disabled temporarily") - an anti-abuse measure that leaves manual and Databricks-native triggers untouched. Rather than fight it, the job now has a **file-arrival trigger** on the `raw_landing` volume: GitHub Actions lands each run's ingested files in a new timestamped subdirectory, Databricks notices and runs the job, and the workflow polls that run to completion. The trigger fires when the files land regardless of when GitHub's scheduler actually ran the workflow, so it also sidesteps GitHub Actions' habit of firing scheduled jobs hours late.
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 

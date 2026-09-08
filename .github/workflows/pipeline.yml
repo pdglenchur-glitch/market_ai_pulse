@@ -44,6 +44,11 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python run_ingestion.py
         working-directory: ingestion
+      # Step name kept stable - monitoring/pipeline_report.ipynb keys its
+      # recovery check on this exact string. The script no longer calls the
+      # Jobs API run-now (Databricks Free Edition disabled that for this org,
+      # bug #24); the transform job runs itself on file arrival in the
+      # raw_landing volume, and this step just waits for that run to finish.
       - name: Trigger Lakeflow transform job and wait for it to finish
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}

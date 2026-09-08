@@ -1,7 +1,16 @@
-# Lakeflow job definition (step 3.14). Deliberately has no `schedule:` field —
-# this job only ever runs when trigger_and_poll_job.py calls run-now via the
-# Jobs API. Read and applied idempotently (create-or-update by name) by
-# orchestration/trigger_and_poll_job.py on every pipeline run.
+# Lakeflow job definition (step 3.14).
+#
+# The job is triggered by **file arrival** in the raw_landing volume, not by a
+# `run-now` API call. Databricks Free Edition disabled API job triggering for
+# this org on 2026-09-07 ("Triggering new runs ... is currently disabled
+# temporarily" - bug #24) while leaving manual and Databricks-native triggers
+# working. So: GitHub Actions lands the ingested files, Databricks notices the
+# new files and runs this job, and orchestration/trigger_and_poll_job.py just
+# waits for that run to finish (it no longer starts it).
+#
+# Read and applied idempotently (create-or-update by name) by
+# orchestration/trigger_and_poll_job.py on every pipeline run, so the job
+# never drifts from what's in git.
 name: market-ai-pulse-transform
 
 git:
@@ -10,6 +19,10 @@ git:
   branch: main
 
 environment_version: "3"
+
+trigger:
+  file_arrival:
+    url: /Volumes/workspace/default/raw_landing/
 
 tasks:
   - task_key: bronze_read
