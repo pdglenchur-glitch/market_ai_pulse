@@ -1953,6 +1953,13 @@
     "trend": "up"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-09-08",
+    "value": 4.8,
+    "change": 0.019999999999999574,
+    "trend": "up"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
