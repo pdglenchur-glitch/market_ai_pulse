@@ -2065,6 +2065,16 @@
     "count": 699
   },
   {
+    "category": "cs.AI",
+    "snapshot_date": "2026-09-16",
+    "count": 898
+  },
+  {
+    "category": "cs.AI",
+    "snapshot_date": "2026-09-17",
+    "count": 919
+  },
+  {
     "category": "cs.LG",
     "snapshot_date": "2025-07-22",
     "count": 746
@@ -4128,5 +4138,15 @@
     "category": "cs.LG",
     "snapshot_date": "2026-09-12",
     "count": 664
+  },
+  {
+    "category": "cs.LG",
+    "snapshot_date": "2026-09-16",
+    "count": 793
+  },
+  {
+    "category": "cs.LG",
+    "snapshot_date": "2026-09-17",
+    "count": 820
   }
 ]
