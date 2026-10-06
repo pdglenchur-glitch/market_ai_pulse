@@ -1,0 +1,106 @@
+# Catch-up publish: exports a transform run that finished after pipeline.yml
+# stopped waiting for it.
+#
+# Databricks Free Edition sometimes withholds serverless compute from this
+# account for hours. The file-arrival trigger still fires, but 10-22h late, so
+# pipeline.yml's 15-minute wait times out and nothing exports the gold tables
+# the delayed run eventually builds (PROJECT_MEMORY bug #27). This checks every
+# 3 hours and publishes them when they show up.
+#
+# Cheap by design: the check uses only the Databricks Jobs API (control plane,
+# no serverless compute, no SQL warehouse). The warehouse is only started when
+# there is genuinely unpublished gold to export.
+name: catchup
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "37 */3 * * *"
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: catchup
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # catchup_check.py reads the last publish time from git history.
+          fetch-depth: 100
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Skip while the daily pipeline is running
+        id: busy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for s in queued in_progress waiting pending requested; do
+            if [ -n "$(gh run list --repo "$GITHUB_REPOSITORY" --workflow pipeline.yml --status "$s" --json databaseId --jq '.[0].databaseId')" ]; then
+              echo "pipeline.yml has a run that is $s; it will publish on its own. Skipping."
+              echo "busy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "busy=false" >> "$GITHUB_OUTPUT"
+      - if: steps.busy.outputs.busy == 'false'
+        run: pip install -r requirements.txt
+      # Step name is read by monitoring/pipeline_report.ipynb (Section 1) to
+      # recognise a successful catch-up publish; keep it in sync.
+      - name: Find a newer successful transform run than the last publish
+        id: check
+        if: steps.busy.outputs.busy == 'false'
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python orchestration/catchup_check.py
+      # The warehouse can still be unavailable when the check succeeds; that's
+      # a retry-next-tick condition, not an alert, so it doesn't fail the run.
+      - name: Export gold tables to docs/data/*.json
+        id: export
+        if: steps.check.outputs.needed == 'true'
+        continue-on-error: true
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: python export_gold_to_json.py
+        working-directory: orchestration
+      - name: Note that the warehouse was unavailable
+        if: steps.check.outputs.needed == 'true' && steps.export.outcome != 'success'
+        run: echo "::warning::Export failed (SQL warehouse likely unavailable). The next catch-up run in ~3h will retry."
+      - name: Generate the pipeline run report
+        if: steps.export.outcome == 'success'
+        continue-on-error: true
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          pip install jupyter pandas
+          jupyter nbconvert --to notebook --execute --inplace monitoring/pipeline_report.ipynb
+      - name: Commit and push the catch-up publish
+        if: steps.export.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/*.json monitoring/pipeline_report.ipynb
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Catch-up publish of delayed transform run ${{ steps.check.outputs.run_id }}"
+          git push
+      - name: Close any open failure alert now that the data is published
+        if: steps.export.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --label pipeline-failure --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Recovered by catch-up publish: Databricks ran the delayed transform (run ${{ steps.check.outputs.run_id }}, finished ${{ steps.check.outputs.run_end }}) and it is now exported. $RUN_URL"
+            gh issue close "$existing" --repo "$GITHUB_REPOSITORY"
+          fi
