@@ -1,0 +1,55 @@
+name: _tmp_diag
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install databricks-sdk
+      - name: Read-only Databricks diagnostics
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        shell: python
+        run: |
+          import os
+          from datetime import datetime, timezone
+          from databricks.sdk import WorkspaceClient
+
+          c = WorkspaceClient(host=os.environ["DATABRICKS_HOST"], token=os.environ["DATABRICKS_TOKEN"])
+          ts = lambda ms: datetime.fromtimestamp(ms / 1000, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S") if ms else "-"
+
+          job = next(iter(c.jobs.list(name="market-ai-pulse-transform")))
+          s = c.jobs.get(job_id=job.job_id).settings
+          print("JOB", job.job_id)
+          print("  max_concurrent_runs:", s.max_concurrent_runs)
+          print("  queue:", s.queue)
+          print("  trigger:", s.trigger)
+          print("  timeout_seconds:", s.timeout_seconds)
+
+          print("\nRUNS (newest first):")
+          for r in c.jobs.list_runs(job_id=job.job_id, limit=25):
+              st = r.state
+              print(f"  {r.run_id}  start={ts(r.start_time)}  end={ts(r.end_time)}  "
+                    f"trigger={r.trigger}  life={st.life_cycle_state}  result={st.result_state}  "
+                    f"msg={(st.state_message or '')[:120]}")
+
+          print("\nACTIVE RUNS:")
+          for r in c.jobs.list_runs(job_id=job.job_id, active_only=True):
+              print(f"  {r.run_id} start={ts(r.start_time)} life={r.state.life_cycle_state}")
+
+          print("\nWAREHOUSES:")
+          for w in c.warehouses.list():
+              print(f"  {w.id} name={w.name} state={w.state} size={w.cluster_size} "
+                    f"auto_stop={w.auto_stop_mins} health={w.health}")
+
+          print("\nRAW LANDING SUBDIRS (newest 10):")
+          entries = sorted((e.name for e in c.files.list_directory_contents("/Volumes/workspace/default/raw_landing/")), reverse=True)
+          print("  total entries:", len(entries))
+          for n in entries[:10]:
+              print("  ", n)
