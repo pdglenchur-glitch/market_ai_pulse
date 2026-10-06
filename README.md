@@ -102,6 +102,8 @@ flowchart LR
 5. **Publish**: commit the JSON into `docs/`, which GitHub Pages serves automatically
 6. **Report**: regenerate `monitoring/pipeline_report.ipynb` and commit it, confirming the run actually succeeded and every source landed data appropriate for the run. This step runs even if an earlier one failed, since a bad run still needs a report explaining what went wrong
 
+A second, small workflow ([`.github/workflows/catchup.yml`](.github/workflows/catchup.yml)) runs every 3 hours and publishes any transform Databricks ran too late for the daily run to wait for (see [Design decisions](#design-decisions)).
+
 No manual steps once triggered, no compute running outside of when the pipeline actually needs it.
 
 ### Where the code for each step lives
@@ -140,6 +142,8 @@ One more notebook exists alongside this chain: [`analysis/key_findings.ipynb`](a
 **One GitHub Actions workflow orchestrates the entire pipeline.** Ingestion, waiting on the Databricks transform, export, and publish all live in a single job that runs top to bottom. Separate scheduled workflows per stage would create a coordination problem for free: if ingestion and transform run on their own independent schedules, there's no guarantee ingestion finished before transform starts reading from it. One workflow with sequential steps sidesteps that.
 
 **The Databricks transform is triggered by file arrival, not by an API call.** It originally ran via a Jobs API `run-now` call from GitHub Actions, with the job carrying no schedule of its own so the two could never drift. That worked for two months, then on 2026-09-01 Databricks Free Edition started refusing API-initiated runs for this account ("Triggering new runs ... is currently disabled temporarily") - an anti-abuse measure that leaves manual and Databricks-native triggers untouched. Rather than fight it, the job now has a **file-arrival trigger** on the `raw_landing` volume: GitHub Actions lands each run's ingested files in a new timestamped subdirectory, Databricks notices and runs the job, and the workflow polls that run to completion. The trigger fires when the files land regardless of when GitHub's scheduler actually ran the workflow, so it also sidesteps GitHub Actions' habit of firing scheduled jobs hours late.
+
+**A catch-up workflow publishes transforms that Databricks runs late.** On roughly one day in four, Free Edition withholds serverless compute from this account for hours: the file-arrival trigger still fires, but 10 to 22 hours late, and the SQL warehouse refuses to start in the meantime. The daily run waits 15 minutes and then fails, so the gold tables that the delayed run eventually builds were never exported, and the dashboard froze until a later day fully succeeded. `catchup.yml` runs every 3 hours and asks the Jobs API, which needs no compute, whether a successful transform finished after the last publish. Only then does it start the warehouse, export, regenerate the run report, and close the failure issue. The daily run still fails visibly on those days; the catch-up is what makes the dashboard heal on its own.
 
 **Crypto was scoped out.** It was in the original plan as a secondary signal, but CoinGecko moved its useful endpoints behind a paid tier partway through evaluation. Not worth building a paid dependency into a portfolio project for data that was never more than supplementary; market, macro, and AI coverage stood fine without it.
 

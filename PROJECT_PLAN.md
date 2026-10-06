@@ -51,6 +51,8 @@ Everything is driven by **one GitHub Actions workflow on one daily cron trigger*
 
 The Lakeflow job carries **no cron schedule** — only the file-arrival trigger — so it runs exactly once per ingestion and can't drift onto a second, independent clock.
 
+**Catch-up publish (`catchup.yml`, every 3 hours, `37 */3 * * *`).** When Databricks runs the triggered transform too late for step 3's 15-minute wait, `orchestration/catchup_check.py` notices via the Jobs API (control plane only) that a successful run finished after the bot's last publish commit, and the workflow then exports, regenerates the report, commits, and closes the failure issue. It skips while a `pipeline.yml` run is active and treats an unavailable warehouse as a retry-next-tick warning. See the 2026-10-06 entry below.
+
 Because Databricks Free Edition's serverless compute restricts outbound internet to a trusted-domain allowlist, all outward-facing work (calling free APIs, writing to R2, pushing to GitHub) happens from GitHub Actions, not from inside Databricks. Databricks only ever does the transform.
 
 **Cadence / trigger history.** Built and proven weekly (Mondays) through Phase 5.
@@ -60,6 +62,7 @@ Because Databricks Free Edition's serverless compute restricts outbound internet
 - **Daily → weekly (2026-09-01):** the same errors recurred (`Cannot create the resource` on the warehouse at 17:15 UTC, then the triggering throttle at 18:04 UTC) with **no** identity prompt this time. This was read at the time as the serverless compute throttle the daily-cadence risk note predicted, hit twice in a week — a reading the next two bullets overturn. Reverted the cron to `"0 13 * * 1"`. Companion change: `pull_market_data.py` was widened to re-capture ~25 trailing trading days per run (up from 3) so the market series stays gap-free at weekly cadence — a gap there would make `silver_to_gold.py`'s `(close - LAG(close))` daily_return a multi-day return that the dashboard compounds as if daily. Full detail in `PROJECT_MEMORY.md` bug #23.
 - **API `run-now` → file-arrival trigger (2026-09-07):** the weekly revert didn't help — the first weekly run hit the identical `Triggering new runs ... is currently disabled temporarily`, and a manual run from the Databricks UI *succeeded* (SQL warehouse fine too), proving the block is specifically on the Jobs API `run-now` call, not the account or compute. So the job now carries a **file-arrival trigger** on `/Volumes/workspace/default/raw_landing/`; ingestion lands each run's files in a fresh timestamped subdirectory (`land_to_databricks_volume.py` / `land_volume_to_bronze.py` changed to match), Databricks runs the job on its own, and `trigger_and_poll_job.py` polls `jobs.list_runs` instead of calling `run-now`. This also makes the transform immune to GitHub's scheduler firing the workflow hours late. Full detail in `PROJECT_MEMORY.md` bug #24.
 - **Weekly → daily (2026-09-07):** restored the daily cron (`"0 13 * * *"`) once the file-arrival trigger removed the `run-now` call that was the actual block. The weekly revert had been aimed at a suspected serverless compute throttle, but nothing ever confirmed that theory: at ~4 runs/month the account still hit the error, and manual UI runs plus the SQL warehouse worked fine throughout. The one genuinely untested risk left is whether Free Edition throttles serverless compute *minutes* at ~30 job runs/month; if it resurfaces the rollback is a one-line cron change back to `"0 13 * * 1"`. `pull_market_data.py`'s trailing window was trimmed from ~25 back to ~10 trading days (still a wide margin for absorbing a run of dropped/late scheduler fires; `silver`'s MERGE-by-`(symbol, date)` keeps it self-healing). The Monday-gated `key_findings.ipynb` refresh stays weekly. Full detail in `PROJECT_MEMORY.md` bug #25.
+- **Catch-up publish (2026-10-06):** 6 of the next 25 daily runs failed with the same signature, 3 in a row Oct 2–4, leaving the dashboard frozen at Oct 1: no triggered run within the 15-minute wait, and the SQL warehouse refusing to start ("Cannot create the resource"). Databricks' own run history showed the trigger *did* fire on each of those days, 10–22 hours late (e.g. 03:43 and 06:19 UTC), and the delayed runs rebuilt gold successfully; nothing ever exported them. Cadence is not the lever here (the delays aren't tied to load we control), so the fix is `catchup.yml` (above). Full detail in `PROJECT_MEMORY.md` bug #27.
 
 (An earlier draft of this note claimed the daily switch also required moving `weekly_star_growth` / `change_from_prior_week` from `LAG(1)` to `LAG(7)`. Those gold columns were later removed entirely — bug #14 — in favour of client-side window math in the dashboard, so no cadence-dependent `LAG` remains.)
 
@@ -151,7 +154,8 @@ Nothing left to do outside Claude Code. Everything from here is code.
 ```
 market-ai-pulse/
 ├── .github/workflows/
-│   └── pipeline.yml          # single daily cron: ingest -> trigger transform -> export -> publish
+│   ├── pipeline.yml          # single daily cron: ingest -> trigger transform -> export -> publish
+│   └── catchup.yml           # every 3h: publish a transform Databricks ran too late for pipeline.yml
 ├── scripts/                  # reusable local/CI debugging scripts (not part of the pipeline)
 │   ├── test_databricks_connection.py
 │   └── test_r2_connection.py
@@ -177,7 +181,8 @@ market-ai-pulse/
 │   └── lakeflow_job_config.yml   # job definition (name, git_source, tasks) — no schedule field, ever
 ├── orchestration/
 │   ├── trigger_and_poll_job.py   # syncs job config from YAML, waits for the file-arrival-triggered run
-│   └── export_gold_to_json.py    # queries gold tables via Databricks SQL connector
+│   ├── export_gold_to_json.py    # queries gold tables via Databricks SQL connector
+│   └── catchup_check.py          # Jobs-API-only check: is there an unpublished successful transform run?
 ├── docs/                     # GitHub Pages site root
 │   ├── index.html
 │   ├── dashboard.js
