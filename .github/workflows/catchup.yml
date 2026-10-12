@@ -2,7 +2,7 @@
 # stopped waiting for it.
 #
 # Databricks Free Edition sometimes withholds serverless compute from this
-# account for hours. The file-arrival trigger still fires, but 10-22h late, so
+# account for hours. The file-arrival trigger still fires, but 10-30h late, so
 # pipeline.yml's 15-minute wait times out and nothing exports the gold tables
 # the delayed run eventually builds (PROJECT_MEMORY bug #27). This checks every
 # 3 hours and publishes them when they show up.

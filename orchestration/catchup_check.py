@@ -1,7 +1,7 @@
 """Decides whether the catch-up workflow needs to publish.
 
 Databricks Free Edition sometimes withholds serverless compute from this
-account for hours: the file-arrival trigger still fires, but 10-22h late, long
+account for hours: the file-arrival trigger still fires, but 10-30h late, long
 after pipeline.yml has given up waiting (PROJECT_MEMORY bug #27). The transform
 then rebuilds gold inside Databricks with nothing left to export it.
 
