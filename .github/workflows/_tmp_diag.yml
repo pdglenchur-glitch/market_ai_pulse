@@ -56,8 +56,7 @@ jobs:
               print("  ", n)
 
           import time
-          print("
-WAREHOUSE START PROBE:")
+          print("WAREHOUSE START PROBE:")
           w = next(iter(c.warehouses.list()))
           try:
               c.warehouses.start(id=w.id)
@@ -69,5 +68,4 @@ WAREHOUSE START PROBE:")
               print(f"  state={g.state} health={g.health}")
               if str(g.state).endswith(("RUNNING", "STOPPED", "DELETED")) and _ > 2:
                   break
-          print("
-CURRENT USER:", c.current_user.me().user_name)
+          print("CURRENT USER:", c.current_user.me().user_name)
