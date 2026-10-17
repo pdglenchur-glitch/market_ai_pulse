@@ -2114,6 +2114,13 @@
     "trend": "down"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-10-15",
+    "value": 5.1,
+    "change": -0.11000000000000032,
+    "trend": "down"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,

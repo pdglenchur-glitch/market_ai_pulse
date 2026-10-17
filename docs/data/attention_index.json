@@ -2616,6 +2616,12 @@
     "attention_index": 277.3868340232341
   },
   {
+    "article": "Artificial_intelligence",
+    "date": "2026-10-15",
+    "views": 32539,
+    "attention_index": 217.24529309654162
+  },
+  {
     "article": "ChatGPT",
     "date": "2025-07-22",
     "views": 112110,
@@ -5238,6 +5244,12 @@
     "attention_index": 62.01587726340202
   },
   {
+    "article": "ChatGPT",
+    "date": "2026-10-15",
+    "views": 69596,
+    "attention_index": 62.07831593970208
+  },
+  {
     "article": "Large_language_model",
     "date": "2025-07-22",
     "views": 4944,
@@ -7858,5 +7870,11 @@
     "date": "2026-10-14",
     "views": 6757,
     "attention_index": 136.67071197411002
+  },
+  {
+    "article": "Large_language_model",
+    "date": "2026-10-15",
+    "views": 6732,
+    "attention_index": 136.16504854368932
   }
 ]
