@@ -2195,6 +2195,11 @@
     "count": 1099
   },
   {
+    "category": "cs.AI",
+    "snapshot_date": "2026-10-19",
+    "count": 1033
+  },
+  {
     "category": "cs.LG",
     "snapshot_date": "2025-07-22",
     "count": 746
@@ -4388,5 +4393,10 @@
     "category": "cs.LG",
     "snapshot_date": "2026-10-18",
     "count": 1133
+  },
+  {
+    "category": "cs.LG",
+    "snapshot_date": "2026-10-19",
+    "count": 1072
   }
 ]
