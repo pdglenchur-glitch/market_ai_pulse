@@ -2149,6 +2149,13 @@
     "trend": "flat"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-10-30",
+    "value": 4.94,
+    "change": -0.05999999999999961,
+    "trend": "down"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
@@ -2349,6 +2356,13 @@
     "date": "2026-09-01",
     "value": 3.75,
     "change": 0.1200000000000001,
+    "trend": "up"
+  },
+  {
+    "series": "fed_funds_rate",
+    "date": "2026-10-01",
+    "value": 3.88,
+    "change": 0.1299999999999999,
     "trend": "up"
   },
   {
