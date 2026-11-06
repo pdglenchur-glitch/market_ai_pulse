@@ -2170,6 +2170,13 @@
     "trend": "up"
   },
   {
+    "series": "10y_yield",
+    "date": "2026-11-04",
+    "value": 4.9,
+    "change": -0.04999999999999982,
+    "trend": "down"
+  },
+  {
     "series": "cpi",
     "date": "2025-07-01",
     "value": 322.169,
@@ -2476,5 +2483,12 @@
     "value": 4.2,
     "change": 0.10000000000000053,
     "trend": "up"
+  },
+  {
+    "series": "unemployment_rate",
+    "date": "2026-10-01",
+    "value": 4.1,
+    "change": -0.10000000000000053,
+    "trend": "down"
   }
 ]
